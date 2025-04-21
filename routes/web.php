@@ -2,29 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
+require __DIR__ . '/auth.php';
+
 Route::get('/welcome', function () {
     return view('welcome');
 });
-
-Route::get('/login', function () {
-    return view("admin.login");
-})->name('login');
-
-Route::get("/register", function () {
-    return view("admin.register");
-})->name('register');
-
-Route::post('/login', function () {
-    return "login";
-})->name('login');
-
-Route::post("/register", function () {
-    return "register";
-})->name('register');
-
-Route::delete('/logout', function () {
-    return "logout";
-})->name('logout');
 
 Route::middleware(['auth',])->group(function () {
     Route::get('/dashboard', function () {
