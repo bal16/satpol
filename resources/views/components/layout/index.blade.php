@@ -11,6 +11,11 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Text:ital@0;1&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+    </style>
+
     <!-- Styles / Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -19,8 +24,7 @@
 
 </head>
 
-<body
-    class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] dark:text-[#FEFEFD] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
+<body class="grid grid-rows-[auto_1fr_auto]">
     {{ $slot }}
 </body>
 
