@@ -17,29 +17,118 @@
                     Organisasi dan tata kerja Satuan Polisi Pamong Praja ditetapkan
                     dengan Peraturan Daerah.
                 </span>
-                <div class="group font-sans font-bold">
-                    <div class="border border-[#fdfdfd] group-hover:border-[#DD1D23] text-[#fdfdfd] h-fit w-fit py-1">
+                <div class="group font-sans font-bold h-fit w-fit">
+                    <div class="border border-[#fdfdfd] group-hover:border-[#DD1D23] text-[#fdfdfd] py-1">
                         <button class="px-2">PROFIL LENGKAP</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="flex bg-[#FDFDFD] lg:max-h-166.25 max-h-69.5">
-            <div class="flex flex-col justify-between">
-                <a class="flex flex-col justify-between text-[#FDFDFD] max-w-145.25 max-h-81.5 m-4"
-                    style="background-image:url(image/tes.png)">
-                    <div class="flex flex-col text-sm gap-2 m-4">
-                        <div class="flex divide-x text-xs px-2 gap-2">
-                            <span class="pe-2">Berita</span>
-                            <span>22 April 2025</span>
+        <section class="flex justify-center lg:h-166.25 h-126.25 items-center bg-[#FDFDFD]">
+            <div class="flex lg:max-h-166.25 gap-14">
+                <div class="hidden lg:flex flex-col gap-20 max-w-160">
+                    <div class="static bg-cover rounded text-[#FDFDFD] max-w-145.25 max-h-81.5 h-81.5"
+                        style="background-image:url(image/tes.png)">
+                        <div
+                            class="static flex flex-col group justify-end w-full h-full bg-gradient-to-b from-white-100/0 to-[#2B2A29]">
+                            <a class="z-10 absolute w-145.25 h-81.5" href=""></a>
+                            <div class="flex flex-col gap-2 m-4">
+                                <div class="flex divide-x gap-2 text-xs">
+                                    <a class="z-20 hover:underline inline-block pe-2" href="#kontol">Berita</a>
+                                    <span>22 April 2025</span>
+                                </div>
+                                <span class="group-hover:border-l-3 group-hover:ps-2">Lorem
+                                    ipsum dolor sit, amet consectetur adipisicing
+                                    elit. Officia aliquam dignissimos voluptatum voluptatibus perspiciatis
+                                    cupiditate ut at, facere quod vel.</span>
+                            </div>
                         </div>
-                        <span class="px-2">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                            Officia aliquam dignissimos voluptatum voluptatibus perspiciatis
-                            cupiditate ut at, facere quod vel.</span>
                     </div>
-                </a>
+                    <div class="flex mx-auto group font-sans font-bold h-fit w-fit">
+                        <div
+                            class="border border-[#2B2A29] rounded group-hover:border-[#e93b23] group-hover:bg-[#e93b23] text-[#2B2A29] group-hover:text-[#fdfdfd] py-1">
+                            <button class="px-2">BERITA LENGKAP</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col lg:max-w-160 gap-4">
+                    <div class="static flex lg:w-141 w-121 justify-between group">
+                        <a class="z-10 absolute lg:w-141 w-121 lg:h-31.5 h-22.5" href=""></a>
+                        <div style="background-image:url(image/tes.png)"
+                            class="bg-cover rounded max-w-56 lg:w-56 w-36.5 max-h-31.5 lg:h-31.5 h-22.5">
+                        </div>
+                        <div class="flex flex-col max-w-75 justify-center">
+                            <div class="flex divide-x gap-2 lg:text-xs text-[8px]">
+                                <a class="z-20 hover:underline inline-block pe-2" href="#kontol">Berita</a>
+                                <span>22 April 2025</span>
+                            </div>
+                            <span
+                                class="lg:text-sm text-xs group-hover:border-l-3 group-hover:border-[#e93b23] group-hover:ps-2">Lorem
+                                ipsum dolor sit, amet consectetur adipisicing
+                                elit. Officia aliquam dignissimos voluptatum voluptatibus perspiciatis
+                                cupiditate ut at, facere quod vel.</span>
+                        </div>
+                    </div>
+                    <div class="static flex lg:w-141 w-121 justify-between group">
+                        <a class="z-10 absolute lg:w-141 w-121 lg:h-31.5 h-22.5" href=""></a>
+                        <div style="background-image:url(image/tes.png)"
+                            class="bg-cover rounded max-w-56 lg:w-56 w-36.5 max-h-31.5 lg:h-31.5 h-22.5">
+                        </div>
+                        <div class="flex flex-col max-w-75 justify-center">
+                            <div class="flex divide-x gap-2 lg:text-xs text-[8px]">
+                                <a class="z-20 hover:underline inline-block pe-2" href="#kontol">Berita</a>
+                                <span>22 April 2025</span>
+                            </div>
+                            <span
+                                class="lg:text-sm text-xs group-hover:border-l-3 group-hover:border-[#e93b23] group-hover:ps-2">Lorem
+                                ipsum dolor sit, amet consectetur adipisicing
+                                elit. Officia aliquam dignissimos voluptatum voluptatibus perspiciatis
+                                cupiditate ut at, facere quod vel.</span>
+                        </div>
+                    </div>
+                    <div class="static flex lg:w-141 w-121 justify-between group">
+                        <a class="z-10 absolute lg:w-141 w-121 lg:h-31.5 h-22.5" href=""></a>
+                        <div style="background-image:url(image/tes.png)"
+                            class="bg-cover rounded max-w-56 lg:w-56 w-36.5 max-h-31.5 lg:h-31.5 h-22.5">
+                        </div>
+                        <div class="flex flex-col max-w-75 justify-center">
+                            <div class="flex divide-x gap-2 lg:text-xs text-[8px]">
+                                <a class="z-20 hover:underline inline-block pe-2" href="#kontol">Berita</a>
+                                <span>22 April 2025</span>
+                            </div>
+                            <span
+                                class="lg:text-sm text-xs group-hover:border-l-3 group-hover:border-[#e93b23] group-hover:ps-2">Lorem
+                                ipsum dolor sit, amet consectetur adipisicing
+                                elit. Officia aliquam dignissimos voluptatum voluptatibus perspiciatis
+                                cupiditate ut at, facere quod vel.</span>
+                        </div>
+                    </div>
+                    <div class="static flex lg:w-141 w-121 justify-between group">
+                        <a class="z-10 absolute lg:w-141 w-121 lg:h-31.5 h-22.5" href=""></a>
+                        <div style="background-image:url(image/tes.png)"
+                            class="bg-cover rounded max-w-56 lg:w-56 w-36.5 max-h-31.5 lg:h-31.5 h-22.5">
+                        </div>
+                        <div class="flex flex-col max-w-75 justify-center">
+                            <div class="flex divide-x gap-2 lg:text-xs text-[8px]">
+                                <a class="z-20 hover:underline inline-block pe-2" href="#kontol">Berita</a>
+                                <span>22 April 2025</span>
+                            </div>
+                            <span
+                                class="lg:text-sm text-xs group-hover:border-l-3 group-hover:border-[#e93b23] group-hover:ps-2">Lorem
+                                ipsum dolor sit, amet consectetur adipisicing
+                                elit. Officia aliquam dignissimos voluptatum voluptatibus perspiciatis
+                                cupiditate ut at, facere quod vel.</span>
+                        </div>
+                    </div>
+                    <div class="lg:hidden flex mx-auto group font-sans font-bold h-fit w-fit">
+                        <div
+                            class="border border-[#2B2A29] group-hover:border-[#e93b23] group-hover:bg-[#e93b23] text-[#2B2A29] group-hover:text-[#fdfdfd] py-1">
+                            <button class="px-2">BERITA LENGKAP</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
     </main>
     <x-footer />
 </x-layout>
