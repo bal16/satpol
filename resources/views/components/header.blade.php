@@ -9,19 +9,19 @@
             </button>
             <ul class="hidden lg:flex my-auto font-bold text-[#fdfdfd] divide-x">
                 <li class="px-2 hover:bg-[#fdfdfd] hover:rounded hover:text-[#2B2A29] border-[#6A6968]">
-                    <a href="">BERANDA</a>
+                    <a href="{{ route('home') }}">BERANDA</a>
                 </li>
                 <li class="px-2 hover:bg-[#fdfdfd] hover:rounded hover:text-[#2B2A29] border-[#6A6968]">
-                    <a href="">PROFIL</a>
+                    <a href="{{ route('profile') }}">PROFIL</a>
                 </li>
                 <li class="px-2 hover:bg-[#fdfdfd] hover:rounded hover:text-[#2B2A29] border-[#6A6968]">
-                    <a href="">BERITA</a>
+                    <a href="{{ route('news') }}">BERITA</a>
                 </li>
                 <li class="px-2 hover:bg-[#fdfdfd] hover:rounded hover:text-[#2B2A29] border-[#6A6968]">
-                    <a href="">GALERI</a>
+                    <a href="{{ route('gallery') }}">GALERI</a>
                 </li>
                 <li class="px-2 hover:bg-[#fdfdfd] hover:rounded hover:text-[#2B2A29] border-[#6A6968]">
-                    <a href="">INFORMASI UMUM</a>
+                    <a href="{{ route('services') }}">INFORMASI UMUM</a>
                 </li>
             </ul>
         </div>

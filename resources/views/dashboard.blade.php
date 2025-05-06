@@ -18,8 +18,8 @@
                     dengan Peraturan Daerah.
                 </span>
                 <div class="group font-sans font-bold h-fit w-fit">
-                    <div class="border border-[#fdfdfd] group-hover:border-[#DD1D23] text-[#fdfdfd] py-1">
-                        <button class="px-2">PROFIL LENGKAP</button>
+                    <div class="border-3 border-[#fdfdfd] transition delay-150 duration-300 ease-in-out group-hover:shadow-lg group-hover:shadow-[#DD1D23] group-hover:inset-shadow-sm group-hover:inset-shadow-[#DD1D23]  group-hover:border-[#DD1D23] text-[#fdfdfd] py-1">
+                        <a href="{{ route('profile') }}" class="px-2">PROFIL LENGKAP</a>
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                                     <a class="z-20 hover:underline inline-block pe-2" href="#kontol">Berita</a>
                                     <span>22 April 2025</span>
                                 </div>
-                                <span class="group-hover:border-l-3 group-hover:ps-2">Lorem
+                                <span class="transition-all delay-150 duration-300 ease-in-out group-hover:border-l-3 group-hover:ps-2">Lorem
                                     ipsum dolor sit, amet consectetur adipisicing
                                     elit. Officia aliquam dignissimos voluptatum voluptatibus perspiciatis
                                     cupiditate ut at, facere quod vel.</span>
@@ -46,7 +46,7 @@
                     </div>
                     <div class="flex mx-auto group font-sans font-bold h-fit w-fit">
                         <div
-                            class="border border-[#2B2A29] rounded group-hover:border-[#e93b23] group-hover:bg-[#e93b23] text-[#2B2A29] group-hover:text-[#fdfdfd] py-1">
+                            class="border border-[#2B2A29] rounded transition delay-150 duration-300 ease-in-out group-hover:shadow-lg group-hover:shadow-[#ff5f67] group-hover:border-[#e93b23] group-hover:bg-[#e93b23] text-[#2B2A29] group-hover:text-[#fdfdfd] py-1">
                             <button class="px-2">BERITA LENGKAP</button>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                                 <span>22 April 2025</span>
                             </div>
                             <span
-                                class="lg:text-sm text-xs group-hover:border-l-3 group-hover:border-[#e93b23] group-hover:ps-2">Lorem
+                                class="lg:text-sm text-xs transition-all delay-150 duration-300 ease-in-out group-hover:border-l-3 group-hover:border-[#e93b23] group-hover:ps-2">Lorem
                                 ipsum dolor sit, amet consectetur adipisicing
                                 elit. Officia aliquam dignissimos voluptatum voluptatibus perspiciatis
                                 cupiditate ut at, facere quod vel.</span>
@@ -80,7 +80,7 @@
                                 <span>22 April 2025</span>
                             </div>
                             <span
-                                class="lg:text-sm text-xs group-hover:border-l-3 group-hover:border-[#e93b23] group-hover:ps-2">Lorem
+                                class="lg:text-sm text-xs transition-all delay-150 duration-300 ease-in-out group-hover:border-l-3 group-hover:border-[#e93b23] group-hover:ps-2">Lorem
                                 ipsum dolor sit, amet consectetur adipisicing
                                 elit. Officia aliquam dignissimos voluptatum voluptatibus perspiciatis
                                 cupiditate ut at, facere quod vel.</span>
@@ -97,7 +97,7 @@
                                 <span>22 April 2025</span>
                             </div>
                             <span
-                                class="lg:text-sm text-xs group-hover:border-l-3 group-hover:border-[#e93b23] group-hover:ps-2">Lorem
+                                class="lg:text-sm text-xs transition-all delay-150 duration-300 ease-in-out group-hover:border-l-3 group-hover:border-[#e93b23] group-hover:ps-2">Lorem
                                 ipsum dolor sit, amet consectetur adipisicing
                                 elit. Officia aliquam dignissimos voluptatum voluptatibus perspiciatis
                                 cupiditate ut at, facere quod vel.</span>
@@ -114,7 +114,7 @@
                                 <span>22 April 2025</span>
                             </div>
                             <span
-                                class="lg:text-sm text-xs group-hover:border-l-3 group-hover:border-[#e93b23] group-hover:ps-2">Lorem
+                                class="lg:text-sm text-xs transition-all delay-150 duration-300 ease-in-out group-hover:border-l-3 group-hover:border-[#e93b23] group-hover:ps-2">Lorem
                                 ipsum dolor sit, amet consectetur adipisicing
                                 elit. Officia aliquam dignissimos voluptatum voluptatibus perspiciatis
                                 cupiditate ut at, facere quod vel.</span>
