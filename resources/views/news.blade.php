@@ -4,7 +4,7 @@
         <div class="static w-full h-full bg-gradient-to-b from-white-100/0 to-[#FDFDFD]">
             <div class="flex flex-col lg:max-w-320 max-w-200 mx-auto p-20 lg:pt-65 gap-5">
                 <h1 class="lg:text-5xl text-3xl font-[DM_Serif_Text] text-[#FDFDFD]">Berita</h1>
-                <div class="flex rounded-sm bg-[#FDFDFD]">
+                <div class="flex rounded-sm justify-center bg-[#FDFDFD]">
                     <div class="flex flex-col lg:max-w-180 max-w-120 lg:py-8 py-5 lg:px-15 px-9 gap-6">
                         <div class="flex lg:max-w-160 max-w-100 justify-between group gap-10">
                             <a class="z-10 absolute lg:w-160 w-100 lg:h-35 h-22.5" href=""></a>
@@ -75,17 +75,17 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="hidden lg:flex flex-col lg:max-w-140 max-w-87.5 gap-5 items-center">
-                        <div class="mt-8 mx-8 lg:w-75 border-b">
+                    <div class="hidden lg:flex flex-col max-w-140 gap-5 items-center">
+                        <div class="mt-8 mx-8 w-84 border-b">
                             <span class="bg-[#2B2A29] text-[#FDFDFD] text-sm border-b py-1 px-4">
                                 Berita Terbaru
                             </span>
                         </div>
-                        <div class="flex lg:max-w-75 justify-between group gap-5.5">
-                            <a class="z-10 absolute lg:w-75 lg:h-17" href=""></a>
-                            <div style="background-image:url(image/tes.png)" class="bg-cover rounded lg:w-30 lg:h-16">
+                        <div class="flex max-w-84 justify-between group gap-5.5">
+                            <a class="z-10 absolute w-84 h-17" href=""></a>
+                            <div style="background-image:url(image/tes.png)" class="bg-cover rounded w-30 h-16">
                             </div>
-                            <div class="flex flex-col lg:max-w-40 justify-center">
+                            <div class="flex flex-col max-w-49 justify-center">
                                 <div class="flex divide-x gap-2 lg:text-[11px]">
                                     <a class="z-20 hover:underline inline-block pe-2" href="#kontol">Berita</a>
                                     <span>22 April 2025</span>
@@ -96,11 +96,11 @@
                                     elit. Officia aliquam.</span>
                             </div>
                         </div>
-                        <div class="flex lg:max-w-75 justify-between group gap-5.5">
-                            <a class="z-10 absolute lg:w-75 lg:h-17" href=""></a>
-                            <div style="background-image:url(image/tes.png)" class="bg-cover rounded lg:w-30 lg:h-16">
+                        <div class="flex max-w-84 justify-between group gap-5.5">
+                            <a class="z-10 absolute w-84 h-17" href=""></a>
+                            <div style="background-image:url(image/tes.png)" class="bg-cover rounded w-30 h-16">
                             </div>
-                            <div class="flex flex-col lg:max-w-40 justify-center">
+                            <div class="flex flex-col max-w-49 justify-center">
                                 <div class="flex divide-x gap-2 lg:text-[11px]">
                                     <a class="z-20 hover:underline inline-block pe-2" href="#kontol">Berita</a>
                                     <span>22 April 2025</span>
@@ -111,11 +111,11 @@
                                     elit. Officia aliquam.</span>
                             </div>
                         </div>
-                        <div class="flex lg:max-w-75 justify-between group gap-5.5">
-                            <a class="z-10 absolute lg:w-75 lg:h-17" href=""></a>
-                            <div style="background-image:url(image/tes.png)" class="bg-cover rounded lg:w-30 lg:h-16">
+                        <div class="flex max-w-84 justify-between group gap-5.5">
+                            <a class="z-10 absolute w-84 h-17" href=""></a>
+                            <div style="background-image:url(image/tes.png)" class="bg-cover rounded w-30 h-16">
                             </div>
-                            <div class="flex flex-col lg:max-w-40 justify-center">
+                            <div class="flex flex-col max-w-49 justify-center">
                                 <div class="flex divide-x gap-2 lg:text-[11px]">
                                     <a class="z-20 hover:underline inline-block pe-2" href="#kontol">Berita</a>
                                     <span>22 April 2025</span>
