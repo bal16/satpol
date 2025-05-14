@@ -2,104 +2,90 @@
     <x-header />
     <main class="flex flex-col items-center">
         <div class="flex font-bold w-full text-[#FDFDFD] text-4xl font-[DM_Serif_Text] justify-center bg-[#2B2A29]">
-            <h1 class="w-7xl px-26 pt-43">
+            <h1 class="lg:w-7xl lg:px-26 lg:text-start text-center pt-43">
                 Informasi Umum
             </h1>
         </div>
-        <div class="flex flex-col bg-[#FDFDFD] w-7xl py-17 px-23.5 gap-14">
-            <div class="grid grid-cols-3 gap-14">
-                <div class="flex flex-col shadow-lg rounded w-81.5 h-201 border-t-5 border-[#E94B23]">
-                    <img src="image/tes.png" alt="Thumbnail" class="max-h-54.5 object-cover">
-                    <span class="flex flex-col p-5 gap-8">
-                        <h3 class="font-bold font-[DM_Serif_Text] text-2xl text-[#E94B23]">Layanan</h3>
-                        <hr class="w-33.5 border-2 border-[#E94B23]">
-                        <ul class="text-[#2B2A29] font-bold font-[DM_Serif_Text] max-w-71.5 list-disc px-7">
+        <div class="flex flex-col bg-[#FDFDFD] lg:max-w-7xl max-w-160 lg:py-17 py-8.75 lg:px-23.5 lg:gap-14 gap-8.75">
+            <div class="grid lg:grid-cols-3 grid-cols-2 mx-auto lg:gap-14 gap-8.75">
+                <div
+                    class="flex flex-col shadow-lg rounded lg:w-81.5 w-51 lg:h-201 h-125.5 lg:border-t-5 border-t-3 border-[#E94B23]">
+                    <img src="image/tes.png" alt="Thumbnail" class="lg:max-h-54.5 max-h-34 object-cover">
+                    <span class="flex flex-col lg:p-5 p-3 lg:gap-8 gap-5">
+                        <h3 class="font-bold font-[DM_Serif_Text] lg:text-2xl text-lg text-[#E94B23]">Layanan</h3>
+                        <hr class="lg:w-33.5 w-21 lg:border-2 border border-[#E94B23]">
+                        <ul
+                            class="text-[#2B2A29] lg:text-lg text-xs font-bold font-[DM_Serif_Text] lg:max-w-71.5 max-w-41 list-disc lg:px-7 px-4.25">
                             <li><a href="">Sarana dan Prasarana</a></li>
                             <li><a href="">Daftar Informasi Publik</a></li>
                             <li><a href="">Peraturan</a></li>
                         </ul>
                     </span>
                 </div>
-                <div class="flex flex-col shadow-lg rounded w-81.5 h-201 border-t-5 border-[#E94B23]">
-                    <img src="image/tes.png" alt="Thumbnail" class="max-h-54.5 object-cover">
-                    <span class="flex flex-col p-5 gap-8">
-                        <h3 class="font-bold font-[DM_Serif_Text] text-2xl text-[#E94B23]">Pemberdayaan</h3>
-                        <hr class="w-33.5 border-2 border-[#E94B23]">
-                        <ul class="text-[#2B2A29] font-bold font-[DM_Serif_Text] max-w-71.5 list-disc px-7">
+                <div
+                    class="flex flex-col shadow-lg rounded lg:w-81.5 w-51 lg:h-201 h-125.5 lg:border-t-5 border-t-3 border-[#E94B23]">
+                    <img src="image/tes.png" alt="Thumbnail" class="lg:max-h-54.5 max-h-34 object-cover">
+                    <span class="flex flex-col lg:p-5 p-3 lg:gap-8 gap-5">
+                        <h3 class="font-bold font-[DM_Serif_Text] lg:text-2xl text-lg text-[#E94B23]">Layanan</h3>
+                        <hr class="lg:w-33.5 w-21 lg:border-2 border border-[#E94B23]">
+                        <ul
+                            class="text-[#2B2A29] lg:text-lg text-xs font-bold font-[DM_Serif_Text] lg:max-w-71.5 max-w-41 list-disc lg:px-7 px-4.25">
                             <li><a href="">Sarana dan Prasarana</a></li>
                             <li><a href="">Daftar Informasi Publik</a></li>
                             <li><a href="">Peraturan</a></li>
                         </ul>
                     </span>
                 </div>
-                <div class="flex flex-col shadow-lg rounded w-81.5 h-201 border-t-5 border-[#E94B23]">
-                    <img src="image/tes.png" alt="Thumbnail" class="max-h-54.5 object-cover">
-                    <span class="flex flex-col p-5 gap-8">
-                        <h3 class="font-bold font-[DM_Serif_Text] text-2xl text-[#E94B23]">PPID</h3>
-                        <hr class="w-33.5 border-2 border-[#E94B23]">
-                        <ul class="text-[#2B2A29] font-bold font-[DM_Serif_Text] max-w-71.5 list-disc px-7">
+                <div
+                    class="flex flex-col shadow-lg rounded lg:w-81.5 w-51 lg:h-201 h-125.5 lg:border-t-5 border-t-3 border-[#E94B23]">
+                    <img src="image/tes.png" alt="Thumbnail" class="lg:max-h-54.5 max-h-34 object-cover">
+                    <span class="flex flex-col lg:p-5 p-3 lg:gap-8 gap-5">
+                        <h3 class="font-bold font-[DM_Serif_Text] lg:text-2xl text-lg text-[#E94B23]">Layanan</h3>
+                        <hr class="lg:w-33.5 w-21 lg:border-2 border border-[#E94B23]">
+                        <ul
+                            class="text-[#2B2A29] lg:text-lg text-xs font-bold font-[DM_Serif_Text] lg:max-w-71.5 max-w-41 list-disc lg:px-7 px-4.25">
                             <li><a href="">Sarana dan Prasarana</a></li>
                             <li><a href="">Daftar Informasi Publik</a></li>
                             <li><a href="">Peraturan</a></li>
                         </ul>
                     </span>
                 </div>
-                <div class="flex flex-col shadow-lg rounded w-81.5 h-201 border-t-5 border-[#E94B23]">
-                    <img src="image/tes.png" alt="Thumbnail" class="max-h-54.5 object-cover">
-                    <span class="flex flex-col p-5 gap-8">
-                        <h3 class="font-bold font-[DM_Serif_Text] text-2xl text-[#E94B23]">Kontak</h3>
-                        <hr class="w-33.5 border-2 border-[#E94B23]">
-                        <ul class="text-[#2B2A29] font-bold font-[DM_Serif_Text] max-w-71.5 list-disc px-7">
+                <div
+                    class="flex flex-col shadow-lg rounded lg:w-81.5 w-51 lg:h-201 h-125.5 lg:border-t-5 border-t-3 border-[#E94B23]">
+                    <img src="image/tes.png" alt="Thumbnail" class="lg:max-h-54.5 max-h-34 object-cover">
+                    <span class="flex flex-col lg:p-5 p-3 lg:gap-8 gap-5">
+                        <h3 class="font-bold font-[DM_Serif_Text] lg:text-2xl text-lg text-[#E94B23]">Layanan</h3>
+                        <hr class="lg:w-33.5 w-21 lg:border-2 border border-[#E94B23]">
+                        <ul
+                            class="text-[#2B2A29] lg:text-lg text-xs font-bold font-[DM_Serif_Text] lg:max-w-71.5 max-w-41 list-disc lg:px-7 px-4.25">
                             <li><a href="">Sarana dan Prasarana</a></li>
                             <li><a href="">Daftar Informasi Publik</a></li>
                             <li><a href="">Peraturan</a></li>
                         </ul>
                     </span>
                 </div>
-                <div class="flex flex-col shadow-lg rounded w-81.5 h-201 border-t-5 border-[#E94B23]">
-                    <img src="image/tes.png" alt="Thumbnail" class="max-h-54.5 object-cover">
-                    <span class="flex flex-col p-5 gap-8">
-                        <h3 class="font-bold font-[DM_Serif_Text] text-2xl text-[#E94B23]">Perda Kota Semarang</h3>
-                        <hr class="w-33.5 border-2 border-[#E94B23]">
-                        <ul class="text-[#2B2A29] font-bold font-[DM_Serif_Text] max-w-71.5 list-disc px-7">
+                <div
+                    class="flex flex-col shadow-lg rounded lg:w-81.5 w-51 lg:h-201 h-125.5 lg:border-t-5 border-t-3 border-[#E94B23]">
+                    <img src="image/tes.png" alt="Thumbnail" class="lg:max-h-54.5 max-h-34 object-cover">
+                    <span class="flex flex-col lg:p-5 p-3 lg:gap-8 gap-5">
+                        <h3 class="font-bold font-[DM_Serif_Text] lg:text-2xl text-lg text-[#E94B23]">Layanan</h3>
+                        <hr class="lg:w-33.5 w-21 lg:border-2 border border-[#E94B23]">
+                        <ul
+                            class="text-[#2B2A29] lg:text-lg text-xs font-bold font-[DM_Serif_Text] lg:max-w-71.5 max-w-41 list-disc lg:px-7 px-4.25">
                             <li><a href="">Sarana dan Prasarana</a></li>
                             <li><a href="">Daftar Informasi Publik</a></li>
                             <li><a href="">Peraturan</a></li>
                         </ul>
                     </span>
                 </div>
-                <div class="flex flex-col shadow-lg rounded w-81.5 h-201 border-t-5 border-[#E94B23]">
-                    <img src="image/tes.png" alt="Thumbnail" class="max-h-54.5 object-cover">
-                    <span class="flex flex-col p-5 gap-8">
-                        <h3 class="font-bold font-[DM_Serif_Text] text-2xl text-[#E94B23]">SOP</h3>
-                        <hr class="w-33.5 border-2 border-[#E94B23]">
-                        <ul class="text-[#2B2A29] font-bold font-[DM_Serif_Text] max-w-71.5 list-disc px-7">
-                            <li><a href="">Sarana dan Prasarana</a></li>
-                            <li><a href="">Daftar Informasi Publik</a></li>
-                            <li><a href="">Peraturan</a></li>
-                        </ul>
-                    </span>
-                </div>
-            </div>
-            <div class="flex bg-[#FDFDFD] justify-center gap-14">
-                <div class="flex flex-col shadow-lg rounded w-81.5 h-201 border-t-5 border-[#E94B23]">
-                    <img src="image/tes.png" alt="Thumbnail" class="max-h-54.5 object-cover">
-                    <span class="flex flex-col p-5 gap-8">
-                        <h3 class="font-bold font-[DM_Serif_Text] text-2xl text-[#E94B23]">SOP</h3>
-                        <hr class="w-33.5 border-2 border-[#E94B23]">
-                        <ul class="text-[#2B2A29] font-bold font-[DM_Serif_Text] max-w-71.5 list-disc px-7">
-                            <li><a href="">Sarana dan Prasarana</a></li>
-                            <li><a href="">Daftar Informasi Publik</a></li>
-                            <li><a href="">Peraturan</a></li>
-                        </ul>
-                    </span>
-                </div>
-                <div class="flex flex-col shadow-lg rounded w-81.5 h-201 border-t-5 border-[#E94B23]">
-                    <img src="image/tes.png" alt="Thumbnail" class="max-h-54.5 object-cover">
-                    <span class="flex flex-col p-5 gap-8">
-                        <h3 class="font-bold font-[DM_Serif_Text] text-2xl text-[#E94B23]">SOP</h3>
-                        <hr class="w-33.5 border-2 border-[#E94B23]">
-                        <ul class="text-[#2B2A29] font-bold font-[DM_Serif_Text] max-w-71.5 list-disc px-7">
+                <div
+                    class="flex flex-col shadow-lg rounded lg:w-81.5 w-51 lg:h-201 h-125.5 lg:border-t-5 border-t-3 border-[#E94B23]">
+                    <img src="image/tes.png" alt="Thumbnail" class="lg:max-h-54.5 max-h-34 object-cover">
+                    <span class="flex flex-col lg:p-5 p-3 lg:gap-8 gap-5">
+                        <h3 class="font-bold font-[DM_Serif_Text] lg:text-2xl text-lg text-[#E94B23]">Layanan</h3>
+                        <hr class="lg:w-33.5 w-21 lg:border-2 border border-[#E94B23]">
+                        <ul
+                            class="text-[#2B2A29] lg:text-lg text-xs font-bold font-[DM_Serif_Text] lg:max-w-71.5 max-w-41 list-disc lg:px-7 px-4.25">
                             <li><a href="">Sarana dan Prasarana</a></li>
                             <li><a href="">Daftar Informasi Publik</a></li>
                             <li><a href="">Peraturan</a></li>
@@ -107,11 +93,42 @@
                     </span>
                 </div>
             </div>
-            <div class="flex flex-col shadow-lg rounded w-273 h-245 border-t-5 border-[#E94B23]">
-                <span class="flex flex-col p-5 pt-10 gap-8">
-                    <h3 class="font-bold font-[DM_Serif_Text] text-5xl text-[#E94B23]">Sejarah Lengkap</h3>
-                    <hr class="w-95.5 border-2 border-[#E94B23]">
-                    <p class="text-2xl text-justify font-[DM_Serif_Text] font-bold w-253">
+            <div class="flex bg-[#FDFDFD] justify-center lg:gap-14 gap-8.75">
+                <div
+                    class="flex flex-col shadow-lg rounded lg:w-81.5 w-51 lg:h-201 h-125.5 lg:border-t-5 border-t-3 border-[#E94B23]">
+                    <img src="image/tes.png" alt="Thumbnail" class="lg:max-h-54.5 max-h-34 object-cover">
+                    <span class="flex flex-col lg:p-5 p-3 lg:gap-8 gap-5">
+                        <h3 class="font-bold font-[DM_Serif_Text] lg:text-2xl text-lg text-[#E94B23]">Layanan</h3>
+                        <hr class="lg:w-33.5 w-21 lg:border-2 border border-[#E94B23]">
+                        <ul
+                            class="text-[#2B2A29] lg:text-lg text-xs font-bold font-[DM_Serif_Text] lg:max-w-71.5 max-w-41 list-disc lg:px-7 px-4.25">
+                            <li><a href="">Sarana dan Prasarana</a></li>
+                            <li><a href="">Daftar Informasi Publik</a></li>
+                            <li><a href="">Peraturan</a></li>
+                        </ul>
+                    </span>
+                </div>
+                <div
+                    class="flex flex-col shadow-lg rounded lg:w-81.5 w-51 lg:h-201 h-125.5 lg:border-t-5 border-t-3 border-[#E94B23]">
+                    <img src="image/tes.png" alt="Thumbnail" class="lg:max-h-54.5 max-h-34 object-cover">
+                    <span class="flex flex-col lg:p-5 p-3 lg:gap-8 gap-5">
+                        <h3 class="font-bold font-[DM_Serif_Text] lg:text-2xl text-lg text-[#E94B23]">Layanan</h3>
+                        <hr class="lg:w-33.5 w-21 lg:border-2 border border-[#E94B23]">
+                        <ul
+                            class="text-[#2B2A29] lg:text-lg text-xs font-bold font-[DM_Serif_Text] lg:max-w-71.5 max-w-41 list-disc lg:px-7 px-4.25">
+                            <li><a href="">Sarana dan Prasarana</a></li>
+                            <li><a href="">Daftar Informasi Publik</a></li>
+                            <li><a href="">Peraturan</a></li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+            <div
+                class="flex flex-col shadow-lg rounded lg:w-273 w-110.75 lg:h-245 h-153 lg:mx-0 mx-24.5 border-t-5 border-[#E94B23]">
+                <span class="flex flex-col p-5 lg:pt-10 lg:gap-8 gap-5">
+                    <h3 class="font-bold font-[DM_Serif_Text] lg:text-5xl text-2xl text-[#E94B23]">Sejarah Lengkap</h3>
+                    <hr class="lg:w-95.5 w-59.5 lg:border-2 border border-[#E94B23]">
+                    <p class="lg:text-2xl text-xs text-justify font-[DM_Serif_Text] font-bold lg:w-253 w-100.75">
                         Satuan Polisi Pamong Praja, disingkat Satpol PP, adalah perangkat Pemerintah Daerah dalam
                         memelihara ketentraman dan ketertiban umum serta menegakkan Peraturan Daerah. Organisasi dan
                         tata kerja Satuan Polisi Pamong Praja ditetapkan dengan Peraturan Daerah.</br></br>
@@ -134,11 +151,12 @@
                     </p>
                 </span>
             </div>
-            <div class="flex flex-col shadow-lg rounded w-273 h-245 border-t-5 border-[#E94B23]">
-                <span class="flex flex-col p-5 pt-10 gap-8">
-                    <h3 class="font-bold font-[DM_Serif_Text] text-5xl text-[#E94B23]">Map</h3>
-                    <hr class="w-95.5 border-2 border-[#E94B23]">
-                    <iframe class="mx-auto w-238 h-185"
+            <div
+                class="flex flex-col shadow-lg rounded lg:w-273 w-110.75 lg:h-245 h-153 lg:mx-0 mx-24.5 border-t-5 border-[#E94B23]">
+                <span class="flex flex-col p-5 lg:pt-10 lg:gap-8 gap-5">
+                    <h3 class="font-bold font-[DM_Serif_Text] lg:text-5xl text-2xl text-[#E94B23]">Map</h3>
+                    <hr class="lg:w-95.5 w-59.5 lg:border-2 border border-[#E94B23]">
+                    <iframe class="mx-auto lg:w-238 w-100.75 lg:h-185 h-123"
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.247579238948!2d110.38884333955568!3d-6.980085989247468!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e708b2d9507a13b%3A0xf137c4f77567b38c!2sKantor+Satpol+PP!5e0!3m2!1sid!2sid!4v1523937750085"
                         style="border:0" width="100%" data-ruffle-polyfilled=""></iframe>
                 </span>
