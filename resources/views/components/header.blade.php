@@ -39,14 +39,16 @@
             </form>
         </div>
     </nav>
-    <div class="flex bg-linear-to-l from-[#E31E24] to-[#30090A]">
-        <div>
-            <img class="lg:h-19.5 h-14.5 lg:my-6.5 my-4.5 lg:ms-7.5 ms-4.5 lg:me-4 me-2" src="image/logo.png"
-                alt="" />
-        </div>
-        <div class="flex flex-col text-[#fdfdfd] font-[Bebas_Neue] my-auto divide-y">
-            <span class="font-black text-4xl">SATPOL PP</span>
-            <span class="text-xs">SATUAN POLISI PAMONG PRAJA</span>
+    <div class="static bg-cover bg-center" style="background-image:url(image/red.jpg)">
+        <div class="static flex bg-gradient-to-l from-[#E31E24]-0 to-[#30090A]">
+            <div class="flex">
+                <img class="lg:h-19.5 h-14.5 lg:my-6.5 my-4.5 lg:ms-7.5 ms-4.5 lg:me-4 me-2" src="image/logo.png"
+                    alt="" />
+            </div>
+            <div class="flex flex-col text-[#fdfdfd] font-[Bebas_Neue] my-auto divide-y">
+                <span class="font-black text-4xl">SATPOL PP</span>
+                <span class="text-xs">SATUAN POLISI PAMONG PRAJA</span>
+            </div>
         </div>
     </div>
 </header>
