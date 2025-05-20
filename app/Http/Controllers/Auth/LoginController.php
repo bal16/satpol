@@ -36,7 +36,7 @@ class LoginController extends Controller
         if (!$user)
             return to_route('login');
 
-        $request['email'] = $user->email;
+        // $request['email'] = $user->email;
 
         if ($request->authenticate()) {
             $request->session()->regenerate(); // return boolean method
