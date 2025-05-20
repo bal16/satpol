@@ -2,7 +2,7 @@
     <x-header />
     <main class="static bg-cover lg:min-h-166 min-h-83" style="background-image:url(image/slider.png)">
         <div class="static w-full h-full bg-gradient-to-b from-white-100/0 to-[#FDFDFD]">
-            <div class="flex flex-col lg:max-w-320 max-w-200 mx-auto p-20 lg:pt-65 gap-5">
+            <div class="flex flex-col lg:max-w-320 max-w-160 mx-auto p-20 lg:pt-65 gap-5">
                 <h1 class="lg:text-5xl text-3xl font-[DM_Serif_Text] text-[#FDFDFD]">Berita</h1>
                 <div class="flex rounded-sm justify-center bg-[#FDFDFD]">
                     <div class="flex flex-col lg:max-w-180 max-w-120 lg:py-8 py-5 lg:px-15 px-9 gap-6">
