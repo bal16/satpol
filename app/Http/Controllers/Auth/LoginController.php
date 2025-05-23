@@ -40,7 +40,7 @@ class LoginController extends Controller
 
         if ($request->authenticate()) {
             $request->session()->regenerate(); // return boolean method
-            return to_route('home')->with('success', "Welcome Back " . $request->key);
+            return to_route('admin.dashboard')->with('success', "Welcome Back " . $request->key);
         }
 
         return to_route('login');
