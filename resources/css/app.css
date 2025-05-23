@@ -8,4 +8,45 @@
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /* TailAdmin Style Custom Properties */
+    --color-primary: #c0392b;          /* Primary color for buttons, links, focus rings */
+    --color-primary-dark: #a02d22;     /* Darker shade of primary, e.g., for focus rings */
+
+    --color-black: #1C2434;            /* Main text color in light mode, or specific "black" elements */
+    --color-white: #FFFFFF;            /* Main text color in dark mode, or specific "white" elements */
+
+    /* Border Colors */
+    --color-stroke: #E2E8F0;           /* Default border color for light mode */
+    --color-form-strokedark: #3D4D60;  /* Input border in dark mode */
+
+    /* Form Specific Colors (Dark Mode) */
+    --color-form-input: #1D2A39;       /* Input background in dark mode */
+
+    /* Box Background Colors (Dark Mode) */
+    --color-boxdark: #24303F;          /* Dark background for containers/cards */
+    --color-boxdark-2: #1A222C;        /* Even darker background, often for main page bg in dark mode */
+
+    /* Spacing - for classes like p-15, m-15 */
+    /* This defines '15' as 3.75rem (15 * 0.25rem default spacing unit) */
+    --spacing-15: 3.75rem;
+
+    /* Box Shadow - for shadow-default */
+    --shadow-default: 0px 8px 13px -3px rgba(0, 0, 0, 0.07), 0px 3px 5px -2px rgba(0, 0, 0, 0.04);
+
+    /*
+       Note on Dark Mode:
+       The `dark:` prefixes in your Blade file (e.g., `dark:bg-boxdark`) will work
+       if dark mode is enabled. Tailwind CSS v4 defaults to `darkMode: 'media'`.
+       If you need `darkMode: 'class'` (common for manual toggles in admin panels),
+       you'd typically set this in a `tailwind.config.js` or using the new `@config`
+       directive in your CSS if you're aiming for a fully config-less setup for this aspect.
+
+       Note on @tailwindcss/forms:
+       The class `form-checkbox` and potentially `focus:ring-primary-dark` styling for the checkbox
+       are typically provided by the `@tailwindcss/forms` plugin. If you are not using a
+       `tailwind.config.js` to register plugins, you'll need to ensure these styles are
+       either manually defined or the plugin's CSS is imported directly if it supports
+       that method with Tailwind CSS v4.
+    */
 }
