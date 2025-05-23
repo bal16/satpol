@@ -10,11 +10,10 @@ class AdminAuth
     public function handle(Request $request, Closure $next): \Symfony\Component\HttpFoundation\Response
     {
 
-        if (!session()->has('admin')) {
+        if (!auth()->user()->is_admin) {
             return redirect()->route('login');
         }
 
         return $next($request);
     }
 }
-
