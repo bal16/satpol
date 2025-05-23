@@ -25,9 +25,10 @@ class RegisterController extends Controller
      */
     public function store(RegisterRequest $request)
     {
+        // dd($request);
         Models\User::create(attributes: [
             'email' => $request->email,
-            'name' => $request->name,
+            'username' => $request->username,
             'password' => Hash::make($request->password),
         ]);
 

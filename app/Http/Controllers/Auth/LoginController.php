@@ -23,27 +23,26 @@ class LoginController extends Controller
      */
     public function store(LoginRequest $request)
     {
-        $user = Models\User::where(
-            'username',
-            '=',
-            $request->key
-        )->orWhere(
-                'email',
-                '=',
-                $request->key
-            )->first('email');
+        // $email = Models\User::where(
+        //     'username',
+        //     '=',
+        //     $request->key
+        //     )->orWhere(
+        //         'email',
+        //         '=',
+        //         $request->key
+        //         )->first('email')->email;
 
-        if (!$user)
-            return to_route('login');
+        // // dd($user);
+        // if (!$email)
+        //     return to_route('login');
 
         // $request['email'] = $user->email;
 
-        if ($request->authenticate()) {
-            $request->session()->regenerate(); // return boolean method
-            return to_route('admin.dashboard')->with('success', "Welcome Back " . $request->key);
-        }
+        $request->authenticate();
 
-        return to_route('login');
+        $request->session()->regenerate(); // return boolean method
+        return to_route('admin.dashboard')->with('success', "Welcome Back " . $request->key);
     }
 
     /**

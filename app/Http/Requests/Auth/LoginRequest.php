@@ -37,12 +37,14 @@ class LoginRequest extends FormRequest
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function authenticate(): void
+    public function authenticate()
     {
         $this->ensureIsNotRateLimited();
         $loginType = $this->loginType();
 
-        $credentials = [$loginType => $this->input('login'), 'password' => $this->input('password')];
+
+        $credentials = [$loginType => $this->input('key'), 'password' => $this->input('password')];
+
 
         if (!Auth::attempt($credentials, $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
@@ -52,6 +54,7 @@ class LoginRequest extends FormRequest
             ]);
         }
 
+
         RateLimiter::clear($this->throttleKey());
     }
 
@@ -60,7 +63,7 @@ class LoginRequest extends FormRequest
      */
     protected function loginType(): string
     {
-        $loginInput = $this->input('login');
+        $loginInput = $this->input('key');
 
         return filter_var($loginInput, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
     }
