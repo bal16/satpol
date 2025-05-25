@@ -10,11 +10,11 @@
     {{-- Add any other common admin head elements here --}}
     @stack('styles')
 </head>
-<body class="bg-slate-100 dark:bg-slate-900 font-sans antialiased">
+<body class="bg-slate-100 dark:bg-stone-600 font-sans antialiased">
 
     <div class="flex min-h-screen bg-slate-100 dark:bg-stone-600">
         <!-- Sidebar -->
-        <aside class="w-64 bg-red-700 dark:bg-stone-800 text-slate-100 flex flex-col transition-all duration-300 ease-in-out shadow-lg">
+        <aside class="w-64 h-auto bg-red-700 dark:bg-stone-800 text-slate-100 flex flex-col transition-all duration-300 ease-in-out shadow-lg">
             <div class="p-5 text-2xl font-bold text-white border-b border-red-800 dark:border-red-400 flex items-center justify-center">
                 {{-- You can add a small logo here if you have one --}}
                 {{-- <img src="/path/to/admin-logo.png" alt="Logo" class="h-8 mr-2"> --}}
@@ -25,11 +25,11 @@
                     <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                     Dashboard
                 </x-admin.nav-link>
-                <x-admin.nav-link href="#" :active="request()->is('admin/berita*')"> {{-- Adjust route check as needed --}}
+                <x-admin.nav-link :href="route('admin.news')" :active="request()->routeIs('admin.news')"> {{-- Adjust route check as needed --}}
                     <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
                     Berita
                 </x-admin.nav-link>
-                <x-admin.nav-link href="#" :active="request()->is('admin/galeri*')"> {{-- Adjust route check as needed --}}
+                <x-admin.nav-link :href="route('admin.gallery')" :active="request()->routeIs('admin.gallery')"> {{-- Adjust route check as needed --}}
                     <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                     Galeri
                 </x-admin.nav-link>
