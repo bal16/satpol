@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -6,33 +6,35 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        "Noto Color Emoji";
 
     /* TailAdmin Style Custom Properties */
-    --color-primary: #c0392b;          /* Primary color for buttons, links, focus rings */
-    --color-primary-dark: #a02d22;     /* Darker shade of primary, e.g., for focus rings */
+    --color-primary: #c0392b; /* Primary color for buttons, links, focus rings */
+    --color-primary-dark: #a02d22; /* Darker shade of primary, e.g., for focus rings */
 
-    --color-black: #1C2434;            /* Main text color in light mode, or specific "black" elements */
-    --color-white: #FFFFFF;            /* Main text color in dark mode, or specific "white" elements */
+    --color-black: #1c2434; /* Main text color in light mode, or specific "black" elements */
+    --color-white: #ffffff; /* Main text color in dark mode, or specific "white" elements */
 
     /* Border Colors */
-    --color-stroke: #E2E8F0;           /* Default border color for light mode */
-    --color-form-strokedark: #3D4D60;  /* Input border in dark mode */
+    --color-stroke: #e2e8f0; /* Default border color for light mode */
+    --color-form-strokedark: #3d4d60; /* Input border in dark mode */
 
     /* Form Specific Colors (Dark Mode) */
-    --color-form-input: #1D2A39;       /* Input background in dark mode */
+    --color-form-input: #1d2a39; /* Input background in dark mode */
 
     /* Box Background Colors (Dark Mode) */
-    --color-boxdark: #24303F;          /* Dark background for containers/cards */
-    --color-boxdark-2: #1A222C;        /* Even darker background, often for main page bg in dark mode */
+    --color-boxdark: #24303f; /* Dark background for containers/cards */
+    --color-boxdark-2: #1a222c; /* Even darker background, often for main page bg in dark mode */
 
     /* Spacing - for classes like p-15, m-15 */
     /* This defines '15' as 3.75rem (15 * 0.25rem default spacing unit) */
     --spacing-15: 3.75rem;
 
     /* Box Shadow - for shadow-default */
-    --shadow-default: 0px 8px 13px -3px rgba(0, 0, 0, 0.07), 0px 3px 5px -2px rgba(0, 0, 0, 0.04);
+    --shadow-default: 0px 8px 13px -3px rgba(0, 0, 0, 0.07),
+        0px 3px 5px -2px rgba(0, 0, 0, 0.04);
 
     /*
        Note on Dark Mode:
@@ -49,4 +51,39 @@
        either manually defined or the plugin's CSS is imported directly if it supports
        that method with Tailwind CSS v4.
     */
+}
+
+#admin-app-container.sidebar-collapsed #admin-sidebar {
+    @apply w-16; /* Tailwind class for width: 4rem */
+}
+
+#admin-app-container.sidebar-collapsed #admin-sidebar .sidebar-text {
+    @apply hidden;
+}
+
+/* Adjustments for icons and alignment when collapsed */
+#admin-app-container.sidebar-collapsed #admin-sidebar .sidebar-header {
+    @apply p-3 justify-center; /* Smaller padding and center content */
+}
+
+#admin-app-container.sidebar-collapsed #admin-sidebar nav a {
+    @apply justify-center px-3; /* Center icon, adjust padding */
+}
+#admin-app-container.sidebar-collapsed #admin-sidebar nav a svg {
+    @apply mr-0; /* Remove margin from icon when text is hidden */
+}
+
+#admin-app-container.sidebar-collapsed #admin-sidebar .sidebar-footer {
+    @apply p-2; /* Smaller padding for footer */
+}
+
+/* Optional: Smooth transition for the main content area if you want it to slide */
+/* #admin-app-container > .flex-1 {
+    @apply transition-all duration-300 ease-in-out;
+}
+
+
+/* Ensure the sidebar itself has a transition for its width change */
+#admin-sidebar {
+    @apply transition-all duration-300 ease-in-out;
 }

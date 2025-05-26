@@ -59,9 +59,9 @@ class NewsController extends Controller
      */
     public function update(UpdateNewsRequest $request, News $news)
     {
-        News::where($request->id)->update([
-            'title' => $news->title,
-            'body' => $news->body
+        $news->update([
+            'title' => $request->title,
+            'body' => $request->body
         ]);
 
         return redirect(route('admin.news'));
