@@ -4,7 +4,6 @@ use App\Http\Controllers\Admin;
 use App\Http\Middleware\AdminAuth;
 use App\Http\Controllers\Api;
 
-
 Route::prefix('/admin')->middleware([AdminAuth::class])->group(function () {
     Route::get('/', [Admin\DashboardController::class, 'index'])->name('admin.dashboard');
 
@@ -22,6 +21,9 @@ Route::prefix('/admin')->middleware([AdminAuth::class])->group(function () {
     Route::put('/gallery/{gallery}', [Admin\GalleryController::class, 'update'])->name('admin.gallery.update');
     Route::delete('/gallery/{gallery}', [Admin\GalleryController::class, 'destroy'])->name('admin.gallery.destroy');
     Route::get('api/gallery/data', [Api\GalleryController::class, 'data'])->name('gallery.data'); // Data source for DataTables
+
+    Route::get('/sliders', [Admin\SliderController::class, 'index'])->name('admin.sliders');
+    Route::patch('/sliders/update/{slot_number}', [Admin\SliderController::class, 'update'])->name('admin.sliders.update');
 });
 
 // use App\Http\Middleware\AdminAuth;

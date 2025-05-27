@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Slider extends Model
 {
-    /** @use HasFactory<\Database\Factories\SliderFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'slot_number',
+        'image_path',
+    ];
 }
