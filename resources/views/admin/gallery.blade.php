@@ -12,7 +12,7 @@
     <!-- Page Title & Add New Button -->
     <div class="mb-6 flex flex-col sm:flex-row justify-between items-center">
         <h1 class="text-2xl font-semibold text-slate-800 dark:text-white">Kelola Galeri</h1>
-        <a href="#"
+        <button id="addGalleryBtn"
             class="inline-flex items-center px-5 py-2.5 bg-green-100 dark:bg-green-500 text-green-600 dark:text-white text-sm font-medium rounded-lg hover:bg-green-700 dark:hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400 focus:ring-offset-2 dark:focus:ring-offset-slate-800 transition duration-150 ease-in-out focus:text-white hover:text-white">
             <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd"
@@ -20,7 +20,7 @@
                     clip-rule="evenodd"></path>
             </svg>
             Unggah ke Galeri
-        </a>
+        </button>
     </div>
 
     <!-- Gallery Management Table -->
@@ -281,7 +281,7 @@
                             displayFormErrors(createGalleryForm, data.errors);
                         } else {
                             closeModal(createGalleryModal, createGalleryModalContent);
-                            $('#GalleryTable').DataTable().ajax.reload(); // Reload DataTable
+                            $('#galleryTable').DataTable().ajax.reload(); // Reload DataTable
                             // Add a success notification if you have one (e.g., Toastr)
                             alert(data.message || 'Galeri berhasil ditambahkan!');
                         }
@@ -290,8 +290,8 @@
             });
 
             // Handle Edit Button Click (delegated from table)
-            $('#GalleryTable tbody').on('click', 'button.edit-gallery-btn', function() {
-                const data = $('#GalleryTable').DataTable().row($(this).parents('tr')).data();
+            $('#galleryTable tbody').on('click', 'button.edit-gallery-btn', function() {
+                const data = $('#galleryTable').DataTable().row($(this).parents('tr')).data();
                 // Fetch full data if necessary, or use what's available
                 // For simplicity, assuming 'body' in datatable is sufficient or you fetch full data
                 // If you need to fetch full data:
@@ -307,7 +307,9 @@
                 // Using data directly from the row (ensure 'body' is complete enough or fetch separately)
                 document.getElementById('edit_id').value = data.id; // This ID is from the hidden input in the component
                 document.getElementById('edit_title').value = data.title;
-                document.getElementById('edit_body').value = data.original_body || data.body; // Assuming you might send original_body
+                // Set edit_path to the value used in the <img> src attribute, which is data.path
+                document.getElementById('edit_path').value = data.path;
+                document.getElementById('edit_category').value = data.original_category || data.category; // Assuming you might send original_body
                 openModal(editGalleryModal, editGalleryModalContent);
             });
 
@@ -319,7 +321,7 @@
                 const GalleryId = document.getElementById('edit_id').value;
                 const formData = new FormData(this);
 
-                fetch(`/admin/Gallery/${GalleryId}`, { // Using the standard update route
+                fetch(`/admin/gallery/${GalleryId}`, { // Using the standard update route
                         method: 'POST', // HTML forms don't support PUT directly, so use POST and _method field
                         headers: {
                             'X-CSRF-TOKEN': formData.get('_token'),
@@ -333,7 +335,7 @@
                             displayFormErrors(editGalleryForm, data.errors);
                         } else {
                             closeModal(editGalleryModal, editGalleryModalContent);
-                            $('#GalleryTable').DataTable().ajax.reload();
+                            $('#galleryTable').DataTable().ajax.reload();
                             alert(data.message || 'Galeri berhasil diperbarui!');
                         }
                     })

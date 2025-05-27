@@ -30,11 +30,18 @@
                     <span class="text-xs text-red-500 hidden" id="{{ $isEdit ? 'edit' : 'create' }}_title_error"></span>
                 </div>
                 <div>
-                    <label for="{{ $isEdit ? 'edit' : 'create' }}_body"
-                        class="block text-sm font-medium text-slate-700 dark:text-slate-300">Isi Berita</label>
-                    <textarea name="body" id="{{ $isEdit ? 'edit' : 'create' }}_body" rows="5" required
+                    <label for="{{ $isEdit ? 'edit' : 'create' }}_path"
+                        class="block text-sm font-medium text-slate-700 dark:text-slate-300">Foto</label>
+                    <input type="text" name="path" id="{{ $isEdit ? 'edit' : 'create' }}_path" required
+                        class="mt-1 py-2 px-3 block w-full rounded-md border-slate-300 dark:border-stone-600 dark:bg-stone-700 dark:text-white shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm">
+                    <span class="text-xs text-red-500 hidden" id="{{ $isEdit ? 'edit' : 'create' }}_path_error"></span>
+                </div>
+                <div>
+                    <label for="{{ $isEdit ? 'edit' : 'create' }}_category"
+                        class="block text-sm font-medium text-slate-700 dark:text-slate-300">Category</label>
+                    <textarea name="category" id="{{ $isEdit ? 'edit' : 'create' }}_category" rows="5" required
                         class="mt-1 px-3 py-2 block w-full rounded-md border-slate-300 dark:border-stone-600 dark:bg-stone-700 dark:text-white shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"></textarea>
-                    <span class="text-xs text-red-500 hidden" id="{{ $isEdit ? 'edit' : 'create' }}_body_error"></span>
+                    <span class="text-xs text-red-500 hidden" id="{{ $isEdit ? 'edit' : 'create' }}_category_error"></span>
                 </div>
                 <div class="flex justify-end pt-4">
                     <button type="button" id="cancel{{ ucfirst(str_replace('-', '', Str::studly($modalId))) }}Btn"
