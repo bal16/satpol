@@ -1,8 +1,45 @@
 <x-layout :pageName="'Dashboard'">
     <x-header />
     <main>
-        <div class="flex w-full lg:max-h-119.5 max-h-74.5 overflow-hidden">
-            <img class="w-full object-cover" src="image/slider.png" alt="" />
+        <!-- New Slider Component -->
+        <div class="relative max-w-screen overflow-hidden h-[80vh]">
+            <input class="hidden peer/slider1 checkbox" type="radio" name="slider" id="slider1" checked />
+            <input class="hidden peer/slider2 checkbox" type="radio" name="slider" id="slider2" />
+            <input class="hidden peer/slider3 checkbox" type="radio" name="slider" id="slider3" />
+            <div
+                class="relative w-[300vw] h-[100%] flex transition-all duration-500 ease-in-out peer-checked/slider1:-left-0 peer-checked/slider2:-left-[100vw] peer-checked/slider3:-left-[200vw]">
+                <div class="relative w-full h-full flex">
+                    <img class="w-full h-full object-cover"
+                        src="{{ asset('image/sliders/1.jpg') }}"
+                        alt="Slider Image 1" />
+                </div>
+                <div class="relative w-full h-full flex">
+                    <img class="w-full h-full object-cover"
+                        src="{{ asset('image/sliders/2.jpg') }}"
+                        alt="Slider Image 2" />
+                </div>
+                <div class="relative w-full h-full flex">
+                    <img class="w-full h-full object-cover"
+                        src="{{ asset('image/sliders/3.jpg') }}"
+                        alt="Slider Image 3" />
+                </div>
+            </div>
+
+            <div
+                class="absolute w-full flex justify-center gap-2 bottom-12 peer-checked/slider1:[&_label:nth-of-type(1)]:opacity-100 peer-checked/slider1:[&_label:nth-of-type(1)]:w-10 peer-checked/slider2:[&_label:nth-of-type(2)]:opacity-100 peer-checked/slider2:[&_label:nth-of-type(2)]:w-10 peer-checked/slider3:[&_label:nth-of-type(3)]:opacity-100 peer-checked/slider3:[&_label:nth-of-type(3)]:w-10">
+                <label
+                    class="block w-5 h-5 bg-white cursor-pointer opacity-50 z-10 transition-all duration-300 ease-in-out hover:scale-125 hover:opacity-100 rounded-full"
+                    for="slider1">
+                </label>
+                <label
+                    class="block w-5 h-5 bg-white cursor-pointer opacity-50 z-10 transition-all duration-300 ease-in-out hover:scale-125 hover:opacity-100 rounded-full"
+                    for="slider2">
+                </label>
+                <label
+                    class="block w-5 h-5 bg-white cursor-pointer opacity-50 z-10 transition-all duration-300 ease-in-out hover:scale-125 hover:opacity-100 rounded-full"
+                    for="slider3">
+                </label>
+            </div>
         </div>
         <div class="bg-[#2B2A29] lg:max-h-166.25">
             <div class="flex max-w-7xl justify-center mx-auto">
