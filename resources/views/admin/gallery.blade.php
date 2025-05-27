@@ -34,9 +34,9 @@
                         <th class="text-left text-xs font-medium text-white uppercase">
                             Title</th>
                         <th class="text-left text-xs font-medium text-white uppercase">
-                            Category</th>
-                        <th class="text-left text-xs font-medium text-white uppercase">
                             Photo</th>
+                        <th class="text-left text-xs font-medium text-white uppercase">
+                            Category</th>
                         <th class="text-left text-xs font-medium text-white uppercase">
                             Created At</th>
                         <th class="text-left text-xs font-medium text-white uppercase">
@@ -139,8 +139,24 @@
                             name: 'title'
                         },
                         {
-                            data: 'body',
-                            name: 'body',
+                            data: 'path',
+                            name: 'path',
+                            orderable: false,
+                            searchable: false,
+                            render: function(data, type, full, meta) {
+                                if (type === 'display' && data) {
+                                    // Assuming 'data' is the path relative to your public storage symlink
+                                    // e.g., if images are in 'storage/app/public/gallery_photos'
+                                    // and your symlink is 'public/storage' -> 'storage/app/public'
+                                    // then 'data' might be 'gallery_photos/image.jpg'
+                                    return `<img src="${data}" alt="${full.title || 'Gallery image'}" class="h-16 w-auto object-cover rounded"/>`;
+                                }
+                                return data; // Return data for other types like 'sort' or 'filter'
+                            }
+                        }, // Body might not be directly searchable/orderable
+                        {
+                            data: 'category',
+                            name: 'category',
                             orderable: false,
                             searchable: false
                         }, // Body might not be directly searchable/orderable
@@ -250,7 +266,7 @@
             createGalleryForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 const formData = new FormData(this);
-                fetch("{{ route('admin.Gallery.store') }}", {
+                fetch("{{ route('admin.gallery.store') }}", {
                         method: 'POST',
                         headers: {
                             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute(
@@ -267,14 +283,14 @@
                             closeModal(createGalleryModal, createGalleryModalContent);
                             $('#GalleryTable').DataTable().ajax.reload(); // Reload DataTable
                             // Add a success notification if you have one (e.g., Toastr)
-                            alert(data.message || 'Berita berhasil ditambahkan!');
+                            alert(data.message || 'Galeri berhasil ditambahkan!');
                         }
                     })
                     .catch(error => console.error('Error:', error));
             });
 
             // Handle Edit Button Click (delegated from table)
-            $('#GalleryTable tbody').on('click', 'button.edit-Gallery-btn', function() {
+            $('#GalleryTable tbody').on('click', 'button.edit-gallery-btn', function() {
                 const data = $('#GalleryTable').DataTable().row($(this).parents('tr')).data();
                 // Fetch full data if necessary, or use what's available
                 // For simplicity, assuming 'body' in datatable is sufficient or you fetch full data
@@ -318,7 +334,7 @@
                         } else {
                             closeModal(editGalleryModal, editGalleryModalContent);
                             $('#GalleryTable').DataTable().ajax.reload();
-                            alert(data.message || 'Berita berhasil diperbarui!');
+                            alert(data.message || 'Galeri berhasil diperbarui!');
                         }
                     })
                     .catch(error => console.error('Error:', error));
