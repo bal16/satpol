@@ -60,10 +60,10 @@ class GalleryController extends Controller
      */
     public function update(UpdateGalleryRequest $request, Gallery $gallery)
     {
-        Gallery::where($request->id)->update([
-            'title' => $gallery->title,
-            'path' => $gallery->path,
-            'category' => $gallery->category
+        $gallery->update([
+            'title' => $request->title,
+            'path' => $request->path,
+            'category' => $request->category
         ]);
 
         return redirect(route('admin.gallery'));

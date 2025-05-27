@@ -17,7 +17,9 @@ class GalleryFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => $this->faker->sentence(rand(3, 7)),
+            'path' => $this->faker->imageUrl(640, 480, 'cats', true, 'Faker'), // Generates a placeholder image URL
+            'category' => $this->faker->word(), // Generates a random word for category
         ];
     }
 }

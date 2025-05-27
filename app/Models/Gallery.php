@@ -9,4 +9,10 @@ class Gallery extends Model
 {
     /** @use HasFactory<\Database\Factories\GalleryFactory> */
     use HasFactory;
+    
+    protected $fillable = [
+        'title',
+        'path',
+        'category'
+    ];
 }

@@ -17,6 +17,11 @@ Route::prefix('/admin')->middleware([AdminAuth::class])->group(function () {
     Route::get('api/news/data', [Api\NewsController::class, 'data'])->name('news.data'); // Data source for DataTables
 
     Route::get('/gallery', [Admin\GalleryController::class, 'index'])->name('admin.gallery');
+    Route::get('/gallery/create', [Admin\GalleryController::class, 'create'])->name('admin.gallery.create');
+    Route::post('/gallery', [Admin\GalleryController::class, 'store'])->name('admin.gallery.store');
+    Route::put('/gallery/{gallery}', [Admin\GalleryController::class, 'update'])->name('admin.gallery.update');
+    Route::delete('/gallery/{gallery}', [Admin\GalleryController::class, 'destroy'])->name('admin.gallery.destroy');
+    Route::get('api/gallery/data', [Api\GalleryController::class, 'data'])->name('gallery.data'); // Data source for DataTables
 });
 
 // use App\Http\Middleware\AdminAuth;
