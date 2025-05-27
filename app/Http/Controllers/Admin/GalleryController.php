@@ -36,7 +36,11 @@ class GalleryController extends Controller
             'category' => $request->category,
         ]);
 
-        return redirect(route('admin.gallery'));
+        // return redirect(route('admin.gallery'));
+        return response()->json([
+            'message' => 'Gallery created successfully',
+            'status' => true
+        ]);
     }
 
     // /**
@@ -66,7 +70,11 @@ class GalleryController extends Controller
             'category' => $request->category
         ]);
 
-        return redirect(route('admin.gallery'));
+        // return redirect(route('admin.gallery'));
+        return response()->json([
+            'message' => 'Gallery updated successfully',
+            'status' => true
+        ]);
     }
 
     /**
@@ -77,5 +85,9 @@ class GalleryController extends Controller
         Gallery::destroy($gallery->id);
 
         return redirect(route('admin.gallery'));
+        // return response()->json([
+        //     'message' => 'Gallery deleted successfully',
+        //     'status' => true
+        // ]);
     }
 }

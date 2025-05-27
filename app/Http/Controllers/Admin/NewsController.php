@@ -35,7 +35,10 @@ class NewsController extends Controller
             'body' => $request->body,
         ]);
 
-        return redirect(route('admin.news'));
+        return response()->json([
+            'message' => 'News created successfully',
+            'status' => true
+        ]);
     }
 
     // /**
@@ -64,7 +67,11 @@ class NewsController extends Controller
             'body' => $request->body
         ]);
 
-        return redirect(route('admin.news'));
+        // return redirect(route('admin.news'));
+        return response()->json([
+            'message' => 'News updated successfully',
+            'status' => true
+        ]);
     }
 
     /**
@@ -75,5 +82,9 @@ class NewsController extends Controller
         News::destroy($news->id);
 
         return redirect(route('admin.news'));
+        // return response()->json([
+        //     'message' => 'News deleted successfully',
+        //     'status' => true
+        // ]);
     }
 }
