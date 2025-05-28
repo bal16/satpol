@@ -19,8 +19,13 @@
         class="relative w-[500vw] h-[100%] flex transition-all duration-500 ease-in-out peer-checked/slider1:-left-0 peer-checked/slider2:-left-[100vw] peer-checked/slider3:-left-[200vw] peer-checked/slider4:-left-[300vw] peer-checked/slider5:-left-[400vw]">
         @foreach ($sliderData as $slider)
             <div class="relative w-full h-[60vh] flex">
-                <img class="w-full h-[60vh] object-contain" src="{{ asset('storage/' . $slider->image_path) }}"
-                    alt="Slider Image {{ $slider->slot_number }}" />
+                @if ($slider->image_path == '')
+                    <img class="w-full h-[60vh] object-contain" src="https://placehold.co/1600x900"
+                        alt="Slider Image {{ $slider->slot_number }}" />
+                @else
+                    <img class="w-full h-[60vh] object-contain" src="{{ asset('storage/' . $slider->image_path) }}"
+                        alt="Slider Image {{ $slider->slot_number }}" />
+                @endif
             </div>
         @endforeach
     </div>

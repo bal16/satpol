@@ -17,7 +17,8 @@ class SliderFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'slot_number' => $this->faker->numberBetween(1, 5),
+            'image_path' => $this->faker->imageUrl(640, 480, 'cats', true, 'Faker'),
         ];
     }
 }
