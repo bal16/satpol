@@ -58,7 +58,7 @@ class NewsController extends Controller
                 ->make(true);
         }
         // Fallback or error if not an AJAX request
-        return abort(403, 'Unauthorized action.');
+        return response()->json(['error' =>  'Unauthorized action.'], 401);
     }
 
     /**
