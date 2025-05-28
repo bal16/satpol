@@ -17,11 +17,28 @@ class SliderController extends Controller
     {
         // Ambil data slider dari database, diurutkan berdasarkan slot_number
         // dan di-key berdasarkan slot_number untuk memudahkan pencarian
-        $sliders = Slider::orderBy('slot_number')->get()->keyBy('slot_number');
+        $slidersFromDb = Slider::orderBy('slot_number')->get()->keyBy('slot_number');
 
+        $currentSlidersData = [];
+        $placeholderBaseUrl = 'https://via.placeholder.com/600x300/e2e8f0/64748b.png?text=';
+        $totalSlots = 5; // Sesuai dengan yang ada di blade
+
+        for ($k = 1; $k <= $totalSlots; $k++) {
+            $sliderForSlot = $slidersFromDb->get($k);
+            $imageUrl = $sliderForSlot
+                        ? asset('storage/' . $sliderForSlot->image_path)
+                        : ($placeholderBaseUrl . 'Slider Slot ' . $k);
+
+            $currentSlidersData[] = [ // Blade menggunakan @foreach, jadi array numerik sudah cukup
+                'image_url' => $imageUrl,
+                'slot_number' => $k,
+                // 'id' => $sliderForSlot ? $sliderForSlot->id : null, // Opsional jika diperlukan di view
+            ];
+        }
 
         return view('admin.slider', [
-            'currentSlidersData' => $sliders
+            'currentSlidersData' => $currentSlidersData,
+            'pageTitle' => 'Kelola Slider' // Sesuai dengan <x-admin-layout :pageTitle>
         ]);
     }
 
@@ -55,7 +72,6 @@ class SliderController extends Controller
 
             // Debugging: Periksa apakah file berhasil disimpan
             if (!$imagePath || !Storage::disk('public')->exists($imagePath)) {
-                dd($imagePath);
                 return redirect()->route('admin.sliders')
                     ->with('error_slot_' . $slot_number, 'Gagal menyimpan file gambar ke disk untuk Slider #' . $slot_number . '.');
             }

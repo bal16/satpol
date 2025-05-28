@@ -16,7 +16,7 @@
                     </svg>
                 </button>
             </div>
-            <form id="{{ $formId }}" class="mt-4 space-y-4">
+            <form id="{{ $formId }}" class="mt-4 space-y-4" action="{{ route("admin.gallery.store") }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @if ($isEdit)
                     @method('PUT')
@@ -32,11 +32,31 @@
                 <div>
                     <label for="{{ $isEdit ? 'edit' : 'create' }}_path"
                         class="block text-sm font-medium text-slate-700 dark:text-slate-300">Foto</label>
-                    <input type="text" name="path" id="{{ $isEdit ? 'edit' : 'create' }}_path" required
-                        class="mt-1 py-2 px-3 block w-full rounded-md border-slate-300 dark:border-stone-600 dark:bg-stone-700 dark:text-white shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm">
+                    @if (!$isEdit)
+                        <input type="file" name="path" id="create_path" required
+                        class="block w-full text-sm text-slate-200 dark:text-slate-300
+                              file:mr-4 file:py-2 file:px-4
+                              file:rounded-lg file:border-0
+                              file:text-sm file:font-semibold
+                              file:bg-red-100 file:text-red-800
+                              dark:file:bg-red-500 dark:file:text-white
+                              hover:file:bg-red-200 dark:hover:file:bg-red-600
+                              cursor-pointer">
+                    @else
+                    <input type="file" name="path" id="edit_path"
+                        class="block w-full text-sm text-slate-200 dark:text-slate-300
+                              file:mr-4 file:py-2 file:px-4
+                              file:rounded-lg file:border-0
+                              file:text-sm file:font-semibold
+                              file:bg-red-100 file:text-red-800
+                              dark:file:bg-red-500 dark:file:text-white
+                              hover:file:bg-red-200 dark:hover:file:bg-red-600
+                              cursor-pointer">
+                    @endif
+
                     <span class="text-xs text-red-500 hidden" id="{{ $isEdit ? 'edit' : 'create' }}_path_error"></span>
                 </div>
-                <div>
+                <div><
                     <label for="{{ $isEdit ? 'edit' : 'create' }}_category"
                         class="block text-sm font-medium text-slate-700 dark:text-slate-300">Category</label>
                     <textarea name="category" id="{{ $isEdit ? 'edit' : 'create' }}_category" rows="5" required
