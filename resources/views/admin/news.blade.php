@@ -59,22 +59,12 @@
     </div>
 
     <!-- Create News Modal -->
-    <x-admin.news-modal
-        modalId="createNewsModal"
-        modalTitle="Tambah Berita Baru"
-        formId="createNewsForm"
-        submitButtonText="Simpan"
-        :isEdit="false"
-    />
+    <x-admin.news-modal modalId="createNewsModal" modalTitle="Tambah Berita Baru" formId="createNewsForm"
+        submitButtonText="Simpan" :isEdit="false" />
 
     <!-- Edit News Modal -->
-    <x-admin.news-modal
-        modalId="editNewsModal"
-        modalTitle="Edit Berita"
-        formId="editNewsForm"
-        submitButtonText="Simpan Perubahan"
-        :isEdit="true"
-    />
+    <x-admin.news-modal modalId="editNewsModal" modalTitle="Edit Berita" formId="editNewsForm"
+        submitButtonText="Simpan Perubahan" :isEdit="true" />
 
     @push('scripts')
         {{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -244,22 +234,15 @@
             $('#newsTable tbody').on('click', 'button.edit-news-btn', function() {
                 const data = $('#newsTable').DataTable().row($(this).parents('tr')).data();
                 // Fetch full data if necessary, or use what's available
-                // For simplicity, assuming 'body' in datatable is sufficient or you fetch full data
-                // If you need to fetch full data:
-                // fetch(`/admin/api/news/${data.id}`) // Create this API endpoint
-                // .then(response => response.json())
-                // .then(newsItem => {
-                //    document.getElementById('edit_id').value = newsItem.id;
-                //    document.getElementById('edit_title').value = newsItem.title;
-                //    document.getElementById('edit_body').value = newsItem.body;
-                //    openModal(editNewsModal, editNewsModalContent);
-                // });
-
-                // Using data directly from the row (ensure 'body' is complete enough or fetch separately)
-                document.getElementById('edit_id').value = data.id; // This ID is from the hidden input in the component
-                document.getElementById('edit_title').value = data.title;
-                document.getElementById('edit_body').value = data.original_body || data.body; // Assuming you might send original_body
-                openModal(editNewsModal, editNewsModalContent);
+                fetch(`/admin/news/${data.id}`)
+                    .then(async response => (await response.json()).news)
+                    .then(newsItem => {
+                        document.getElementById('edit_id').value = newsItem.id;
+                        document.getElementById('edit_title').value = newsItem.title;
+                        document.getElementById('edit_body').value = newsItem.body;
+                        openModal(editNewsModal, editNewsModalContent);
+                    })
+                    .catch(error => console.error('Error:', error));
             });
 
             // Handle Edit Form Submission
