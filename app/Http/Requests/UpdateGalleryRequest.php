@@ -22,9 +22,7 @@ class UpdateGalleryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:255',
-            'path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048', // Image is optional on update, Max 2MB
-            'category' => 'required|string|max:255',
+            //
         ];
     }
 }

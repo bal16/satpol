@@ -7,7 +7,7 @@
             integrity="sha384-AsA35Lk2b1bdNXsEfz6MqkD/XkQdW8zEykqBZihdl/kU7DLyednCOCzbKfbSoxFb" crossorigin="anonymous">
         <link href="https://cdn.datatables.net/responsive/3.0.4/css/responsive.dataTables.min.css" rel="stylesheet"
             integrity="sha384-kz9bozrCHP/y+wTJV8P+n/dMBOh00rqNmmIAgHckzFWpoSB49V5ornW1aY+uYTyA" crossorigin="anonymous">
-        <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+        <x-rich-text-laravel::styles theme="richtextlaravel" />
     @endpush
 
     <!-- Page Title & Add New Button -->
@@ -34,8 +34,7 @@
                             ID</th>
                         <th class="text-left text-xs font-medium text-white uppercase">
                             Title</th>
-                        <th class="text-left text-xs font-medium text-white uppercase">
-                            Body</th>
+
                         <th class="text-left text-xs font-medium text-white uppercase">
                             Created At</th>
                         <th class="text-left text-xs font-medium text-white uppercase">
@@ -63,10 +62,6 @@
     <x-admin.news-modal modalId="createNewsModal" modalTitle="Tambah Berita Baru" formId="createNewsForm"
         submitButtonText="Simpan" :isEdit="false" />
 
-    <!-- Edit News Modal -->
-    <x-admin.news-modal modalId="editNewsModal" modalTitle="Edit Berita" formId="editNewsForm"
-        submitButtonText="Simpan Perubahan" :isEdit="true" />
-
     @push('scripts')
         {{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
@@ -81,7 +76,6 @@
         <script src="https://cdn.datatables.net/responsive/3.0.4/js/dataTables.responsive.min.js"
             integrity="sha384-A6In5tKqlvPZKDpH+ei4A3A4TZrEsyvvN2Fe+oCB1IaQfGD5HNqDIxwjztNKSGDd" crossorigin="anonymous">
         </script>
-        <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
         <script>
             $(document).ready(function() {
                 let newsTable = $('#newsTable').DataTable({
@@ -97,12 +91,6 @@
                             data: 'title',
                             name: 'title'
                         },
-                        {
-                            data: 'body',
-                            name: 'body',
-                            orderable: false,
-                            searchable: false
-                        }, // Body might not be directly searchable/orderable
                         {
                             data: 'created_at',
                             name: 'created_at'
@@ -122,10 +110,6 @@
                             responsivePriority: 1,
                             targets: 1
                         }, // Title
-                        {
-                            responsivePriority: 2,
-                            targets: 5
-                        } // Actions
                     ],
                     // You can add language options for internationalization if needed
                     // language: {
@@ -141,12 +125,6 @@
             const closeCreateNewsModalBtn = document.getElementById('closeCreateNewsModalBtn'); // Adjusted ID
             const cancelCreateNewsModalBtn = document.getElementById('cancelCreateNewsModalBtn'); // Adjusted ID
             const createNewsForm = document.getElementById('createNewsForm');
-
-            const editNewsModal = document.getElementById('editNewsModal');
-            const editNewsModalContent = document.getElementById('editNewsModalContent');
-            const closeEditNewsModalBtn = document.getElementById('closeEditNewsModalBtn'); // Adjusted ID
-            const cancelEditNewsModalBtn = document.getElementById('cancelEditNewsModalBtn'); // Adjusted ID
-            const editNewsForm = document.getElementById('editNewsForm');
 
             function openModal(modal, modalContent) {
                 modal.classList.remove('hidden');
@@ -166,9 +144,6 @@
                     // Clear form fields and errors
                     if (modal === createNewsModal) {
                         createNewsForm.reset();
-                        clearFormErrors(createNewsForm);
-                    } else if (modal === editNewsModal) {
-                        editNewsForm.reset();
                         clearFormErrors(editNewsForm);
                     }
                 }, 300);
@@ -198,17 +173,15 @@
             cancelCreateNewsModalBtn.addEventListener('click', () => closeModal(createNewsModal, createNewsModalContent));
             window.addEventListener('click', (event) => {
                 if (event.target === createNewsModal) closeModal(createNewsModal, createNewsModalContent);
-                if (event.target === editNewsModal) closeModal(editNewsModal, editNewsModalContent);
             });
 
-            // Edit Modal Listeners
-            closeEditNewsModalBtn.addEventListener('click', () => closeModal(editNewsModal, editNewsModalContent));
-            cancelEditNewsModalBtn.addEventListener('click', () => closeModal(editNewsModal, editNewsModalContent));
 
             // Handle Create Form Submission
-            createNewsForm.addEventListener('submit', function(e) {
+            createNewsForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
                 const formData = new FormData(this);
+                // console.log("🚀 ~ createNewsForm.addEventListener ~ formData:", formData)
+
                 fetch("{{ route('admin.news.store') }}", {
                         method: 'POST',
                         headers: {
@@ -232,51 +205,14 @@
                     .catch(error => console.error('Error:', error));
             });
 
-            // Handle Edit Button Click (delegated from table)
-            $('#newsTable tbody').on('click', 'button.edit-news-btn', function() {
-                const data = $('#newsTable').DataTable().row($(this).parents('tr')).data();
-                // Fetch full data if necessary, or use what's available
-                fetch(`/admin/news/${data.id}`)
-                    .then(async response => (await response.json()).news)
-                    .then(newsItem => {
-                        document.getElementById('edit_id').value = newsItem.id;
-                        document.getElementById('edit_title').value = newsItem.title;
-                        document.getElementById('edit_body').value = newsItem.body;
-                        const inputEvent = new Event('input', { bubbles: true });
-                        document.getElementById('edit_body').dispatchEvent(inputEvent);
-                        openModal(editNewsModal, editNewsModalContent);
-                    })
-                    .catch(error => console.error('Error:', error));
-            });
-
-            // Handle Edit Form Submission
-            editNewsForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                if (!confirm('Apakah Anda yakin ingin menyimpan perubahan ini?')) return;
-
-                const newsId = document.getElementById('edit_id').value;
-                const formData = new FormData(this);
-
-                fetch(`/admin/news/${newsId}`, { // Using the standard update route
-                        method: 'POST', // HTML forms don't support PUT directly, so use POST and _method field
-                        headers: {
-                            'X-CSRF-TOKEN': formData.get('_token'),
-                            'Accept': 'application/json',
-                        },
-                        body: formData // FormData will include _method: 'PUT'
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.errors) {
-                            displayFormErrors(editNewsForm, data.errors);
-                        } else {
-                            closeModal(editNewsModal, editNewsModalContent);
-                            $('#newsTable').DataTable().ajax.reload();
-                            alert(data.message || 'Berita berhasil diperbarui!');
-                        }
-                    })
-                    .catch(error => console.error('Error:', error));
-            });
+            // // Handle Edit Button Click (delegated from table)
+            // $('#newsTable tbody').on('click', 'button.edit-news-btn', function() {
+            //     const data = $('#newsTable').DataTable().row($(this).parents('tr')).data(); // Get row data
+            //     if (data && data.id) {
+            //         // Redirect to the edit page
+            //         window.location.href = `/admin/news/${data.id}/edit`;
+            //     }
+            // });
 
             // CSRF Token for AJAX
             // Add this if not already globally configured for jQuery AJAX
@@ -285,24 +221,6 @@
             //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             //     }
             // });
-
-            const quill = new Quill('#edit_body_editor', {
-                theme: 'snow'
-            });
-
-            quill.on('text-change', function() {
-                document.getElementById('edit_body').value = quill.root.innerHTML;
-            });
-
-            const textArea = document.getElementById('edit_body');
-            textArea.addEventListener('input', function  () {
-                quill.root.innerHTML = document.getElementById('edit_body').value;
-            });
-            textArea.addEventListener('change', function  () {
-                quill.root.innerHTML = document.getElementById('edit_body').value;
-            });
-            
-
 
             let prefers = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
             let html = document.querySelector('html');

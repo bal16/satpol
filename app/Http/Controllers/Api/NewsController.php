@@ -17,7 +17,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        return response()->json( ['news' => News::all(),]);
+        return response()->json(['news' => News::all(),]);
     }
 
     /**
@@ -31,9 +31,6 @@ class NewsController extends Controller
             $news = News::select(['id', 'title', 'body', 'created_at', 'updated_at'])->latest();
 
             return DataTables::of($news)
-                ->editColumn('body', function ($item) {
-                    return Str::limit($item->body, 70);
-                })
                 ->editColumn('created_at', function ($item) {
                     return $item->created_at ? $item->created_at->format('M d, Y H:i') : '-';
                 })
@@ -47,18 +44,18 @@ class NewsController extends Controller
                     $deleteUrl = route('admin.news.destroy', $item->id); // Example route name
                     $csrfToken = csrf_token();
 
-                    return '<button type="button" id="' . $item->id . '" class="edit-news-btn text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300 mr-3">Edit</button>' .
-                           '<form action="' . $deleteUrl . '" method="POST" class="inline-block" onsubmit="return confirm(\'Are you sure you want to delete this item?\');">' .
-                           '<input type="hidden" name="_token" value="' . $csrfToken . '">' .
-                           '<input type="hidden" name="_method" value="DELETE">' .
-                           '<button type="submit" class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300">Delete</button>' .
-                           '</form>';
+                    return '<a href="' . route('admin.news.edit', $item->id) . '" class="edit-news-btn cursor-pointer text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300 mr-3">Edit</a>' .
+                        '<form action="' . $deleteUrl . '" method="POST" class="inline-block" onsubmit="return confirm(\'Are you sure you want to delete this item?\');">' .
+                        '<input type="hidden" name="_token" value="' . $csrfToken . '">' .
+                        '<input type="hidden" name="_method" value="DELETE">' .
+                        '<button type="submit" class="text-red-600 hover:text-red-900 cursor-pointer dark:text-red-400 dark:hover:text-red-300" >Delete</button>' .
+                        '</form>';
                 })
                 ->rawColumns(['action']) // Important to render HTML in the action column
                 ->make(true);
         }
         // Fallback or error if not an AJAX request
-        return response()->json(['error' =>  'Unauthorized action.'], 401);
+        return response()->json(['error' => 'Unauthorized action.'], 401);
     }
 
     /**
@@ -66,6 +63,6 @@ class NewsController extends Controller
      */
     public function show(News $news)
     {
-        return response()->json(['news' => $news]);
+        return response()->json(['news' => $news, 'body' => $news->body->toTrixHtml()]);
     }
 }
