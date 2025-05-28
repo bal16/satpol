@@ -29,7 +29,8 @@
                         <img id="sliderPreview{{ $slotNumber }}" src="https://placehold.co/1600x900"
                             alt="Pratinjau Slider {{ $slotNumber }}" class="w-full h-full object-cover">
                     @else
-                        <img id="sliderPreview{{ $slotNumber }}" src="{{ $sliderData['image_path'] }}"
+                        <img id="sliderPreview{{ $slotNumber }}"
+                            src="{{ asset('storage/' . $sliderData->image_path) }}"
                             alt="Pratinjau Slider {{ $slotNumber }}" class="w-full h-full object-cover">
                     @endif
                 </div>
@@ -47,12 +48,12 @@
                         <input type="file" name="slider_image" id="sliderImageInput{{ $slotNumber }}"
                             class="block w-full text-sm text-slate-200 dark:text-slate-300
                               file:mr-4 file:py-2 file:px-4
-                              file:rounded-lg file:border-0
+                              file:rounded-lg file:border-0 
                               file:text-sm file:font-semibold
                               file:bg-red-100 file:text-red-800
                               dark:file:bg-red-500 dark:file:text-white
                               hover:file:bg-red-200 dark:hover:file:bg-red-600
-                              cursor-pointer"
+                              file:cursor-pointer cursor-pointer"
                             accept="image/png, image/jpeg, image/jpg, image/webp"
                             onchange="previewSliderImage(this, 'sliderPreview{{ $slotNumber }}')">
 
@@ -65,7 +66,7 @@
                     </div>
 
                     <button type="submit"
-                        class="w-full inline-flex items-center justify-center px-4 py-2.5
+                        class="w-full cursor-pointer inline-flex items-center justify-center px-4 py-2.5
                            bg-red-500 hover:bg-red-400 dark:bg-red-600 dark:hover:bg-red-500
                            text-white text-sm font-medium rounded-lg
                            focus:outline-none focus:ring-2 focus:ring-red-300 dark:focus:ring-red-700
