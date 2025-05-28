@@ -18,7 +18,7 @@ class NewsFactory extends Factory
     {
         return [
             'title' => $this->faker->sentence(rand(5, 10)), // Generates a sentence with 5 to 10 words
-            // 'body' => $this->faker->paragraphs(rand(3, 7), true), // Generates 3 to 7 paragraphs as a single string
+            'body' => $this->faker->paragraphs(rand(3, 7), true), // Generates 3 to 7 paragraphs as a single string
         ];
     }
 }

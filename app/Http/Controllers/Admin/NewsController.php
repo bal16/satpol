@@ -52,10 +52,10 @@ class NewsController extends Controller
     // /**
     //  * Show the form for editing the specified resource.
     //  */
-    public function edit(News $news)
-    {
-        return view('admin.news.edit', compact('news'));
-    }
+    // public function edit(News $news)
+    // {
+    //     //
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -67,8 +67,11 @@ class NewsController extends Controller
             'body' => $request->body
         ]);
 
-        return redirect()->route('admin.news')
-                         ->with('success', 'Berita berhasil diperbarui.');
+        // return redirect(route('admin.news'));
+        return response()->json([
+            'message' => 'News updated successfully',
+            'status' => true
+        ]);
     }
 
     /**

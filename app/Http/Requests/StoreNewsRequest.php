@@ -22,8 +22,7 @@ class StoreNewsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required',
-            'body' => 'nullable|string'
+            //
         ];
     }
 }

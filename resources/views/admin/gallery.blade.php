@@ -145,11 +145,14 @@
                             searchable: false,
                             render: function(data, type, full, meta) {
                                 if (type === 'display' && data) {
-                                    // Assuming 'data' is the path relative to your public storage symlink
-                                    // e.g., if images are in 'storage/app/public/gallery_photos'
-                                    // and your symlink is 'public/storage' -> 'storage/app/public'
-                                    // then 'data' might be 'gallery_photos/image.jpg'
-                                    return `<img src="${data}" alt="${full.title || 'Gallery image'}" class="h-16 w-auto object-cover rounded"/>`;
+                                    let imageUrl = data;
+                                    // Ensure the URL is correctly formed for public access.
+                                    // If 'data' is a relative path like 'gallery_photos/image.jpg',
+                                    // prepend '/storage/'.
+                                    // If 'data' is already '/storage/gallery_photos/image.jpg' or a full HTTP/S URL,
+                                    // it will be used as is.
+
+                                    return `<img src="${imageUrl}" alt="${full.title || 'Gallery image'}" class="h-16 w-auto object-cover rounded"/>`;
                                 }
                                 return data; // Return data for other types like 'sort' or 'filter'
                             }
@@ -307,8 +310,9 @@
                 // Using data directly from the row (ensure 'body' is complete enough or fetch separately)
                 document.getElementById('edit_id').value = data.id; // This ID is from the hidden input in the component
                 document.getElementById('edit_title').value = data.title;
-                // Set edit_path to the value used in the <img> src attribute, which is data.path
-                document.getElementById('edit_path').value = data.path;
+                // document.getElementById('edit_path').value = data.path; // This line is ineffective for file inputs and can be removed.
+                                                                        // The backend should handle not updating the image if no new file is submitted.
+                                                                        // You might want to show a preview of the current image here instead.
                 document.getElementById('edit_category').value = data.original_category || data.category; // Assuming you might send original_body
                 openModal(editGalleryModal, editGalleryModalContent);
             });

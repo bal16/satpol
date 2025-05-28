@@ -12,7 +12,6 @@ Route::prefix('/admin')->middleware([AdminAuth::class])->group(function () {
     Route::get('/news/create', [Admin\NewsController::class, 'create'])->name('admin.news.create');
     Route::post('/news', [Admin\NewsController::class, 'store'])->name('admin.news.store');
     Route::get('/news/{news}', [Api\NewsController::class, 'show'])->name('admin.news.show');
-    Route::get('/news/{news}/edit', [Admin\NewsController::class, 'edit'])->name('admin.news.edit'); // Changed PUT to GET
     Route::put('/news/{news}', [Admin\NewsController::class, 'update'])->name('admin.news.update');
     Route::delete('/news/{news}', [Admin\NewsController::class, 'destroy'])->name('admin.news.destroy');
     Route::get('api/news/data', [Api\NewsController::class, 'data'])->name('news.data'); // Data source for DataTables
