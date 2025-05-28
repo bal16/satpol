@@ -7,6 +7,7 @@
             integrity="sha384-AsA35Lk2b1bdNXsEfz6MqkD/XkQdW8zEykqBZihdl/kU7DLyednCOCzbKfbSoxFb" crossorigin="anonymous">
         <link href="https://cdn.datatables.net/responsive/3.0.4/css/responsive.dataTables.min.css" rel="stylesheet"
             integrity="sha384-kz9bozrCHP/y+wTJV8P+n/dMBOh00rqNmmIAgHckzFWpoSB49V5ornW1aY+uYTyA" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
     @endpush
 
     <!-- Page Title & Add New Button -->
@@ -80,6 +81,7 @@
         <script src="https://cdn.datatables.net/responsive/3.0.4/js/dataTables.responsive.min.js"
             integrity="sha384-A6In5tKqlvPZKDpH+ei4A3A4TZrEsyvvN2Fe+oCB1IaQfGD5HNqDIxwjztNKSGDd" crossorigin="anonymous">
         </script>
+        <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
         <script>
             $(document).ready(function() {
                 let newsTable = $('#newsTable').DataTable({
@@ -240,6 +242,8 @@
                         document.getElementById('edit_id').value = newsItem.id;
                         document.getElementById('edit_title').value = newsItem.title;
                         document.getElementById('edit_body').value = newsItem.body;
+                        const inputEvent = new Event('input', { bubbles: true });
+                        document.getElementById('edit_body').dispatchEvent(inputEvent);
                         openModal(editNewsModal, editNewsModalContent);
                     })
                     .catch(error => console.error('Error:', error));
@@ -281,6 +285,24 @@
             //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             //     }
             // });
+
+            const quill = new Quill('#edit_body_editor', {
+                theme: 'snow'
+            });
+
+            quill.on('text-change', function() {
+                document.getElementById('edit_body').value = quill.root.innerHTML;
+            });
+
+            const textArea = document.getElementById('edit_body');
+            textArea.addEventListener('input', function  () {
+                quill.root.innerHTML = document.getElementById('edit_body').value;
+            });
+            textArea.addEventListener('change', function  () {
+                quill.root.innerHTML = document.getElementById('edit_body').value;
+            });
+            
+
 
             let prefers = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
             let html = document.querySelector('html');
