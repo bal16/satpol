@@ -72,7 +72,6 @@ class SliderController extends Controller
 
             // Debugging: Periksa apakah file berhasil disimpan
             if (!$imagePath || !Storage::disk('public')->exists($imagePath)) {
-                dd($imagePath);
                 return redirect()->route('admin.sliders')
                     ->with('error_slot_' . $slot_number, 'Gagal menyimpan file gambar ke disk untuk Slider #' . $slot_number . '.');
             }
