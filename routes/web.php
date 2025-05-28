@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';
@@ -9,15 +10,7 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth',])->group(function () {
-    Route::get('/dashboard', function () {
-        return view("admin.dashboard");
-    })->name('dashboard');
-});
-
-Route::get('/', function () {
-    return view('dashboard');
-})->name('home');
+Route::get('/', [DashboardController::class, 'index'])->name('home');
 
 Route::get('/profile', function () {
     return view('profile');
