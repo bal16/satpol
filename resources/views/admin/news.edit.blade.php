@@ -27,7 +27,7 @@
                     <label for="body" class="block text-sm font-medium text-slate-700 dark:text-slate-300">Isi
                         Berita</label>
                     {{-- Pastikan ID unik jika ada beberapa editor Trix di halaman lain --}}
-                    <x-trix-input :attachment="true" id="edit_news_body" name="body" :value="old('body', $news->body)"
+                    <x-trix-input :attachment="true" id="edit_news_body" name="body" :value="old('body', $news->body->toTrixHtml())"
                         class="mt-1 block w-full @error('body')
 trix-content-invalid
 @enderror" />

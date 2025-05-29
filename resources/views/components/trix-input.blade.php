@@ -1,7 +1,6 @@
-@props(['id', 'name', 'value' => '', 'attachment' => false])
+@props(['id', 'name', 'value' => '', 'attachment' => true])
 
 {{-- More detailed dump: --}}
-@php dump(['id' => $id, 'name' => $name, 'passed_attachment_value' => $attachment, 'type' => gettype($attachment)]); @endphp
 
 <input type="hidden" name="{{ $name }}" id="{{ $id }}_input" value="{{ $value }}" />
 
