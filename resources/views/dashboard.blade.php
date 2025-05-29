@@ -52,7 +52,7 @@
                     <div class="flex mx-auto group font-sans font-bold h-fit w-fit">
                         <div
                             class="border border-[#2B2A29] rounded transition delay-150 duration-300 ease-in-out group-hover:shadow-lg group-hover:shadow-[#ff5f67] group-hover:border-[#e93b23] group-hover:bg-[#e93b23] text-[#2B2A29] group-hover:text-[#fdfdfd] py-1">
-                            <button class="px-2">BERITA LENGKAP</button>
+                            <a class="px-2" href="{{ route('news') }}">BERITA LENGKAP</a>
                         </div>
                     </div>
                 </div>
