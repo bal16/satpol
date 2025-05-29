@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Gallery;
 use App\Http\Requests\StoreGalleryRequest;
 use Illuminate\Support\Facades\Storage;
@@ -27,7 +28,20 @@ class GalleryController extends Controller
 
         $gallery = new Gallery();
         $gallery->title = $request->input('title');
-        $gallery->category = $request->input('category');
+
+        // Handle Category
+        $categoryId = $request->input('category_id');
+        $newCategoryName = $request->input('new_category_name');
+
+        if (!empty($newCategoryName)) {
+            // User wants to create a new category
+            $category = Category::firstOrCreate(['name' => $newCategoryName]);
+            $gallery->category_id = $category->id;
+        } elseif (!empty($categoryId)) {
+            // User selected an existing category
+            $gallery->category_id = $categoryId;
+        }
+        // If both are empty, category_id will be null (if column is nullable)
 
         if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
             $uploadedFile = $request->file('photo');
@@ -102,7 +116,21 @@ class GalleryController extends Controller
         // Validation is handled by UpdateGalleryRequest.
 
         $gallery->title = $request->input('title');
-        $gallery->category = $request->input('category');
+
+        // Handle Category
+        $categoryId = $request->input('category_id');
+        $newCategoryName = $request->input('new_category_name');
+
+        if (!empty($newCategoryName)) {
+            // User wants to create a new category or changed to a new one
+            $categoryModel = Category::firstOrCreate(['name' => $newCategoryName]);
+            $gallery->category_id = $categoryModel->id;
+        } elseif (!empty($categoryId)) {
+            // User selected an existing category
+            $gallery->category_id = $categoryId;
+        } else {
+            $gallery->category_id = null; // Allow unsetting category
+        }
 
         if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
             $newUploadedFile = $request->file('photo');

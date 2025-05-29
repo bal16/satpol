@@ -17,7 +17,7 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        return response()->json( ['gallery' => Gallery::all(),]);
+        return response()->json(['gallery' => Gallery::all(),]);
     }
 
     /**
@@ -28,12 +28,21 @@ class GalleryController extends Controller
     public function data(Request $request)
     {
         if ($request->ajax()) {
-            $gallery = Gallery::select(['id', 'title', 'path', 'category', 'created_at', 'updated_at'])->latest();
+            // Eager load category relationship
+            $gallery = Gallery::with('category')->select(['id','title', 'path', 'category_id', 'created_at', 'updated_at'])->latest();
 
             return DataTables::of($gallery)
+                ->addIndexColumn() // Tambahkan baris ini untuk nomor urut
+
                 ->editColumn('path', function ($item) {
-                    return asset('storage/'.$item->path);
+                    return asset('storage/' . $item->path);
                 })
+                ->addColumn('category_name', function (Gallery $gallery) {
+                    return $gallery->category ? $gallery->category->name : 'N/A';
+                })
+                // Hide original category_id from being sent to client if not needed directly
+                // Or keep it if your edit logic relies on it directly from DT row data
+                // ->removeColumn('category_id')
                 ->editColumn('created_at', function ($item) {
                     return $item->created_at ? $item->created_at->format('M d, Y H:i') : '-';
                 })
@@ -48,17 +57,19 @@ class GalleryController extends Controller
                     $csrfToken = csrf_token();
 
                     return '<button type="button" id="' . $item->id . '" class="edit-gallery-btn text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300 mr-3">Edit</button>' .
-                           '<form action="' . $deleteUrl . '" method="POST" class="inline-block" onsubmit="return confirm(\'Are you sure you want to delete this item?\');">' .
-                           '<input type="hidden" name="_token" value="' . $csrfToken . '">' .
-                           '<input type="hidden" name="_method" value="DELETE">' .
-                           '<button type="submit" class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300">Delete</button>' .
-                           '</form>';
+                        '<form action="' . $deleteUrl . '" method="POST" class="inline-block" onsubmit="return confirm(\'Are you sure you want to delete this item?\');">' .
+                        '<input type="hidden" name="_token" value="' . $csrfToken . '">' .
+                        '<input type="hidden" name="_method" value="DELETE">' .
+                        '<button type="submit" class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300">Delete</button>' .
+                        '</form>';
                 })
                 ->rawColumns(['action']) // Important to render HTML in the action column
                 ->make(true);
         }
         // Fallback or error if not an AJAX request
-        return abort(403, 'Unauthorized action.');
+        return response()->json([
+            'message' => 'Unauthorized action.'
+        ], 403);
     }
 
     /**

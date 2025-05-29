@@ -24,7 +24,7 @@ class UpdateGalleryRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048', // Image is optional on update, Max 2MB
-            'category' => 'required|string|max:255',
+            'new_category_name' => 'nullable|string|max:255',
         ];
     }
 }

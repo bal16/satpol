@@ -28,11 +28,19 @@ class Gallery extends Model
                 Storage::delete($model->getOriginal('path'));
             }
         });
+
     }
 
-    // If your timestamps are not named created_at/updated_at or you don't use them
-    // public $timestamps = false; // or true by default
-
-    // If your date columns should be Carbon instances
-    // protected $dates = ['created_at', 'updated_at']; // Example
+    /**
+     * Get the category that owns the gallery item.
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
+// If your timestamps are not named created_at/updated_at or you don't use them
+// public $timestamps = false; // or true by default
+
+// If your date columns should be Carbon instances
+// protected $dates = ['created_at', 'updated_at']; // Example

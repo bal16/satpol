@@ -24,6 +24,13 @@ Route::prefix('/admin')->middleware([AdminAuth::class])->group(function () {
     Route::put('/gallery/{gallery}', [Admin\GalleryController::class, 'update'])->name('admin.gallery.update');
     Route::delete('/gallery/{gallery}', [Admin\GalleryController::class, 'destroy'])->name('admin.gallery.destroy');
     Route::get('api/gallery/data', [Api\GalleryController::class, 'data'])->name('gallery.data'); // Data source for DataTables
+    Route::get('api/categories/list', [Admin\CategoryController::class, 'list'])->name('api.categories.list');
+
+    // Category Routes (for Gallery Page Category Management)
+    Route::get('api/categories/data', [Admin\CategoryController::class, 'data'])->name('admin.categories.data');
+    Route::post('/categories', [Admin\CategoryController::class, 'store'])->name('admin.categories.store');
+    Route::put('/categories/{category}', [Admin\CategoryController::class, 'update'])->name('admin.categories.update'); // Matched with JS fetch
+    Route::delete('/categories/{category}', [Admin\CategoryController::class, 'destroy'])->name('admin.categories.destroy');
 
     Route::get('/sliders', [Admin\SliderController::class, 'index'])->name('admin.sliders');
     Route::patch('/sliders/update/{slot_number}', [Admin\SliderController::class, 'update'])->name('admin.sliders.update');

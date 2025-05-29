@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreGalleryRequest extends FormRequest
+class UpdateCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true; // Or implement your authorization logic
+        return true;
     }
 
     /**
@@ -22,9 +22,7 @@ class StoreGalleryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:255',
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048', // Max 2MB, adjust as needed
-            'new_category_name' => 'nullable|string|max:255',
+            'name' => 'required|string|max:255',
         ];
     }
 }
