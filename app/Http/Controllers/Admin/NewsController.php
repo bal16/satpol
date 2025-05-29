@@ -14,31 +14,28 @@ class NewsController extends Controller
      */
     public function index()
     {
-        return view('admin.news');
+        return view('admin.news.index');
     }
 
-    // /**
-    //  * Show the form for creating a new resource.
-    //  */
-    // public function create()
-    // {
-    //     //
-    // }
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('admin.news.create');
+    }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(StoreNewsRequest $request)
     {
-        News::create([
+        $news = News::create([
             'title' => $request->title,
             'body' => $request->body,
+            'slug' => $request->slug
         ]);
-
-        return response()->json([
-            'message' => 'News created successfully',
-            'status' => true
-        ]);
+        return redirect()->route('admin.news')->with('success', 'Berita berhasil dibuat!');
     }
 
     // /**
@@ -64,11 +61,12 @@ class NewsController extends Controller
     {
         $news->update([
             'title' => $request->title,
-            'body' => $request->body
+            'body' => $request->body,
+            'slug' => $request->slug
         ]);
 
         return redirect()->route('admin.news')
-            ->with('success', 'Berita berhasil diperbarui.');
+            ->with('success', 'Berita berhasil diubah.');
     }
 
     /**
@@ -78,7 +76,7 @@ class NewsController extends Controller
     {
         News::destroy($news->id);
 
-        return redirect(route('admin.news'));
+        return redirect(route('admin.news'))->with('success', 'Berita berhasil dihapus.');
         // return response()->json([
         //     'message' => 'News deleted successfully',
         //     'status' => true

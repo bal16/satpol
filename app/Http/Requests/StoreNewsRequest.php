@@ -23,7 +23,8 @@ class StoreNewsRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'body' => 'nullable|string'
+            'body' => 'nullable|string',
+            'slug' => 'required|unique:news,slug',
         ];
     }
 }

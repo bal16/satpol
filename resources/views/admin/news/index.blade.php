@@ -7,13 +7,19 @@
             integrity="sha384-AsA35Lk2b1bdNXsEfz6MqkD/XkQdW8zEykqBZihdl/kU7DLyednCOCzbKfbSoxFb" crossorigin="anonymous">
         <link href="https://cdn.datatables.net/responsive/3.0.4/css/responsive.dataTables.min.css" rel="stylesheet"
             integrity="sha384-kz9bozrCHP/y+wTJV8P+n/dMBOh00rqNmmIAgHckzFWpoSB49V5ornW1aY+uYTyA" crossorigin="anonymous">
+        <!-- Di dalam <head> -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+        <!-- Sebelum </body> penutup -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
         <x-rich-text-laravel::styles theme="richtextlaravel" />
     @endpush
 
     <!-- Page Title & Add New Button -->
     <div class="mb-6 flex flex-col sm:flex-row justify-between items-center">
         <h1 class="text-2xl font-semibold text-slate-800 dark:text-white">Kelola Berita</h1>
-        <button id="addNewsBtn"
+        <a href="{{ route('admin.news.create') }}"
             class="inline-flex items-center px-5 py-2.5 bg-red-100 dark:bg-red-500 text-red-700 dark:text-white text-sm font-medium rounded-lg hover:bg-red-800 dark:hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 dark:focus:ring-red-400 focus:ring-offset-2 dark:focus:ring-offset-slate-800 transition duration-150 ease-in-out focus:text-white hover:text-white">
             <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd"
@@ -21,7 +27,7 @@
                     clip-rule="evenodd"></path>
             </svg>
             Tambah Berita Baru
-        </button>
+        </a>
     </div>
 
     <!-- News Management Table -->
@@ -34,6 +40,8 @@
                             No</th>
                         <th class="text-left text-xs font-medium text-white uppercase">
                             Title</th>
+                        <th class="text-left text-xs font-medium text-white uppercase">
+                            Slug</th>
 
                         <th class="text-left text-xs font-medium text-white uppercase">
                             Created At</th>
@@ -58,9 +66,7 @@
         --}}
     </div>
 
-    <!-- Create News Modal -->
-    <x-admin.news-modal modalId="createNewsModal" modalTitle="Tambah Berita Baru" formId="createNewsForm"
-        submitButtonText="Simpan" :isEdit="false" />
+    {{-- Modal untuk create berita telah dihapus, digantikan halaman terpisah --}}
 
     @push('scripts')
         {{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -94,6 +100,10 @@
                             name: 'title'
                         },
                         {
+                            data: 'slug',
+                            name: 'slug'
+                        },
+                        {
                             data: 'created_at',
                             name: 'created_at'
                         },
@@ -108,7 +118,9 @@
                             searchable: false
                         }
                     ],
-                    order: [[2, 'desc']], // Default order: column index 2 (created_at) descending
+                    order: [
+                        [3, 'desc']
+                    ], // Default order: column index 2 (created_at) descending
                     columnDefs: [{
                             responsivePriority: 1,
                             targets: 1
@@ -121,92 +133,57 @@
                 });
             });
 
-            // Modal Handling
-            const createNewsModal = document.getElementById('createNewsModal');
-            const createNewsModalContent = document.getElementById('createNewsModalContent');
-            const addNewsBtn = document.getElementById('addNewsBtn'); // This ID remains the same
-            const closeCreateNewsModalBtn = document.getElementById('closeCreateNewsModalBtn'); // Adjusted ID
-            const cancelCreateNewsModalBtn = document.getElementById('cancelCreateNewsModalBtn'); // Adjusted ID
-            const createNewsForm = document.getElementById('createNewsForm');
-
-            function openModal(modal, modalContent) {
-                modal.classList.remove('hidden');
-                setTimeout(() => { // For transition
-                    modal.classList.remove('opacity-0');
-                    modalContent.classList.remove('scale-95', 'opacity-0');
-                    modalContent.classList.add('scale-100', 'opacity-100');
-                }, 10);
-            }
-
-            function closeModal(modal, modalContent) {
-                modalContent.classList.remove('scale-100', 'opacity-100');
-                modalContent.classList.add('scale-95', 'opacity-0');
-                modal.classList.add('opacity-0');
-                setTimeout(() => { // For transition
-                    modal.classList.add('hidden');
-                    // Clear form fields and errors
-                    if (modal === createNewsModal) {
-                        createNewsForm.reset();
-                        clearFormErrors(editNewsForm);
-                    }
-                }, 300);
-            }
-
-            function clearFormErrors(form) {
-                form.querySelectorAll('span[id$="_error"]').forEach(span => {
-                    span.classList.add('hidden');
-                    span.textContent = '';
+            // Display session messages with SweetAlert2
+            @if (session('success'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: "{{ session('success') }}",
+                    timer: 3000,
+                    showConfirmButton: true
                 });
-            }
+            @endif
 
-            function displayFormErrors(form, errors) {
-                clearFormErrors(form);
-                for (const field in errors) {
-                    const errorSpan = form.querySelector(`#${form.id.startsWith('create') ? 'create' : 'edit'}_${field}_error`);
-                    if (errorSpan) {
-                        errorSpan.textContent = errors[field][0];
-                        errorSpan.classList.remove('hidden');
-                    }
-                }
-            }
+            @if (session('error'))
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal!',
+                    text: "{{ session('error') }}",
+                    timer: 3000,
+                    showConfirmButton: true
+                });
+            @endif
 
-            // Create Modal Listeners
-            addNewsBtn.addEventListener('click', () => openModal(createNewsModal, createNewsModalContent));
-            closeCreateNewsModalBtn.addEventListener('click', () => closeModal(createNewsModal, createNewsModalContent));
-            cancelCreateNewsModalBtn.addEventListener('click', () => closeModal(createNewsModal, createNewsModalContent));
-            window.addEventListener('click', (event) => {
-                if (event.target === createNewsModal) closeModal(createNewsModal, createNewsModalContent);
-            });
-
-
-            // Handle Create Form Submission
-            createNewsForm.addEventListener('submit', async function(e) {
-                e.preventDefault();
-                const formData = new FormData(this);
-                // console.log("🚀 ~ createNewsForm.addEventListener ~ formData:", formData)
-
-                fetch("{{ route('admin.news.store') }}", {
-                        method: 'POST',
-                        headers: {
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute(
-                                'content') || formData.get('_token'), // Ensure CSRF token is sent
-                            'Accept': 'application/json',
-                        },
-                        body: formData
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.errors) {
-                            displayFormErrors(createNewsForm, data.errors);
-                        } else {
-                            closeModal(createNewsModal, createNewsModalContent);
-                            $('#newsTable').DataTable().ajax.reload(); // Reload DataTable
-                            // Add a success notification if you have one (e.g., Toastr)
-                            alert(data.message || 'Berita berhasil ditambahkan!');
+            // SweetAlert2 for delete confirmation (if not using DataTables built-in confirm)
+            // This example assumes your delete form in DataTables action column has a specific class or structure
+            // If your delete is a direct link or a simple form, you might need to adjust the selector
+            $(document).on('submit', 'form[action*="/admin/news/"]', function(e) {
+                // Check if the form method is DELETE (or POST with _method=DELETE)
+                const formMethod = $(this).find('input[name="_method"]').val() || $(this).attr('method');
+                if (formMethod.toUpperCase() === 'DELETE' || (formMethod.toUpperCase() === 'POST' && $(this).find(
+                        'input[name="_method"]').val() === 'DELETE')) {
+                    e.preventDefault(); // Prevent default form submission
+                    const form = this;
+                    Swal.fire({
+                        title: 'Anda yakin?',
+                        text: "Data yang dihapus tidak dapat dikembalikan!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Ya, hapus!',
+                        cancelButtonText: 'Batal'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit(); // Submit the form if confirmed
                         }
-                    })
-                    .catch(error => console.error('Error:', error));
+                    });
+                }
             });
+
+            // JavaScript untuk modal create telah dihapus karena create sekarang adalah halaman terpisah.
+            // Fungsi openModal, closeModal, clearFormErrors, displayFormErrors mungkin masih berguna jika Anda memiliki modal lain.
+            // Jika tidak, Anda bisa menghapusnya atau memindahkannya ke file JS global jika digunakan di tempat lain.
 
             // // Handle Edit Button Click (delegated from table)
             // $('#newsTable tbody').on('click', 'button.edit-news-btn', function() {

@@ -28,7 +28,7 @@ class NewsController extends Controller
     public function data(Request $request)
     {
         if ($request->ajax()) {
-            $news = News::select(['id', 'title', 'body', 'created_at', 'updated_at']);
+            $news = News::select(['id', 'title', 'slug', 'created_at', 'updated_at']);
 
             return DataTables::of($news)
                 ->addIndexColumn() // Tambahkan baris ini untuk nomor urut
@@ -46,7 +46,7 @@ class NewsController extends Controller
                     $csrfToken = csrf_token();
 
                     return '<a href="' . route('admin.news.edit', $item->id) . '" class="edit-news-btn cursor-pointer text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300 mr-3">Edit</a>' .
-                        '<form action="' . $deleteUrl . '" method="POST" class="inline-block" onsubmit="return confirm(\'Are you sure you want to delete this item?\');">' .
+                        '<form action="' . $deleteUrl . '" method="POST" class="inline-block" >' .
                         '<input type="hidden" name="_token" value="' . $csrfToken . '">' .
                         '<input type="hidden" name="_method" value="DELETE">' .
                         '<button type="submit" class="text-red-600 hover:text-red-900 cursor-pointer dark:text-red-400 dark:hover:text-red-300" >Delete</button>' .

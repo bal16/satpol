@@ -10,7 +10,7 @@ Route::prefix('/admin')->middleware([AdminAuth::class])->group(function () {
 
     // News Routes
     Route::get('/news', [Admin\NewsController::class, 'index'])->name('admin.news');
-    Route::get('/news/create', [Admin\NewsController::class, 'create'])->name('admin.news.create');
+    Route::get('/news/create', [Admin\NewsController::class, 'create'])->name('admin.news.create'); // Pastikan ini sudah benar
     Route::post('/news', [Admin\NewsController::class, 'store'])->name('admin.news.store');
     Route::get('/news/{news}', [Api\NewsController::class, 'show'])->name('admin.news.show');
     Route::get('/news/{news}/edit', [Admin\NewsController::class, 'edit'])->name('admin.news.edit'); // Changed PUT to GET

@@ -22,7 +22,9 @@ class UpdateNewsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required',
+            'body' => 'nullable|string',
+            'slug' => 'required|unique:news,slug',
         ];
     }
 }
