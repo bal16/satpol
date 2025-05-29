@@ -1,5 +1,6 @@
 <?php
 
+namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 
@@ -30,9 +31,8 @@ Route::get('/services/{slug}', function () {
     return view('services');
 });
 
-Route::get('/gallery', function () {
-    return view('gallery');
-})->name('gallery');
+Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
+
 
 Route::prefix('/info')
     ->group(function () {
