@@ -31,6 +31,9 @@ class GalleryController extends Controller
             $gallery = Gallery::select(['id', 'title', 'path', 'category', 'created_at', 'updated_at'])->latest();
 
             return DataTables::of($gallery)
+                ->editColumn('path', function ($item) {
+                    return asset('storage/'.$item->path);
+                })
                 ->editColumn('created_at', function ($item) {
                     return $item->created_at ? $item->created_at->format('M d, Y H:i') : '-';
                 })

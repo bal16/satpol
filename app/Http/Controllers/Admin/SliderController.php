@@ -63,12 +63,6 @@ class SliderController extends Controller
             // Cari slider yang ada untuk slot ini
             $slider = Slider::where('slot_number', $slot_number)->first();
 
-            // Hapus gambar lama jika ada
-            if ($slider && $slider->image_path) {
-                if (Storage::disk('public')->exists($slider->image_path)) {
-                    Storage::disk('public')->delete($slider->image_path);
-                }
-            }
 
             // Update atau buat record slider baru
             $sliderRecord = Slider::updateOrCreate(
@@ -87,7 +81,6 @@ class SliderController extends Controller
             return redirect()->route('admin.sliders') // Koreksi nama route
                 ->with('success_slot_' . $slot_number, 'Gambar untuk Slider #' . $slot_number . ' berhasil diperbarui.');
         }
-
         // Jika tidak ada file yang diunggah (seharusnya tidak terjadi jika validasi 'required' aktif)
         return redirect()->route('admin.sliders') // Koreksi nama route
             ->with('error_slot_' . $slot_number, 'Gagal memperbarui Slider #' . $slot_number . '. Tidak ada gambar yang diunggah.');

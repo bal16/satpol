@@ -29,11 +29,11 @@ class GalleryController extends Controller
         $gallery->title = $request->input('title');
         $gallery->category = $request->input('category');
 
-        if ($request->hasFile('path') && $request->file('path')->isValid()) {
-            $uploadedFile = $request->file('path');
+        if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
+            $uploadedFile = $request->file('photo');
             // Store the file in 'storage/app/public/gallery_photos'
             // The store method on the 'public' disk will return a path like 'gallery_photos/filename.ext'
-            $storedPath = $uploadedFile->store('gallery_photos', 'public');
+            $storedPath = $uploadedFile->store('gallery_photos');
 
             if ($storedPath) {
                 $gallery->path = $storedPath;
@@ -104,17 +104,12 @@ class GalleryController extends Controller
         $gallery->title = $request->input('title');
         $gallery->category = $request->input('category');
 
-        if ($request->hasFile('path') && $request->file('path')->isValid()) {
-            $newUploadedFile = $request->file('path');
-
-            // Delete the old image if it exists
-            if ($gallery->path && Storage::disk('public')->exists($gallery->path)) {
-                Storage::disk('public')->delete($gallery->path);
-            }
+        if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
+            $newUploadedFile = $request->file('photo');
 
             // Store the new file in 'storage/app/public/gallery_photos'
             // The store method on the 'public' disk will return a path like 'gallery_photos/filename.ext'
-            $newStoredPath = $newUploadedFile->store('gallery_photos', 'public');
+            $newStoredPath = $newUploadedFile->store('gallery_photos');
 
             if ($newStoredPath) {
                 $gallery->path = $newStoredPath;
@@ -125,6 +120,8 @@ class GalleryController extends Controller
         // If no new file is uploaded, the existing $gallery->path remains unchanged.
 
         $gallery->save();
+        // dd(Storage::disk('public')->exists($gallery->path));
+        // dd($gallery->path);
 
         return response()->json([
             'message' => 'Galeri berhasil diperbarui!',
@@ -146,10 +143,12 @@ class GalleryController extends Controller
         $gallery->delete(); // Deletes the model instance from DB
 
         // For AJAX, a JSON response is better, assuming your frontend handles it
-        return response()->json([
-            'message' => 'Galeri berhasil dihapus!',
-            'status' => true
-        ]);
+        // return response()->json([
+        //     'message' => 'Galeri berhasil dihapus!',
+        //     'status' => true
+        // ]);
+
+        return redirect(route('admin.gallery'));
         // If you prefer a redirect for non-AJAX or specific scenarios:
         // return redirect()->route('admin.gallery')->with('success', 'Galeri berhasil dihapus!');
     }

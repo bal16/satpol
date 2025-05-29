@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute; // Import Attribute
 
 class Gallery extends Model
@@ -16,16 +17,17 @@ class Gallery extends Model
         'category',
     ];
 
-    /**
-     * Get the full URL for the gallery image.
-     *
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute
-     */
-    protected function path(): Attribute
+
+
+    protected static function boot()
     {
-        return Attribute::make(
-            get: fn($value) => $value ? asset('storage/' . $value) : null,
-        );
+        parent::boot();
+        static::updating(function ($model) {
+
+            if ($model->isDirty('path') && ($model->getOriginal('path') !== null)) {
+                Storage::delete($model->getOriginal('path'));
+            }
+        });
     }
 
     // If your timestamps are not named created_at/updated_at or you don't use them

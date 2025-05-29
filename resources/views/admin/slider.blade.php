@@ -48,7 +48,7 @@
                         <input type="file" name="slider_image" id="sliderImageInput{{ $slotNumber }}"
                             class="block w-full text-sm text-slate-200 dark:text-slate-300
                               file:mr-4 file:py-2 file:px-4
-                              file:rounded-lg file:border-0 
+                              file:rounded-lg file:border-0
                               file:text-sm file:font-semibold
                               file:bg-red-100 file:text-red-800
                               dark:file:bg-red-500 dark:file:text-white

@@ -23,7 +23,7 @@ class StoreGalleryRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:255',
-            'path' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048', // Max 2MB, adjust as needed
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048', // Max 2MB, adjust as needed
             'category' => 'required|string|max:255',
         ];
     }

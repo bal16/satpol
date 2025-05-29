@@ -16,7 +16,7 @@
                     </svg>
                 </button>
             </div>
-            <form id="{{ $formId }}" class="mt-4 space-y-4" action="{{ route("admin.gallery.store") }}" method="post" enctype="multipart/form-data">
+            <form id="{{ $formId }}" class="mt-4 space-y-4" method="post" enctype="multipart/form-data">
                 @csrf
                 @if ($isEdit)
                     @method('PUT')
@@ -30,11 +30,11 @@
                     <span class="text-xs text-red-500 hidden" id="{{ $isEdit ? 'edit' : 'create' }}_title_error"></span>
                 </div>
                 <div>
-                    <label for="{{ $isEdit ? 'edit' : 'create' }}_path"
+                    <label for="{{ $isEdit ? 'edit' : 'create' }}_photo"
                         class="block text-sm font-medium text-slate-700 dark:text-slate-300">Foto</label>
                     @if (!$isEdit)
-                        <input type="file" name="path" id="create_path" required
-                        class="block w-full text-sm text-slate-200 dark:text-slate-300
+                        <input type="file" name="photo" id="create_photo" required
+                            class="block w-full text-sm text-slate-200 dark:text-slate-300
                               file:mr-4 file:py-2 file:px-4
                               file:rounded-lg file:border-0
                               file:text-sm file:font-semibold
@@ -43,8 +43,8 @@
                               hover:file:bg-red-200 dark:hover:file:bg-red-600
                               cursor-pointer">
                     @else
-                    <input type="file" name="path" id="edit_path"
-                        class="block w-full text-sm text-slate-200 dark:text-slate-300
+                        <input type="file" name="photo" id="edit_photo"
+                            class="block w-full text-sm text-slate-200 dark:text-slate-300
                               file:mr-4 file:py-2 file:px-4
                               file:rounded-lg file:border-0
                               file:text-sm file:font-semibold
@@ -54,14 +54,16 @@
                               cursor-pointer">
                     @endif
 
-                    <span class="text-xs text-red-500 hidden" id="{{ $isEdit ? 'edit' : 'create' }}_path_error"></span>
+                    <span class="text-xs text-red-500 hidden"
+                        id="{{ $isEdit ? 'edit' : 'create' }}_photo_error"></span>
                 </div>
-                <div><
-                    <label for="{{ $isEdit ? 'edit' : 'create' }}_category"
+                <div>
+                    < <label for="{{ $isEdit ? 'edit' : 'create' }}_category"
                         class="block text-sm font-medium text-slate-700 dark:text-slate-300">Category</label>
-                    <textarea name="category" id="{{ $isEdit ? 'edit' : 'create' }}_category" rows="5" required
-                        class="mt-1 px-3 py-2 block w-full rounded-md border-slate-300 dark:border-stone-600 dark:bg-stone-700 dark:text-white shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"></textarea>
-                    <span class="text-xs text-red-500 hidden" id="{{ $isEdit ? 'edit' : 'create' }}_category_error"></span>
+                        <textarea name="category" id="{{ $isEdit ? 'edit' : 'create' }}_category" rows="5" required
+                            class="mt-1 px-3 py-2 block w-full rounded-md border-slate-300 dark:border-stone-600 dark:bg-stone-700 dark:text-white shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"></textarea>
+                        <span class="text-xs text-red-500 hidden"
+                            id="{{ $isEdit ? 'edit' : 'create' }}_category_error"></span>
                 </div>
                 <div class="flex justify-end pt-4">
                     <button type="button" id="cancel{{ ucfirst(str_replace('-', '', Str::studly($modalId))) }}Btn"
