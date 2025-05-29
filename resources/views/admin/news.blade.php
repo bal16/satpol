@@ -30,8 +30,8 @@
             <table id="newsTable" class="table-auto">
                 <thead class="bg-red-600 dark:bg-stone-700">
                     <tr>
-                        <th class="text-left text-xs font-medium text-white uppercase">
-                            ID</th>
+                        <th class="text-left text-xs font-medium text-white uppercase w-12">
+                            No</th>
                         <th class="text-left text-xs font-medium text-white uppercase">
                             Title</th>
 
@@ -84,8 +84,10 @@
                     serverSide: true, // Enable server-side processing
                     ajax: "{{ route('news.data') }}", // URL to fetch data from
                     columns: [{
-                            data: 'id',
-                            name: 'id'
+                            data: 'DT_RowIndex', // Gunakan DT_RowIndex yang disediakan server
+                            name: 'DT_RowIndex', // Nama untuk referensi server-side (jika diperlukan)
+                            orderable: false,
+                            searchable: false
                         },
                         {
                             data: 'title',
@@ -106,6 +108,7 @@
                             searchable: false
                         }
                     ],
+                    order: [[2, 'desc']], // Default order: column index 2 (created_at) descending
                     columnDefs: [{
                             responsivePriority: 1,
                             targets: 1

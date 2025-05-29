@@ -28,9 +28,10 @@ class NewsController extends Controller
     public function data(Request $request)
     {
         if ($request->ajax()) {
-            $news = News::select(['id', 'title', 'body', 'created_at', 'updated_at'])->latest();
+            $news = News::select(['id', 'title', 'body', 'created_at', 'updated_at']);
 
             return DataTables::of($news)
+                ->addIndexColumn() // Tambahkan baris ini untuk nomor urut
                 ->editColumn('created_at', function ($item) {
                     return $item->created_at ? $item->created_at->format('M d, Y H:i') : '-';
                 })
