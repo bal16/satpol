@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api;
 use App\Http\Controllers\Admin;
 use App\Http\Middleware\AdminAuth;
-use App\Http\Controllers\Api;
+use App\Http\Controllers\AttachmentsController;
 
 Route::prefix('/admin')->middleware([AdminAuth::class])->group(function () {
     Route::get('/', [Admin\DashboardController::class, 'index'])->name('admin.dashboard');
@@ -26,6 +27,9 @@ Route::prefix('/admin')->middleware([AdminAuth::class])->group(function () {
 
     Route::get('/sliders', [Admin\SliderController::class, 'index'])->name('admin.sliders');
     Route::patch('/sliders/update/{slot_number}', [Admin\SliderController::class, 'update'])->name('admin.sliders.update');
+
+    Route::post('attachments', AttachmentsController::class)
+    ->name('attachments.store');
 });
 
 // use App\Http\Middleware\AdminAuth;

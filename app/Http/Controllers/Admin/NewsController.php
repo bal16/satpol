@@ -68,7 +68,7 @@ class NewsController extends Controller
         ]);
 
         return redirect()->route('admin.news')
-                         ->with('success', 'Berita berhasil diperbarui.');
+            ->with('success', 'Berita berhasil diperbarui.');
     }
 
     /**
