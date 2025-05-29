@@ -64,6 +64,16 @@
                     <span class="sidebar-text">Slider</span>
                 </x-admin.nav-link>
             </nav>
+            {{-- Tombol Kembali ke Halaman Utama --}}
+            <div class="mt-auto px-2 py-2 border-t border-red-800 dark:border-red-400">
+                <a href="{{ url('/') }}"
+                    class="flex items-center p-2 text-base font-normal text-slate-100 rounded-lg hover:bg-red-600 dark:hover:bg-stone-700 group">
+                    <svg class="w-5 h-5 mr-3 text-slate-100 transition duration-75 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    <span class="sidebar-text">Kembali ke Situs</span>
+                </a>
+            </nav>
             <div class="p-4 mt-auto border-t border-red-800 sidebar-footer">
                 <p class="text-xs text-slate-400 text-center sidebar-text">&copy; {{ date('Y') }} Satpol PP Admin
                 </p>
