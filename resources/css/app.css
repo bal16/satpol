@@ -87,3 +87,12 @@
 #admin-sidebar {
     @apply transition-all duration-300 ease-in-out;
 }
+
+@media (prefers-color-scheme: dark) {
+    .trix-button {
+        background-color: var(--color-stone-700) !important;
+    }
+    .trix-button.trix-active {
+        background-color: var(--color-stone-400) !important;
+    }
+}
