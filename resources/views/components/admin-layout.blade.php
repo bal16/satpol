@@ -7,7 +7,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $pageTitle }} - Satpol PP Admin</title>
+    <title>{{ $pageTitle }} - Satpol PP Admin </title>
+    <link rel="icon" type="image/png" href="{{ asset('image.png') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     {{-- Add any other common admin head elements here --}}
     @stack('styles')
