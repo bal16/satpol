@@ -22,15 +22,89 @@
                 :value="old('email')" required :iconSvg="'<svg class=\'fill-current\' width=\'22\' height=\'22\' viewBox=\'0 0 22 22\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'><g opacity=\'0.5\'><path d=\'M19.2516 3.30005H2.75156C1.65156 3.30005 0.751562 4.20005 0.751562 5.30005V16.7C0.751562 17.8 1.65156 18.7 2.75156 18.7H19.2516C20.3516 18.7 21.2516 17.8 21.2516 16.7V5.30005C21.2516 4.20005 20.3516 3.30005 19.2516 3.30005ZM19.2516 4.80005C19.2828 4.80005 19.3128 4.80155 19.3432 4.80455L11.0016 10.3846L2.66003 4.80455C2.69034 4.80155 2.72034 4.80005 2.75156 4.80005H19.2516ZM19.2516 17.2H2.75156C2.47031 17.2 2.25156 16.9813 2.25156 16.7V6.9188L10.5244 12.2331C10.6716 12.3313 10.8366 12.3846 11.0016 12.3846C11.1666 12.3846 11.3316 12.3313 11.4788 12.2331L19.7516 6.9188V16.7C19.7516 16.9813 19.5328 17.2 19.2516 17.2Z\' fill=\'currentColor\'/></g></svg>'" />
 
             <!-- Password -->
-            <x-form-input id="password" name="password" type="password" label="Password"
-                placeholder="Enter your password" required :iconSvg="'<svg class=\'fill-current\' width=\'22\' height=\'22\' viewBox=\'0 0 22 22\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'><g opacity=\'0.5\'><path d=\'M16.5088 10.5234H5.49117C4.26881 10.5234 3.29117 11.4784 3.29117 12.696V19.0042C3.29117 20.2218 4.26881 21.1768 5.49117 21.1768H16.5088C17.7312 21.1768 18.7088 20.2218 18.7088 19.0042V12.696C18.7088 11.4784 17.7312 10.5234 16.5088 10.5234ZM16.5088 19.6768C16.5088 19.7768 16.4262 19.8594 16.3262 19.8594H5.67373C5.57373 19.8594 5.49117 19.7768 5.49117 19.6768V12.696C5.49117 12.596 5.57373 12.5134 5.67373 12.5134H16.3262C16.4262 12.5134 16.5088 12.596 16.5088 12.696V19.6768Z\' fill=\'currentColor\'/><path d=\'M11.0003 13.8008C10.0453 13.8008 9.26782 14.5783 9.26782 15.5333C9.26782 16.4883 10.0453 17.2658 11.0003 17.2658C11.9553 17.2658 12.7328 16.4883 12.7328 15.5333C12.7328 14.5783 11.9553 13.8008 11.0003 13.8008ZM11.0003 15.9491C10.7728 15.9491 10.5846 15.7608 10.5846 15.5333C10.5846 15.3058 10.7728 15.1175 11.0003 15.1175C11.2278 15.1175 11.4161 15.3058 11.4161 15.5333C11.4161 15.7608 11.2278 15.9491 11.0003 15.9491Z\' fill=\'currentColor\'/><path d=\'M14.2238 10.5234V7.37419C14.2238 5.78336 13.4113 4.34919 12.2113 3.38336C11.9613 3.17419 11.7025 3.00002 11.435 2.86169C11.1588 2.71836 10.8575 2.63919 10.5525 2.63919C9.60629 2.63919 8.24879 3.13419 7.77629 4.38336C7.66254 4.68336 7.59129 5.00419 7.57254 5.33336C7.52879 6.05836 7.77629 7.37419 7.77629 7.37419V10.5234H9.09254V7.37419C9.09254 7.37419 8.91879 5.92836 9.09254 5.43752C9.22129 5.04502 9.46504 4.71919 9.80879 4.48336C10.085 4.29086 10.3988 4.13919 10.7263 4.13919C11.045 4.13919 11.3463 4.22169 11.605 4.38752C12.115 4.71502 12.5875 5.54086 12.5875 6.58752V7.37419C12.5875 7.37419 12.5875 7.37419 12.5875 7.37419V10.5234H14.2238Z\' fill=\'currentColor\'/></g></svg>'" />
+            <div class="mb-4.5">
+                <label for="password" class="mb-2.5 block font-medium text-black dark:text-white">Password</label>
+                <div class="relative">
+                    <span class="absolute left-4.5 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                        </svg>
+                    </span>
+                    <input id="password" name="password" type="password" placeholder="Enter your password" required
+                        class="w-full rounded border border-stroke bg-gray py-3 pl-11.5 pr-12 text-black focus:border-primary focus-visible:outline-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary @error('password') !border-red-500 @enderror">
+                    <!-- Hidden Checkbox for Password -->
+                    <input type="checkbox" id="togglePasswordCheckbox" class="hidden">
+                    <!-- Label acting as a button for the hidden checkbox -->
+                    <label for="togglePasswordCheckbox" id="togglePasswordLabel" aria-label="Toggle password visibility"
+                        class="absolute inset-y-0 right-0 flex items-center pr-4 cursor-pointer text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">
+                        <span id="togglePasswordShowIcon" class="w-5 h-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-full h-full">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                        </span>
+                        <span id="togglePasswordHideIcon" class="w-5 h-5 hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-full h-full">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.243 4.243l-4.243-4.243" />
+                            </svg>
+                        </span>
+                    </label>
+                </div>
+                @error('password')
+                    <p class="mt-1.5 text-xs text-red-500">{{ $message }}</p>
+                @enderror
+            </div>
 
             <!-- Confirm Password -->
-            <x-form-input id="password_confirmation" name="password_confirmation" type="password"
-                label="Confirm Password" placeholder="Confirm your password" required :iconSvg="'<svg class=\'fill-current\' width=\'22\' height=\'22\' viewBox=\'0 0 22 22\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'><g opacity=\'0.5\'><path d=\'M16.5088 10.5234H5.49117C4.26881 10.5234 3.29117 11.4784 3.29117 12.696V19.0042C3.29117 20.2218 4.26881 21.1768 5.49117 21.1768H16.5088C17.7312 21.1768 18.7088 20.2218 18.7088 19.0042V12.696C18.7088 11.4784 17.7312 10.5234 16.5088 10.5234ZM16.5088 19.6768C16.5088 19.7768 16.4262 19.8594 16.3262 19.8594H5.67373C5.57373 19.8594 5.49117 19.7768 5.49117 19.6768V12.696C5.49117 12.596 5.57373 12.5134 5.67373 12.5134H16.3262C16.4262 12.5134 16.5088 12.596 16.5088 12.696V19.6768Z\' fill=\'currentColor\'/><path d=\'M11.0003 13.8008C10.0453 13.8008 9.26782 14.5783 9.26782 15.5333C9.26782 16.4883 10.0453 17.2658 11.0003 17.2658C11.9553 17.2658 12.7328 16.4883 12.7328 15.5333C12.7328 14.5783 11.9553 13.8008 11.0003 13.8008ZM11.0003 15.9491C10.7728 15.9491 10.5846 15.7608 10.5846 15.5333C10.5846 15.3058 10.7728 15.1175 11.0003 15.1175C11.2278 15.1175 11.4161 15.3058 11.4161 15.5333C11.4161 15.7608 11.2278 15.9491 11.0003 15.9491Z\' fill=\'currentColor\'/><path d=\'M14.2238 10.5234V7.37419C14.2238 5.78336 13.4113 4.34919 12.2113 3.38336C11.9613 3.17419 11.7025 3.00002 11.435 2.86169C11.1588 2.71836 10.8575 2.63919 10.5525 2.63919C9.60629 2.63919 8.24879 3.13419 7.77629 4.38336C7.66254 4.68336 7.59129 5.00419 7.57254 5.33336C7.52879 6.05836 7.77629 7.37419 7.77629 7.37419V10.5234H9.09254V7.37419C9.09254 7.37419 8.91879 5.92836 9.09254 5.43752C9.22129 5.04502 9.46504 4.71919 9.80879 4.48336C10.085 4.29086 10.3988 4.13919 10.7263 4.13919C11.045 4.13919 11.3463 4.22169 11.605 4.38752C12.115 4.71502 12.5875 5.54086 12.5875 6.58752V7.37419C12.5875 7.37419 12.5875 7.37419 12.5875 7.37419V10.5234H14.2238Z\' fill=\'currentColor\'/></g></svg>'"
-                {{-- Adjusted margin for spacing as in original --}} />
-
-            <!-- Sign Up Button -->
+            <div class="mb-4.5">
+                <label for="password_confirmation" class="mb-2.5 block font-medium text-black dark:text-white">Confirm
+                    Password</label>
+                <div class="relative">
+                    <span class="absolute left-4.5 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                        </svg>
+                    </span>
+                    <input id="password_confirmation" name="password_confirmation" type="password"
+                        placeholder="Confirm your password" required
+                        class="w-full rounded border border-stroke bg-gray py-3 pl-11.5 pr-12 text-black focus:border-primary focus-visible:outline-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary @error('password_confirmation') !border-red-500 @enderror">
+                    <!-- Hidden Checkbox for Confirm Password -->
+                    <input type="checkbox" id="toggleConfirmPasswordCheckbox" class="hidden">
+                    <!-- Label acting as a button for the hidden checkbox -->
+                    <label for="toggleConfirmPasswordCheckbox" id="toggleConfirmPasswordLabel"
+                        aria-label="Toggle confirm password visibility"
+                        class="absolute inset-y-0 right-0 flex items-center pr-4 cursor-pointer text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">
+                        <span id="toggleConfirmPasswordShowIcon" class="w-5 h-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-full h-full">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                        </span>
+                        <span id="toggleConfirmPasswordHideIcon" class="w-5 h-5 hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-full h-full">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.243 4.243l-4.243-4.243" />
+                            </svg>
+                        </span>
+                    </label>
+                </div>
+                @error('password_confirmation')
+                    <p class="mt-1.5 text-xs text-red-500">{{ $message }}</p>
+                @enderror
+            </div>
             <div class="mb-5 mt-10">
                 <x-primary-button>
                     Sign Up
@@ -48,4 +122,46 @@
             </div>
         </form>
     </x-auth-card>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function setupPasswordToggle(inputId, labelId, checkboxId, showIconId, hideIconId) {
+                const passwordInput = document.getElementById(inputId);
+                const toggleLabel = document.getElementById(labelId); // Changed from button to label
+                const toggleCheckbox = document.getElementById(checkboxId);
+                const showIcon = document.getElementById(showIconId);
+                const hideIcon = document.getElementById(hideIconId);
+
+                if (!passwordInput || !toggleLabel || !toggleCheckbox || !showIcon || !hideIcon) {
+                    return;
+                }
+
+                // Clicking the label will now naturally toggle the checkbox,
+                // so the explicit click listener on the label to toggle the checkbox
+                // and dispatch a change event is no longer strictly necessary
+                // if the label's `for` attribute is correctly set.
+                // However, keeping it can be a fallback or ensure behavior if `for` is missed.
+                // For simplicity and relying on standard label behavior, we can remove it.
+
+                toggleCheckbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        passwordInput.type = 'text';
+                        showIcon.classList.add('hidden');
+                        hideIcon.classList.remove('hidden');
+                    } else {
+                        passwordInput.type = 'password';
+                        showIcon.classList.remove('hidden');
+                        hideIcon.classList.add('hidden');
+                    }
+                });
+            }
+
+            // Setup for Password field
+            setupPasswordToggle('password', 'togglePasswordLabel', 'togglePasswordCheckbox',
+                'togglePasswordShowIcon', 'togglePasswordHideIcon');
+            // Setup for Confirm Password field
+            setupPasswordToggle('password_confirmation', 'toggleConfirmPasswordLabel',
+                'toggleConfirmPasswordCheckbox', 'toggleConfirmPasswordShowIcon',
+                'toggleConfirmPasswordHideIcon');
+        });
+    </script>
 </x-layout>
