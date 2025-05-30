@@ -187,12 +187,16 @@
                         <div class="relative dropdown">
                             <button type="button" aria-haspopup="true" aria-expanded="false"
                                 aria-controls="headlessui-menu-items-117"
-                                class=" bg-white text-black px-4 py-2 rounded hover:bg-red-700 hover:text-white">
+                                class=" bg-red-700 text-white px-4 py-2 rounded hover:bg-red-700 hover:text-white">
                                 Bidang PPUD ▼
                             </button>
                             <div aria-labelledby="headlessui-menu-button-1" id="headlessui-menu-items-117"
                                 role="menu"
                                 class="dropdown-menu absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-md opacity-0 hidden group-hover:opacity-100 group-hover:block transition duration-200 z-10">
+                                <a href="#"
+                                    class="text-[16px] block px-4 py-2 bg-white text-black rounded hover:bg-red-700 hover:text-white sop-control-button"
+                                    onclick="changeIframeSrc('https://drive.google.com/file/d/10p8_xDAzRh3vKwv0tXipj4Wo0SzxufMt/preview', this)">Bidang
+                                    PPUD</a>
                                 <a href="#"
                                     class="text-[16px] block px-4 py-2 bg-white text-black rounded hover:bg-red-700 hover:text-white sop-control-button"
                                     onclick="changeIframeSrc('https://drive.google.com/file/d/1uw65fA59SUyZjm6qmSARL8mtqwDcWBas/preview', this)">Penegakan
