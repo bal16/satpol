@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+
 <x-layout :pageName="'Gallery'">
     <x-header />
     <main class="bg-[#FDFDFD]">
@@ -15,26 +17,32 @@
                         {{-- Category List --}}
                         <ul id="category-list" class="flex lg:flex-col gap-2 py-1">
                             <li
-                                class="{{ !request()->filled('category') ? 'font-bold lg:text-xl text-xs' : 'opacity-50 lg:text-sm text-xs' }}">
-                                <a href="{{ route('gallery') }}" data-category="">Semua Foto</a>
+                                class="{{ !request()->filled('category_id') ? 'font-bold lg:text-xl text-xs' : 'opacity-50 lg:text-sm text-xs' }}">
+                                <a href="{{ route('gallery') }}" data-category-id="">Semua Foto</a>
                             </li>
-                            @if (isset($categories))
+                            @if (isset($categories) && $categories->count() > 0)
                                 @foreach ($categories as $category)
                                     <li
-                                        class="{{ request()->get('category') == $category ? 'font-bold lg:text-xl text-xs' : 'opacity-50 lg:text-sm text-xs' }}">
-                                        <a href="{{ route('gallery', ['category' => $category]) }}"
-                                            data-category="{{ $category }}">{{ $category }}</a>
+                                        class="{{ request()->get('category_id') == $category->id ? 'font-bold lg:text-xl text-xs' : 'opacity-50 lg:text-sm text-xs' }}">
+                                        <a href="{{ route('gallery', ['category_id' => $category->id]) }}"
+                                            data-category-id="{{ $category->id }}">{{ $category->name }}</a>
                                     </li>
                                 @endforeach
                             @endif
                         </ul>
                     </div>
 
-                    <div id="gallery_image" class="grid grid-cols-3 lg:pl-16 gap-2 lg:w-3/4">
+                    <div id="gallery_image" class="grid grid-cols-3 lg:pl-16 gap-2 lg:w-3/4 min-h-80">
+                        @php $currentCategoryId = request()->input('category_id'); @endphp
                         @foreach ($gallery as $gal)
-                            <a href=""><img src="{{ asset('storage/' . $gal->path) }}"
+                            <a href="{{ asset('storage/' . $gal->path) }}"
+                               class="gallery-lightbox-item" {{-- Class for GLightbox selector --}}
+                               data-gallery="{{ $currentCategoryId ? 'category-' . $currentCategoryId : 'all-gallery' }}" {{-- For grouping --}}
+                               title="{{ $gal->title }}"> {{-- GLightbox uses this for captions --}}
+                                <img src="{{ asset('storage/' . $gal->path) }}"
                                     class="lg:w-50 h-37.5 object-cover hover:scale-105 transition duration-300 ease-in-out"
-                                    alt="{{ $gal->title }}"></a>
+                                    alt="{{ $gal->title }}">
+                            </a>
                         @endforeach
                     </div>
 
@@ -51,13 +59,28 @@
     <x-footer />
 </x-layout>
 
-
+<script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
 <script>
+    let lightboxInstance = null; // Keep track of the GLightbox instance
+
+    function initializeLightbox() {
+        if (lightboxInstance) {
+            lightboxInstance.destroy(); // Destroy previous instance if it exists
+        }
+        lightboxInstance = window.GLightbox({ // Explicitly use window.GLightbox
+            selector: '.gallery-lightbox-item', // Use the class we added to the <a> tags
+            titlePosition: 'bottom', // 'bottom', 'top', 'left', 'right'
+            // openEffect: 'zoom', // Example: 'zoom', 'fade', 'none'
+            // closeEffect: 'fade', // Example: 'zoom', 'fade', 'none'
+            // You can add more GLightbox options here: https://glightbox.mcstudios.com.mx/documentation.html
+        });
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
         const galleryImageContainer = document.getElementById('gallery_image');
         const categoryListContainer = document.getElementById('category-list');
         const paginationContainer = document.getElementById('pagination-container');
-
+        initializeLightbox(); // Initial call to setup GLightbox
         if (paginationContainer) {
             paginationContainer.addEventListener('click', function(event) {
                 // Find the closest ancestor anchor tag that was clicked
@@ -74,7 +97,7 @@
 
         if (categoryListContainer) {
             categoryListContainer.addEventListener('click', function(event) {
-                const targetLink = event.target.closest('a[data-category]');
+                const targetLink = event.target.closest('a[data-category-id]');
 
                 if (targetLink && this.contains(targetLink)) {
                     event.preventDefault(); // Prevent default link navigation
@@ -85,12 +108,14 @@
                     categoryListContainer.querySelectorAll('li').forEach(liNode => {
                         liNode.classList.remove('font-bold', 'lg:text-xl');
                         liNode.classList.add('opacity-50', 'lg:text-sm');
+                        // Ensure text-xs remains if it's a base class
                     });
 
                     const parentLi = targetLink.closest('li');
                     if (parentLi) {
                         parentLi.classList.remove('opacity-50', 'lg:text-sm');
                         parentLi.classList.add('font-bold', 'lg:text-xl');
+                        // Ensure text-xs remains
                     }
                 }
             });
@@ -98,21 +123,24 @@
 
         // Function to update the active state of category links
         function updateActiveCategoryUI(currentUrl) {
-            const urlParams = new URLSearchParams(new URL(currentUrl).search);
-            const activeCategory = urlParams.get('category');
+            const url = new URL(currentUrl);
+            const urlParams = new URLSearchParams(url.search);
+            const activeCategoryId = urlParams.get('category_id');
 
             categoryListContainer.querySelectorAll('li').forEach(liNode => {
-                const link = liNode.querySelector('a[data-category]');
+                const link = liNode.querySelector('a[data-category-id]');
                 if (link) {
-                    const linkCategory = link.getAttribute('data-category');
-                    liNode.classList.toggle('font-bold', (activeCategory === linkCategory) || (!
-                        activeCategory && linkCategory === ""));
-                    liNode.classList.toggle('lg:text-xl', (activeCategory === linkCategory) || (!
-                        activeCategory && linkCategory === ""));
-                    liNode.classList.toggle('opacity-50', !((activeCategory === linkCategory) || (!
-                        activeCategory && linkCategory === "")));
-                    liNode.classList.toggle('lg:text-sm', !((activeCategory === linkCategory) || (!
-                        activeCategory && linkCategory === "")));
+                    const linkCategoryId = link.getAttribute('data-category-id');
+                    const isLinkActive = (activeCategoryId === linkCategoryId) || (!activeCategoryId && linkCategoryId === "");
+
+                    if (isLinkActive) {
+                        liNode.classList.remove('opacity-50', 'lg:text-sm');
+                        liNode.classList.add('font-bold', 'lg:text-xl');
+                    } else {
+                        liNode.classList.remove('font-bold', 'lg:text-xl');
+                        liNode.classList.add('opacity-50', 'lg:text-sm');
+                    }
+                    // 'text-xs' is a base class defined in the HTML, so it should remain.
                 }
             });
         }
@@ -161,6 +189,7 @@
                             path: url
                         }, document.title, url);
                     }
+                    initializeLightbox(); // Re-initialize GLightbox after new content is loaded
                     updateActiveCategoryUI(url); // Update active category based on the new URL
                 })
                 .catch(error => {

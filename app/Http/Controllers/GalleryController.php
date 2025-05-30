@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category; // Import Category model
 use App\Models\Gallery;
 // use App\Http\Requests\StoreGalleryRequest;
 // use App\Http\Requests\UpdateGalleryRequest;
@@ -14,23 +15,31 @@ class GalleryController extends Controller
      */
     public function index(Request $request)
     {
-        $categories = Gallery::select('category')->distinct()->pluck('category');
-        $selectedCategory = $request->input('category');
+        // Fetch categories that have at least one gallery item
+        $categories = Category::whereHas('galleries')
+                                ->orderBy('name')
+                                ->get();
+        $selectedCategoryId = $request->input('category_id');
 
         $query = Gallery::query();
 
-        if ($selectedCategory) {
-            $query->where('category', $selectedCategory);
+        if ($selectedCategoryId) {
+            $query->where('category_id', $selectedCategoryId);
         }
 
         $data = $query->orderBy('created_at', 'desc')->paginate(12);
         $data->appends($request->except('page')); // Ensure category filter is kept in pagination links
 
         if ($request->ajax()) {
-            // For AJAX requests, return a partial view containing the gallery items and pagination
-            // This partial view needs to be created or ensured it has the correct structure
-            return view('partial.gallery', ['gallery' => $data, 'categories' => $categories]);
-        };
+            // For AJAX requests, return a partial view.
+            // Passing $categories and $selectedCategoryId might be useful if the partial evolves.
+            return view('partial.gallery', [
+                'gallery' => $data,
+                'selectedCategoryId' => $selectedCategoryId // Pass selectedCategoryId for lightbox grouping
+            ]);
+        }
+        // For initial page load, pass all necessary data.
+        // $selectedCategoryId can be derived in the view using request() helper if preferred.
         return view('gallery', ['gallery' => $data, 'categories' => $categories]);
     }
 

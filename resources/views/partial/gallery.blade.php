@@ -3,12 +3,18 @@
 
 <div id="gallery_image" class="grid grid-cols-3 lg:pl-16 gap-2">
     @forelse ($gallery as $gal)
-        <a href="{{-- Consider linking to a detail page or use for a lightbox --}}">
-            <img src="{{ asset('storage/'.$gal->path) }}" class="lg:w-50 h-37.5 object-cover"
+        <a href="{{ asset('storage/'.$gal->path) }}"
+           class="gallery-lightbox-item" {{-- Class for GLightbox selector --}}
+           data-gallery="{{ $selectedCategoryId ? 'category-' . $selectedCategoryId : 'all-gallery' }}" {{-- For grouping --}}
+           title="{{ $gal->title }}"> {{-- GLightbox uses this for captions --}}
+            <img src="{{ asset('storage/'.$gal->path) }}"
+                 class="lg:w-50 h-37.5 object-cover hover:scale-105 transition duration-300 ease-in-out"
                  alt="{{ $gal->title }}">
         </a>
     @empty
-        <p class="col-span-3 text-center py-10">Tidak ada gambar yang ditemukan untuk kategori ini.</p>
+        <div class="col-span-3 flex items-center justify-center h-full">
+            <p class="text-center">Tidak ada gambar yang ditemukan untuk kategori ini.</p>
+        </div>
     @endforelse
 </div>
 

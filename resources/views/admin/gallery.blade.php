@@ -103,44 +103,12 @@
         </div>
     </div>
 
-    <!-- Create Category Modal -->
-    <div id="createCategoryModal"
-        class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50 transition-opacity duration-300 ease-in-out opacity-0">
-        <div id="createCategoryModalContent"
-            class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-xl w-full max-w-md transform transition-all duration-300 ease-in-out scale-95 opacity-0">
-            <div class="flex justify-between items-center pb-3 border-b dark:border-slate-700">
-                <h3 class="text-xl font-semibold text-slate-800 dark:text-white">Tambah Kategori Baru</h3>
-                <button id="closeCreateCategoryModalBtn" type="button"
-                    class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
-                        </path>
-                    </svg>
-                </button>
-            </div>
-            <form id="createCategoryForm" class="mt-4 space-y-4">
-                @csrf
-                <div>
-                    <label for="create_category_name"
-                        class="block text-sm font-medium text-slate-700 dark:text-slate-300">Nama Kategori</label>
-                    <input type="text" name="name" id="create_category_name"
-                        class="mt-1 block w-full rounded-md border-slate-300 dark:border-slate-600 dark:bg-slate-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                        required>
-                    <span id="create_category_name_error" class="text-red-500 text-xs mt-1 hidden"></span>
-                </div>
-                <div class="flex justify-end space-x-3 pt-3 border-t dark:border-slate-700">
-                    <button id="cancelCreateCategoryModalBtn" type="button"
-                        class="px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-600 rounded-md hover:bg-slate-200 dark:hover:bg-slate-500">Batal</button>
-                    <button type="submit"
-                        class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700">Simpan</button>
-                </div>
-            </form>
-        </div>
-    </div>
+    <x-admin.category-modal modalId="createCategoryModal" modalTitle="Tambah Kategori Baru" formId="createCategoryForm"
+        submitButtonText="Simpan" :isEdit="false" />
 
     <!-- Edit Category Modal (Structure similar to create, adapt as needed) -->
     <x-admin.category-modal modalId="editCategoryModal" modalTitle="Edit Kategori" formId="editCategoryForm"
-        submitButtonText="Simpan Perubahan" />
+        submitButtonText="Simpan Perubahan" :isEdit="true" />
 
     @push('scripts')
         {{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -367,6 +335,9 @@
                     } else if (modal === createCategoryModal) {
                         createCategoryForm.reset();
                         clearFormErrors(createCategoryForm);
+                    } else if (modal === editCategoryModal) { // Added for edit category modal
+                        editCategoryForm.reset();
+                        clearFormErrors(editCategoryForm);
                     }
                 }, 300);
             }
@@ -384,7 +355,9 @@
                     let errorSpanId;
                     if (form.id === 'createGalleryForm' || form.id === 'editGalleryForm') {
                         errorSpanId = `${form.id.startsWith('create') ? 'create' : 'edit'}_${field}_error`;
-                    } else if (form.id === 'createCategoryForm' || form.id === 'editCategoryForm') {
+                    } else if (form.id === 'createCategoryForm') { // Adjusted for create category
+                        errorSpanId = `create_category_${field}_error`;
+                    } else if (form.id === 'editCategoryForm') { // Adjusted for edit category
                         errorSpanId = `${form.id.startsWith('create') ? 'create_category' : 'edit_category'}_${field}_error`;
                     }
                     const errorSpan = form.querySelector(`#${errorSpanId}`);
@@ -406,6 +379,7 @@
                 if (event.target === createGalleryModal) closeModal(createGalleryModal, createGalleryModalContent);
                 if (event.target === editGalleryModal) closeModal(editGalleryModal, editGalleryModalContent);
                 if (event.target === createCategoryModal) closeModal(createCategoryModal, createCategoryModalContent);
+                if (event.target === editCategoryModal) closeModal(editCategoryModal, editCategoryModalContent); // Added for edit category modal
             });
 
             // --- Category Handling ---
@@ -599,8 +573,8 @@
             // Handle Edit Category Button Click (delegated from table)
             $('#categoryTable tbody').on('click', 'button.edit-category-btn', function() {
                 const data = $('#categoryTable').DataTable().row($(this).parents('tr')).data();
-                document.getElementById('edit_category_id').value = data.id; // From x-admin.category-modal
-                document.getElementById('edit_category_name').value = data.name; // From x-admin.category-modal
+                document.getElementById('edit_category_id_hidden').value = data.id; // Updated ID
+                document.getElementById('edit_category_name').value = data.name;
                 openModal(editCategoryModal, editCategoryModalContent);
             });
 
@@ -610,7 +584,7 @@
                     e.preventDefault();
                     if (!confirm('Apakah Anda yakin ingin menyimpan perubahan kategori ini?')) return;
 
-                    const categoryId = document.getElementById('edit_category_id').value;
+                    const categoryId = document.getElementById('edit_category_id_hidden').value; // Updated ID
                     const formData = new FormData(this);
 
                     fetch(`/admin/categories/${categoryId}`, { // Ensure this route exists, e.g., admin.categories.update
@@ -636,6 +610,34 @@
                         .catch(error => console.error('Error updating category:', error));
                 });
             }
+
+            // Handle Delete Category Button Click (delegated from table)
+            $('#categoryTable tbody').on('click', 'button.delete-category-btn', function() {
+                const categoryId = $(this).data('id');
+                if (!confirm('Apakah Anda yakin ingin menghapus kategori ini?')) return;
+
+                fetch(`/admin/categories/${categoryId}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                                'content'),
+                            'Accept': 'application/json',
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.message) {
+                            alert(data.message);
+                            $('#categoryTable').DataTable().ajax.reload();
+                            // Optionally reload categories in gallery forms if needed
+                            if (createCategorySelect) loadCategories(createCategorySelect);
+                            if (editCategorySelect) loadCategories(editCategorySelect);
+                        } else {
+                            alert('Gagal menghapus kategori.');
+                        }
+                    })
+                    .catch(error => console.error('Error deleting category:', error));
+            });
 
             // CSRF Token for AJAX
             // Add this if not already globally configured for jQuery AJAX
