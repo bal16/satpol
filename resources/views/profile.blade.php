@@ -1,9 +1,15 @@
 <x-layout :pageName="'Profile'">
     <x-header />
+    <style>
+        .dropdown:focus-within .dropdown-menu {
+            display: block;
+            opacity: 1;
+        }
+    </style>
     <main>
         <div class="flex lg:max-h-64 max-h-32 bg-[#FDFDFD] overflow-hidden justify-center">
             <span class="flex flex-col justify-center text-center lg:h-64 h-32 lg:gap-15 gap-5 py-auto">
-                <h2 class="font-[DM_Serif_Text] lg:text-5xl text-xl font-black">Visi</h2>
+                <h3 class="font-[DM_Serif_Text] lg:text-7xl text-xl font-black">Visi</h3>
                 <p class="text-xs lg:text-lg">"Semarang Kota Perdagangan dan Jasa yang Hebat Menuju Masyarakat Semakin
                     Sejahtera"</p>
             </span>
@@ -12,7 +18,7 @@
             <div class="flex max-w-7xl justify-center mx-auto">
                 <div
                     class="flex flex-col font-[DM_Serif_Text] justify-center lg:max-w-160 max-w-80 text-justify text-xs lg:text-lg text-[#FDFDFD] lg:px-17.5 px-8.75 lg:py-24.5 py-12.25 lg:gap-7.5 gap-4.5">
-                    <span class="font-bold text-3xl lg:text-5xl">Sejarah</span>
+                    <h3 class="font-bold text-3xl lg:text-7xl">Sejarah</h3>
                     <span class="font-sans">
                         Polisi Pamong Praja didirikan di Yogyakarta pada tanggal 3 Maret 1950 dengan semboyan Praja
                         Wibawa,
@@ -38,7 +44,7 @@
             <div class="flex max-w-7xl justify-center mx-auto">
                 <div
                     class="flex flex-col items-center font-[DM_Serif_Text] justify-center text-xs lg:text-lg text-[#2B2A29] lg:px-17.5 px-8.75 lg:py-24.5 py-12.25 lg:gap-7.5 gap-4.5">
-                    <span class="font-bold text-3xl lg:text-5xl text-center">Struktur Organisasi</span>
+                    <h3 class="font-bold text-3xl lg:text-7xl text-center">Struktur Organisasi</h3>
                     <div class="w-full mt-4 lg:mt-6">
                         <img class="w-full h-auto max-w-3xl mx-auto" src="image/struktur-organisasi.jpg"
                             alt="Struktur Organisasi" />
@@ -110,10 +116,10 @@
             </div>
         </div>
         <div class="bg-[#FDFDFD]">
-            <div class="flex justify-center mx-auto">
+            <div class="flex max-w-7xl justify-center mx-auto">
                 <div
                     class="flex flex-col font-[DM_Serif_Text] justify-center  text-justify text-xs lg:text-lg text-[#2B2A29] lg:px-17.5 px-8.75 lg:py-24.5 py-12.25 lg:gap-7.5 gap-4.5">
-                    <h3 class="font-bold text-3xl lg:text-5xl text-center">Tupoksi</h3>
+                    <h3 class="font-bold text-3xl lg:text-7xl text-center">Tupoksi</h3>
                     <h4 class="font-bold text-3xl lg:text-2xl">GAMBARAN PELAYANAN SATUAN POLISI PAMONG PRAJA KOTA
                         SEMARANG</h4>
                     <p class="font-sans">
@@ -172,15 +178,75 @@
                 </div>
             </div>
         </div>
-        <div class="bg-[#2B2A29] lg:max-h-166.25">
-            <div class="flex max-w-7xl justify-center mx-auto">
+        <div class="bg-[#2B2A29]">
+            <div class="flex justify-center mx-auto">
                 <div
-                    class="flex flex-col font-[DM_Serif_Text] justify-center lg:max-w-160 max-w-80 text-justify text-xs lg:text-lg text-[#FDFDFD] lg:px-17.5 px-8.75 lg:py-24.5 py-12.25 lg:gap-7.5 gap-4.5">
-                    <span class="font-bold text-3xl lg:text-5xl">SOP</span>
+                    class=" flex flex-col font-[DM_Serif_Text]  justify-center  text-justify text-xs lg:text-lg text-[#FDFDFD] lg:px-17.5 px-8.75 lg:py-24.5 py-12.25 lg:gap-7.5 gap-4.5">
+                    <h3 class="font-bold text-3xl lg:text-7xl">SOP</h3>
+                    <div class="flex items-center justify-center space-x-4">
+                        <div class="relative dropdown">
+                            <button type="button" aria-haspopup="true" aria-expanded="false"
+                                aria-controls="headlessui-menu-items-117"
+                                class=" bg-white text-black px-4 py-2 rounded hover:bg-red-700 hover:text-white">
+                                Bidang PPUD ▼
+                            </button>
+                            <div aria-labelledby="headlessui-menu-button-1" id="headlessui-menu-items-117"
+                                role="menu"
+                                class="dropdown-menu absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-md opacity-0 hidden group-hover:opacity-100 group-hover:block transition duration-200 z-10">
+                                <a href="#"
+                                    class="text-[16px] block px-4 py-2 bg-white text-black rounded hover:bg-red-700 hover:text-white sop-control-button"
+                                    onclick="changeIframeSrc('https://drive.google.com/file/d/1uw65fA59SUyZjm6qmSARL8mtqwDcWBas/preview', this)">Penegakan
+                                    Perda</a>
+                                <a href="#"
+                                    class="text-[16px] block px-4 py-2 bg-white text-black rounded hover:bg-red-700 hover:text-white sop-control-button"
+                                    onclick="changeIframeSrc('https://drive.google.com/file/d/1umhMSZK1Bbv6rum0E55zYFHUuHYRWr8-/preview', this)">Gelar
+                                    Perkara</a>
+                                <a href="#"
+                                    class="text-[16px] block px-4 py-2 bg-white text-black rounded hover:bg-red-700 hover:text-white sop-control-button"
+                                    onclick="changeIframeSrc('https://drive.google.com/file/d/1TXABrxwP6kd9du4oxvuzOvnEal9uxLCS/preview', this)">Sidang
+                                    di Tempat</a>
+                                <a href="#"
+                                    class="text-[16px] block px-4 py-2 bg-white text-black rounded hover:bg-red-700 hover:text-white sop-control-button"
+                                    onclick="changeIframeSrc('https://drive.google.com/file/d/1Zj6pYe4hsiSURZvca84eGnCjTwtUKRxo/preview', this)">Hubungan
+                                    Antar OPD</a>
+                                <a href="#"
+                                    class="text-[16px] block px-4 py-2 bg-white text-black rounded hover:bg-red-700 hover:text-white sop-control-button"
+                                    onclick="changeIframeSrc('https://drive.google.com/file/d/18Pv7ShM6vRGW0ic4q-qHRdbqE4W_Qaif/preview', this)">Pembinaan
+                                    PPNS</a>
+                                <a href="#"
+                                    class="text-[16px] block px-4 py-2 bg-white text-black rounded hover:bg-red-700 hover:text-white sop-control-button"
+                                    onclick="changeIframeSrc('https://drive.google.com/file/d/1J9bUFlh7opRIbfp9Gpuh9vy9GMd5tUOT/preview', this)">Sekretariat
+                                    PPNS</a>
+                            </div>
+                        </div>
+                        <button
+                            class="bg-white text-black px-4 py-2 rounded hover:bg-red-700 hover:text-white sop-control-button"
+                            onclick="changeIframeSrc('https://drive.google.com/file/d/1rXh3RG54VFu6N6-xKSF_ksDstd7ERYeP/preview', this)">
+                            Bidang Tibum
+                        </button>
+                        <button
+                            class="bg-white text-black px-4 py-2 rounded hover:bg-red-700 hover:text-white sop-control-button"
+                            onclick="changeIframeSrc('https://drive.google.com/file/d/1i4vtkTyHw9uh6ro-KF8hU4ISrKL3VjFM/preview', this)">
+                            Bidang Linmas
+                        </button>
+                        <button
+                            class="bg-white text-black px-4 py-2 rounded hover:bg-red-700 hover:text-white sop-control-button"
+                            onclick="changeIframeSrc('https://drive.google.com/file/d/1SxUEH52slktWxLzWLj3vY4VodQzWheoP/preview', this)">
+                            Bidang Sekretariat
+                        </button>
+                        <button
+                            class="bg-white text-black px-4 py-2 rounded hover:bg-red-700 hover:text-white sop-control-button"
+                            onclick="changeIframeSrc('https://drive.google.com/file/d/1BIKXvqq8AwYBCpiF0tnGyvbsitKJmpA0/preview', this)">
+                            Bidang Binmas
+                        </button>
+                    </div>
+
+                    <!-- === IFRAME === -->
+                    <iframe id="Iframe"
+                        src="https://drive.google.com/file/d/10p8_xDAzRh3vKwv0tXipj4Wo0SzxufMt/preview"
+                        class="w-11/12 h-[400px] border border-gray-300 rounded mx-auto"></iframe>
                 </div>
-                <div
-                    class="hidden lg:flex flex-col font-[DM_Serif_Text] justify-center lg:max-w-160 max-w-80 text-justify text-xs lg:text-lg text-[#FDFDFD] lg:px-17.5 px-8.75 lg:py-24.5 py-12.25 lg:gap-7.5 gap-4.5">
-                </div>
+
             </div>
         </div>
         <div class="bg-[#FDFDFD] lg:max-h-166.25">
@@ -190,10 +256,60 @@
                 </div>
                 <div
                     class="flex flex-col font-[DM_Serif_Text] justify-center lg:max-w-160 max-w-80 text-justify text-xs lg:text-lg text-[#2B2A29] lg:px-17.5 px-8.75 lg:py-24.5 py-12.25 lg:gap-7.5 gap-4.5">
-                    <span class="font-bold text-3xl lg:text-5xl">Strategi & Kebijakan</span>
+                    <h3 class="font-bold text-3xl lg:text-7xl">Strategi & Kebijakan</h3>
                 </div>
             </div>
         </div>
+        <script>
+            let currentActiveButton = null; // Menyimpan elemen <button> atau <a> yang iframe-nya aktif
+            let currentActiveDropdownTrigger = null; // Menyimpan tombol trigger dropdown utama yang aktif (misal "Bidang PPUD")
+
+            function changeIframeSrc(url, clickedElement) {
+                if (url && clickedElement) {
+                    document.getElementById('Iframe').src = url;
+
+                    if (event) { // 'event' secara implisit tersedia pada inline event handler
+                        event.preventDefault();
+                    }
+
+                    // 1. Reset style tombol/link yang sebelumnya aktif
+                    if (currentActiveButton && currentActiveButton !== clickedElement) {
+                        currentActiveButton.classList.remove('bg-red-700', 'text-white');
+                        currentActiveButton.classList.add('bg-white', 'text-black'); // Kembalikan ke style default
+                    }
+
+                    // 2. Reset style dan teks tombol trigger dropdown yang sebelumnya aktif (jika ada)
+                    if (currentActiveDropdownTrigger) {
+                        currentActiveDropdownTrigger.classList.remove('bg-red-700', 'text-white');
+                        currentActiveDropdownTrigger.classList.add('bg-white', 'text-black');
+                        if (currentActiveDropdownTrigger.dataset.originalText) {
+                            currentActiveDropdownTrigger.innerHTML = currentActiveDropdownTrigger.dataset.originalText;
+                        }
+                        currentActiveDropdownTrigger = null; // Reset
+                    }
+
+                    // 3. Tambahkan style aktif ke elemen yang baru diklik (<a> atau <button>)
+                    clickedElement.classList.remove('bg-white', 'text-black');
+                    clickedElement.classList.add('bg-red-700', 'text-white');
+                    currentActiveButton = clickedElement; // Perbarui elemen yang sedang aktif
+
+                    // 4. Jika yang diklik adalah item dropdown (<a>), perbarui tombol trigger dropdown-nya
+                    const dropdownGroup = clickedElement.closest('.relative.dropdown');
+                    if (clickedElement.tagName === 'A' && dropdownGroup) {
+                        const mainDropdownButton = dropdownGroup.querySelector('button');
+                        if (mainDropdownButton) {
+                            if (!mainDropdownButton.dataset.originalText) {
+                                mainDropdownButton.dataset.originalText = mainDropdownButton.innerHTML.trim();
+                            }
+                            mainDropdownButton.innerHTML = clickedElement.textContent.trim() + ' ▼';
+                            mainDropdownButton.classList.remove('bg-white', 'text-black');
+                            mainDropdownButton.classList.add('bg-red-700', 'text-white');
+                            currentActiveDropdownTrigger = mainDropdownButton; // Set trigger dropdown yang aktif
+                        }
+                    }
+                }
+            }
+        </script>
     </main>
     <x-footer />
 </x-layout>
