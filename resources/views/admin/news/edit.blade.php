@@ -1,4 +1,4 @@
-<x-admin-layout :pageTitle="'Edit Berita: ' . $news->title">
+<x-admin-layout :pageTitle="'Edit Berita: ' . Str::limit($news->title, 10, '...')">
     @push('styles')
         <x-rich-text-laravel::styles theme="richtextlaravel" />
         <!-- Di dalam <head> -->
@@ -9,7 +9,7 @@
     @endpush
 
     <div class="mb-6 flex flex-col sm:flex-row justify-between items-center">
-        <h1 class="text-2xl font-semibold text-slate-800 dark:text-white">Tambah Berita Baru</h1>
+        <h1 class="text-2xl font-semibold text-slate-800 dark:text-white">Edit Berita</h1>
         <a href="{{ route('admin.news') }}"
             class="inline-flex items-center px-5 py-2.5 bg-stone-100 dark:bg-stone-700 text-stone-700 dark:text-white text-sm font-medium rounded-lg hover:bg-stone-200 dark:hover:bg-stone-600 focus:outline-none focus:ring-2 focus:ring-stone-500 dark:focus:ring-stone-400 focus:ring-offset-2 dark:focus:ring-offset-slate-800 transition duration-150 ease-in-out">
             <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
