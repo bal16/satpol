@@ -23,6 +23,6 @@ class NewsController extends Controller
      */
     public function show(News $news)
     {
-        return view('news.show',['news' => $news]);
+        return view('news.show', ['news' => $news]);
     }
 }

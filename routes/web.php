@@ -20,9 +20,7 @@ Route::get('/profile', function () {
 Route::get('/news', function () {
     return view('news');
 })->name('news');
-Route::get('/news/{slug}', function () {
-    return view('news');
-});
+Route::get('/news/{news:slug}', [NewsController::class, 'show'])->name('news.show');
 
 Route::get('/services', function () {
     return view('services');
