@@ -1,10 +1,10 @@
-@props(['id', 'name', 'value' => '', 'attachment' => true])
+@props(['id', 'name', 'value' => '', 'attachment' => false])
 
 {{-- More detailed dump: --}}
 
 <input type="hidden" name="{{ $name }}" id="{{ $id }}_input" value="{{ $value }}" />
 
-<trix-toolbar class="[&_.trix-button]:dark:bg-white [&_.trix-button]:bg-white [&_.trix-button.trix-active]:bg-gray-300 "
+<trix-toolbar  class="[&_.trix-button]:dark:bg-white [&_.trix-button]:bg-white [&_.trix-button.trix-active]:bg-gray-300 "
     id="{{ $id }}_toolbar"></trix-toolbar>
 
 <trix-editor id="{{ $id }}" toolbar="{{ $id }}_toolbar" input="{{ $id }}_input"

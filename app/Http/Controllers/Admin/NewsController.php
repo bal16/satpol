@@ -30,11 +30,20 @@ class NewsController extends Controller
      */
     public function store(StoreNewsRequest $request)
     {
+
         $news = News::create([
             'title' => $request->title,
             'body' => $request->body,
             'slug' => $request->slug
         ]);
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $imageFile) {
+                // Store in storage/app/public/news_images/{news_id}/filename.ext
+                $path = $imageFile->store('news_images/' . $news->id, 'public');
+                $news->images()->create(['path' => $path]);
+            }
+        }
         return redirect()->route('admin.news')->with('success', 'Berita berhasil dibuat!');
     }
 

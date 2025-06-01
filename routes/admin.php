@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api;
 use App\Http\Controllers\Admin;
+use App\Http\Controllers\Admin\NewsImageController;
 use App\Http\Middleware\AdminAuth;
 use App\Http\Controllers\AttachmentsController;
 
@@ -17,6 +18,10 @@ Route::prefix('/admin')->middleware([AdminAuth::class])->group(function () {
     Route::put('/news/{news}', [Admin\NewsController::class, 'update'])->name('admin.news.update');
     Route::delete('/news/{news}', [Admin\NewsController::class, 'destroy'])->name('admin.news.destroy');
     Route::get('api/news/data', [Api\NewsController::class, 'data'])->name('news.data'); // Data source for DataTables
+
+    // News Images Routes
+    Route::post('/news/{news}/images', [NewsImageController::class, 'store'])->name('admin.news.images.store');
+    Route::delete('/news/images/{image}', [NewsImageController::class, 'destroy'])->name('admin.news.images.destroy');
 
     Route::get('/gallery', [Admin\GalleryController::class, 'index'])->name('admin.gallery');
     Route::get('/gallery/create', [Admin\GalleryController::class, 'create'])->name('admin.gallery.create');
