@@ -1,17 +1,25 @@
 <x-layout :pageName="Str::words($news->title, 20, '...')">
     <x-header />
-    <main class="flex flex-col items-center font-[DM_Sans]">
+    <main class="flex flex-col items-center font-[DM_Sans] overflow-x-hidden"> {{-- Menambahkan overflow-x-hidden sebagai pengaman --}}
+        {{-- Bagian Judul --}}
         <div
-            class="flex flex-col font-bold lg:w-250 max-w-display text-black text-5xl  justify-center border-b-2 border-gray-500 pb-5">
-            <h1 class="lg:w-7xl  lg:text-start text-center pt-26">
+            class="w-full lg:max-w-4xl xl:max-w-5xl mx-auto px-4 sm:px-6 lg:px-0 flex flex-col font-bold text-black justify-center border-b-2 border-gray-500 pb-5 pt-12 lg:pt-20">
+            {{-- Mengganti lg:w-250 max-w-display dengan max-width responsif dan padding. Menyesuaikan padding atas. --}}
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl lg:text-start text-center">
+                {{-- Menghapus lg:w-7xl, menyesuaikan ukuran font agar responsif --}}
                 {{ $news->title }}
             </h1>
-            <h3 class="lg:w-7xl  lg:text-start text-center text-xl">
+            <h3 class="text-base sm:text-lg lg:text-xl lg:text-start text-center mt-2">
+                {{-- Menghapus lg:w-7xl, menyesuaikan ukuran font agar responsif --}}
                 Oleh "{{ $news->author }}" <span
                     class="text-gray-500 font-normal italic pl-4">{{ $news->created_at }}</span></h3>
         </div>
-        <div class="flex flex-col text-blue-500 lg:w-250 max-w-display text-black justify-center py-3">
-            <a href="#" class="flex-row flex justify-start lg:px-5 py-2">
+        {{-- Bagian Tombol Salin Tautan --}}
+        <div
+            class="w-full lg:max-w-4xl xl:max-w-5xl mx-auto px-4 sm:px-6 lg:px-0 flex flex-col text-blue-500 text-black justify-center py-3">
+            {{-- Mengganti lg:w-250 max-w-display dengan max-width responsif dan padding --}}
+            <a href="#" class="flex flex-row items-center justify-start py-2">
+                {{-- Menghapus lg:px-5, menambahkan items-center untuk alignment ikon dan teks --}}
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                     <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="1.5" color="currentColor">
@@ -25,19 +33,24 @@
             </a>
         </div>
 
-        <div
-            class="lg:w-250  lg:text-lg text-[11px] w-display  flex flex-col  lg:px-1 px-8 items-center ofervlow-x-hidden">
-
+        {{-- Bagian Slider dan Isi Berita --}}
+        {{-- Div sebelumnya: class="lg:w-250 lg:text-lg text-[11px] w-display flex flex-col lg:px-1 px-8 items-center ofervlow-x-hidden" --}}
+        {{-- Sekarang dipecah menjadi kontainer w-full untuk slider, dan kontainer max-width terpisah untuk teks isi berita --}}
+        <div class="w-full flex flex-col items-center"> {{-- Ini memastikan slider bisa full-width jika komponennya dirancang demikian --}}
             {{-- Pastikan variabel $sliders sudah terdefinisi sebelum baris ini --}}
             {{-- Jika Anda mengambil data dari controller, pastikan $sliders sudah di-pass ke view --}}
-            <x-news.slider :sliderData="$news->images" />
-            {{-- <img class="" src="https://picsum.photos/1000/400" alt="Thumbnail"> --}}
-            <div class="py-4 border-b-2 border-gray-500 pb-5">
+            <x-news.show-slider :sliderData="$news->images" />
+
+            {{-- Isi Berita --}}
+            <div
+                class="w-full lg:max-w-4xl xl:max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-4 border-b-2 border-gray-500 pb-5 text-sm lg:text-lg">
+                {{-- Menambahkan max-width responsif, padding, dan ukuran teks untuk isi berita --}}
                 {!! $news->body !!}
             </div>
         </div>
-
-        <div class="lg:w-250  flex flex-col py-4 px-4">
+        {{-- Bagian "Artikel baru" --}}
+        <div class="w-full lg:max-w-4xl xl:max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col py-4">
+            {{-- Mengganti lg:w-250 dengan max-width responsif dan padding --}}
             <h4 class="text-xl font-bold italic lg:text-start text-center">Artikel baru</h4>
             <div class="grid lg:grid-cols-2 grid-cols-1 gap-4">
                 {{-- Ini Mulai isi Berita --}}

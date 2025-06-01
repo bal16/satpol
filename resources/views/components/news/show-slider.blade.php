@@ -9,16 +9,15 @@
     $inactiveNavButtonSpecificClasses = 'w-5 opacity-50 hover:opacity-100';
 @endphp
 
-<div id="imageSliderViewport"
-    class="relative max-w-screen overflow-hidden h-[60vh] bg-linear-to-r from-[#2B2A29] via-[#fdfdfd] to-[#2B2A29]">
+<div id="imageSliderViewport" class="relative max-w-screen overflow-hidden h-[60vh]">
+    {{-- Kelas background dihilangkan dari div ini --}}
     @if ($sliderCount > 0)
         <div id="imageSliderTrack" class="relative h-[100%] flex transition-transform duration-500 ease-in-out"
             style="width: {{ $sliderCount * 100 }}vw; transform: translateX(0vw);">
             @foreach ($sliderData as $sliderItem)
                 {{-- Menggunakan $sliderItem untuk konsistensi --}}
                 <div class="relative w-full h-[60vh] flex-shrink-0" style="width: 100vw;">
-                    {{-- Menggunakan $sliderItem->image_path atau $sliderItem->path sesuai struktur data Anda --}}
-                    {{-- Asumsi $sliderItem memiliki properti 'image_path' atau 'path' --}}
+                    {{-- Menggunakan $sliderItem->path atau $sliderItem->image_path sesuai struktur data Anda --}}
                     @php $imagePath = $sliderItem->image_path ?? ($sliderItem->path ?? ''); @endphp
                     @if (empty($imagePath))
                         <img class="w-full h-[60vh] object-contain"
@@ -42,7 +41,8 @@
         </div>
     @else
         <div class="w-full h-[60vh] flex items-center justify-center">
-            <p class="text-white">No images to display in slider.</p>
+            {{-- Sesuaikan warna teks jika background utama gelap --}}
+            <p class="text-gray-800">No images to display in slider.</p>
         </div>
     @endif
 </div>
@@ -137,7 +137,6 @@
 
             function handleDragMove(e) {
                 if (!isDragging || numSlides <= 1) return;
-                // Mencegah scroll halaman saat melakukan swipe horizontal pada perangkat sentuh
                 if (e.type === 'touchmove') {
                     e.preventDefault();
                 }
@@ -150,27 +149,27 @@
 
                 if (e.type === 'mouseup' || e.type === 'mouseleave') {
                     const images = imageSliderTrack.querySelectorAll('img');
-                    images.forEach(img => img.ondragstart = null); // Mengembalikan perilaku drag default
+                    images.forEach(img => img.ondragstart = null);
                 }
 
                 const endX = getEndEventX(e);
                 const diffX = endX - startX;
 
                 if (Math.abs(diffX) > SWIPE_THRESHOLD) {
-                    if (diffX < 0) { // Swipe left (next slide)
+                    if (diffX < 0) {
                         advanceSlide(1);
-                    } else { // Swipe right (previous slide)
+                    } else {
                         advanceSlide(-1);
                     }
                 } else {
-                    resetAutoSlide(); // If not enough swipe, still reset timer
+                    resetAutoSlide();
                 }
             }
 
             sliderViewport.addEventListener('mousedown', handleDragStart);
-            document.addEventListener('mousemove', handleDragMove); // Listen on document for wider drag area
-            document.addEventListener('mouseup', handleDragEnd); // Listen on document
-            sliderViewport.addEventListener('mouseleave', handleDragEnd); // End drag if mouse leaves viewport
+            document.addEventListener('mousemove', handleDragMove);
+            document.addEventListener('mouseup', handleDragEnd);
+            sliderViewport.addEventListener('mouseleave', handleDragEnd);
 
             sliderViewport.addEventListener('touchstart', handleDragStart, {
                 passive: true
@@ -180,16 +179,15 @@
             });
             document.addEventListener('touchend', handleDragEnd);
 
-            // Event listener untuk klik tombol navigasi
             navButtons.forEach((button) => {
                 button.addEventListener('click', () => {
                     const newIndex = parseInt(button.dataset.slideToIndex, 10);
-                    updateSliderPosition(newIndex); // User interaction, will reset auto-slide
+                    updateSliderPosition(newIndex);
                 });
             });
 
-            imageSliderTrack.style.cursor = 'grab'; // Atur kursor awal
-            if (numSlides > 1) startAutoSlide(); // Mulai auto-slide jika ada lebih dari 1 slide
+            imageSliderTrack.style.cursor = 'grab';
+            if (numSlides > 1) startAutoSlide();
         });
     </script>
 @endif
