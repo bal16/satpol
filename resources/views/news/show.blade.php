@@ -10,7 +10,7 @@
                 Oleh "Nama Penulis" <span class="text-gray-500 font-normal italic pl-4">Tanggal Publish</span></h3>
         </div>
         <div class="flex flex-col text-blue-500 lg:w-250 max-w-display text-black justify-center py-3">
-            <a class="flex-row flex justify-start lg:px-5 py-2">
+            <a href="#" class="flex-row flex justify-start lg:px-5 py-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                     <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="1.5" color="currentColor">
@@ -24,9 +24,22 @@
             </a>
         </div>
 
-        <div class="lg:w-250 w-150 lg:text-lg text-[11px]  flex flex-col border-b-2 border-gray-500 pb-5">
+        <div class="lg:w-250  lg:text-lg text-[11px] w-display  flex flex-col  lg:px-1 px-8">
+            @php
+                $sliders = collect([
+                    (object) ['slot_number' => 1, 'image_path' => 'https://picsum.photos/1000/412'],
+                    (object) ['slot_number' => 2, 'image_path' => 'https://picsum.photos/1000/413'],
+                    (object) ['slot_number' => 3, 'image_path' => 'https://picsum.photos/1000/414'],
+                    // Anda bisa menambahkan lebih banyak slider di sini jika diperlukan
+                    // (object) ['slot_number' => 4, 'image_path' => 'https://picsum.photos/seed/picsum4/1600/900'],
+                    // (object) ['slot_number' => 5, 'image_path' => ''], // Contoh dengan image_path kosong
+                ]);
+            @endphp
+            {{-- Pastikan variabel $sliders sudah terdefinisi sebelum baris ini --}}
+            {{-- Jika Anda mengambil data dari controller, pastikan $sliders sudah di-pass ke view --}}
+            {{-- <x-slider :sliderData="$sliders" /> --}}
             <img class="" src="https://picsum.photos/1000/400" alt="Thumbnail">
-            <div class="py-4">
+            <div class="py-4 border-b-2 border-gray-500 pb-5">
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac felis vehicula, pellentesque
                     justo vitae, malesuada neque. Pellentesque et massa leo. Vivamus posuere magna mollis augue
@@ -60,14 +73,15 @@
             </div>
         </div>
 
-        <div class="lg:w-250 w-150 flex flex-col py-4 ">
-            <h4 class="text-xl font-bold">Artikel baru</h4>
-            <div class="grid grid-cols-2 gap-4">
-                <div class="static bg-cover rounded text-[#FDFDFD] max-w-145.25 max-h-81.5 lg:h-81.5 h-70"
-                    style="background-image:url(https://picsum.photos/1000/404)">
+        <div class="lg:w-250  flex flex-col py-4 px-4">
+            <h4 class="text-xl font-bold italic lg:text-start text-center">Artikel baru</h4>
+            <div class="grid lg:grid-cols-2 grid-cols-1 gap-4">
+                {{-- Ini Mulai isi Berita --}}
+                <div class="static bg-cover rounded text-[#FDFDFD] max-w-145.25 max-h-81.5 h-81.5"
+                    style="background-image:url(image/tes.png)">
                     <div
                         class="static flex flex-col group justify-end w-full h-full bg-gradient-to-b from-white-100/0 to-[#2B2A29]">
-                        <a class="z-10 absolute lg:w-145.25 w-75.25 lg:h-81.5 h-40" href=""></a>
+                        <a class="z-10 absolute lg:w-145.25 w-75.25 h-81.5" href=""></a>
                         <div class="flex flex-col gap-2 m-4">
                             <div class="flex divide-x gap-2 text-xs">
                                 <a class="z-20 hover:underline inline-block pe-2" href="#kontol">Berita</a>
@@ -81,11 +95,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="static bg-cover rounded text-[#FDFDFD] max-w-145.25 max-h-81.5 lg:h-81.5 h-70"
-                    style="background-image:url(https://picsum.photos/1000/403)">
+                <div class="static bg-cover rounded text-[#FDFDFD] max-w-145.25 max-h-81.5 h-81.5"
+                    style="background-image:url(image/tes.png)">
                     <div
                         class="static flex flex-col group justify-end w-full h-full bg-gradient-to-b from-white-100/0 to-[#2B2A29]">
-                        <a class="z-10 absolute lg:w-145.25 w-75.25 lg:h-81.5 h-40" href=""></a>
+                        <a class="z-10 absolute lg:w-145.25 w-75.25 h-81.5" href=""></a>
                         <div class="flex flex-col gap-2 m-4">
                             <div class="flex divide-x gap-2 text-xs">
                                 <a class="z-20 hover:underline inline-block pe-2" href="#kontol">Berita</a>
@@ -99,11 +113,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="static bg-cover rounded text-[#FDFDFD] max-w-145.25 max-h-81.5 lg:h-81.5 h-70"
-                    style="background-image:url(https://picsum.photos/1000/401)">
+                <div class="static bg-cover rounded text-[#FDFDFD] max-w-145.25 max-h-81.5 h-81.5"
+                    style="background-image:url(image/tes.png)">
                     <div
                         class="static flex flex-col group justify-end w-full h-full bg-gradient-to-b from-white-100/0 to-[#2B2A29]">
-                        <a class="z-10 absolute lg:w-145.25 w-75.25 lg:h-81.5 h-40" href=""></a>
+                        <a class="z-10 absolute lg:w-145.25 w-75.25 h-81.5" href=""></a>
                         <div class="flex flex-col gap-2 m-4">
                             <div class="flex divide-x gap-2 text-xs">
                                 <a class="z-20 hover:underline inline-block pe-2" href="#kontol">Berita</a>
@@ -117,11 +131,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="static bg-cover rounded text-[#FDFDFD] max-w-145.25 max-h-81.5 lg:h-81.5 h-70"
-                    style="background-image:url(https://picsum.photos/1000/402)">
+                <div class="static bg-cover rounded text-[#FDFDFD] max-w-145.25 max-h-81.5 h-81.5"
+                    style="background-image:url(image/tes.png)">
                     <div
                         class="static flex flex-col group justify-end w-full h-full bg-gradient-to-b from-white-100/0 to-[#2B2A29]">
-                        <a class="z-10 absolute lg:w-145.25 w-75.25 lg:h-81.5 h-40" href=""></a>
+                        <a class="z-10 absolute lg:w-145.25 w-75.25 h-81.5" href=""></a>
                         <div class="flex flex-col gap-2 m-4">
                             <div class="flex divide-x gap-2 text-xs">
                                 <a class="z-20 hover:underline inline-block pe-2" href="#kontol">Berita</a>
@@ -135,6 +149,7 @@
                         </div>
                     </div>
                 </div>
+                {{-- Ini Akhir isi Berita --}}
             </div>
         </div>
     </main>
