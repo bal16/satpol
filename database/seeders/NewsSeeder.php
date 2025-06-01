@@ -24,7 +24,7 @@ class NewsSeeder extends Seeder
             $saved_news = News::create([
                 'title' => $news->title,
                 'body' => $news->body,
-                'slug' => Str::limit($news->slug, 40, ''),
+                'slug' => Str::words($news->slug,10, ''),
                 'author' => $news->author,
                 'created_at' => $news->created_at,
                 'updated_at' => $news->updated_at,

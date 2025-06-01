@@ -13,7 +13,7 @@ class GalleryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function __invoke(Request $request)
     {
         // Fetch categories that have at least one gallery item
         $categories = Category::whereHas('galleries')
@@ -43,13 +43,4 @@ class GalleryController extends Controller
         return view('gallery', ['gallery' => $data, 'categories' => $categories]);
     }
 
-
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Gallery $gallery)
-    {
-        return view('gallery.show',['gallery' => $gallery]);
-    }
 }

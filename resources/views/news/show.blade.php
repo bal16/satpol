@@ -1,4 +1,4 @@
-<x-layout :pageName="'Show'">
+<x-layout :pageName="Str::words($news->title, 20, '...')">
     <x-header />
     <main class="flex flex-col items-center font-[DM_Sans]">
         <div
@@ -25,7 +25,8 @@
             </a>
         </div>
 
-        <div class="lg:w-250  lg:text-lg text-[11px] w-display  flex flex-col  lg:px-1 px-8 items-center ofervlow-x-hidden">
+        <div
+            class="lg:w-250  lg:text-lg text-[11px] w-display  flex flex-col  lg:px-1 px-8 items-center ofervlow-x-hidden">
 
             {{-- Pastikan variabel $sliders sudah terdefinisi sebelum baris ini --}}
             {{-- Jika Anda mengambil data dari controller, pastikan $sliders sudah di-pass ke view --}}

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\News;
+use Illuminate\Http\Request;
 // use App\Http\Requests\StoreNewsRequest;
 // use App\Http\Requests\UpdateNewsRequest;
 
@@ -11,9 +12,15 @@ class NewsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('news', ['news' => News::all(),]);
+        $news = News::query()->orderBy('created_at', 'desc')->paginate(5)->appends($request->except('page')); 
+
+        if ($request->ajax()) {
+            return view('partial.news', ['news' => $news]);
+        }
+
+        return view('news', ['news' => $news,]);
     }
 
 

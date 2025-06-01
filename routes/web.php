@@ -11,15 +11,13 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Route::get('/', [DashboardController::class, 'index'])->name('home');
+Route::get('/', DashboardController::class)->name('home');
 
 Route::get('/profile', function () {
     return view('profile');
 })->name('profile');
 
-Route::get('/news', function () {
-    return view('news');
-})->name('news');
+Route::get('/news', [NewsController::class, 'index'])->name('news');
 Route::get('/news/{news:slug}', [NewsController::class, 'show'])->name('news.show');
 
 Route::get('/services', function () {
@@ -29,7 +27,7 @@ Route::get('/services/{slug}', function () {
     return view('services');
 });
 
-Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
+Route::get('/gallery', GalleryController::class)->name('gallery');
 
 
 Route::prefix('/info')

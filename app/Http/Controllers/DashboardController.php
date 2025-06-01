@@ -1,18 +1,21 @@
 <?php
+
 namespace App\Http\Controllers;
 
+use App\Models\News;
 use App\Models\Slider;
+use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Handle the incoming request.
      */
-    public function index()
+    public function __invoke(Request $request)
     {
-        // dd(Slider::all());
         return view('dashboard', [
-            'sliders' => Slider::all()
+            'sliders' => Slider::all(),
+            'news' => News::latest()->take(5)->get(),
         ]);
     }
 }

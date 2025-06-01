@@ -1,3 +1,8 @@
+@php
+    $firstNews = $news->first();
+    $nextNews = $news->take(5)->skip(1);
+
+@endphp
 <x-layout :pageName="'Dashboard'">
     <x-header />
     <main class="max-w-[100vw] overflow-hidden">
@@ -32,20 +37,19 @@
             <div class="flex lg:max-h-166.25 gap-14">
                 <div class="hidden lg:flex flex-col gap-20 max-w-160">
                     <div class="static bg-cover rounded text-[#FDFDFD] max-w-145.25 max-h-81.5 h-81.5"
-                        style="background-image:url(image/tes.png)">
+                        style="background-image:url({{ asset('storage/' . $firstNews->images->first()->path) }})">
                         <div
                             class="static flex flex-col group justify-end w-full h-full bg-gradient-to-b from-white-100/0 to-[#2B2A29]">
-                            <a class="z-10 absolute lg:w-145.25 w-75.25 h-81.5" href=""></a>
+                            <a class="z-10 absolute lg:w-145.25 w-75.25 h-81.5"
+                                href="{{ route('news.show', $firstNews->slug) }}" }}"></a>
                             <div class="flex flex-col gap-2 m-4">
                                 <div class="flex divide-x gap-2 text-xs">
-                                    <a class="z-20 hover:underline inline-block pe-2" href="#kontol">Berita</a>
-                                    <span>22 April 2025</span>
+                                    <a class="z-20 hover:underline inline-block pe-2" href="">Berita</a>
+                                    <span>{{ $firstNews->created_at->format('d-m-Y') }}
+                                        ({{ $firstNews->created_at->diffForHumans() }})</span>
                                 </div>
                                 <span
-                                    class="transition-all delay-150 duration-300 ease-in-out group-hover:border-l-3 group-hover:ps-2">Lorem
-                                    ipsum dolor sit, amet consectetur adipisicing
-                                    elit. Officia aliquam dignissimos voluptatum voluptatibus perspiciatis
-                                    cupiditate ut at, facere quod vel.</span>
+                                    class="transition-all delay-150 duration-300 ease-in-out group-hover:border-l-3 group-hover:ps-2">{{ Str::words($firstNews->title, 20, '...') }}</span>
                             </div>
                         </div>
                     </div>
@@ -57,12 +61,10 @@
                     </div>
                 </div>
                 <div class="flex flex-col lg:max-w-160 gap-4">
-                    <x-news.list :category="'Berita'" :date="'22 April 2025'" :title="'Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia aliquam dignissimos voluptatum voluptatibus perspiciatis cupiditate ut at, facere quod vel.'" />
-                    <x-news.list :category="'Berita'" :date="'22 April 2025'" :title="'Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia aliquam dignissimos voluptatum voluptatibus perspiciatis cupiditate ut at, facere quod vel.'" />
-                    <x-news.list :category="'Berita'" :date="'22 April 2025'" :title="'Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia aliquam dignissimos voluptatum voluptatibus perspiciatis cupiditate ut at, facere quod vel.'" />
-                    <x-news.list :category="'Berita'" :date="'22 April 2025'" :title="'Asegaf ipsum dolor sit amet consectetur adipisicing elit. Officia aliquam dignissimos voluptatum voluptatibus perspiciatis cupiditate ut at, facere quod vel.'" />
-
-
+                    @foreach ($nextNews as $item)
+                        <x-news.list :href="route('news.show', $item->slug)" :image="asset('storage/' . $item->images->first()->path)" :category="'Berita'" :date="$item->created_at->format('d-m-Y') . ' (' . $item->created_at->diffForHumans() . ')'"
+                            :title="$item->title" />
+                    @endforeach
                 </div>
         </section>
     </main>

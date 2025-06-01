@@ -6,9 +6,13 @@
                 <h1 class="lg:text-5xl text-3xl font-[DM_Serif_Text] text-[#FDFDFD]">Berita</h1>
                 <div class="flex rounded-sm justify-center lg:gap-10 bg-[#FDFDFD]">
                     <div class="hidden lg:flex flex-col max-w-160 lg:py-8 py-5 lg:gap-6 gap-3">
-                        <x-news.primary-list :category="'Berita'" :date="'22 April 2025'" :title="'Asegaf ipsum dolor sit amet consectetur adipisicing elit. Officia aliquam dignissimos voluptatum voluptatibus perspiciatis cupiditate ut at, facere quod vel.'" />
-                        <x-news.primary-list :category="'Berita'" :date="'22 April 2025'" :title="'Asegaf ipsum dolor sit amet consectetur adipisicing elit. Officia aliquam dignissimos voluptatum voluptatibus perspiciatis cupiditate ut at, facere quod vel.'" />
-                        <x-news.primary-list :category="'Berita'" :date="'22 April 2025'" :title="'Asegaf ipsum dolor sit amet consectetur adipisicing elit. Officia aliquam dignissimos voluptatum voluptatibus perspiciatis cupiditate ut at, facere quod vel.'" />
+                        @foreach ($news as $item)
+                            <x-news.primary-list :category="'Berita'" :date="$item->created_at->format('d-m-Y') .
+                                ' (' .
+                                $item->created_at->diffForHumans() .
+                                ')'" :title="$item->title" :image="asset('storage/' . $item->images->first()->path)"
+                                :href="route('news.show', $item->slug)" />
+                        @endforeach
                         <div class="flex justify-center p-5">
                             <ul class="flex gap-4 lg:text-xl text-sm">
                                 <li class="opacity-25"><a href="">&lt;</a>
@@ -33,11 +37,12 @@
                                 Berita Terbaru
                             </span>
                         </div>
-                        <x-news.secondary-list :category="'Berita'" :date="'22 April 2025'" :title="'Asegaf ipsum dolor sit amet consectetur adipisicing elit. Officia aliquam dignissimos voluptatum voluptatibus perspiciatis cupiditate ut at, facere quod vel.'" />
-                        <x-news.secondary-list :category="'Berita'" :date="'22 April 2025'" :title="'Asegaf ipsum dolor sit amet consectetur adipisicing elit. Officia aliquam dignissimos voluptatum voluptatibus perspiciatis cupiditate ut at, facere quod vel.'" />
-                        <x-news.secondary-list :category="'Berita'" :date="'22 April 2025'" :title="'Asegaf ipsum dolor sit amet consectetur adipisicing elit. Officia aliquam dignissimos voluptatum voluptatibus perspiciatis cupiditate ut at, facere quod vel.'" />
+                        @foreach ($news as $item)
+                            <x-news.secondary-list :category="'Berita'" :date="$item->created_at->format('d-m-Y')" :title="$item->title"
+                                :image="asset('storage/' . $item->images->first()->path)" :href="route('news.show', $item->slug)" />
+                        @endforeach
                         <div class="lg:hidden flex justify-center">
-                            <ul class="flex gap-4 lg:text-xl text-sm">
+                            {{-- <ul class="flex gap-4 lg:text-xl text-sm">
                                 <li class="opacity-25"><a href="">&lt;</a>
                                 </li>
                                 <li class="text-[#e93b23]"><a href="">1</a>
@@ -51,7 +56,8 @@
                                 </li>
                                 <li><a href="">&gt;</a>
                                 </li>
-                            </ul>
+                            </ul> --}}
+                            {{ $news->links() }}
                         </div>
                     </div>
                 </div>

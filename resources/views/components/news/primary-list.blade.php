@@ -16,7 +16,7 @@
             <a class="z-20 hover:underline inline-block pe-2" href="{{ $href }}">{{ $category }}</a>
             <span>{{ $date }}</span>
         </div>
-        <span class="lg:text-lg text-xs group-hover:border-l-3 group-hover:border-[#e93b23] group-hover:ps-2">Lorem
+        <span class="lg:text-lg text-xs group-hover:border-l-3 group-hover:border-[#e93b23] group-hover:ps-2">
             {{ Str::words($title, 15, '...') }}</span>
     </div>
 </div>
