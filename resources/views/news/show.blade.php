@@ -4,10 +4,11 @@
         <div
             class="flex flex-col font-bold lg:w-250 max-w-display text-black text-5xl  justify-center border-b-2 border-gray-500 pb-5">
             <h1 class="lg:w-7xl  lg:text-start text-center pt-26">
-                Judul Berita
+                {{ $news->title }}
             </h1>
             <h3 class="lg:w-7xl  lg:text-start text-center text-xl">
-                Oleh "Nama Penulis" <span class="text-gray-500 font-normal italic pl-4">Tanggal Publish</span></h3>
+                Oleh "{{ $news->author }}" <span
+                    class="text-gray-500 font-normal italic pl-4">{{ $news->created_at }}</span></h3>
         </div>
         <div class="flex flex-col text-blue-500 lg:w-250 max-w-display text-black justify-center py-3">
             <a href="#" class="flex-row flex justify-start lg:px-5 py-2">
@@ -24,52 +25,14 @@
             </a>
         </div>
 
-        <div class="lg:w-250  lg:text-lg text-[11px] w-display  flex flex-col  lg:px-1 px-8">
-            @php
-                $sliders = collect([
-                    (object) ['slot_number' => 1, 'image_path' => 'https://picsum.photos/1000/412'],
-                    (object) ['slot_number' => 2, 'image_path' => 'https://picsum.photos/1000/413'],
-                    (object) ['slot_number' => 3, 'image_path' => 'https://picsum.photos/1000/414'],
-                    // Anda bisa menambahkan lebih banyak slider di sini jika diperlukan
-                    // (object) ['slot_number' => 4, 'image_path' => 'https://picsum.photos/seed/picsum4/1600/900'],
-                    // (object) ['slot_number' => 5, 'image_path' => ''], // Contoh dengan image_path kosong
-                ]);
-            @endphp
+        <div class="lg:w-250  lg:text-lg text-[11px] w-display  flex flex-col  lg:px-1 px-8 items-center ofervlow-x-hidden">
+
             {{-- Pastikan variabel $sliders sudah terdefinisi sebelum baris ini --}}
             {{-- Jika Anda mengambil data dari controller, pastikan $sliders sudah di-pass ke view --}}
-            {{-- <x-slider :sliderData="$sliders" /> --}}
-            <img class="" src="https://picsum.photos/1000/400" alt="Thumbnail">
+            <x-news.slider :sliderData="$news->images" />
+            {{-- <img class="" src="https://picsum.photos/1000/400" alt="Thumbnail"> --}}
             <div class="py-4 border-b-2 border-gray-500 pb-5">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac felis vehicula, pellentesque
-                    justo vitae, malesuada neque. Pellentesque et massa leo. Vivamus posuere magna mollis augue
-                    condimentum venenatis. Sed eu viverra nisi, nec ornare lorem. Nulla augue nibh, sollicitudin eu
-                    quam sit amet, tincidunt congue arcu. Curabitur blandit ante in nisl molestie varius. Quisque
-                    nec viverra sem. Pellentesque justo eros, aliquam vel consectetur at, gravida quis libero. Sed
-                    ac nunc vel sem sagittis volutpat vel sit amet ipsum. Integer molestie ante convallis urna
-                    commodo vestibulum. Morbi justo magna, lacinia ut volutpat nec, hendrerit quis tellus.
-                    Suspendisse tristique lectus sed lobortis venenatis. Mauris eget pulvinar leo. Fusce placerat,
-                    justo malesuada dapibus hendrerit, nisi enim volutpat arcu, id tincidunt nunc dui id mauris.
-                    <br><br>
-                    Aliquam facilisis urna sit amet vehicula pharetra. Sed pharetra dictum velit vulputate vehicula.
-                    Praesent egestas urna in nunc dignissim imperdiet. Proin gravida velit ac lorem eleifend
-                    vehicula. Sed gravida eros nec ipsum semper, nec commodo urna pellentesque. Sed finibus, justo
-                    volutpat sollicitudin vulputate, orci mi facilisis augue, eu luctus ex magna vitae orci. Nunc
-                    ligula ex, rhoncus eu vestibulum sit amet, mollis in justo. Integer ipsum quam, ultricies sed
-                    ornare at, posuere a quam. Donec tincidunt risus tincidunt luctus commodo. Quisque molestie
-                    molestie sapien, pharetra convallis tellus vestibulum sit amet. Fusce semper eget turpis non
-                    semper. Etiam porta pretium purus, eget fringilla turpis consectetur sit amet.
-                    <br><br>
-                    Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-                    Cras cursus ac massa blandit aliquam. Nunc iaculis quis nibh at sagittis. Fusce ullamcorper
-                    porta tellus, nec tristique lorem consequat ut. Nunc malesuada, odio a congue egestas, libero
-                    est placerat erat, ac vulputate leo neque nec est. Cras suscipit, turpis sit amet sodales
-                    consectetur, felis odio molestie metus, eu posuere felis nibh et libero. Etiam luctus commodo
-                    fringilla. Aliquam faucibus lacinia nisi. Curabitur augue ipsum, porta sed ultrices sit amet,
-                    placerat id mi. In sed massa bibendum, pretium risus dignissim, faucibus leo. Nunc consequat
-                    malesuada dolor, quis blandit est fringilla vel. Etiam tempus nisl nec mauris scelerisque, non
-                    suscipit tellus scelerisque. Ut vel elit non sem sodales bibendum.
-                </p>
+                {!! $news->body !!}
             </div>
         </div>
 
