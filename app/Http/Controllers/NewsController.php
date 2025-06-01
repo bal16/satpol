@@ -14,7 +14,7 @@ class NewsController extends Controller
      */
     public function index(Request $request)
     {
-        $news = News::query()->orderBy('created_at', 'desc')->paginate(5)->appends($request->except('page')); 
+        $news = News::query()->orderBy('created_at', 'desc')->paginate(5)->appends($request->except('page'));
 
         if ($request->ajax()) {
             return view('partial.news', ['news' => $news]);
@@ -30,6 +30,9 @@ class NewsController extends Controller
      */
     public function show(News $news)
     {
-        return view('news.show', ['news' => $news]);
+        return view('news.show', [
+            'news' => $news,
+            'latest' => News::latest()->take(4)->get()
+        ]);
     }
 }
