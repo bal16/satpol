@@ -4,18 +4,20 @@
     <x-header />
     <main class="bg-[#FDFDFD]">
         <div class="flex max-w-7xl justify-center mx-auto">
-            <div class="flex flex-col p-25 ">
+            <div class="flex flex-col mt-14 px-4 lg:px-0">
+                {{-- {/* Mengubah p-25 menjadi p-6 untuk padding yang lebih standar */} --}}
                 <h1 class="lg:text-5xl text-3xl font-[DM_Serif_Text]">Galeri</h1>
-                <div class="flex lg:flex-row flex-col p-6 rounded-sm shadow-xl justify-between lg:gap-0 gap-5">
-
+                <div
+                    class="flex lg:flex-row flex-col p-6 rounded-sm shadow-xl justify-between md:min-w-[70vw] lg:min-w-[60vw] lg:gap-6 gap-5">
 
                     <div class="flex flex-col lg:justify-start justify-between gap-4 lg:min-h-[50vh] lg:w-1/4">
-                        <h2 class="lg:border-b-2 lg:w-76">
+                        <h2 class="lg:border-b-2 lg:w-full">
+                            {{-- {/* Mengubah lg:w-76 menjadi lg:w-full */} --}}
                             <span
                                 class="lg:font-bold lg:text-lg text-xs text-[#FDFDFD] bg-black px-2 py-1">Kategori</span>
                         </h2>
                         {{-- Category List --}}
-                        <ul id="category-list" class="flex lg:flex-col gap-2 py-1">
+                        <ul id="category-list" class="flex flex-wrap lg:flex-col gap-2 py-1">
                             <li
                                 class="{{ !request()->filled('category_id') ? 'font-bold lg:text-xl text-xs' : 'opacity-50 lg:text-sm text-xs' }}">
                                 <a href="{{ route('gallery') }}" data-category-id="">Semua Foto</a>
@@ -32,20 +34,28 @@
                         </ul>
                     </div>
 
-                    <div id="gallery_image" class="grid grid-cols-3 lg:pl-16 gap-2 lg:w-3/4 min-h-80">
-                        @php $currentCategoryId = request()->input('category_id'); @endphp
-                        @foreach ($gallery as $gal)
-                            <a href="{{ asset('storage/' . $gal->path) }}"
-                               class="gallery-lightbox-item" {{-- Class for GLightbox selector --}}
-                               data-gallery="{{ $currentCategoryId ? 'category-' . $currentCategoryId : 'all-gallery' }}" {{-- For grouping --}}
-                               title="{{ $gal->title }}"> {{-- GLightbox uses this for captions --}}
-                                <img src="{{ asset('storage/' . $gal->path) }}"
-                                    class="lg:w-50 h-37.5 object-cover hover:scale-105 transition duration-300 ease-in-out"
-                                    alt="{{ $gal->title }}">
-                            </a>
-                        @endforeach
+                    <div id="gallery_image" class="lg:w-10/11 min-h-80 min-w-[300px]">
+                        @if ($gallery->isNotEmpty())
+                            @php $currentCategoryId = request()->input('category_id'); @endphp
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+                                {{-- {/* Membuat grid responsif */} --}}
+                                @foreach ($gallery as $gal)
+                                    <a href="{{ asset('storage/' . $gal->path) }}" class="gallery-lightbox-item"
+                                        {{-- Class for GLightbox selector --}}
+                                        data-gallery="{{ $currentCategoryId ? 'category-' . $currentCategoryId : 'all-gallery' }}"
+                                        {{-- For grouping --}} title="{{ $gal->title }}"> {{-- GLightbox uses this for captions --}}
+                                        <img src="{{ asset('storage/' . $gal->path) }}"
+                                            class="w-full h-37.5 object-cover hover:scale-105 transition duration-300 ease-in-out"
+                                            {/* Mengubah lg:w-50 menjadi w-full */} alt="{{ $gal->title }}">
+                                    </a>
+                                @endforeach
+                            </div>
+                        @else
+                            <div class="flex items-center justify-center h-full text-center">
+                                <p class="text-gray-500 text-lg">Tidak ada foto untuk ditampilkan.</p>
+                            </div>
+                        @endif
                     </div>
-
 
                 </div> {{-- End of flex lg:flex-row --}}
                 <div class="py-3" id="pagination-container"> {{-- This is where pagination links are rendered --}}
@@ -131,7 +141,8 @@
                 const link = liNode.querySelector('a[data-category-id]');
                 if (link) {
                     const linkCategoryId = link.getAttribute('data-category-id');
-                    const isLinkActive = (activeCategoryId === linkCategoryId) || (!activeCategoryId && linkCategoryId === "");
+                    const isLinkActive = (activeCategoryId === linkCategoryId) || (!activeCategoryId &&
+                        linkCategoryId === "");
 
                     if (isLinkActive) {
                         liNode.classList.remove('opacity-50', 'lg:text-sm');
