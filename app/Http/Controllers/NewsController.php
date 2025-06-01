@@ -14,13 +14,22 @@ class NewsController extends Controller
      */
     public function index(Request $request)
     {
-        $news = News::query()->orderBy('created_at', 'desc')->paginate(5)->appends($request->except('page'));
+        $news = News::query();
 
+        $query = $request->input('search');
+
+        if ($query) {
+            $news->where('title', 'like', "%{$query}%")
+                ->orWhere('body', 'like', "%{$query}%");
+        }
+
+        $news = $news->orderBy('created_at', 'desc')->paginate(5)->appends($request->except('page'));
+        $latest = News::latest()->take(5)->get();
         if ($request->ajax()) {
             return view('partial.news', ['news' => $news]);
         }
 
-        return view('news', ['news' => $news,]);
+        return view('news.index', ['news' => $news,'latest' => $latest]);
     }
 
 

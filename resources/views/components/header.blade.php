@@ -26,9 +26,9 @@
             </ul>
         </div>
         <div class="flex border border-[#fdfdfd] text-[#fdfdfd] h-fit mx-3.25">
-            <form class="flex h-full divide-x" action="{{ route('news') }}" id="search-form">
-                <input class="border-[#6A6968] py-1 px-4 text-xs" type="text" name="search" id="search"
-                    placeholder="Search" />
+            <form class="flex h-full divide-x" action="{{ route('news') }}" >
+                <input class="border-[#6A6968] py-1 px-4 text-xs" type="text" name="search"
+                    placeholder="Search" id="news-search-input" />
                 <button class="flex px-1 hover:text-[#DD1D23]">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         class="m-auto">
