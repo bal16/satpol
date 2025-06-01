@@ -18,7 +18,7 @@
         <div
             class="w-full lg:max-w-4xl xl:max-w-5xl mx-auto px-4 sm:px-6 lg:px-0 flex flex-col text-blue-500 text-black justify-center py-3">
             {{-- Mengganti lg:w-250 max-w-display dengan max-width responsif dan padding --}}
-            <a href="#" class="flex flex-row items-center justify-start py-2">
+            <button onclick="navigator.clipboard.writeText('{{ request()->url() }}'); alert('Tautan berhasil disalin');" class="flex flex-row items-center justify-start py-2">
                 {{-- Menghapus lg:px-5, menambahkan items-center untuk alignment ikon dan teks --}}
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                     <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -30,7 +30,7 @@
                     </g>
                 </svg>
                 <p class="flex text-left pl-1">Salin Tautan</p>
-            </a>
+            </button>
         </div>
 
         {{-- Bagian Slider dan Isi Berita --}}
@@ -54,78 +54,26 @@
             <h4 class="text-xl font-bold italic lg:text-start text-center">Artikel baru</h4>
             <div class="grid lg:grid-cols-2 grid-cols-1 gap-4">
                 {{-- Ini Mulai isi Berita --}}
-                <div class="static bg-cover rounded text-[#FDFDFD] max-w-145.25 max-h-81.5 h-81.5"
-                    style="background-image:url(image/tes.png)">
-                    <div
-                        class="static flex flex-col group justify-end w-full h-full bg-gradient-to-b from-white-100/0 to-[#2B2A29]">
-                        <a class="z-10 absolute lg:w-145.25 w-75.25 h-81.5" href=""></a>
-                        <div class="flex flex-col gap-2 m-4">
-                            <div class="flex divide-x gap-2 text-xs">
-                                <a class="z-20 hover:underline inline-block pe-2" href="#kontol">Berita</a>
-                                <span>22 April 2025</span>
+                @foreach ($latest as $item)
+                    <div class="static bg-cover rounded text-[#FDFDFD] max-w-145.25 max-h-81.5 h-81.5"
+                        style="background-image:url({{ asset('storage/' . $item->images->first()->path) }})">
+                        <div
+                            class="static flex flex-col group justify-end w-full h-full bg-gradient-to-b from-white-100/0 to-[#2B2A29]">
+                            <a class="z-10 absolute lg:w-145.25 w-75.25 h-81.5"
+                                href="{{ route('news.show', $item->slug) }}"></a>
+                            <div class="flex flex-col gap-2 m-4">
+                                <div class="flex divide-x gap-2 text-xs">
+                                    <a class="z-20 hover:underline inline-block pe-2"
+                                        href="{{ route('news') }}">Berita</a>
+                                    <span>{{ $item->created_at->format('d-m-Y') }}</span>
+                                </div>
+                                <span
+                                    class="transition-all delay-150 duration-300 ease-in-out group-hover:border-l-3 group-hover:ps-2">{{ Str::words($item->title, 10, '...') }}.</span>
                             </div>
-                            <span
-                                class="transition-all delay-150 duration-300 ease-in-out group-hover:border-l-3 group-hover:ps-2">Lorem
-                                ipsum dolor sit, amet consectetur adipisicing
-                                elit. Officia aliquam dignissimos voluptatum voluptatibus perspiciatis
-                                cupiditate ut at, facere quod vel.</span>
                         </div>
                     </div>
-                </div>
-                <div class="static bg-cover rounded text-[#FDFDFD] max-w-145.25 max-h-81.5 h-81.5"
-                    style="background-image:url(image/tes.png)">
-                    <div
-                        class="static flex flex-col group justify-end w-full h-full bg-gradient-to-b from-white-100/0 to-[#2B2A29]">
-                        <a class="z-10 absolute lg:w-145.25 w-75.25 h-81.5" href=""></a>
-                        <div class="flex flex-col gap-2 m-4">
-                            <div class="flex divide-x gap-2 text-xs">
-                                <a class="z-20 hover:underline inline-block pe-2" href="#kontol">Berita</a>
-                                <span>22 April 2025</span>
-                            </div>
-                            <span
-                                class="transition-all delay-150 duration-300 ease-in-out group-hover:border-l-3 group-hover:ps-2">Lorem
-                                ipsum dolor sit, amet consectetur adipisicing
-                                elit. Officia aliquam dignissimos voluptatum voluptatibus perspiciatis
-                                cupiditate ut at, facere quod vel.</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="static bg-cover rounded text-[#FDFDFD] max-w-145.25 max-h-81.5 h-81.5"
-                    style="background-image:url(image/tes.png)">
-                    <div
-                        class="static flex flex-col group justify-end w-full h-full bg-gradient-to-b from-white-100/0 to-[#2B2A29]">
-                        <a class="z-10 absolute lg:w-145.25 w-75.25 h-81.5" href=""></a>
-                        <div class="flex flex-col gap-2 m-4">
-                            <div class="flex divide-x gap-2 text-xs">
-                                <a class="z-20 hover:underline inline-block pe-2" href="#kontol">Berita</a>
-                                <span>22 April 2025</span>
-                            </div>
-                            <span
-                                class="transition-all delay-150 duration-300 ease-in-out group-hover:border-l-3 group-hover:ps-2">Lorem
-                                ipsum dolor sit, amet consectetur adipisicing
-                                elit. Officia aliquam dignissimos voluptatum voluptatibus perspiciatis
-                                cupiditate ut at, facere quod vel.</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="static bg-cover rounded text-[#FDFDFD] max-w-145.25 max-h-81.5 h-81.5"
-                    style="background-image:url(image/tes.png)">
-                    <div
-                        class="static flex flex-col group justify-end w-full h-full bg-gradient-to-b from-white-100/0 to-[#2B2A29]">
-                        <a class="z-10 absolute lg:w-145.25 w-75.25 h-81.5" href=""></a>
-                        <div class="flex flex-col gap-2 m-4">
-                            <div class="flex divide-x gap-2 text-xs">
-                                <a class="z-20 hover:underline inline-block pe-2" href="#kontol">Berita</a>
-                                <span>22 April 2025</span>
-                            </div>
-                            <span
-                                class="transition-all delay-150 duration-300 ease-in-out group-hover:border-l-3 group-hover:ps-2">Lorem
-                                ipsum dolor sit, amet consectetur adipisicing
-                                elit. Officia aliquam dignissimos voluptatum voluptatibus perspiciatis
-                                cupiditate ut at, facere quod vel.</span>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
+
                 {{-- Ini Akhir isi Berita --}}
             </div>
         </div>

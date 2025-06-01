@@ -32,7 +32,7 @@ class NewsController extends Controller
     {
         return view('news.show', [
             'news' => $news,
-            'latest' => News::latest()->take(4)->get()
+            'latest' => News::latest()->take(5)->get()
         ]);
     }
 }

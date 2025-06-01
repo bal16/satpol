@@ -26,7 +26,7 @@
             </ul>
         </div>
         <div class="flex border border-[#fdfdfd] text-[#fdfdfd] h-fit mx-3.25">
-            <form class="flex h-full divide-x" action="">
+            <form class="flex h-full divide-x" action="{{ route('news') }}" id="search-form">
                 <input class="border-[#6A6968] py-1 px-4 text-xs" type="text" name="search" id="search"
                     placeholder="Search" />
                 <button class="flex px-1 hover:text-[#DD1D23]">
