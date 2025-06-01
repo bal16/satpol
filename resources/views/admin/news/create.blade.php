@@ -26,12 +26,12 @@
             <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="newsTabs">
                 <li class="mr-2">
                     <button type="button"
-                        class="inline-block p-4 border-b-2 rounded-t-lg focus:outline-none"
+                        class="inline-block p-4 border-b-2 rounded-t-lg focus:outline-none text-slate-500 dark:text-slate-400"
                         data-tab-target="#newsContent">Detail Berita</button>
                 </li>
                 <li class="mr-2">
                     <button type="button"
-                        class="inline-block p-4 border-b-2 rounded-t-lg focus:outline-none"
+                        class="inline-block p-4 border-b-2 rounded-t-lg focus:outline-none text-slate-500 dark:text-slate-400"
                         data-tab-target="#newsImages">Gambar Berita</button>
                 </li>
             </ul>
@@ -42,38 +42,52 @@
             <!-- Tab Content -->
             <div id="newsContent" data-tab-content class="space-y-4">
                 <div>
-                    <label for="title" class="block text-sm font-medium text-slate-700 dark:text-slate-300">Judul</label>
+                    <label for="title"
+                        class="block text-sm font-medium text-slate-700 dark:text-slate-300">Judul</label>
                     <input type="text" name="title" id="title" value="{{ old('title') }}" required
-                           class="mt-1 py-2 px-3 block w-full rounded-md border-slate-300 dark:border-stone-600 dark:bg-stone-700 dark:text-white shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm @error('title') border-red-500 @enderror">
+                        class="mt-1 py-2 px-3 block w-full rounded-md border-slate-300 dark:border-stone-600 dark:bg-stone-700 dark:text-white shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm @error('title') border-red-500 @enderror">
                     @error('title')
-                    <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
                     @enderror
                 </div>
 
                 <div>
-                    <label for="slug" class="block text-sm font-medium text-slate-700 dark:text-slate-300">Slug (Otomatis)</label>
+                    <label for="author"
+                        class="block text-sm font-medium text-slate-700 dark:text-slate-300">Author</label>
+                    <input type="text" name="title" id="title" value="{{ old('author') }}" required
+                        class="mt-1 py-2 px-3 block w-full rounded-md border-slate-300 dark:border-stone-600 dark:bg-stone-700 dark:text-white shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm @error('author') border-red-500 @enderror">
+                    @error('author')
+                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div>
+                    <label for="slug" class="block text-sm font-medium text-slate-700 dark:text-slate-300">Slug
+                        (Otomatis)</label>
                     <input type="text" name="slug" id="slug" value="{{ old('slug') }}"
-                           class="mt-1 py-2 px-3 block w-full rounded-md border-slate-300 dark:border-stone-600 dark:bg-stone-700 dark:text-white shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm @error('slug') border-red-500 @enderror"
-                           placeholder="Akan terisi otomatis berdasarkan judul" readonly>
+                        class="mt-1 py-2 px-3 block w-full rounded-md border-slate-300 dark:border-stone-600 dark:bg-stone-700 dark:text-white shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm @error('slug') border-red-500 @enderror"
+                        placeholder="Akan terisi otomatis berdasarkan judul" readonly>
                     @error('slug')
-                    <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
                     @enderror
                 </div>
                 <div>
-                    <label for="create_news_body" class="block text-sm font-medium text-slate-700 dark:text-slate-300">Isi Berita</label>
+                    <label for="create_news_body"
+                        class="block text-sm font-medium text-slate-700 dark:text-slate-300">Isi Berita</label>
                     <x-trix-input id="create_news_body" name="body" :value="old('body')"
-                                  class="mt-1 block w-full min-h-[250px] @error('body') trix-content-invalid @enderror" />
+                        class="mt-1 block w-full min-h-[250px] @error('body') trix-content-invalid @enderror" />
                     @error('body')
-                    <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
                     @enderror
                 </div>
             </div>
 
             <div id="newsImages" data-tab-content class="hidden space-y-4">
                 <div>
-                    <label for="images" class="block text-sm font-medium text-slate-700 dark:text-slate-300">Upload Gambar (Bisa Pilih Banyak)</label>
+                    <label for="images" class="block text-sm font-medium text-slate-700 dark:text-slate-300">Upload
+                        Gambar (Bisa Pilih Banyak)</label>
                     <input type="file" name="images[]" id="images" multiple
-                           class="mt-1 block w-full text-sm text-slate-500 dark:text-slate-300
+                        class="mt-1 block w-full text-sm text-slate-500 dark:text-slate-300
                                   file:mr-4 file:py-2 file:px-4
                                   file:rounded-md file:border-0
                                   file:text-sm file:font-semibold
@@ -81,10 +95,11 @@
                                   hover:file:bg-red-100 dark:hover:file:bg-red-600
                                   @error('images.*') border-red-500 @enderror">
                     @error('images.*')
-                    <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
                     @enderror
-                    @error('images') {{-- General error for the images array itself --}}
-                    <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                    @error('images')
+                        {{-- General error for the images array itself --}}
+                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
                     @enderror
                 </div>
             </div>
@@ -133,7 +148,9 @@
                 const tabButtons = document.querySelectorAll('[data-tab-target]');
                 const tabContents = document.querySelectorAll('[data-tab-content]');
                 const activeTabClasses = ['border-red-500', 'text-red-600', 'dark:text-red-500'];
-                const inactiveTabClasses = ['border-transparent', 'hover:text-slate-600', 'hover:border-slate-300', 'dark:hover:text-slate-300', 'dark:hover:border-slate-600'];
+                const inactiveTabClasses = ['border-transparent', 'hover:text-slate-600', 'hover:border-slate-300',
+                    'dark:hover:text-slate-300', 'dark:hover:border-slate-600'
+                ];
 
                 function activateTab(button) {
                     const target = document.querySelector(button.dataset.tabTarget);
@@ -170,9 +187,9 @@
                         tabToActivate = storedTabButton;
                     }
                 }
-                
+
                 if (tabToActivate) {
-                     activateTab(tabToActivate);
+                    activateTab(tabToActivate);
                 } else if (tabButtons.length > 0) {
                     // Fallback if no tab was activated (e.g. localStorage was invalid)
                     activateTab(tabButtons[0]);

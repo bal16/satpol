@@ -23,6 +23,7 @@ class StoreNewsRequest extends FormRequest
     {
         return [
             'title' => 'required',
+            'author' => 'required',
             'body' => 'nullable|string',
             'slug' => 'required|unique:news,slug',
             'images' => 'required',

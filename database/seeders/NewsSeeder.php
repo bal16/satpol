@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\News;
-use Database\Seeders\Helper; // Import the Helper trait
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -24,7 +24,10 @@ class NewsSeeder extends Seeder
             $saved_news = News::create([
                 'title' => $news->title,
                 'body' => $news->body,
-                'slug' => $news->slug,
+                'slug' => Str::limit($news->slug, 40, ''),
+                'author' => $news->author,
+                'created_at' => $news->created_at,
+                'updated_at' => $news->updated_at,
             ]);
 
             // Ensure $news->image is an array

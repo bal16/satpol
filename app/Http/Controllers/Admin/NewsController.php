@@ -33,6 +33,7 @@ class NewsController extends Controller
 
         $news = News::create([
             'title' => $request->title,
+            'author' => $request->author,
             'body' => $request->body,
             'slug' => $request->slug
         ]);
@@ -70,6 +71,7 @@ class NewsController extends Controller
     {
         $news->update([
             'title' => $request->title,
+            'author' => $request->author,
             'body' => $request->body,
             'slug' => $request->slug
         ]);
