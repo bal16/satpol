@@ -26,12 +26,12 @@
             <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="newsTabs">
                 <li class="mr-2">
                     <button type="button"
-                        class="inline-block p-4 border-b-2 rounded-t-lg focus:outline-none text-slate-500 dark:text-slate-400"
+                        class="inline-block p-4 border-b-2 rounded-t-lg focus:outline-none text-slate-500 dark:text-slate-400 cursor-pointer"
                         data-tab-target="#newsContent">Detail Berita</button>
                 </li>
                 <li class="mr-2">
                     <button type="button"
-                        class="inline-block p-4 border-b-2 rounded-t-lg focus:outline-none text-slate-500 dark:text-slate-400"
+                        class="inline-block p-4 border-b-2 rounded-t-lg focus:outline-none text-slate-500 dark:text-slate-400 cursor-pointer"
                         data-tab-target="#newsImages">Gambar Berita</button>
                 </li>
             </ul>
