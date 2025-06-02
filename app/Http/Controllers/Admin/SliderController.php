@@ -52,7 +52,7 @@ class SliderController extends Controller
 
             // Simpan file ke 'storage/app/public/sliders'
             // Metode storeAs mengembalikan path relatif terhadap root disk 'public' (misal: 'sliders/namafile.jpg')
-            $imagePath = $file->storeAs('sliders', $filename, 'public');
+            $imagePath = $file->storeAs('sliders_images', $filename, 'public');
 
             // Debugging: Periksa apakah file berhasil disimpan
             if (!$imagePath || !Storage::disk('public')->exists($imagePath)) {

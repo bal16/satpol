@@ -45,9 +45,9 @@ class GalleryController extends Controller
 
         if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
             $uploadedFile = $request->file('photo');
-            // Store the file in 'storage/app/public/gallery_photos'
-            // The store method on the 'public' disk will return a path like 'gallery_photos/filename.ext'
-            $storedPath = $uploadedFile->store('gallery_photos');
+            // Store the file in 'storage/app/public/gallery_images'
+            // The store method on the 'public' disk will return a path like 'gallery_images/filename.ext'
+            $storedPath = $uploadedFile->store('gallery_images');
 
             if ($storedPath) {
                 $gallery->path = $storedPath;
@@ -135,9 +135,9 @@ class GalleryController extends Controller
         if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
             $newUploadedFile = $request->file('photo');
 
-            // Store the new file in 'storage/app/public/gallery_photos'
-            // The store method on the 'public' disk will return a path like 'gallery_photos/filename.ext'
-            $newStoredPath = $newUploadedFile->store('gallery_photos');
+            // Store the new file in 'storage/app/public/gallery_images'
+            // The store method on the 'public' disk will return a path like 'gallery_images/filename.ext'
+            $newStoredPath = $newUploadedFile->store('gallery_images');
 
             if ($newStoredPath) {
                 $gallery->path = $newStoredPath;
