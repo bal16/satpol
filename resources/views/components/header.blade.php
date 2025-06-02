@@ -1,7 +1,7 @@
 <header>
     <nav class="flex lg:max-h-12.5 max-h-9.5 justify-between items-center bg-[#2B2A29]">
         <div class="flex">
-            <button class="flex border size-5.75 border-[#fdfdfd] ms-3.75 me-1.5 my-3.75">
+            <button id="sidebar-toggle-button" class="flex border size-5.75 border-[#fdfdfd] ms-3.75 me-1.5 my-3.75 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="text-[#fdfdfd] size-4 m-auto">
                     <path fill="currentColor"
                         d="M3 7h18a1 1 0 0 0 0-2H3a1 1 0 0 0 0 2m18 10H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2m0-4H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2m0-4H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2" />
@@ -39,10 +39,10 @@
             </form>
         </div>
     </nav>
-    <div class="static bg-cover bg-center" style="background-image:url(image/red.jpg)">
+    <div class="static bg-cover bg-center" style="background-image:url('{{ asset('image/red.jpg') }}')">
         <div class="static flex bg-gradient-to-l from-[#E31E24]-0 to-[#30090A]">
             <div class="flex">
-                <img class="lg:h-19.5 h-14.5 lg:my-6.5 my-4.5 lg:ms-7.5 ms-4.5 lg:me-4 me-2" src="image/logo.png"
+                <img class="lg:h-19.5 h-14.5 lg:my-6.5 my-4.5 lg:ms-7.5 ms-4.5 lg:me-4 me-2" src="{{ asset('image/logo.png') }}"
                     alt="" />
             </div>
             <div class="flex flex-col text-[#fdfdfd] font-[Bebas_Neue] my-auto divide-y">
