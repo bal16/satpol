@@ -22,11 +22,11 @@
                     @php $imagePath = $sliderItem->image_path ?? ($sliderItem->path ?? ''); @endphp
                     @if (empty($imagePath))
                         <img class="w-full h-[60vh] object-contain"
-                            src="https://placehold.co/1600x900?text=Placeholder+{{ $loop->iteration }}"
-                            alt="Slider Image {{ $loop->iteration }}" />
+                            src="https://placehold.co/1600x900?text=Placeholder+{{ $sliderItem->slot_number }}"
+                            alt="Slider Image {{ $sliderItem->slot_number }}" />
                     @else
                         <img class="w-full h-[60vh] object-contain" src="{{ asset('storage/' . $imagePath) }}"
-                            alt="Slider Image {{ $loop->iteration }}" />
+                            alt="Slider Image {{ $sliderItem->slot_number }}" />
                     @endif
                 </div>
             @endforeach
@@ -36,7 +36,7 @@
             @foreach ($sliderData as $index => $sliderItem)
                 <button
                     class="{{ $navButtonBaseClasses }} {{ $loop->first ? $activeNavButtonSpecificClasses : $inactiveNavButtonSpecificClasses }}"
-                    data-slide-to-index="{{ $index }}" aria-label="Go to slide {{ $loop->iteration }}">
+                    data-slide-to-index="{{ $index }}" aria-label="Go to slide {{ $sliderItem->slot_number }}">
                 </button>
             @endforeach
         </div>
