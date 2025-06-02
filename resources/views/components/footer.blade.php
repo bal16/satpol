@@ -16,7 +16,7 @@
             <!-- Kolom 2: Tautan Cepat -->
             <div class="space-y-3">
                 <h5 class="font-bold text-base lg:text-lg mb-2 uppercase">Tautan Cepat</h5>
-                <ul class="space-y-1.5">
+                <ul class="space-y-1.5 md:grid md:grid-cols-2 md:gap-x-6 md:gap-y-1.5 md:space-y-0">
                     <li><a href="{{ route('home') }}" class="hover:text-gray-300 hover:underline transition-colors">Beranda</a></li>
                     <li><a href="{{ route('profile') }}" class="hover:text-gray-300 hover:underline transition-colors">Profil</a></li>
                     <li><a href="{{ route('news') }}" class="hover:text-gray-300 hover:underline transition-colors">Berita</a></li>
