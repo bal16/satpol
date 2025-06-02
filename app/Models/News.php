@@ -26,10 +26,10 @@ class News extends Model
         'slug',
     ];
 
-    public function getRouteKeyName(): string
-    {
-        return 'slug';
-    }
+    // public function getRouteKeyName(): string
+    // {
+    //     return 'slug';
+    // }
 
     public function images()
     {
