@@ -18,7 +18,7 @@ class NewsSeeder extends Seeder
     public function run(): void
     {
         // Ensure image.zip is in database/seeders/data/
-        $this->unzip("image.zip");
+        $this->unzip("news.zip");
 
         $this->makeCollectionfromJSON($this->dataPath("news.json"))->each(function ($news) {
             $saved_news = News::create([

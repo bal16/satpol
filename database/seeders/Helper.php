@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\Storage;
 
 trait Helper
 {
-    private function process_image($imageFilename, $newsId)
+    private function process_image($imageFilename, $id = "", $for = "news")
     {
-        $sourceImagePath = $this->dataPath("images/" . $imageFilename);
+        $sourceImagePath = $this->dataPath("images/" . $for . "/" . $imageFilename);
         if (!File::exists($sourceImagePath)) {
             // Optionally, log this error or handle it if an image is missing
             // For now, we'll return null if the source image doesn't exist
@@ -26,13 +26,17 @@ trait Helper
         $extension = pathinfo($sourceImagePath, PATHINFO_EXTENSION);
 
         $randomString = Str::random(40);
-        $storagePath = 'news_images/' . $newsId . '/' . $randomString . '.' . $extension;
+        if ($id !== "") {
+            $storagePath = $for . '_images/' . $id . '/' . $randomString . '.' . $extension;
+        } else {
+            $storagePath = $for . '_images/' . $randomString . '.' . $extension;
+        }
         Storage::disk('public')->put($storagePath, $imageContent);
-        
+
         return $storagePath;
     }
 
-    private function unzip($path)
+    private function unzip($path, $target = "news")
     {
         if (!extension_loaded('zip')) {
             $this->command->error('The PHP Zip extension is not enabled. Please enable it to proceed.');
@@ -55,7 +59,7 @@ trait Helper
         $res = $zip->open($zipFilePath);
 
         if ($res === TRUE) {
-            $extractPath = $this->dataPath("images");
+            $extractPath = $this->dataPath("images/" . $target);
 
             // Ensure the extraction directory exists, create if not
             if (!File::isDirectory($extractPath)) { // Explicitly use File facade
