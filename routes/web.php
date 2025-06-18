@@ -13,9 +13,7 @@ Route::get('/welcome', function () {
 
 Route::get('/', DashboardController::class)->name('home');
 
-Route::get('/profile', function () {
-    return view('profile');
-})->name('profile');
+Route::get('/profile', ProfileController::class)->name('profile');
 
 Route::get('/news', [NewsController::class, 'index'])->name('news');
 Route::get('/news/{news:slug}', [NewsController::class, 'show'])->name('news.show');

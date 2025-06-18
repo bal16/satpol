@@ -40,6 +40,11 @@ Route::prefix('/admin')->middleware([AdminAuth::class])->group(function () {
     Route::get('/sliders', [Admin\SliderController::class, 'index'])->name('admin.sliders');
     Route::patch('/sliders/update/{slot_number}', [Admin\SliderController::class, 'update'])->name('admin.sliders.update');
 
+    // Profile Page Items (using Admin\ProfileController and ProfileItems model)
+    Route::get('/profile', [Admin\ProfileController::class, 'index'])->name('admin.profile');
+    Route::get('/profile/{profileItem}/edit', [Admin\ProfileController::class, 'edit'])->name('admin.profile.edit');
+    Route::put('/profile/{profileItem}', [Admin\ProfileController::class, 'update'])->name('admin.profile.update');
+
     Route::post('attachments', AttachmentsController::class)
     ->name('attachments.store');
 });
