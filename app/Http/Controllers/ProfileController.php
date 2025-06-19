@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProfileItems;
+use App\Models\SOP;
 use Illuminate\Http\Request;
 // use App\Http\Requests\StoreProfileItemsRequest;
 // use App\Http\Requests\UpdateProfileItemsRequest;
@@ -13,6 +14,7 @@ class ProfileController extends Controller
     {
         return view('profile', [
             'items' => ProfileItems::all(),
+            'sops' => SOP::all(),
         ]);
     }
 }

@@ -63,29 +63,58 @@
                     </svg>
                     <span class="sidebar-text">Slider</span>
                 </x-admin.nav-link>
-                <x-admin.nav-link :href="route('admin.profile')" :active="request()->routeIs('admin.profile')"> {{-- Adjust route check as needed --}}
-                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                    </svg>
-                    <span class="sidebar-text">Profile</span>
-                </x-admin.nav-link>
+
+                {{-- Expandable Profile Link --}}
+                @php
+                    $isProfileSectionActive = request()->routeIs('admin.profile*');
+                    $profileButtonClasses = $isProfileSectionActive
+                        ? 'flex items-center w-full px-4 py-3 text-base font-medium text-white bg-red-800 rounded-lg transition-colors duration-150 group'
+                        : 'flex items-center w-full px-4 py-3 text-base font-medium text-red-100 hover:text-white hover:bg-red-600 rounded-lg transition-colors duration-150 group';
+                @endphp
+                <div>
+                    <button type="button" class="{{ $profileButtonClasses }}"
+                        onclick="toggleAdminSubmenu(this, 'profileSubmenu')">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                        <span class="sidebar-text flex-1 text-left">Profile</span>
+                        <svg class="w-4 h-4 admin-submenu-arrow {{ $isProfileSectionActive ? 'rotate-90' : '' }} transition-transform duration-200"
+                            fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div id="profileSubmenu" class="mt-1 pl-5 space-y-1 {{ $isProfileSectionActive ? '' : 'hidden' }}">
+                        <x-admin.nav-link :href="route('admin.profile')" :active="request()->routeIs('admin.profile') || request()->routeIs('admin.profile.edit')">
+                            <span class="sidebar-text">Kelola Halaman</span>
+                        </x-admin.nav-link>
+                        <x-admin.nav-link :href="route('admin.profile.sop')" :active="request()->routeIs('admin.profile.sop')">
+                            <span class="sidebar-text">SOP</span>
+                        </x-admin.nav-link>
+                        {{-- You can add more profile sub-links here --}}
+                    </div>
+                </div>
             </nav>
             {{-- Tombol Kembali ke Halaman Utama --}}
             <div class="mt-auto px-2 py-2 border-t border-red-800 dark:border-red-400">
                 <a href="{{ url('/') }}"
                     class="flex items-center p-2 text-base font-normal text-slate-100 rounded-lg hover:bg-red-600 dark:hover:bg-stone-700 group">
-                    <svg class="w-5 h-5 mr-3 text-slate-100 transition duration-75 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    <svg class="w-5 h-5 mr-3 text-slate-100 transition duration-75 group-hover:text-white"
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
+                        </path>
                     </svg>
                     <span class="sidebar-text">Kembali ke Situs</span>
                 </a>
-            </nav>
-            <div class="p-4 mt-auto border-t border-red-800 sidebar-footer">
-                <p class="text-xs text-slate-400 text-center sidebar-text">&copy; {{ date('Y') }} Satpol PP Admin
-                </p>
-            </div>
+                </nav>
+                <div class="p-4 mt-auto border-t border-red-800 sidebar-footer">
+                    <p class="text-xs text-slate-400 text-center sidebar-text">&copy; {{ date('Y') }} Satpol PP
+                        Admin
+                    </p>
+                </div>
         </aside>
 
         <!-- Main Content -->
@@ -176,6 +205,13 @@
             // Optional: Re-check on window resize
             window.addEventListener('resize', checkSidebarState);
         });
+
+        function toggleAdminSubmenu(button, submenuId) {
+            const submenu = document.getElementById(submenuId);
+            const arrow = button.querySelector('.admin-submenu-arrow');
+            submenu.classList.toggle('hidden');
+            arrow.classList.toggle('rotate-90');
+        }
     </script>
     @stack('scripts')
 </body>

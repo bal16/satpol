@@ -44,9 +44,12 @@ Route::prefix('/admin')->middleware([AdminAuth::class])->group(function () {
     Route::get('/profile', [Admin\ProfileController::class, 'index'])->name('admin.profile');
     Route::get('/profile/{profileItem}/edit', [Admin\ProfileController::class, 'edit'])->name('admin.profile.edit');
     Route::put('/profile/{profileItem}', [Admin\ProfileController::class, 'update'])->name('admin.profile.update');
+    Route::get('/profile/sop', [Admin\SOPController::class, 'index'])->name('admin.profile.sop');
+    Route::post('/profile/sop', [Admin\SOPController::class, 'store'])->name('admin.profile.sop.store');
+    Route::delete('/profile/sop/{SOP}', [Admin\SOPController::class, 'destroy'])->name('admin.profile.sop.destroy');
 
     Route::post('attachments', AttachmentsController::class)
-    ->name('attachments.store');
+        ->name('attachments.store');
 });
 
 // use App\Http\Middleware\AdminAuth;

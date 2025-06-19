@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\SOP;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -21,7 +22,7 @@ class ProfileController extends Controller
 
 
         return view('admin.profile.index', [
-            'items' => $profileItems
+            'items' => $profileItems,
         ]);
     }
 
@@ -34,6 +35,7 @@ class ProfileController extends Controller
             'item' => $profileItem,
         ]);
     }
+    
 
     /**
      * Update the specified profile item in storage.

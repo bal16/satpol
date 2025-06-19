@@ -199,61 +199,25 @@
                                 <button type="button" aria-haspopup="true" aria-expanded="false"
                                     aria-controls="headlessui-menu-items-117"
                                     class=" bg-red-700 text-white px-4 py-2 rounded hover:bg-red-700 hover:text-white">
-                                    Bidang PPUD ▼
+                                    {{ $sops[4]->title }} ▼
                                 </button>
                                 <div aria-labelledby="headlessui-menu-button-1" id="headlessui-menu-items-117"
                                     role="menu"
                                     class="dropdown-menu absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-md opacity-0 hidden group-hover:opacity-100 group-hover:block transition duration-200 z-10">
-                                    <a href="#"
+                                    @foreach ( $sops->skip(4) as $sop )
+                                        <a href="#"
                                         class="text-[16px] block px-4 py-2 bg-white text-black rounded hover:bg-red-700 hover:text-white sop-control-button"
-                                        onclick="changeIframeSrc('https://drive.google.com/file/d/10p8_xDAzRh3vKwv0tXipj4Wo0SzxufMt/preview', this)">Bidang
-                                        PPUD</a>
-                                    <a href="#"
-                                        class="text-[16px] block px-4 py-2 bg-white text-black rounded hover:bg-red-700 hover:text-white sop-control-button"
-                                        onclick="changeIframeSrc('https://drive.google.com/file/d/1uw65fA59SUyZjm6qmSARL8mtqwDcWBas/preview', this)">Penegakan
-                                        Perda</a>
-                                    <a href="#"
-                                        class="text-[16px] block px-4 py-2 bg-white text-black rounded hover:bg-red-700 hover:text-white sop-control-button"
-                                        onclick="changeIframeSrc('https://drive.google.com/file/d/1umhMSZK1Bbv6rum0E55zYFHUuHYRWr8-/preview', this)">Gelar
-                                        Perkara</a>
-                                    <a href="#"
-                                        class="text-[16px] block px-4 py-2 bg-white text-black rounded hover:bg-red-700 hover:text-white sop-control-button"
-                                        onclick="changeIframeSrc('https://drive.google.com/file/d/1TXABrxwP6kd9du4oxvuzOvnEal9uxLCS/preview', this)">Sidang
-                                        di Tempat</a>
-                                    <a href="#"
-                                        class="text-[16px] block px-4 py-2 bg-white text-black rounded hover:bg-red-700 hover:text-white sop-control-button"
-                                        onclick="changeIframeSrc('https://drive.google.com/file/d/1Zj6pYe4hsiSURZvca84eGnCjTwtUKRxo/preview', this)">Hubungan
-                                        Antar OPD</a>
-                                    <a href="#"
-                                        class="text-[16px] block px-4 py-2 bg-white text-black rounded hover:bg-red-700 hover:text-white sop-control-button"
-                                        onclick="changeIframeSrc('https://drive.google.com/file/d/18Pv7ShM6vRGW0ic4q-qHRdbqE4W_Qaif/preview', this)">Pembinaan
-                                        PPNS</a>
-                                    <a href="#"
-                                        class="text-[16px] block px-4 py-2 bg-white text-black rounded hover:bg-red-700 hover:text-white sop-control-button"
-                                        onclick="changeIframeSrc('https://drive.google.com/file/d/1J9bUFlh7opRIbfp9Gpuh9vy9GMd5tUOT/preview', this)">Sekretariat
-                                        PPNS</a>
+                                        onclick="changeIframeSrc('{{ $sop->link }}', this)">{{ $sop->title }}</a>
+                                    @endforeach
                                 </div>
                             </div>
-                            <button
-                                class="bg-white text-black px-4 py-2 rounded hover:bg-red-700 hover:text-white sop-control-button"
-                                onclick="changeIframeSrc('https://drive.google.com/file/d/1rXh3RG54VFu6N6-xKSF_ksDstd7ERYeP/preview', this)">
-                                Bidang Tibum
-                            </button>
-                            <button
-                                class="bg-white text-black px-4 py-2 rounded hover:bg-red-700 hover:text-white sop-control-button"
-                                onclick="changeIframeSrc('https://drive.google.com/file/d/1i4vtkTyHw9uh6ro-KF8hU4ISrKL3VjFM/preview', this)">
-                                Bidang Linmas
-                            </button>
-                            <button
-                                class="bg-white text-black px-4 py-2 rounded hover:bg-red-700 hover:text-white sop-control-button"
-                                onclick="changeIframeSrc('https://drive.google.com/file/d/1SxUEH52slktWxLzWLj3vY4VodQzWheoP/preview', this)">
-                                Bidang Sekretariat
-                            </button>
-                            <button
-                                class="bg-white text-black px-4 py-2 rounded hover:bg-red-700 hover:text-white sop-control-button"
-                                onclick="changeIframeSrc('https://drive.google.com/file/d/1BIKXvqq8AwYBCpiF0tnGyvbsitKJmpA0/preview', this)">
-                                Bidang Binmas
-                            </button>
+                            @foreach ( $sops->take(4) as $sop )
+                                <button
+                                    class="bg-white text-black px-4 py-2 rounded hover:bg-red-700 hover:text-white sop-control-button"
+                                    onclick="changeIframeSrc('{{ $sop->link }}', this)">
+                                    {{ $sop->title }}
+                                </button>
+                            @endforeach
                         </div>
 
                         <!-- === IFRAME === -->

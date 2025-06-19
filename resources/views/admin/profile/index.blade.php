@@ -14,7 +14,8 @@
     </div>
 
     @if (session('success'))
-        <div class="mb-4 p-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800" role="alert">
+        <div class="mb-4 p-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
+            role="alert">
             {{ session('success') }}
         </div>
     @endif
@@ -29,9 +30,12 @@
             <table class="table-auto w-full">
                 <thead class="bg-red-600 dark:bg-stone-700">
                     <tr>
-                        <th class="px-4 py-2 text-left text-xs font-medium text-white uppercase tracking-wider">Judul (Title)</th>
-                        <th class="px-4 py-2 text-left text-xs font-medium text-white uppercase tracking-wider">Ditampilkan</th>
-                        <th class="px-4 py-2 text-left text-xs font-medium text-white uppercase tracking-wider">Aksi</th>
+                        <th class="px-4 py-2 text-left text-xs font-medium text-white uppercase tracking-wider">Judul
+                            (Title)</th>
+                        <th class="px-4 py-2 text-left text-xs font-medium text-white uppercase tracking-wider">
+                            Ditampilkan</th>
+                        <th class="px-4 py-2 text-left text-xs font-medium text-white uppercase tracking-wider">Aksi
+                        </th>
                     </tr>
                 </thead>
                 <tbody class="bg-white dark:bg-stone-700 divide-y divide-slate-200 dark:divide-stone-600">
@@ -41,20 +45,29 @@
                             <td class="px-4 py-2 whitespace-nowrap">
                                 @if ($item->show)
                                     <span class="inline-flex items-center justify-center text-green-500" title="Ya">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                                         </svg>
                                     </span>
                                 @else
                                     <span class="inline-flex items-center justify-center text-red-500" title="Tidak">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M6 18L18 6M6 6l12 12" />
                                         </svg>
                                     </span>
                                 @endif
                             </td>
                             <td class="px-4 py-2 whitespace-nowrap">
-                                <a href="{{ route('admin.profile.edit', $item->id) }}" class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Edit</a>
+                                @if ($item->title == 'SOP')
+                                    <a href="{{ route('admin.profile.sop') }}"
+                                        class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Edit</a>
+                                @else
+                                    <a href="{{ route('admin.profile.edit', $item->id) }}"
+                                        class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Edit</a>
+                                @endif
                             </td>
                         </tr>
                     @empty

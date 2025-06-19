@@ -27,7 +27,8 @@ class DatabaseSeeder extends Seeder
             NewsSeeder::class,
             GallerySeeder::class,
             SliderSeeder::class,
-            ProfileItemsSeeder::class
+            ProfileItemsSeeder::class,
+            SOPSeeder::class
         ]);
 
 
