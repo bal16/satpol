@@ -99,9 +99,9 @@
                     $pajakLinks = [
                         [
                             'text' => 'Daftar Wajib Pajak',
-                            'href' => 'https://jatuhtempo.satpolpp.semarangkota.go.id/data',
+                            'href' => route('services.pajak-daftar'),
                         ],
-                        ['text' => 'Jatuh Tempo Pajak', 'href' => '#'],
+                        ['text' => 'Jatuh Tempo Pajak', 'href' => route('services.pajak-tempo')],
                     ];
                 @endphp
                 <x-info-card imageSrc="https://picsum.photos/600/406" title="Pajak Daerah" :links="$pajakLinks" />

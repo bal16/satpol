@@ -21,9 +21,17 @@ Route::get('/news/{news:slug}', [NewsController::class, 'show'])->name('news.sho
 Route::get('/services', function () {
     return view('services');
 })->name('services');
-Route::get('/services/{slug}', function () {
-    return view('services');
-});
+// Route::get('/services/{slug}', function () {
+//     return view('services');
+// });
+
+Route::get('/services/pajak-wajib', function () {
+    return view('pajak-info', ['type' => 'daftar']);
+})->name('services.pajak-daftar');
+Route::get('/services/tempo-pajak', function () {
+    return view('pajak-info', ['type' => 'tempo']);
+})->name('services.pajak-tempo');
+
 
 Route::get('/gallery', GalleryController::class)->name('gallery');
 
