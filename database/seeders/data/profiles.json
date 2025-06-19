@@ -2,12 +2,12 @@
     {
         "title": "Visi",
         "type": "text",
-        "content": "&quot;Semarang Kota Perdagangan dan Jasa yang Hebat Menuju Masyarakat Semakin Sejahtera&quot;",
+        "content": "&quot; Semarang Kota Perdagangan dan Jasa yang Hebat Menuju Masyarakat Semakin Sejahtera &quot;",
         "show": true
     },
     {
         "title": "Sejarah",
-        "text": "text",
+        "type": "text",
         "content": "Polisi Pamong Praja didirikan di Yogyakarta pada tanggal 3 Maret 1950 dengan semboyan Praja Wibawa, untuk mewadahi sebagian ketugasan pemerintah daerah. Sebenarnya ketugasan ini telah dilaksanakan pemerintah sejak zaman kolonial. Sebelum menjadi Satuan Polisi Pamong Praja setelah proklamasi kemerdekaan dimana diawali dengan kondisi yang tidak stabil dan mengancam NKRI, dibentuklah Detasemen Polisi sebagai Penjaga Keamanan Kapanewon di Yogjakarta sesuai dengan Surat Perintah Jawatan Praja di Daerah Istimewa Yogyakarta untuk menjaga ketentraman dan ketertiban masyarakat.",
         "show": true
     },
