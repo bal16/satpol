@@ -25,7 +25,7 @@ Route::get('/services', function () {
 //     return view('services');
 // });
 
-Route::get('/services/pajak-wajib', function () {
+Route::get('/services/pajak-daftar', function () {
     return view('pajak-info', ['type' => 'daftar']);
 })->name('services.pajak-daftar');
 Route::get('/services/tempo-pajak', function () {

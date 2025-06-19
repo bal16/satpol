@@ -1,9 +1,15 @@
 <x-layout :pageName="'Services'">
     <x-header />
     <main class="flex flex-col items-center">
-        <div
-            class="flex font-bold w-full text-[#FDFDFD] text-4xl font-[IBM_Plex_Serif] text-shadow-lg justify-center bg-[url(https://picsum.photos/2000/300)]">
-            <h1 class="lg:w-7xl lg:px-26 lg:text-start text-center pt-43">
+        <div 
+        class="flex font-bold w-full text-[#FDFDFD] text-4xl font-[IBM_Plex_Serif] text-shadow-lg justify-center"
+        style="
+        background-image: url({{ asset('image/300.jpg') }});
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;"
+        >
+            <h1 class="lg:w-7xl lg:px-26 lg:text-start text-center pt-36">
                 Informasi Umum
             </h1>
         </div>
@@ -117,12 +123,12 @@
 
             </div>
             <div id="view-history"
-                class="flex flex-col shadow-lg rounded lg:w-273 w-full lg:h-245 h-auto lg:mx-0 border-t-5 border-[#E94B23]">
-                <span class="flex flex-col p-5 lg:pt-10 lg:gap-8 gap-5">
+                class="flex flex-col shadow-lg rounded lg:w-273 w-full lg:h-257 h-auto lg:mx-0 border-t-5 border-[#E94B23]">
+                <span class="flex flex-col p-8 lg:pt-10 lg:gap-8 gap-5">
                     <h3 class="font-bold font-[IBM_Plex_Serif] lg:text-5xl text-2xl text-shadow-lg text-[#E94B23]">
                         Sejarah Lengkap</h3>
                     <hr class="lg:w-95.5 w-59.5 lg:border-2 border border-[#E94B23]">
-                    <p class="lg:text-2xl text-xs text-justify font-[IBM_Plex_Serif] lg:w-253 w-full">
+                    <p class="lg:text-2xl text-xs text-justify font-[IBM_Plex_Serif] lg:w-253 w-full px-4">
                         Satuan Polisi Pamong Praja, disingkat Satpol PP, adalah perangkat Pemerintah Daerah dalam
                         memelihara ketentraman dan ketertiban umum serta menegakkan Peraturan Daerah. Organisasi dan
                         tata kerja Satuan Polisi Pamong Praja ditetapkan dengan Peraturan Daerah.</br></br>
@@ -147,7 +153,7 @@
             </div>
             <div
                 class="flex flex-col shadow-lg rounded lg:w-273 w-full lg:h-245 h-auto lg:mx-0 border-t-5 border-[#E94B23]">
-                <span class="flex flex-col p-5 lg:pt-10 lg:gap-8 gap-5">
+                <span class="flex flex-col p-8 lg:pt-10 lg:gap-8 gap-5">
                     <h3 class="font-bold font-[IBM_Plex_Serif] lg:text-5xl text-2xl text-shadow-lg text-[#E94B23]">Map
                     </h3>
                     <hr class="lg:w-95.5 w-59.5 lg:border-2 border border-[#E94B23]">

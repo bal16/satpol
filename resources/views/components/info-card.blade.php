@@ -27,7 +27,7 @@
             class="text-[#2B2A29] lg:text-lg text-xs {{ $listFont }} {{ $listExtraClasses }} {{ $listContainerClasses }} {{ $listStyle }} {{ $listItemPadding }} space-y-1.5">
             @foreach($links as $linkItem)
                 <li>
-                    <a href="{{ $linkItem['href'] ?? '#' }}" class="hover:underline">
+                    <a href="{{ $linkItem['href'] ?? '#' }}" class="link link-underline link-underline-black">
                         @if(isset($linkItem['isHtml']) && $linkItem['isHtml'])
                             {!! $linkItem['text'] !!}
                         @else
@@ -42,3 +42,23 @@
         {{ $slot }}
     </span>
 </div>
+
+<style>
+    .link-underline {
+		border-bottom-width: 0;
+		background-image: linear-gradient(transparent, transparent), linear-gradient(#fff, #fff);
+		background-size: 0 3px;
+		background-position: 0 100%;
+		background-repeat: no-repeat;
+		transition: background-size .3s ease-in-out;
+	}
+
+	.link-underline-black {
+		background-image: linear-gradient(transparent, transparent), linear-gradient(#E94B23, #E94B23)
+	}
+
+	.link-underline:hover {
+		background-size: 100% 3px;
+		background-position: 0 100%
+	}
+</style>
