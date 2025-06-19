@@ -24,10 +24,10 @@
                         Organisasi dan tata kerja Satuan Polisi Pamong Praja ditetapkan
                         dengan Peraturan Daerah.
                     </span>
-                    <div class="group font-sans font-bold h-fit w-fit lg:mx-0 mx-auto">
+                    <div class="group font-sans font-bold text-xl h-fit w-fit lg:mx-0 mx-auto">
                         <div
-                            class="border-3 border-[#fdfdfd] transition delay-150 duration-300 ease-in-out group-hover:shadow-lg group-hover:shadow-[#DD1D23] group-hover:inset-shadow-sm group-hover:inset-shadow-[#DD1D23]  group-hover:border-[#DD1D23] text-[#fdfdfd] py-1">
-                            <a href="{{ route('profile') }}" class="px-2">PROFIL LENGKAP</a>
+                            class="p-1 before:ease relative overflow-hidden border border-[#DD1D23] text-[#DD1D23] shadow-2xl transition-all before:absolute before:top-1/2 before:h-0 before:w-64 before:origin-center before:-translate-x-20 before:rotate-45 before:bg-[#DD1D23] before:duration-300 hover:text-white hover:shadow-[#DD1D23] hover:before:h-64 hover:before:-translate-y-32">
+                            <a href="{{ route('profile') }}" class="px-2 relative z-10">PROFIL LENGKAP</a>
                         </div>
                     </div>
                 </div>

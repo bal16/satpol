@@ -25,9 +25,10 @@
                         </span>
                         <div class="group font-sans font-bold h-fit w-fit">
                             <div
-                                class="border-3 border-[#fdfdfd] transition delay-150 duration-300 ease-in-out group-hover:shadow-lg group-hover:shadow-[#DD1D23] group-hover:inset-shadow-sm group-hover:inset-shadow-[#DD1D23]  group-hover:border-[#DD1D23] text-[#fdfdfd] py-1">
-                                <a href="{{ route('services') }}" class="px-2">SEJARAH LENGKAP</a>
+                                class="p-1 before:ease relative overflow-hidden border border-[#DD1D23] text-[#DD1D23] shadow-2xl transition-all before:absolute before:top-1/2 before:h-0 before:w-64 before:origin-center before:-translate-x-20 before:rotate-45 before:bg-[#DD1D23] before:duration-300 hover:text-white hover:shadow-[#DD1D23] hover:before:h-64 hover:before:-translate-y-32">
+                                <a href="{{ route('services') }}" class="px-2 relative z-10">SEJARAH LENGKAP</a>
                             </div>
+
                         </div>
                     </div>
                     <div class="lg:max-w-160 max-w-80 lg:px-17.5 px-8.75 lg:py-24.5 py-12.25">

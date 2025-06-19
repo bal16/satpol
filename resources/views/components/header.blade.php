@@ -8,21 +8,37 @@
                         d="M3 7h18a1 1 0 0 0 0-2H3a1 1 0 0 0 0 2m18 10H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2m0-4H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2m0-4H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2" />
                 </svg>
             </button>
-            <ul class="hidden lg:flex my-auto font-bold text-[#fdfdfd] divide-x">
-                <li class="px-2 hover:bg-[#fdfdfd] hover:rounded hover:text-[#2B2A29] border-[#6A6968]">
-                    <a href="{{ route('home') }}">BERANDA</a>
+            <ul class="hidden lg:flex my-auto font-bold text-[#fdfdfd]">
+                {{-- Apply modern button style to list items, wrapping the effect inside the li --}}
+                <li> {{-- The li itself is not rounded or overflow-hidden, allowing the divide-x border to be straight --}}
+                    <div
+                        class="p-2 px-4 hover:mx-1 before:ease relative overflow-hidden text-[#fdfdfd] transition-all before:absolute before:top-1/2 before:h-0 before:w-64 before:origin-center before:-translate-x-20 before:rotate-45 before:bg-[#fdfdfd] before:duration-300 hover:text-[#2B2A29] hover:before:h-64 hover:before:-translate-y-32 rounded-xl">
+                        <a href="{{ route('home') }}" class="block text-center relative z-10">BERANDA</a>
+                    </div>
                 </li>
-                <li class="px-2 hover:bg-[#fdfdfd] hover:rounded hover:text-[#2B2A29] border-[#6A6968]">
-                    <a href="{{ route('profile') }}">PROFIL</a>
+                <li>
+                    <div
+                        class="p-2 px-4 hover:mx-1 before:ease relative overflow-hidden text-[#fdfdfd] transition-all before:absolute before:top-1/2 before:h-0 before:w-64 before:origin-center before:-translate-x-20 before:rotate-45 before:bg-[#fdfdfd] before:duration-300 hover:text-[#2B2A29] hover:before:h-64 hover:before:-translate-y-32 rounded-xl">
+                        <a href="{{ route('profile') }}" class="block text-center relative z-10">PROFIL</a>
+                    </div>
                 </li>
-                <li class="px-2 hover:bg-[#fdfdfd] hover:rounded hover:text-[#2B2A29] border-[#6A6968]">
-                    <a href="{{ route('news') }}">BERITA</a>
+                <li>
+                    <div
+                        class="p-2 px-4  hover:mx-1 before:ease relative overflow-hidden text-[#fdfdfd] transition-all before:absolute before:top-1/2 before:h-0 before:w-64 before:origin-center before:-translate-x-20 before:rotate-45 before:bg-[#fdfdfd] before:duration-300 hover:text-[#2B2A29] hover:before:h-64 hover:before:-translate-y-32 rounded-xl">
+                        <a href="{{ route('news') }}" class="block text-center relative z-10">BERITA</a>
+                    </div>
                 </li>
-                <li class="px-2 hover:bg-[#fdfdfd] hover:rounded hover:text-[#2B2A29] border-[#6A6968]">
-                    <a href="{{ route('gallery') }}">GALERI</a>
+                <li>
+                    <div
+                        class="p-2 px-4 hover:mx-1 before:ease relative overflow-hidden text-[#fdfdfd] transition-all before:absolute before:top-1/2 before:h-0 before:w-64 before:origin-center before:-translate-x-20 before:rotate-45 before:bg-[#fdfdfd] before:duration-300 hover:text-[#2B2A29] hover:before:h-64 hover:before:-translate-y-32 rounded-xl">
+                        <a href="{{ route('gallery') }}" class="block text-center relative z-10">GALERI</a>
+                    </div>
                 </li>
-                <li class="px-2 hover:bg-[#fdfdfd] hover:rounded hover:text-[#2B2A29] border-[#6A6968]">
-                    <a href="{{ route('services') }}">INFORMASI UMUM</a>
+                <li>
+                    <div
+                        class="p-2 px-4 hover:mx-1 before:ease relative overflow-hidden text-[#fdfdfd] transition-all before:absolute before:top-1/2 before:h-0 before:w-64 before:origin-center before:-translate-x-20 before:rotate-45 before:bg-[#fdfdfd] before:duration-300 hover:text-[#2B2A29] hover:before:h-64 hover:before:-translate-y-32 rounded-xl">
+                        <a href="{{ route('services') }}" class="block text-center relative z-10">INFORMASI UMUM</a>
+                    </div>
                 </li>
             </ul>
         </div>
