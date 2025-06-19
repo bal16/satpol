@@ -35,7 +35,7 @@ class ProfileController extends Controller
             'item' => $profileItem,
         ]);
     }
-    
+
 
     /**
      * Update the specified profile item in storage.
@@ -45,9 +45,11 @@ class ProfileController extends Controller
         $rules = [
             'title' => 'required|string|max:255',
             'type' => 'required|string|max:50', // e.g., text, image_url, json_list
+            'body' => 'nullable|string',
             'show' => 'boolean',
         ];
 
+        // dd($request->all());
 
         // Adjust validation rules for content based on type
         if ($request->input('type') === 'image') {

@@ -78,7 +78,7 @@
                     <div>
                         <label for="edit_news_body"
                             class="block text-sm font-medium text-slate-700 dark:text-slate-300">Isi Berita</label>
-                        <x-trix-input id="edit_news_body" name="body" :value="old('body', $news->body->toTrixHtml())"
+                            <x-trix-input id="edit_news_body" name="body" :value="old('body', $news->body->toTrixHtml())"
                             class="mt-1 block w-full min-h-[250px] @error('body')
 trix-content-invalid
 @enderror" />

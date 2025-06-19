@@ -55,62 +55,8 @@
                 <div class="flex max-w-7xl justify-center mx-auto">
                     <div
                         class="flex flex-col font-[DM_Serif_Text] justify-center text-center text-xs lg:text-lg text-[#FDFDFD] lg:px-17.5 px-8.75 lg:py-24.5 py-12.25 lg:gap-7.5 gap-4.5">
-                        <span class="font-bold text-3xl lg:text-5xl">Kegiatan</span>
-                        <span class="font-sans">Dalam usahanya untuk menjaga ketentraman dan
-                            ketertiban dalam masyarakat, Satuan Polisi Pamong Praja melaksanakan kegiatan-kegiatan
-                            penertiban yang dapat mengganggu keamanan dan kenyamanan masyarakat. Beberapa kegiatan yang
-                            dilaksanakan adalah menyangkut hal-hal berikut:
-                        </span>
-                        <ul class="columns-2 font-sans lg:px-17.5 px-8.75">
-                            <li>
-                                Operasi Yustisi
-                            </li>
-                            <li>
-                                Operasi Rutin
-                            </li>
-                            <li>
-                                Penanganan Unjuk Rasa
-                            </li>
-                            <li>
-                                Patroli Wilayah
-                            </li>
-                            <li>
-                                Patroli Pariwisata
-                            </li>
-                            <li>
-                                Kewaspadaan Dini
-                            </li>
-                            <li>
-                                Sosialisasi
-                            </li>
-                            <li>
-                                Bimbingan dan Penyuluhan
-                            </li>
-                            <li>
-                                Posko Kewaspadaan Linmas
-                            </li>
-                            <li>
-                                Patroli keamanan dan kenyamanan lingkungan
-                            </li>
-                            <li>
-                                Mobilisasi dan pergerakan linmas
-                            </li>
-                            <li>
-                                Pengaduan
-                            </li>
-                            <li>
-                                Pengendalian
-                            </li>
-                            <li>
-                                Penyidikan dan penyelidikan
-                            </li>
-                            <li>
-                                Pembinaan PPNS
-                            </li>
-                            <li>
-                                Kegiatan-kegiatan lain
-                            </li>
-                        </ul>
+                        <h3 class="font-bold text-3xl lg:text-5xl">{{ $items[3]->title }}</h3>
+                        {!! $items[3]->body !!}
                     </div>
                 </div>
             </div>
@@ -120,70 +66,8 @@
                 <div class="flex max-w-7xl justify-center mx-auto">
                     <div
                         class="flex flex-col font-[DM_Serif_Text] justify-center  text-justify text-xs lg:text-lg text-[#2B2A29] lg:px-17.5 px-8.75 lg:py-24.5 py-12.25 lg:gap-7.5 gap-4.5">
-                        <h3 class="font-bold text-3xl lg:text-7xl text-center">Tupoksi</h3>
-                        <h4 class="font-bold text-3xl lg:text-2xl">GAMBARAN PELAYANAN SATUAN POLISI PAMONG PRAJA KOTA
-                            SEMARANG</h4>
-                        <p class="font-sans">
-                            Didalam Undang-undang Nomor 23 Tahun 2014 tentang Pemerintahan Daerah disebutkan bahwa
-                            kewenangan Satuan polisi pamong praja adalah : (a) melakukan tindakan penertiban
-                            non-yustisial
-                            terhadap warga masyarakat, aparatur, atau badan hukum yang melakukan pelanggaran atas Perda
-                            dan/atau Perkada; (b) menindak warga masyarakat, aparatur, atau badan hukum yang mengganggu
-                            ketertiban umum dan ketenteraman masyarakat; (c) melakukan tindakan penyelidikan terhadap
-                            warga
-                            masyarakat, aparatur, atau badan hukum yang diduga melakukan pelanggaran atas Perda dan/atau
-                            Perkada; dan (d) melakukan tindakan administratif terhadap warga masyarakat, aparatur, atau
-                            badan hukum yang melakukan pelanggaran atas Perda dan/atau Perkada.
-
-                            Dalam pelaksanaan tugasnya Satpol PP Kota Semarang berdasar pada Peraturan Pemerintah Nomor
-                            6
-                            Tahun 2010 tentang Pedoman Satuan Polisi Pamong Praja yang berisi tentang penyusunan
-                            Struktur
-                            organisasi dan tata kerja, tugas dan fungsi Satpol PP serta pedoman-pedoman dasar lainnya.
-                            Adapun Struktur Organisasi dan Tata Kerja Satpol PP Kota Semarang diatur dalam Peraturan
-                            Daerah
-                            Kota Semarang Nomor 14 Tahun 2016 tentang Pembentukan dan Susunan Perangkat Daerah Kota
-                            Semarang
-                            dengan penjabaran tugas pokok dan fungsi masing-masing bagian, bidang dan seksi diatur dalam
-                            Peraturan Walikota Semarang Nomor 67 Tahun 2016 tentang Kedudukan, Susunan Organisasi, Tugas
-                            Gungsi Serta Tata Kerja Satuan Polisi Pamong Praja Kota Semarang.
-                        </p>
-                        <h4 class="font-sans font-bold text-3xl lg:text-xl">TUGAS: </h4>
-                        <p class="font-sans">Membantu Walikota dalam melaksanakan urusan pemerintahan bidang
-                            Ketenteraman
-                            dan ketertiban umum serta perlindungan masyarakat yang menjadi kewenangan daerah dan tugas
-                            pembantuan yang ditugaskan kepada daerah. </p>
-                        <h4 class="font-sans font-bold text-3xl lg:text-xl">FUNGSI: </h4>
-                        <ol class="font-sans order-1 list-decimal lg:px-17.5 px-8.75">
-                            <li>Perumusan kebijakan Bidang Pembinaan Masyarakat, Bidang Ketertiban Umum
-                                dan Ketenteraman Masyarakat, Bidang Penegakan Perundang-Undangan Daerah, dan Bidang
-                                Satuan
-                                Perlindungan Masyarakat;</li>
-                            <li>Perumusan rencana strategis sesuai dengan visi dan misi Walikota;</li>
-                            <li>Pengkoordinasian tugas-tugas dalam rangka pelaksanaan program dan kegiatan
-                                Kesekretariatan,
-                                Bidang Pembinaan Masyarakat, Bidang Ketertiban Umum dan Ketenteraman Masyarakat, Bidang
-                                Penegakan Perundang-Undangan Daerah, dan Bidang Satuan Perlindungan Masyarakat;</li>
-                            <li>Penyelenggaraan pembinaan kepada bawahan dalam lingkup tanggungjawabnya;</li>
-                            <li>Penyelenggaraan penyusunan Sasaran Kerja Pegawai;</li>
-                            <li>Penyelenggaraan kerjasama Bidang Pembinaan Masyarakat, Bidang Ketertiban Umum dan
-                                Ketenteraman Masyarakat, Bidang Penegakan Perundang-Undangan Daerah, dan Bidang Satuan
-                                Perlindungan Masyarakat;</li>
-                            <li>Penyelenggaraan kesekretariatan Satpol PP;</li>
-                            <li>Penyelenggaraan program dan kegiatan Bidang Pembinaan Masyarakat, Bidang Ketertiban Umum
-                                dan
-                                Ketenteraman Masyarakat, Bidang Penegakan Perundang-Undangan Daerah, dan Bidang Satuan
-                                Perlindungan Masyarakat;</li>
-                            <li>Penyelenggaraan penilaian kinerja Pegawai;</li>
-                            <li>Penyelenggaraan monitoring dan evaluasi program dan kegiatan Bidang Penegakan
-                                Perundang-Undangan Daerah, Bidang Pembinaan Masyarakat, Bidang Ketertiban Umum dan
-                                Ketenteraman
-                                Masyarakat, Bidang
-                                Penegakan Perundang-Undangan Daerah, dan Bidang Satuan Perlindungan Masyarakat;</li>
-                            <li>Penyelenggaraan laporan pelaksanaan program dan kegiatan; dan</li>
-                            <li>Pelaksanaan fungsi lain yang diberikan oleh Walikota terkait dengan tugas dan
-                                fungsinya.</li>
-                        </ol>
+                        <h3 class="font-bold text-3xl lg:text-7xl text-center">{{ $items[4]->title }}</h3>
+                        {!! $items[4]->body !!}
                     </div>
                 </div>
             </div>
@@ -204,14 +88,14 @@
                                 <div aria-labelledby="headlessui-menu-button-1" id="headlessui-menu-items-117"
                                     role="menu"
                                     class="dropdown-menu absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-md opacity-0 hidden group-hover:opacity-100 group-hover:block transition duration-200 z-10">
-                                    @foreach ( $sops->skip(4) as $sop )
+                                    @foreach ($sops->skip(4) as $sop)
                                         <a href="#"
-                                        class="text-[16px] block px-4 py-2 bg-white text-black rounded hover:bg-red-700 hover:text-white sop-control-button"
-                                        onclick="changeIframeSrc('{{ $sop->link }}', this)">{{ $sop->title }}</a>
+                                            class="text-[16px] block px-4 py-2 bg-white text-black rounded hover:bg-red-700 hover:text-white sop-control-button"
+                                            onclick="changeIframeSrc('{{ $sop->link }}', this)">{{ $sop->title }}</a>
                                     @endforeach
                                 </div>
                             </div>
-                            @foreach ( $sops->take(4) as $sop )
+                            @foreach ($sops->take(4) as $sop)
                                 <button
                                     class="bg-white text-black px-4 py-2 rounded hover:bg-red-700 hover:text-white sop-control-button"
                                     onclick="changeIframeSrc('{{ $sop->link }}', this)">

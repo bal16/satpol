@@ -17,9 +17,10 @@ class ProfileItemsSeeder extends Seeder
         $this->makeCollectionfromJSON($this->dataPath("profiles.json"))->each(function ($item) {
             ProfileItems::create([
                 'title' => $item->title,
-                'type' => isset($item->type) ? $item->type : "text",
-                'content' => isset($item->content) ? $item->content : null,
-                'show' => isset($item->show) ? $item->show : false,
+                'type' => $item->type ?? "text",
+                'content' => $item->content ?? null,
+                'show' => $item->show ?? false,
+                'html' => $item->type == "html" ? $item->content : null,
             ]);
         });
     }

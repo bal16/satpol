@@ -47,6 +47,7 @@ Route::prefix('/admin')->middleware([AdminAuth::class])->group(function () {
     Route::get('/profile/sop', [Admin\SOPController::class, 'index'])->name('admin.profile.sop');
     Route::post('/profile/sop', [Admin\SOPController::class, 'store'])->name('admin.profile.sop.store');
     Route::delete('/profile/sop/{SOP}', [Admin\SOPController::class, 'destroy'])->name('admin.profile.sop.destroy');
+    Route::put('/profile/sop/{SOP}', [Admin\SOPController::class, 'update'])->name('admin.profile.sop.destroy');
 
     Route::post('attachments', AttachmentsController::class)
         ->name('attachments.store');
