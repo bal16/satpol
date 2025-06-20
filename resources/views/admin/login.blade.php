@@ -68,10 +68,20 @@
                 {{-- <a href="route('password.request')" class="text-sm font-medium text-primary hover:underline"> Replace with your forgot password route --}}
                 {{-- Forgot password? --}}
                 {{-- </a> --}}
+
             </div>
+            <!-- Google Recaptcha Widget-->
+            <div class="g-recaptcha mt-4" data-sitekey="{{ config('services.recaptcha.key') }}"></div>
+            {{-- Pastikan ada kutip di sini --}}
+            {{-- Contoh di admin.login.blade.php --}}
+            @if ($errors->has('g-recaptcha-response'))
+                <span class="text-red-500 text-sm">
+                    {{ $errors->first('g-recaptcha-response') }}
+                </span>
+            @endif
 
             <!-- Sign In Button -->
-            <div class="mb-5">
+            <div class="mt-5 mb-5">
                 <x-primary-button>
                     Sign In
                 </x-primary-button>
@@ -87,6 +97,9 @@
                 </p>
             </div>
         </form>
+
+        </div>
+
     </x-auth-card>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
