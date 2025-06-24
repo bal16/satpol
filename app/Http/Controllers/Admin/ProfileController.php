@@ -67,8 +67,8 @@ class ProfileController extends Controller
             dd($validator->errors());
 
             return redirect()->route('admin.profile.edit', $profileItem->id)
-                        ->withErrors($validator)
-                        ->withInput();
+                ->withErrors($validator)
+                ->withInput();
         }
 
 
@@ -94,6 +94,8 @@ class ProfileController extends Controller
                 if (Storage::disk('public')->exists($profileItem->content)) {
                     Storage::disk('public')->delete($profileItem->content);
                 }
+            } elseif ($validatedData['type'] !== 'image' && $profileItem->type === 'text' && $profileItem->content) {
+                $validatedData['content'] = $request->content_text_input;
             }
             // If type is 'image' but no new file is uploaded, $validatedData['content'] will be null from validation
             // if 'content' was not sent. We might want to keep the old image path in this case.

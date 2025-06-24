@@ -5,13 +5,20 @@
             display: block;
             opacity: 1;
         }
+        ol {
+            list-style-type: decimal;
+        }
+        .bagi ul {
+            display: grid;
+            grid-template-columns: auto auto;
+        }
     </style>
     <main>
         @if ($items->first()->show)
             <div class="flex lg:max-h-64 max-h-32 bg-[#FDFDFD] overflow-hidden justify-center">
                 <span class="flex flex-col justify-center text-center lg:h-64 h-32 lg:gap-15 gap-5 py-auto">
-                    <h3 class="font-[DM_Serif_Text] lg:text-7xl text-xl font-black">{{ $items->first()->title }}</h3>
-                    <p class="text-xs lg:text-lg">{{ $items->first()->content }}</p>
+                    <h3 class="font-[DM_Serif_Text] lg:text-7xl text-3xl font-black">{{ $items->first()->title }}</h3>
+                    <p class="text-xs lg:text-lg">&quot;{{ $items->first()->content }}&quot;</p>
                 </span>
             </div>
         @endif
@@ -19,20 +26,19 @@
             <div class="bg-[#2B2A29] lg:max-h-166.25">
                 <div class="flex max-w-7xl justify-center mx-auto">
                     <div
-                        class="flex flex-col font-[DM_Serif_Text] justify-center lg:max-w-160 max-w-80 text-justify text-xs lg:text-lg text-[#FDFDFD] lg:px-17.5 px-8.75 lg:py-24.5 py-12.25 lg:gap-7.5 gap-4.5">
-                        <h3 class="font-bold text-3xl lg:text-7xl">{{ $items[1]->title }}</h3>
-                        <span class="font-sans">{{ $items[1]->content }}
+                        class="flex flex-col font-[DM_Serif_Text] justify-center lg:max-w-160 max-w-80 text-xs lg:text-lg text-[#FDFDFD] lg:px-17.5 lg:py-24.5 py-12.25 lg:gap-7.5 gap-4.5">
+                        <h3 class="font-bold md:text-start text-center text-3xl lg:text-7xl">{{ $items[1]->title }}</h3>
+                        <span class="font-sans text-justify">{{ $items[1]->content }}
                         </span>
-                        <div class="group font-sans font-bold h-fit w-fit">
+                        <div class="group font-sans font-bold h-fit w-fit text-xs lg:text-lg">
                             <div
                                 class="p-1 before:ease relative overflow-hidden border border-[#DD1D23] text-[#DD1D23] shadow-2xl transition-all before:absolute before:top-1/2 before:h-0 before:w-64 before:origin-center before:-translate-x-20 before:rotate-45 before:bg-[#DD1D23] before:duration-300 hover:text-white hover:shadow-[#DD1D23] hover:before:h-64 hover:before:-translate-y-32">
-                                <a href="{{ route('services') }}" class="px-2 relative z-10">SEJARAH LENGKAP</a>
+                                <a href="{{ route('services') }}" class="px-2 relative z-10 text-xs lg:text-lg">SEJARAH LENGKAP</a>
                             </div>
-
                         </div>
                     </div>
-                    <div class="lg:max-w-160 max-w-80 lg:px-17.5 px-8.75 lg:py-24.5 py-12.25">
-                        <img class="lg:h-126 h-63" src="image/logo.png" alt="" />
+                    <div class="md:flex flex-row hidden items-center max-w-160 px-17.5 py-24.5">
+                        <img class="lg:h-84 md:h-63" src="image/logo.png" alt="" />
                     </div>
                 </div>
             </div>
@@ -53,11 +59,13 @@
         @endif
         @if ($items[3]->show)
             <div class="bg-[#2B2A29] lg:max-h-166.25">
-                <div class="flex max-w-7xl justify-center mx-auto">
+                <div class="flex lg:max-w-7xl justify-center mx-auto">
                     <div
                         class="flex flex-col font-[DM_Serif_Text] justify-center text-center text-xs lg:text-lg text-[#FDFDFD] lg:px-17.5 px-8.75 lg:py-24.5 py-12.25 lg:gap-7.5 gap-4.5">
                         <h3 class="font-bold text-3xl lg:text-5xl">{{ $items[3]->title }}</h3>
-                        {!! $items[3]->body !!}
+                        <div class="font-sans bagi text-xs lg:text-lg">
+                            {!! $items[3]->body !!}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -68,7 +76,9 @@
                     <div
                         class="flex flex-col font-[DM_Serif_Text] justify-center  text-justify text-xs lg:text-lg text-[#2B2A29] lg:px-17.5 px-8.75 lg:py-24.5 py-12.25 lg:gap-7.5 gap-4.5">
                         <h3 class="font-bold text-3xl lg:text-7xl text-center">{{ $items[4]->title }}</h3>
-                        {!! $items[4]->body !!}
+                        <div class="font-sans text-xs lg:text-lg">
+                            {!! $items[4]->body !!}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -88,7 +98,7 @@
                                 </button>
                                 <div aria-labelledby="headlessui-menu-button-1" id="headlessui-menu-items-117"
                                     role="menu"
-                                    class="dropdown-menu absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-md opacity-0 hidden group-hover:opacity-100 group-hover:block transition duration-200 z-10">
+                                    class="dropdown-menu absolute left-0 mt-2 lg:w-48 bg-white border border-gray-200 rounded shadow-md opacity-0 hidden group-hover:opacity-100 group-hover:block transition duration-200 z-10 text-xs lg:text-lg">
                                     @foreach ($sops->skip(4) as $sop)
                                         <a href="#"
                                             class="text-[16px] block px-4 py-2 bg-white text-black rounded hover:bg-red-700 hover:text-white sop-control-button"
@@ -108,7 +118,7 @@
                         <!-- === IFRAME === -->
                         <iframe id="Iframe"
                             src="https://drive.google.com/file/d/10p8_xDAzRh3vKwv0tXipj4Wo0SzxufMt/preview"
-                            class="w-11/12 h-[400px] border border-gray-300 rounded mx-auto"></iframe>
+                            class="lg:w-11/12 lg:h-[400px] border border-gray-300 rounded mx-auto"></iframe>
                     </div>
 
                 </div>
