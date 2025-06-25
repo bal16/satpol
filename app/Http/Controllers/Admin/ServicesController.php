@@ -21,7 +21,7 @@ class ServicesController extends Controller
     public function data(Request $request)
     {
         if ($request->ajax()) { // This method is still used by index.blade.php for DataTables
-            $data = Service::withCount('items')->latest(); // Urutkan berdasarkan data terbaru
+            $data = Service::latest(); // Urutkan berdasarkan data terbaru
 
             return DataTables::of($data)
                 ->addIndexColumn()

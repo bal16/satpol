@@ -56,10 +56,6 @@ Route::prefix('/admin')->middleware([AdminAuth::class])->group(function () {
     Route::get('/services/{service}/edit', [Admin\ServicesController::class, 'edit'])->name('admin.services.edit');
     Route::put('/services/{service}', [Admin\ServicesController::class, 'update'])->name('admin.services.update');
     Route::delete('/services/{service}', [Admin\ServicesController::class, 'destroy'])->name('admin.services.destroy');
-    
-    Route::post('services/{service}/items', [Admin\ServiceItemsController::class, 'store'])->name('services.items.store');
-    Route::patch('services/items/{item}', [Admin\ServiceItemsController::class, 'update'])->name('services.items.update');
-    Route::delete('services/items/{item}', [Admin\ServiceItemsController::class, 'destroy'])->name('services.items.destroy');
 
     Route::post('attachments', AttachmentsController::class)
         ->name('attachments.store');

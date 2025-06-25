@@ -24,8 +24,5 @@ class Service extends Model
 
     // Properti $richTextFields tidak lagi digunakan di versi terbaru, gunakan $richTextAttributes
 
-    public function items()
-    {
-        return $this->hasMany(ServiceItem::class);
-    }
+
 }
