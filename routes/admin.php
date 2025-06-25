@@ -56,6 +56,8 @@ Route::prefix('/admin')->middleware([AdminAuth::class])->group(function () {
     Route::get('/services/{service}/edit', [Admin\ServicesController::class, 'edit'])->name('admin.services.edit');
     Route::put('/services/{service}', [Admin\ServicesController::class, 'update'])->name('admin.services.update');
     Route::delete('/services/{service}', [Admin\ServicesController::class, 'destroy'])->name('admin.services.destroy');
+    Route::get('api/services/data', [Admin\ServicesController::class, 'data'])->name('services.data');
+    
 
     Route::post('attachments', AttachmentsController::class)
         ->name('attachments.store');
