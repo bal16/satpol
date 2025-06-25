@@ -44,7 +44,8 @@
                         class="mt-1 block w-full px-3 py-2 bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
                         required>
                         <option value="text" {{ old('type', $item->type) == 'text' ? 'selected' : '' }}>Text</option>
-                        <option value="image" {{ old('type', $item->type) == 'image' ? 'selected' : '' }}>Image</option>
+                        <option value="image" {{ old('type', $item->type) == 'image' ? 'selected' : '' }}>Image
+                        </option>
                         <option value="html" {{ old('type', $item->type) == 'html' ? 'selected' : '' }}>HTML</option>
                         {{-- Tambahkan opsi lain jika diperlukan di masa mendatang --}}
                     </select>
@@ -58,51 +59,59 @@
                 {{-- Conditional Content Input Area --}}
                 <div id="content-input-area" class="space-y-6">
                     {{-- Image Input Section --}}
-                    <div id="image-content-section" style="display: {{ old('type', $item->type) == 'image' ? 'block' : 'none' }};">
+                    <div id="image-content-section"
+                        style="display: {{ old('type', $item->type) == 'image' ? 'block' : 'none' }};">
                         <label for="content_image" class="block text-sm font-medium text-slate-700 dark:text-slate-300">
                             Unggah Gambar</label>
-                        <input type="file" name="content_image_input" id="content_image"
+                        <input type="file" name="content_image" id="content_image"
                             class="mt-1 block w-full px-3 py-2 bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-md shadow-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
                             accept="image/*" onchange="previewImage(event)">
 
                         <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
                             @if ($item->type == 'image' && $item->content)
-                            <div>
-                                <p class="mt-2 text-xs text-slate-500 dark:text-slate-400 mb-1">Gambar saat ini:</p>
-                                <img src="{{ asset('storage/' . $item->content) }}" alt="Gambar saat ini" class="rounded-md max-h-48 w-auto shadow">
-                            </div>
+                                <div>
+                                    <p class="mt-2 text-xs text-slate-500 dark:text-slate-400 mb-1">Gambar saat ini:</p>
+                                    <img src="{{ asset('storage/' . $item->content) }}" alt="Gambar saat ini"
+                                        class="rounded-md max-h-48 w-auto shadow">
+                                </div>
                             @endif
                             <div>
-                                <p class="mt-2 text-xs text-slate-500 dark:text-slate-400 mb-1">Pratinjau gambar baru:</p>
-                                <img id="image_preview" src="#" alt="Pratinjau gambar baru" class="rounded-md max-h-48 w-auto shadow" style="display: none;">
+                                <p class="mt-2 text-xs text-slate-500 dark:text-slate-400 mb-1">Pratinjau gambar baru:
+                                </p>
+                                <img id="image_preview" src="#" alt="Pratinjau gambar baru"
+                                    class="rounded-md max-h-48 w-auto shadow" style="display: none;">
                             </div>
                         </div>
 
                         @if ($item->type == 'image' && $item->content)
                         @endif
-                        @error('content') {{-- Assuming 'content' is the field name for validation regardless of type --}}
+                        @error('content_image')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                         @enderror
                     </div>
 
                     {{-- HTML (Trix Editor) Input Section --}}
-                    <div id="html-content-section" style="display: {{ old('type', $item->type) == 'html' ? 'block' : 'none' }};">
+                    <div id="html-content-section"
+                        style="display: {{ old('type', $item->type) == 'html' ? 'block' : 'none' }};">
                         <label for="content_html_editor"
                             class="block text-sm font-medium text-slate-700 dark:text-slate-300">Konten HTML</label>
-                        <x-trix-input id="content_html_editor" name="body" :value="old('body', $item->body->toTrixHtml())" {{-- Changed name --}}
-                            class="mt-1 block w-full min-h-[250px] @error('content') trix-content-invalid @enderror" />
-                        @error('content')
+                        <x-trix-input id="content_html_editor" name="body" :value="old('body', $item->body->toTrixHtml())"
+                            class="mt-1 block w-full min-h-[250px] @error('body')
+trix-content-invalid
+@enderror" />
+                        @error('body')
                             <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
                         @enderror
                     </div>
 
                     {{-- Text (Textarea) Input Section --}}
-                    <div id="text-content-section" style="display: {{ old('type', $item->type) == 'text' || (old('type', $item->type) != 'image' && old('type', $item->type) != 'html') ? 'block' : 'none' }};">
-                        <label for="content_text_input"
+                    <div id="text-content-section"
+                        style="display: {{ old('type', $item->type) == 'text' ? 'block' : 'none' }};">
+                        <label for="content_text"
                             class="block text-sm font-medium text-slate-700 dark:text-slate-300">Konten</label>
-                        <textarea name="content_text_input" id="content_text_input" rows="10" {{-- Changed name --}}
-                            class="mt-1 block w-full px-3 py-2 bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-md shadow-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm">{{ old('content', $item->content) }}</textarea>
-                        @error('content')
+                        <textarea name="content_text" id="content_text" rows="10"
+                            class="mt-1 block w-full px-3 py-2 bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-md shadow-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm">{{ old('content_text', $item->content) }}</textarea>
+                        @error('content_text')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                         @enderror
                     </div>
@@ -153,48 +162,12 @@
                 const htmlContentSection = document.getElementById('html-content-section');
                 const textContentSection = document.getElementById('text-content-section');
 
-                const imageInput = document.getElementById('content_image');
-                const htmlInput = document.querySelector('#html-content-section trix-editor'); // Trix editor is a web component
-                const textInput = document.getElementById('content_text_input');
-
-                function updateContentFieldName() {
-                    // Disable all content inputs first to ensure only one is active
-                    if (imageInput) imageInput.name = '';
-                    if (htmlInput) htmlInput.inputElement.name = ''; // Trix stores its input in a hidden field
-                    if (textInput) textInput.name = '';
-
-                    const selectedType = typeSelect.value;
-
-                    if (selectedType === 'image') {
-                        if (imageInput) imageInput.name = 'content';
-                    } else if (selectedType === 'html') {
-                        if (htmlInput && htmlInput.inputElement) {
-                             // The actual hidden input for Trix is typically named after the 'input' attribute of the editor or the 'name' of the x-trix-input
-                             // Let's assume x-trix-input component handles setting its hidden input's name to 'content' if its own name prop is 'content'
-                             // For now, we ensure the original x-trix-input component's name prop is 'content' when it's visible.
-                             // The Blade component <x-trix-input name="content_html_input"...
-                             // We need to ensure the actual submitted name is 'content'.
-                             // The easiest is to have three distinct named inputs in blade and then in controller pick the right one.
-                             // Or, more cleanly, ensure the x-trix-input component's 'name' attribute is dynamically set or its hidden input is.
-                             // For simplicity with current structure, we'll rely on the blade name for trix being `content_html_input`
-                             // and adjust it here if needed, or handle it server-side.
-                             // Let's rename the trix-editor's hidden input directly if possible.
-                             const trixHiddenInput = document.getElementById('content_html_editor'); // This is the ID of the x-trix-input
-                             if(trixHiddenInput) trixHiddenInput.name = 'content'; // This should target the hidden input generated by trix
-                        }
-                    } else { // text or default
-                        if (textInput) textInput.name = 'content';
-                    }
-                }
-
                 function toggleContentFields() {
                     const selectedType = typeSelect.value;
 
                     imageContentSection.style.display = selectedType === 'image' ? 'block' : 'none';
                     htmlContentSection.style.display = selectedType === 'html' ? 'block' : 'none';
-                    textContentSection.style.display = (selectedType === 'text' || (selectedType !== 'image' && selectedType !== 'html')) ? 'block' : 'none';
-
-                    updateContentFieldName(); // Update the name attribute of the active input to 'content'
+                    textContentSection.style.display = selectedType === 'text' ? 'block' : 'none';
                 }
 
                 typeSelect.addEventListener('change', toggleContentFields);

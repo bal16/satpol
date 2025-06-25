@@ -42,74 +42,77 @@ class ProfileController extends Controller
      */
     public function update(Request $request, ProfileItems $profileItem)
     {
+        // Base validation rules
         $rules = [
             'title' => 'required|string|max:255',
-            'type' => 'required|string|max:50', // e.g., text, image_url, json_list
-            'body' => 'nullable|string',
+            'type' => 'required|string|in:text,image,html',
             'show' => 'boolean',
         ];
 
-        // dd($request->all());
-
-        // Adjust validation rules for content based on type
-        if ($request->input('type') === 'image') {
-            // If a new image is being uploaded, it's required or can be nullable if keeping old image is an option
-            // For simplicity, let's make it nullable, meaning if no new file is sent, old content (path) is kept or cleared.
-            // If a file is sent, it must be an image.
-            $rules['content'] = 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048'; // Max 2MB
-        } else {
-            $rules['content'] = 'nullable|string';
+        // Add type-specific validation rules
+        $type = $request->input('type');
+        if ($type === 'image') {
+            // Image is only required if there isn't one already. Otherwise, it's optional.
+            $rule = $profileItem->content ? 'nullable' : 'required';
+            $rules['content_image'] = [$rule, 'image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:2048'];
+        } elseif ($type === 'text') {
+            $rules['content_text'] = 'required|string';
+        } elseif ($type === 'html') {
+            $rules['body'] = 'required|string';
         }
 
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-            dd($validator->errors());
-
             return redirect()->route('admin.profile.edit', $profileItem->id)
                 ->withErrors($validator)
                 ->withInput();
         }
 
-
-
         try {
             $validatedData = $validator->validated();
-            // Ensure 'show' is present, as checkboxes don't send value if unchecked
-            // dd($validatedData);
-            $validatedData['show'] = $request->has('show');
 
+            // Prepare data for update
+            $updateData = [
+                'title' => $validatedData['title'],
+                'type' => $validatedData['type'],
+                'show' => $request->has('show'),
+                'content' => $profileItem->content, // Default to old content
+                'body' => $profileItem->body, // Default to old body
+            ];
 
-            // Handle image upload if type is 'image' and a file is present
-            if ($validatedData['type'] === 'image' && $request->hasFile('content')) {
-                // Delete old image if it exists
-                if ($profileItem->content && Storage::disk('public')->exists($profileItem->content)) {
+            // Handle content based on type
+            if ($updateData['type'] === 'image') {
+                if ($request->hasFile('content_image')) {
+                    // Delete old image if it exists
+                    if ($profileItem->content && Storage::disk('public')->exists($profileItem->content)) {
+                        Storage::disk('public')->delete($profileItem->content);
+                    }
+                    // Store new image and update path
+                    $imagePath = $request->file('content_image')->store('profile_images', 'public');
+                    $updateData['content'] = $imagePath;
+                }
+                // Clear body if switching to image type
+                $updateData['body'] = null;
+            } elseif ($updateData['type'] === 'text') {
+                $updateData['content'] = $validatedData['content_text'];
+                // Clear body if switching to text type
+                $updateData['body'] = null;
+                // Delete old image if switching from image type
+                if ($profileItem->type === 'image' && $profileItem->content && Storage::disk('public')->exists($profileItem->content)) {
                     Storage::disk('public')->delete($profileItem->content);
                 }
-                // Store new image
-                $imagePath = $request->file('content')->store('profile_images', 'public');
-                $validatedData['content'] = $imagePath;
-            } elseif ($validatedData['type'] !== 'image' && $profileItem->type === 'image' && $profileItem->content) {
-                // If type changed from image to something else, delete the old image
-                if (Storage::disk('public')->exists($profileItem->content)) {
+            } elseif ($updateData['type'] === 'html') {
+                $updateData['body'] = $validatedData['body'];
+                // Clear content if switching to html type
+                $updateData['content'] = null;
+                // Delete old image if switching from image type
+                if ($profileItem->type === 'image' && $profileItem->content && Storage::disk('public')->exists($profileItem->content)) {
                     Storage::disk('public')->delete($profileItem->content);
                 }
-            } elseif ($validatedData['type'] !== 'image' && $profileItem->type === 'text' && $profileItem->content) {
-                $validatedData['content'] = $request->content_text_input;
-            }
-            // If type is 'image' but no new file is uploaded, $validatedData['content'] will be null from validation
-            // if 'content' was not sent. We might want to keep the old image path in this case.
-            // However, the current validation makes 'content' nullable, so if no file is sent,
-            // $validatedData['content'] will not be set by $validator->validated() if it was not in the request.
-            // If 'content' field is not sent at all (e.g. type changed from image to text and content field removed from form for image)
-            // we need to ensure it's handled.
-            // The current blade logic for type 'image' sends 'content' as a file input.
-            // If type is 'image' and no new file is sent, and we want to keep the old image:
-            if ($validatedData['type'] === 'image' && !$request->hasFile('content') && $profileItem->content) {
-                $validatedData['content'] = $profileItem->content; // Keep old image path
             }
 
-            $profileItem->update($validatedData);
+            $profileItem->update($updateData);
             return redirect()->route('admin.profile')->with('success', 'Profile item berhasil diperbarui.');
         } catch (\Exception $e) {
             return redirect()->route('admin.profile.edit', $profileItem->id)->with('error', 'Gagal memperbarui item profile: ' . $e->getMessage())->withInput();
