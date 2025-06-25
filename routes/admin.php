@@ -49,6 +49,18 @@ Route::prefix('/admin')->middleware([AdminAuth::class])->group(function () {
     Route::delete('/profile/sop/{SOP}', [Admin\SOPController::class, 'destroy'])->name('admin.profile.sop.destroy');
     Route::put('/profile/sop/{SOP}', [Admin\SOPController::class, 'update'])->name('admin.profile.sop.update');
 
+    // Services Page Items
+    Route::get('/services', [Admin\ServicesController::class, 'index'])->name('admin.services');
+    Route::get('/services/create', [Admin\ServicesController::class, 'create'])->name('admin.services.create');
+    Route::post('/services', [Admin\ServicesController::class, 'store'])->name('admin.services.store');
+    Route::get('/services/{service}/edit', [Admin\ServicesController::class, 'edit'])->name('admin.services.edit');
+    Route::put('/services/{service}', [Admin\ServicesController::class, 'update'])->name('admin.services.update');
+    Route::delete('/services/{service}', [Admin\ServicesController::class, 'destroy'])->name('admin.services.destroy');
+    
+    Route::post('services/{service}/items', [Admin\ServiceItemsController::class, 'store'])->name('services.items.store');
+    Route::patch('services/items/{item}', [Admin\ServiceItemsController::class, 'update'])->name('services.items.update');
+    Route::delete('services/items/{item}', [Admin\ServiceItemsController::class, 'destroy'])->name('services.items.destroy');
+
     Route::post('attachments', AttachmentsController::class)
         ->name('attachments.store');
 });

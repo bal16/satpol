@@ -73,8 +73,7 @@
                         ],
                     ];
                 @endphp
-                <x-info-card cardId="contact" imageSrc="https://picsum.photos/600/403" title="Kontak" :links="$kontakLinks"
-                    listFont="font-[IBM_Plex_Serif]" listExtraClasses="font-bold" />
+                <x-info-card cardId="contact" imageSrc="https://picsum.photos/600/403" title="Kontak" :links="$kontakLinks" />
 
                 @php
                     $perdaLinks = [
