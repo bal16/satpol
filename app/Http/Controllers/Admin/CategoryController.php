@@ -27,8 +27,8 @@ class CategoryController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn() // Adds DT_RowIndex
                 ->addColumn('action', function ($row) {
-                    $editBtn = '<button class="text-blue-500 hover:text-blue-700 edit-category-btn" data-id="' . $row->id . '" data-name="' . htmlspecialchars($row->name, ENT_QUOTES) . '">Edit</button>';
-                    $deleteBtn = '<button class="text-red-500 hover:text-red-700 delete-category-btn ml-2" data-id="' . $row->id . '">Hapus</button>';
+                    $editBtn = '<button class="cursor-pointer text-blue-500 hover:text-blue-700 edit-category-btn" data-id="' . $row->id . '" data-name="' . htmlspecialchars($row->name, ENT_QUOTES) . '">Edit</button>';
+                    $deleteBtn = '<button class="cursor-pointer text-red-500 hover:text-red-700 delete-category-btn ml-2" data-id="' . $row->id . '">Hapus</button>';
                     return $editBtn . $deleteBtn;
                 })
                 ->editColumn('created_at', function ($row) {

@@ -29,7 +29,7 @@ class GalleryController extends Controller
     {
         if ($request->ajax()) {
             // Eager load category relationship
-            $gallery = Gallery::with('category')->select(['id','title', 'path', 'category_id', 'created_at', 'updated_at'])->latest();
+            $gallery = Gallery::with('category')->select(['id', 'title', 'path', 'category_id', 'created_at', 'updated_at'])->latest();
 
             return DataTables::of($gallery)
                 ->addIndexColumn() // Tambahkan baris ini untuk nomor urut
@@ -56,11 +56,11 @@ class GalleryController extends Controller
                     $deleteUrl = route('admin.gallery.destroy', $item->id); // Example route name
                     $csrfToken = csrf_token();
 
-                    return '<button type="button" id="' . $item->id . '" class="edit-gallery-btn text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300 mr-3">Edit</button>' .
+                    return '<button type="button" id="' . $item->id . '" class="edit-gallery-btn cursor-pointer text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300 mr-3">Edit</button>' .
                         '<form action="' . $deleteUrl . '" method="POST" class="inline-block" onsubmit="return confirm(\'Are you sure you want to delete this item?\');">' .
                         '<input type="hidden" name="_token" value="' . $csrfToken . '">' .
                         '<input type="hidden" name="_method" value="DELETE">' .
-                        '<button type="submit" class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300">Delete</button>' .
+                        '<button type="submit" class="cursor-pointer text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300">Delete</button>' .
                         '</form>';
                 })
                 ->rawColumns(['action']) // Important to render HTML in the action column
