@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ServiceController;
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';
@@ -18,9 +19,7 @@ Route::get('/profile', ProfileController::class)->name('profile');
 Route::get('/news', [NewsController::class, 'index'])->name('news');
 Route::get('/news/{news:slug}', [NewsController::class, 'show'])->name('news.show');
 
-Route::get('/services', function () {
-    return view('services');
-})->name('services');
+Route::get('/services', [ServiceController::class, 'index'])->name('services');
 // Route::get('/services/{slug}', function () {
 //     return view('services');
 // });

@@ -13,7 +13,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        return view('service', ['service' => Service::all(),]);
+        return view('services', ['services' => Service::all()]);
     }
 
 
@@ -23,6 +23,6 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
-        return view('service.show',['service' => $service]);
+        return view('service.show', ['service' => $service]);
     }
 }

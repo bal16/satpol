@@ -24,5 +24,33 @@ class Service extends Model
 
     // Properti $richTextFields tidak lagi digunakan di versi terbaru, gunakan $richTextAttributes
 
+    /**
+     * Accessor untuk mengubah konten rich text (HTML) menjadi array link.
+     * Dipanggil secara otomatis saat kita mengakses $service->links.
+     */
+    public function getLinksAttribute(): array
+    {
+        // Jika body kosong, kembalikan array kosong
+        if (empty($this->body?->body)) {
+            return [];
+        }
 
+        $links = [];
+        $dom = new \DOMDocument();
+        // Menggunakan @ untuk menekan warning jika HTML tidak sempurna
+        // Trix editor membungkus konten dalam div, jadi kita muat sebagai HTML penuh
+        @$dom->loadHTML('<?xml encoding="utf-8" ?>' . $this->body->body, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+
+        $a_tags = $dom->getElementsByTagName('a');
+
+        foreach ($a_tags as $a_tag) {
+            $links[] = [
+                'text' => $dom->saveHTML($a_tag), // Ambil seluruh HTML di dalam tag <a>
+                'href' => $a_tag->getAttribute('href'),
+                'isHtml' => true, // Selalu anggap sebagai HTML
+            ];
+        }
+
+        return $links;
+    }
 }

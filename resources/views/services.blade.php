@@ -16,107 +16,13 @@
         <div
             class="flex flex-col justify-between items-center bg-[#FDFDFD] lg:max-w-7xl max-w-160 lg:py-17 py-8.75 px-5 lg:px-23.5 lg:gap-14 gap-8.75">
             <div class="grid lg:grid-cols-3 grid-cols-1 mx-auto lg:gap-14 gap-8.75">
-                @php
-                    $layananLinks = [
-                        ['text' => 'Sarana dan Prasarana', 'href' => '#'],
-                        ['text' => 'Daftar Informasi Publik', 'href' => '#'],
-                        ['text' => 'Peraturan', 'href' => '#'],
-                    ];
-                @endphp
-                <x-info-card imageSrc="https://picsum.photos/600/401" title="Layanan" :links="$layananLinks" />
-
-                @php
-                    $pemberdayaanLinks = [
-                        ['text' => 'Bidang Kamtibnas', 'href' => '#'],
-                        ['text' => 'Bidang Kesehatan', 'href' => '#'],
-                        ['text' => 'Bidang Pariwisata', 'href' => '#'],
-                    ];
-                @endphp
-                <x-info-card imageSrc="https://picsum.photos/600/400" title="Pemberdayaan" :links="$pemberdayaanLinks" />
-
-                @php
-                    $ppidLinks = [
-                        ['text' => 'Dasar Hukum', 'href' => '#'],
-                        ['text' => 'Pelayanan Informasi', 'href' => '#'],
-                        ['text' => 'Informasi', 'href' => '#'],
-                        ['text' => 'Profil PPID', 'href' => '#'],
-                    ];
-                @endphp
-                <x-info-card imageSrc="https://picsum.photos/600/402" title="PPID" :links="$ppidLinks" />
-
-                @php
-                    $kontakLinks = [
-                        [
-                            'text' => 'No. Telp<br><p class="font-normal">+621326317741</p>',
-                            'href' => 'Tel: +621326317741',
-                            'isHtml' => true,
-                        ],
-                        [
-                            'text' => 'Email<br><p class="font-normal">satpolpp@semarangkota.go.id</p>',
-                            'href' => 'mailto: satpolpp@semarangkota.go.id',
-                            'isHtml' => true,
-                        ],
-                        [
-                            'text' => 'Facebook<br><p class="font-normal">satpolppsemarangkota</p>',
-                            'href' => 'https://www.facebook.com/satpolppsemarangkota/?locale=id_ID',
-                            'isHtml' => true,
-                        ],
-                        [
-                            'text' => 'X<br><p class="font-normal">@satpolpp.smg</p>',
-                            'href' => 'https://x.com/satpolpp_smg',
-                            'isHtml' => true,
-                        ],
-                        [
-                            'text' => 'Instagram<br><p class="font-normal">@satpolpp.smg</p>',
-                            'href' => 'https://www.instagram.com/satpolpp.smg/',
-                            'isHtml' => true,
-                        ],
-                    ];
-                @endphp
-                <x-info-card cardId="contact" imageSrc="https://picsum.photos/600/403" title="Kontak" :links="$kontakLinks" />
-
-                @php
-                    $perdaLinks = [
-                        ['text' => 'Perda Bangunan Gedung', 'href' => '#'],
-                        ['text' => 'Perda Minuman Beralkohol', 'href' => '#'],
-                        ['text' => 'Perda Pengelolaan Rumah', 'href' => '#'],
-                        ['text' => 'Perda Pengendalian Lingkungan Hidup', 'href' => '#'],
-                        ['text' => 'Perda Penyelenggaraan Administrasi Kependudukan', 'href' => '#'],
-                        ['text' => 'Perda Pendidik Pegawai Negeri Sipil', 'href' => '#'],
-                        ['text' => 'Perda Rencana Tata Ruang Wilayah', 'href' => '#'],
-                        ['text' => 'Perda Reklame', 'href' => '#'],
-                        ['text' => 'Perda Pengelolaan Pohon Pada Ruang Terbuka Hijau', 'href' => '#'],
-                    ];
-                @endphp
-                <x-info-card imageSrc="https://picsum.photos/600/404" title="Perda Kota Semarang" :links="$perdaLinks" />
-
-                @php
-                    $sopLinks = [
-                        ['text' => 'Bidang PPUD', 'href' => '#'],
-                        ['text' => 'Bidang Tibum', 'href' => '#'],
-                        ['text' => 'Bidang Linmas', 'href' => '#'],
-                        ['text' => 'Bidang Sekretariat', 'href' => '#'],
-                        ['text' => 'Bidang Binmas', 'href' => '#'],
-                    ];
-                @endphp
-                <x-info-card imageSrc="https://picsum.photos/600/405" title="SOP" :links="$sopLinks" />
-                @php
-                    $pajakLinks = [
-                        [
-                            'text' => 'Daftar Wajib Pajak',
-                            'href' => route('services.pajak-daftar'),
-                        ],
-                        ['text' => 'Jatuh Tempo Pajak', 'href' => route('services.pajak-tempo')],
-                    ];
-                @endphp
-                <x-info-card imageSrc="https://picsum.photos/600/406" title="Pajak Daerah" :links="$pajakLinks" />
-
-                @php
-                    $kinerjaLinks = [['text' => 'Menuju', 'href' => '#']];
-                @endphp
-                <x-info-card imageSrc="https://picsum.photos/600/407" title="Perjanjian Kinerja" :links="$kinerjaLinks" />
-
-
+                @foreach ($services as $service)
+                    <x-info-card 
+                        imageSrc="{{ asset('storage/' . $service->image_src) }}" 
+                        title="{{ $service->title }}" 
+                        :links="$service->links"
+                        :cardId="$service->card_id" />
+                @endforeach
             </div>
             <div class="grid lg:grid-cols-3 grid-cols-1 mx-auto lg:gap-14 gap-8.75">
 
