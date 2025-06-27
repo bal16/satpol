@@ -19,8 +19,8 @@
                 @foreach ($services as $service)
                     <x-info-card 
                         imageSrc="{{ asset('storage/' . $service->image_src) }}" 
-                        title="{{ $service->title }}" 
-                        :links="$service->links"
+                        title="{{ $service->title }}"
+                        :items="$service->items" {{-- Pass the collection of ServiceItems --}}
                         :cardId="$service->card_id" />
                 @endforeach
             </div>

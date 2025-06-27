@@ -1,10 +1,23 @@
 <x-admin-layout :pageTitle="'Kelola Slider'">
+    @push('styles')
+        <!-- SweetAlert2 -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    @endpush
+
     <!-- Page Title -->
     <div class="mb-6">
         <h2 class="text-2xl font-semibold text-slate-800 dark:text-white">Kelola Gambar Slider</h2>
         <p class="text-slate-600 dark:text-white">Unggah dan ganti gambar untuk slider di halaman utama. Terdapat 5 slot
             gambar yang dapat Anda kelola.</p>
     </div>
+
+    {{-- These divs are used to pass session messages to SweetAlert2 --}}
+    @if (session('success'))
+        <div id="swal-success" data-message="{{ session('success') }}"></div>
+    @endif
+    @if (session('error'))
+        <div id="swal-error" data-message="{{ session('error') }}"></div>
+    @endif
 
     <!-- Slider Images Management -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -37,7 +50,7 @@
 
                 {{-- Form untuk mengganti gambar --}}
                 {{-- PASTIKAN ACTION INI BENAR --}}
-                <form action="{{ route('admin.sliders.update', ['slot_number' => $slotNumber]) }}" method="POST"
+                <form class="slider-update-form" action="{{ route('admin.sliders.update', ['slot_number' => $slotNumber]) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     @method('PATCH') {{-- Ini akan mengirimkan request sebagai PATCH --}}
@@ -91,6 +104,9 @@
     </div>
 
     @push('scripts')
+        <!-- SweetAlert2 -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
         <script>
             function previewSliderImage(input, previewId) {
                 const file = input.files[0];
@@ -103,6 +119,55 @@
                     reader.readAsDataURL(file);
                 }
             }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                // Display session messages with SweetAlert2
+                if (document.getElementById('swal-success')) {
+                    Swal.fire({
+                        background: document.documentElement.classList.contains('dark') ? '#292524' : '#fff',
+                        color: document.documentElement.classList.contains('dark') ? '#d6d3d1' : '#1e293b',
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: document.getElementById('swal-success').getAttribute('data-message'),
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                }
+                if (document.getElementById('swal-error')) {
+                    Swal.fire({
+                        background: document.documentElement.classList.contains('dark') ? '#292524' : '#fff',
+                        color: document.documentElement.classList.contains('dark') ? '#d6d3d1' : '#1e293b',
+                        icon: 'error',
+                        title: 'Gagal!',
+                        text: document.getElementById('swal-error').getAttribute('data-message'),
+                        showConfirmButton: true,
+                        timer: 3000
+                    });
+                }
+
+                // Add confirmation to all slider update forms
+                document.querySelectorAll('.slider-update-form').forEach(form => {
+                    form.addEventListener('submit', function(e) {
+                        e.preventDefault(); // Prevent default submission
+                        const currentForm = this;
+                        Swal.fire({
+                            title: 'Simpan Perubahan?',
+                            text: "Anda yakin ingin mengganti gambar slider ini?",
+                            icon: 'question',
+                            showCancelButton: true,
+                            background: document.documentElement.classList.contains('dark') ? '#292524' : '#fff',
+                            color: document.documentElement.classList.contains('dark') ? '#d6d3d1' : '#1e293b',
+                            customClass: {
+                                confirmButton: 'bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded',
+                                cancelButton: 'bg-slate-500 hover:bg-slate-600 text-white font-bold py-2 px-4 rounded ml-2'
+                            },
+                            buttonsStyling: false,
+                            confirmButtonText: 'Ya, ganti!',
+                            cancelButtonText: 'Batal'
+                        }).then((result) => result.isConfirmed && currentForm.submit());
+                    });
+                });
+            });
         </script>
     @endpush
 

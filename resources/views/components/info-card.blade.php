@@ -1,7 +1,7 @@
 @props([
     'imageSrc',
     'title',
-    'links' => [], // Array of objects: ['text' => 'Link Text', 'href' => '#', 'isHtml' => false]
+    'items' => [], // Diubah dari 'links' menjadi 'items' untuk menerima koleksi ServiceItem
     'titleFont' => 'font-[IBM_Plex_Serif]', // Font default untuk judul
     'listFont' => 'font-[IBM_Plex_Serif]',  // Font default untuk daftar link
     'listStyle' => 'list-disc',
@@ -22,18 +22,16 @@
     <span class="flex flex-col lg:p-5 p-3 lg:gap-8 gap-5 flex-grow">
         <h3 class="font-bold {{ $titleFont }} lg:text-3xl text-lg text-[#E94B23] text-shadow-lg">{{ $title }}</h3>
         <hr class="{{ $hrWidthMobile }} {{ $hrWidthDesktop }} lg:border-2 border border-[#E94B23]">
-        @if(!empty($links))
+        @if($items->isNotEmpty())
         <ul
             class="text-[#2B2A29] lg:text-lg text-xs {{ $listFont }} {{ $listExtraClasses }} {{ $listContainerClasses }} {{ $listStyle }} {{ $listItemPadding }} space-y-1.5">
-            @foreach($links as $linkItem)
+            @foreach($items as $item)
                 <li>
-                    <a href="{{ $linkItem['href'] ?? '#' }}" class="link link-underline link-underline-black">
-                        @if(isset($linkItem['isHtml']) && $linkItem['isHtml'])
-                            {!! $linkItem['text'] !!}
-                        @else
-                            {{ $linkItem['text'] }}
-                        @endif
-                    </a>
+                    @if($item->href)
+                        <a href="{{ $item->href }}" class="link link-underline link-underline-black">{!! $item->text !!}</a>
+                    @else
+                        {!! $item->text !!}
+                    @endif
                 </li>
             @endforeach
         </ul>

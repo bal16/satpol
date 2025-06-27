@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin;
 use App\Http\Controllers\Admin\NewsImageController;
 use App\Http\Middleware\AdminAuth;
 use App\Http\Controllers\AttachmentsController;
+use App\Http\Controllers\Admin\ServiceItemController;
 
 Route::prefix('/admin')->middleware([AdminAuth::class])->group(function () {
     Route::get('/', [Admin\DashboardController::class, 'index'])->name('admin.dashboard');
@@ -58,6 +59,11 @@ Route::prefix('/admin')->middleware([AdminAuth::class])->group(function () {
     Route::delete('/services/{service}', [Admin\ServicesController::class, 'destroy'])->name('admin.services.destroy');
     Route::get('api/services/data', [Admin\ServicesController::class, 'data'])->name('services.data');
     
+        // Service Items routes (dipindahkan dari api.php)
+    Route::get('services/{service}/items/data', [ServiceItemController::class, 'data'])->name('admin.services.items.data');
+    Route::post('services/{service}/items', [ServiceItemController::class, 'store'])->name('admin.services.items.store');
+    Route::match(['put', 'patch'], 'services/items/{item}', [ServiceItemController::class, 'update'])->name('admin.services.items.update');
+    Route::delete('services/items/{item}', [ServiceItemController::class, 'destroy'])->name('admin.services.items.destroy');
 
     Route::post('attachments', AttachmentsController::class)
         ->name('attachments.store');

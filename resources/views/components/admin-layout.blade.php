@@ -1,6 +1,6 @@
 @props(['pageTitle' => 'Admin Panel'])
 
-<!DOCTYPE html>
+<!DOCTYPE html> {{-- Kelas 'dark' akan dikelola oleh JavaScript --}}
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
@@ -14,9 +14,9 @@
     @stack('styles')
 </head>
 
-<body class="bg-slate-100 dark:bg-stone-600 font-sans antialiased">
+<body class="bg-slate-200 dark:bg-stone-800 font-sans antialiased">
 
-    <div id="admin-app-container" class="flex min-h-screen bg-slate-100 dark:bg-stone-600">
+    <div id="admin-app-container" class="flex min-h-screen">
         <!-- Sidebar -->
         {{-- Sidebar: w-64 by default, w-16 when collapsed --}}
         <aside id="admin-sidebar"
@@ -101,8 +101,8 @@
                 <x-admin.nav-link :href="route('admin.services')" :active="request()->routeIs('admin.services')"> {{-- Adjust route check as needed --}}
                     <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.515-1.32 1.958-2.182 3.46-1.827 1.502.355 2.582 1.78 2.067 3.102l-.707 1.768a1 1 0 00.547 1.342l1.768.707c1.32.515 2.182 1.958 1.827 3.46-.355 1.502-1.78 2.582-3.102 2.067l-1.768-.707a1 1 0 00-1.342.547l-.707 1.768c-.515 1.32-1.958 2.182-3.46 1.827-1.502-.355-2.582-1.78-2.067-3.102l.707-1.768a1 1 0 00-.547-1.342l-1.768-.707c-1.32-.515-2.182-1.958-1.827-3.46.355-1.502 1.78-2.582 3.102-2.067l1.768.707a1 1 0 001.342-.547l.707-1.768z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                     </svg>
                     <span class="sidebar-text">Services</span>
                 </x-admin.nav-link>
@@ -146,6 +146,21 @@
                     </h1>
                 </div>
                 <div class="flex items-center space-x-4">
+                    <!-- Theme Switcher -->
+                    <div class="relative">
+                        <button id="theme-toggle-button" type="button" class="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-stone-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
+                            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                            <svg id="theme-toggle-system-icon" class="hidden w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </button>
+                        <!-- Dropdown menu -->
+                        <div id="theme-toggle-dropdown" class="hidden absolute right-0 mt-2 w-36 bg-white dark:bg-stone-800 rounded-md shadow-lg py-1 z-50 border dark:border-stone-700">
+                            <button data-theme="light" class="theme-choice-button w-full text-left px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-stone-700 flex items-center"><svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>Light</button>
+                            <button data-theme="dark" class="theme-choice-button w-full text-left px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-stone-700 flex items-center"><svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>Dark</button>
+                            <button data-theme="system" class="theme-choice-button w-full text-left px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-stone-700 flex items-center"><svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>System</button>
+                        </div>
+                    </div>
+
                     <div class="relative">
                         <button class="flex items-center text-sm focus:outline-none group">
                             <img class="w-8 h-8 rounded-full object-cover mr-2 border-2 border-transparent group-hover:border-red-600 transition-colors"
@@ -169,7 +184,7 @@
                         @csrf
                         @method('DELETE')
                         <button type="submit"
-                            class="px-4 py-2 bg-red-500 text-white text-sm font-medium rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition duration-150 ease-in-out flex items-center">
+                            class="cursor-pointer px-4 py-2 bg-red-500 text-white text-sm font-medium rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition duration-150 ease-in-out flex items-center">
                             <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -190,30 +205,94 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- Sidebar Toggle Logic ---
             const sidebarToggle = document.getElementById('sidebar-toggle');
             const sidebar = document.getElementById('admin-sidebar');
             const appContainer = document.getElementById('admin-app-container'); // Or the body if preferred
 
-            // Function to check if sidebar should be collapsed based on screen size
             const checkSidebarState = () => {
                 if (window.innerWidth < 768) { // Tailwind's 'md' breakpoint
                     appContainer.classList.add('sidebar-collapsed');
                 } else {
-                    // Optional: remove collapsed state on larger screens if you want it expanded by default
-                    // appContainer.classList.remove('sidebar-collapsed');
+                    // On larger screens, you might want to remove the collapsed state by default
+                    // appContainer.classList.remove('sidebar-collapsed'); 
                 }
             };
 
-            // Initial check
             checkSidebarState();
 
-            sidebarToggle.addEventListener('click', function() {
+            sidebarToggle.addEventListener('click', function () {
                 appContainer.classList.toggle('sidebar-collapsed');
             });
 
-            // Optional: Re-check on window resize
             window.addEventListener('resize', checkSidebarState);
+
+            // --- Theme Switcher Logic ---
+            const themeToggleButton = document.getElementById('theme-toggle-button');
+            const themeToggleDropdown = document.getElementById('theme-toggle-dropdown');
+            const lightIcon = document.getElementById('theme-toggle-light-icon');
+            const darkIcon = document.getElementById('theme-toggle-dark-icon');
+            const systemIcon = document.getElementById('theme-toggle-system-icon');
+
+            function updateIcon(theme) {
+                lightIcon.classList.add('hidden');
+                darkIcon.classList.add('hidden');
+                systemIcon.classList.add('hidden');
+
+                if (theme === 'dark') {
+                    darkIcon.classList.remove('hidden');
+                } else if (theme === 'light') {
+                    lightIcon.classList.remove('hidden');
+                } else {
+                    systemIcon.classList.remove('hidden');
+                }
+            }
+
+            function applyTheme(theme) {
+                if (theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+            }
+
+            function handleThemeSelection(theme) {
+                if (theme === 'system') {
+                    localStorage.removeItem('theme');
+                } else {
+                    localStorage.setItem('theme', theme);
+                }
+                applyTheme(theme);
+                updateIcon(theme);
+            }
+
+            themeToggleButton.addEventListener('click', () => {
+                themeToggleDropdown.classList.toggle('hidden');
+            });
+
+            window.addEventListener('click', (e) => {
+                if (themeToggleButton && !themeToggleButton.contains(e.target) && themeToggleDropdown && !themeToggleDropdown.contains(e.target)) {
+                    themeToggleDropdown.classList.add('hidden');
+                }
+            });
+
+            document.querySelectorAll('.theme-choice-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    handleThemeSelection(button.getAttribute('data-theme'));
+                    themeToggleDropdown.classList.add('hidden');
+                });
+            });
+
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                if (!('theme' in localStorage)) {
+                    handleThemeSelection('system');
+                }
+            });
+
+            // Apply theme on initial load
+            const savedTheme = localStorage.getItem('theme') || 'system';
+            handleThemeSelection(savedTheme);
         });
 
         function toggleAdminSubmenu(button, submenuId) {

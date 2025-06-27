@@ -1,11 +1,7 @@
 <x-admin-layout :pageTitle="'Edit Profile Item: ' . $item->title">
     @push('styles')
         <x-rich-text-laravel::styles theme="richtextlaravel" />
-        <!-- Di dalam <head> -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-
-        <!-- Sebelum </body> penutup -->
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @endpush
 
 
@@ -14,14 +10,16 @@
                 class="text-red-600">{{ $item->title }}</span></h1>
     </div>
 
+    {{-- These divs are used to pass session messages to SweetAlert2 --}}
+    @if (session('success'))
+        <div id="swal-success" data-message="{{ session('success') }}"></div>
+    @endif
     @if (session('error'))
-        <div class="mb-4 p-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
-            {{ session('error') }}
-        </div>
+        <div id="swal-error" data-message="{{ session('error') }}"></div>
     @endif
 
     <div class="bg-white dark:bg-stone-800 text-stone-900 dark:text-white shadow-xl rounded-lg p-6">
-        <form action="{{ route('admin.profile.update', $item->id) }}" method="POST" enctype="multipart/form-data"">
+        <form id="editProfileItemForm" action="{{ route('admin.profile.update', $item->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -155,6 +153,9 @@ trix-content-invalid
         </form>
     </div>
     @push('scripts')
+        <!-- SweetAlert2 -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const typeSelect = document.getElementById('type');
@@ -172,6 +173,54 @@ trix-content-invalid
 
                 typeSelect.addEventListener('change', toggleContentFields);
                 toggleContentFields(); // Initial call
+
+                // Display session messages with SweetAlert2
+                if (document.getElementById('swal-success')) {
+                    Swal.fire({
+                        background: document.documentElement.classList.contains('dark') ? '#292524' : '#fff',
+                        color: document.documentElement.classList.contains('dark') ? '#d6d3d1' : '#1e293b',
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: document.getElementById('swal-success').getAttribute('data-message'),
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                }
+                if (document.getElementById('swal-error')) {
+                    Swal.fire({
+                        background: document.documentElement.classList.contains('dark') ? '#292524' : '#fff',
+                        color: document.documentElement.classList.contains('dark') ? '#d6d3d1' : '#1e293b',
+                        icon: 'error',
+                        title: 'Gagal!',
+                        text: document.getElementById('swal-error').getAttribute('data-message'),
+                        showConfirmButton: true,
+                        timer: 3000
+                    });
+                }
+
+                // SweetAlert for main form submission
+                const editProfileItemForm = document.getElementById('editProfileItemForm');
+                if (editProfileItemForm) {
+                    editProfileItemForm.addEventListener('submit', function(e) {
+                        e.preventDefault(); // Prevent default submission
+                        const form = this;
+                        Swal.fire({
+                            title: 'Simpan Perubahan?',
+                            text: "Anda yakin ingin menyimpan perubahan pada item profile ini?",
+                            icon: 'question',
+                            showCancelButton: true,
+                            background: document.documentElement.classList.contains('dark') ? '#292524' : '#fff',
+                            color: document.documentElement.classList.contains('dark') ? '#d6d3d1' : '#1e293b',
+                            customClass: {
+                                confirmButton: 'bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded',
+                                cancelButton: 'bg-slate-500 hover:bg-slate-600 text-white font-bold py-2 px-4 rounded ml-2'
+                            },
+                            buttonsStyling: false,
+                            confirmButtonText: 'Ya, simpan!',
+                            cancelButtonText: 'Batal'
+                        }).then((result) => result.isConfirmed && form.submit());
+                    });
+                }
             });
 
             function previewImage(event) {

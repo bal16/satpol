@@ -136,16 +136,21 @@
             // Display session messages with SweetAlert2
             @if (session('success'))
                 Swal.fire({
+                    // Gunakan parameter bawaan untuk warna agar lebih andal
+                    background: document.documentElement.classList.contains('dark') ? '#292524' : '#fff', // stone-800
+                    color: document.documentElement.classList.contains('dark') ? '#d6d3d1' : '#1e293b', // stone-300
                     icon: 'success',
                     title: 'Berhasil!',
                     text: "{{ session('success') }}",
-                    timer: 3000,
-                    showConfirmButton: true
+                    showConfirmButton: false,
+                    timer: 2000
                 });
             @endif
 
             @if (session('error'))
                 Swal.fire({
+                    background: document.documentElement.classList.contains('dark') ? '#292524' : '#fff',
+                    color: document.documentElement.classList.contains('dark') ? '#d6d3d1' : '#1e293b',
                     icon: 'error',
                     title: 'Gagal!',
                     text: "{{ session('error') }}",
@@ -165,12 +170,17 @@
                     e.preventDefault(); // Prevent default form submission
                     const form = this;
                     Swal.fire({
+                        background: document.documentElement.classList.contains('dark') ? '#292524' : '#fff',
+                        color: document.documentElement.classList.contains('dark') ? '#d6d3d1' : '#1e293b',
+                        customClass: { // customClass tetap bagus untuk styling tombol
+                            confirmButton: 'bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded',
+                            cancelButton: 'bg-slate-500 hover:bg-slate-600 text-white font-bold py-2 px-4 rounded ml-2'
+                        },
                         title: 'Anda yakin?',
                         text: "Data yang dihapus tidak dapat dikembalikan!",
                         icon: 'warning',
                         showCancelButton: true,
-                        confirmButtonColor: '#d33',
-                        cancelButtonColor: '#3085d6',
+                        buttonsStyling: false,
                         confirmButtonText: 'Ya, hapus!',
                         cancelButtonText: 'Batal'
                     }).then((result) => {
@@ -201,12 +211,6 @@
             //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             //     }
             // });
-
-            let prefers = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-            let html = document.querySelector('html');
-
-            html.classList.add(prefers);
-            html.setAttribute('data-bs-theme', prefers);
         </script>
     @endpush
 </x-admin-layout>

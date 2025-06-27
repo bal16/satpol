@@ -25,7 +25,7 @@ class UpdateNewsRequest extends FormRequest
             'title' => 'required',
             'author' => 'required',
             'body' => 'nullable|string',
-            'slug' => 'required|unique:news,slug',
+            'slug' => 'required',
         ];
     }
 }

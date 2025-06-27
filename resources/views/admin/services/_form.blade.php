@@ -34,16 +34,6 @@
     </div>
 </div>
 
-<div class="mt-6">
-    <label for="service_body" class="block text-sm font-medium text-slate-700 dark:text-slate-300">Isi Konten</label>
-    {{-- Pastikan model Service Anda menggunakan trait HasRichText agar ini berfungsi --}}
-    <x-trix-input id="service_body" name="body" :value="old('body', $service->body)"
-        class="mt-1 block w-full min-h-[250px] @error('body') trix-content-invalid @enderror" />
-    @error('body')
-        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-    @enderror
-</div>
-
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
     <div>
         <label for="card_id" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">ID Kartu (Opsional)</label>

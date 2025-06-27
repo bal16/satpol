@@ -25,14 +25,14 @@ class ServicesController extends Controller
 
             return DataTables::of($data)
                 ->addIndexColumn()
-                ->editColumn('body', function ($row) {
-                    // Ubah objek RichText menjadi string HTML sebelum dikirim ke DataTables
-                    return (string) $row->body;
+                ->addColumn('items_count', function ($row) {
+                    return $row->items()->count(); // Get count of related items
                 })
                 ->addColumn('action', function ($row) {
-                    $editBtn = '<a href="' . route('admin.services.edit', $row->id) . '" class="font-medium text-indigo-600 dark:text-indigo-500 hover:underline">Edit</a>';
-                    $deleteBtn = '<button class="font-medium text-red-600 dark:text-red-500 hover:underline delete-service-btn ml-2" data-id="' . $row->id . '">Hapus</button>';
-                    return $editBtn . $deleteBtn;
+                    $editBtn = '<a href="' . route('admin.services.edit', $row->id) . '" class="font-medium text-indigo-600 dark:text-indigo-500 hover:underline">Edit</a> ';
+                    $manageItemsBtn = '<button class="font-medium text-blue-600 dark:text-blue-500 hover:underline manage-items-btn ml-2 cursor-pointer" data-id="' . $row->id . '" data-title="' . htmlspecialchars($row->title, ENT_QUOTES) . '">Kelola Item</button> ';
+                    $deleteBtn = '<button class="cursor-pointer font-medium text-red-600 dark:text-red-500 hover:underline delete-service-btn ml-2" data-id="' . $row->id . '">Hapus</button>';
+                    return $editBtn . $manageItemsBtn . $deleteBtn;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
@@ -54,7 +54,6 @@ class ServicesController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'body' => 'nullable|string',
             'image_src' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validasi untuk upload file
             'card_id' => 'nullable|string|max:255',
         ]);
@@ -76,7 +75,6 @@ class ServicesController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'body' => 'nullable|string',
             'image_src' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // 'nullable' karena tidak selalu diupdate
             'card_id' => 'nullable|string|max:255',
         ]);

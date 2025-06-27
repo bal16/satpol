@@ -52,13 +52,13 @@ class SOPController extends Controller
             'link' => $validatedData['link'],
         ]);
 
-        return redirect()->route('admin.profile.aop')->with('success', 'Profile item berhasil diperbarui.');
+        return redirect()->route('admin.profile.sop')->with('success', 'SOP item berhasil diperbarui.');
     }
 
     public function destroy(SOP $sop)
     {
         SOP::destroy($sop->id);
 
-        return redirect(route('admin.profile.sop'))->with('success', 'Berita berhasil dihapus.');
+        return redirect(route('admin.profile.sop'))->with('success', 'SOP berhasil dihapus.');
     }
 }

@@ -7,11 +7,21 @@
             integrity="sha384-AsA35Lk2b1bdNXsEfz6MqkD/XkQdW8zEykqBZihdl/kU7DLyednCOCzbKfbSoxFb" crossorigin="anonymous">
         <link href="https://cdn.datatables.net/responsive/3.0.4/css/responsive.dataTables.min.css" rel="stylesheet"
             integrity="sha384-kz9bozrCHP/y+wTJV8P+n/dMBOh00rqNmmIAgHckzFWpoSB49V5ornW1aY+uYTyA" crossorigin="anonymous">
+        <!-- SweetAlert2 -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     @endpush
 
     <div class="mb-6 flex flex-col sm:flex-row justify-between items-center">
         <h1 class="text-2xl font-semibold text-slate-800 dark:text-white">Kelola Galeri & Kategori</h1>
     </div>
+
+    {{-- These divs are used to pass session messages to SweetAlert2 --}}
+    @if (session('success'))
+        <div id="swal-success" data-message="{{ session('success') }}"></div>
+    @endif
+    @if (session('error'))
+        <div id="swal-error" data-message="{{ session('error') }}"></div>
+    @endif
 
     <div class="bg-white dark:bg-stone-800 shadow-xl rounded-lg p-6">
         <!-- Tab Nav -->
@@ -132,6 +142,8 @@
         <script src="https://cdn.datatables.net/responsive/3.0.4/js/dataTables.responsive.min.js"
             integrity="sha384-A6In5tKqlvPZKDpH+ei4A3A4TZrEsyvvN2Fe+oCB1IaQfGD5HNqDIxwjztNKSGDd" crossorigin="anonymous">
         </script>
+        <!-- SweetAlert2 -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         {{-- <script>
             $(document).ready(function() {
@@ -166,6 +178,31 @@
 
         <script>
             $(document).ready(function() {
+                // Display session messages with SweetAlert2
+                if ($('#swal-success').length) {
+                    Swal.fire({
+                        background: document.documentElement.classList.contains('dark') ? '#292524' : '#fff',
+                        color: document.documentElement.classList.contains('dark') ? '#d6d3d1' : '#1e293b',
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: $('#swal-success').data('message'),
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                }
+                if ($('#swal-error').length) {
+                    Swal.fire({
+                        background: document.documentElement.classList.contains('dark') ? '#292524' : '#fff',
+                        color: document.documentElement.classList.contains('dark') ? '#d6d3d1' : '#1e293b',
+                        icon: 'error',
+                        title: 'Gagal!',
+                        text: $('#swal-error').data('message'),
+                        showConfirmButton: true,
+                        timer: 3000
+                    });
+                }
+
+                // Gallery DataTable
                 let GalleryTable = $('#galleryTable').DataTable({
                     responsive: true,
                     processing: true, // Show processing indicator
@@ -536,8 +573,15 @@
                         } else {
                             closeModal(createGalleryModal, createGalleryModalContent);
                             $('#galleryTable').DataTable().ajax.reload(); // Reload DataTable
-                            // Add a success notification if you have one (e.g., Toastr)
-                            alert(data.message || 'Galeri berhasil ditambahkan!');
+                            Swal.fire({
+                                background: document.documentElement.classList.contains('dark') ? '#292524' : '#fff',
+                                color: document.documentElement.classList.contains('dark') ? '#d6d3d1' : '#1e293b',
+                                icon: 'success',
+                                title: 'Berhasil!',
+                                text: data.message || 'Galeri berhasil ditambahkan!',
+                                showConfirmButton: false,
+                                timer: 2000
+                            });
                         }
                     })
                     .catch(error => console.error('Error:', error));
@@ -575,30 +619,87 @@
             // Handle Edit Form Submission
             editGalleryForm.addEventListener('submit', function(e) {
                 e.preventDefault();
-                if (!confirm('Apakah Anda yakin ingin menyimpan perubahan ini?')) return;
+                const form = this;
+                const galleryId = document.getElementById('edit_id').value;
+                const formData = new FormData(form);
 
-                const GalleryId = document.getElementById('edit_id').value;
-                const formData = new FormData(this);
+                Swal.fire({
+                    title: 'Simpan Perubahan?',
+                    text: "Anda yakin ingin menyimpan perubahan pada item galeri ini?",
+                    icon: 'question',
+                    showCancelButton: true,
+                    background: document.documentElement.classList.contains('dark') ? '#292524' : '#fff',
+                    color: document.documentElement.classList.contains('dark') ? '#d6d3d1' : '#1e293b',
+                    customClass: {
+                        confirmButton: 'bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded',
+                        cancelButton: 'bg-slate-500 hover:bg-slate-600 text-white font-bold py-2 px-4 rounded ml-2'
+                    },
+                    buttonsStyling: false,
+                    confirmButtonText: 'Ya, simpan!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        fetch(`/admin/gallery/${galleryId}`, { // Using the standard update route
+                            method: 'POST', // HTML forms don't support PUT directly, so use POST and _method field
+                            headers: {
+                                'X-CSRF-TOKEN': formData.get('_token'),
+                                'Accept': 'application/json',
+                            },
+                            body: formData // FormData will include _method: 'PUT'
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.errors) {
+                                displayFormErrors(editGalleryForm, data.errors);
+                            } else {
+                                closeModal(editGalleryModal, editGalleryModalContent);
+                                $('#galleryTable').DataTable().ajax.reload();
+                                Swal.fire({ background: document.documentElement.classList.contains('dark') ? '#292524' : '#fff', color: document.documentElement.classList.contains('dark') ? '#d6d3d1' : '#1e293b', icon: 'success', title: 'Berhasil!', text: data.message || 'Galeri berhasil diperbarui!', showConfirmButton: false, timer: 2000 });
+                            }
+                        })
+                        .catch(error => console.error('Error:', error));
+                    }
+                });
+            });
 
-                fetch(`/admin/gallery/${GalleryId}`, { // Using the standard update route
-                        method: 'POST', // HTML forms don't support PUT directly, so use POST and _method field
-                        headers: {
-                            'X-CSRF-TOKEN': formData.get('_token'),
-                            'Accept': 'application/json',
-                        },
-                        body: formData // FormData will include _method: 'PUT'
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.errors) {
-                            displayFormErrors(editGalleryForm, data.errors);
-                        } else {
-                            closeModal(editGalleryModal, editGalleryModalContent);
-                            $('#galleryTable').DataTable().ajax.reload();
-                            alert(data.message || 'Galeri berhasil diperbarui!');
-                        }
-                    })
-                    .catch(error => console.error('Error:', error));
+            // Handle Delete Gallery Button Click (delegated from table)
+            $('#galleryTable tbody').on('click', 'button.delete-gallery-btn', function() {
+                const galleryId = $(this).data('id');
+                Swal.fire({
+                    title: 'Anda yakin?',
+                    text: "Item galeri ini akan dihapus secara permanen!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    background: document.documentElement.classList.contains('dark') ? '#292524' : '#fff',
+                    color: document.documentElement.classList.contains('dark') ? '#d6d3d1' : '#1e293b',
+                    customClass: {
+                        confirmButton: 'bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded',
+                        cancelButton: 'bg-slate-500 hover:bg-slate-600 text-white font-bold py-2 px-4 rounded ml-2'
+                    },
+                    buttonsStyling: false,
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        fetch(`/admin/gallery/${galleryId}`, {
+                            method: 'DELETE',
+                            headers: {
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                                'Accept': 'application/json',
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.message) {
+                                $('#galleryTable').DataTable().ajax.reload();
+                                Swal.fire({ background: document.documentElement.classList.contains('dark') ? '#292524' : '#fff', color: document.documentElement.classList.contains('dark') ? '#d6d3d1' : '#1e293b', icon: 'success', title: 'Dihapus!', text: data.message, showConfirmButton: false, timer: 2000 });
+                            } else {
+                                Swal.fire({ background: document.documentElement.classList.contains('dark') ? '#292524' : '#fff', color: document.documentElement.classList.contains('dark') ? '#d6d3d1' : '#1e293b', icon: 'error', title: 'Gagal!', text: 'Gagal menghapus item galeri.' });
+                            }
+                        })
+                        .catch(error => console.error('Error deleting gallery item:', error));
+                    }
+                });
             });
 
             // Handle Create Category Form Submission
@@ -607,27 +708,27 @@
                     e.preventDefault();
                     const formData = new FormData(this);
                     fetch("{{ route('admin.categories.store') }}", { // Ensure this route exists
-                            method: 'POST',
-                            headers: {
-                                'X-CSRF-TOKEN': formData.get('_token'),
-                                'Accept': 'application/json',
-                            },
-                            body: formData
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.errors) {
-                                displayFormErrors(createCategoryForm, data.errors);
-                            } else {
-                                closeModal(createCategoryModal, createCategoryModalContent);
-                                $('#categoryTable').DataTable().ajax.reload();
-                                alert(data.message || 'Kategori berhasil ditambahkan!');
-                                // Also reload categories in gallery forms
-                                if (createCategorySelect) loadCategories(createCategorySelect);
-                                if (editCategorySelect) loadCategories(editCategorySelect);
-                            }
-                        })
-                        .catch(error => console.error('Error creating category:', error));
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': formData.get('_token'),
+                            'Accept': 'application/json',
+                        },
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.errors) {
+                            displayFormErrors(createCategoryForm, data.errors);
+                        } else {
+                            closeModal(createCategoryModal, createCategoryModalContent);
+                            $('#categoryTable').DataTable().ajax.reload();
+                            Swal.fire({ background: document.documentElement.classList.contains('dark') ? '#292524' : '#fff', color: document.documentElement.classList.contains('dark') ? '#d6d3d1' : '#1e293b', icon: 'success', title: 'Berhasil!', text: data.message || 'Kategori berhasil ditambahkan!', showConfirmButton: false, timer: 2000 });
+                            // Also reload categories in gallery forms
+                            if (createCategorySelect) loadCategories(createCategorySelect);
+                            if (editCategorySelect) loadCategories(editCategorySelect);
+                        }
+                    })
+                    .catch(error => console.error('Error creating category:', error));
                 });
             }
 
@@ -643,61 +744,92 @@
             if (editCategoryForm) {
                 editCategoryForm.addEventListener('submit', function(e) {
                     e.preventDefault();
-                    if (!confirm('Apakah Anda yakin ingin menyimpan perubahan kategori ini?')) return;
+                    const form = this;
+                    const categoryId = document.getElementById('edit_category_id_hidden').value;
+                    const formData = new FormData(form);
 
-                    const categoryId = document.getElementById('edit_category_id_hidden').value; // Updated ID
-                    const formData = new FormData(this);
-
-                    fetch(`/admin/categories/${categoryId}`, { // Ensure this route exists, e.g., admin.categories.update
-                            method: 'POST', // Use POST with _method: 'PUT'
-                            headers: {
-                                'X-CSRF-TOKEN': formData.get('_token'),
-                                'Accept': 'application/json',
-                            },
-                            body: formData
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.errors) {
-                                displayFormErrors(editCategoryForm, data.errors);
-                            } else {
-                                closeModal(editCategoryModal, editCategoryModalContent);
-                                $('#categoryTable').DataTable().ajax.reload();
-                                alert(data.message || 'Kategori berhasil diperbarui!');
-                                if (createCategorySelect) loadCategories(createCategorySelect);
-                                if (editCategorySelect) loadCategories(editCategorySelect);
-                            }
-                        })
-                        .catch(error => console.error('Error updating category:', error));
+                    Swal.fire({
+                        title: 'Simpan Perubahan?',
+                        text: "Anda yakin ingin menyimpan perubahan pada kategori ini?",
+                        icon: 'question',
+                        showCancelButton: true,
+                        background: document.documentElement.classList.contains('dark') ? '#292524' : '#fff',
+                        color: document.documentElement.classList.contains('dark') ? '#d6d3d1' : '#1e293b',
+                        customClass: {
+                            confirmButton: 'bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded',
+                            cancelButton: 'bg-slate-500 hover:bg-slate-600 text-white font-bold py-2 px-4 rounded ml-2'
+                        },
+                        buttonsStyling: false,
+                        confirmButtonText: 'Ya, simpan!',
+                        cancelButtonText: 'Batal'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            fetch(`/admin/categories/${categoryId}`, {
+                                method: 'POST',
+                                headers: {
+                                    'X-CSRF-TOKEN': formData.get('_token'),
+                                    'Accept': 'application/json',
+                                },
+                                body: formData
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.errors) {
+                                    displayFormErrors(editCategoryForm, data.errors);
+                                } else {
+                                    closeModal(editCategoryModal, editCategoryModalContent);
+                                    $('#categoryTable').DataTable().ajax.reload();
+                                    Swal.fire({ background: document.documentElement.classList.contains('dark') ? '#292524' : '#fff', color: document.documentElement.classList.contains('dark') ? '#d6d3d1' : '#1e293b', icon: 'success', title: 'Berhasil!', text: data.message || 'Kategori berhasil diperbarui!', showConfirmButton: false, timer: 2000 });
+                                    if (createCategorySelect) loadCategories(createCategorySelect);
+                                    if (editCategorySelect) loadCategories(editCategorySelect);
+                                }
+                            })
+                            .catch(error => console.error('Error updating category:', error));
+                        }
+                    });
                 });
             }
 
             // Handle Delete Category Button Click (delegated from table)
             $('#categoryTable tbody').on('click', 'button.delete-category-btn', function() {
                 const categoryId = $(this).data('id');
-                if (!confirm('Apakah Anda yakin ingin menghapus kategori ini?')) return;
-
-                fetch(`/admin/categories/${categoryId}`, {
-                        method: 'DELETE',
-                        headers: {
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
-                                'content'),
-                            'Accept': 'application/json',
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.message) {
-                            alert(data.message);
-                            $('#categoryTable').DataTable().ajax.reload();
-                            // Optionally reload categories in gallery forms if needed
-                            if (createCategorySelect) loadCategories(createCategorySelect);
-                            if (editCategorySelect) loadCategories(editCategorySelect);
-                        } else {
-                            alert('Gagal menghapus kategori.');
-                        }
-                    })
-                    .catch(error => console.error('Error deleting category:', error));
+                Swal.fire({
+                    title: 'Anda yakin?',
+                    text: "Menghapus kategori akan membuat item galeri terkait menjadi tidak berkategori. Aksi ini tidak dapat dibatalkan!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    background: document.documentElement.classList.contains('dark') ? '#292524' : '#fff',
+                    color: document.documentElement.classList.contains('dark') ? '#d6d3d1' : '#1e293b',
+                    customClass: {
+                        confirmButton: 'bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded',
+                        cancelButton: 'bg-slate-500 hover:bg-slate-600 text-white font-bold py-2 px-4 rounded ml-2'
+                    },
+                    buttonsStyling: false,
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        fetch(`/admin/categories/${categoryId}`, {
+                            method: 'DELETE',
+                            headers: {
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                                'Accept': 'application/json',
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.message) {
+                                $('#categoryTable').DataTable().ajax.reload();
+                                Swal.fire({ background: document.documentElement.classList.contains('dark') ? '#292524' : '#fff', color: document.documentElement.classList.contains('dark') ? '#d6d3d1' : '#1e293b', icon: 'success', title: 'Dihapus!', text: data.message, showConfirmButton: false, timer: 2000 });
+                                if (createCategorySelect) loadCategories(createCategorySelect);
+                                if (editCategorySelect) loadCategories(editCategorySelect);
+                            } else {
+                                Swal.fire({ background: document.documentElement.classList.contains('dark') ? '#292524' : '#fff', color: document.documentElement.classList.contains('dark') ? '#d6d3d1' : '#1e293b', icon: 'error', title: 'Gagal!', text: 'Gagal menghapus kategori.' });
+                            }
+                        })
+                        .catch(error => console.error('Error deleting category:', error));
+                    }
+                });
             });
 
             // CSRF Token for AJAX

@@ -39,7 +39,7 @@
 
         <!-- Tab Content -->
         <div id="newsContent" data-tab-content class="space-y-6">
-            <form action="{{ route('admin.news.update', $news->id) }}" method="POST">
+            <form id="editNewsForm" action="{{ route('admin.news.update', $news->id) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="space-y-4">
@@ -255,6 +255,30 @@ trix-content-invalid
                     }
                     activateTab(buttonToActivate);
                 }
+
+                // SweetAlert for main form submission
+                const editNewsForm = document.getElementById('editNewsForm');
+                if (editNewsForm) {
+                    editNewsForm.addEventListener('submit', function(e) {
+                        e.preventDefault(); // Prevent default submission
+                        const form = this;
+                        Swal.fire({
+                            title: 'Simpan Perubahan?',
+                            text: "Anda yakin ingin menyimpan perubahan pada berita ini?",
+                            icon: 'question',
+                            showCancelButton: true,
+                            background: document.documentElement.classList.contains('dark') ? '#292524' : '#fff',
+                            color: document.documentElement.classList.contains('dark') ? '#d6d3d1' : '#1e293b',
+                            customClass: {
+                                confirmButton: 'bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded',
+                                cancelButton: 'bg-slate-500 hover:bg-slate-600 text-white font-bold py-2 px-4 rounded ml-2'
+                            },
+                            buttonsStyling: false,
+                            confirmButtonText: 'Ya, simpan!',
+                            cancelButtonText: 'Batal'
+                        }).then((result) => result.isConfirmed && form.submit());
+                    });
+                }
             });
 
             // SweetAlert for delete confirmation
@@ -263,9 +287,14 @@ trix-content-invalid
                     title: 'Anda yakin?',
                     text: "Gambar ini akan dihapus secara permanen!",
                     icon: 'warning',
+                    background: document.documentElement.classList.contains('dark') ? '#292524' : '#fff',
+                    color: document.documentElement.classList.contains('dark') ? '#d6d3d1' : '#1e293b',
+                    customClass: {
+                        confirmButton: 'bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded',
+                        cancelButton: 'bg-slate-500 hover:bg-slate-600 text-white font-bold py-2 px-4 rounded ml-2'
+                    },
                     showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#3085d6',
+                    buttonsStyling: false,
                     confirmButtonText: 'Ya, hapus!',
                     cancelButtonText: 'Batal'
                 }).then((result) => {
