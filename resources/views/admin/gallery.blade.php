@@ -9,56 +9,62 @@
             integrity="sha384-kz9bozrCHP/y+wTJV8P+n/dMBOh00rqNmmIAgHckzFWpoSB49V5ornW1aY+uYTyA" crossorigin="anonymous">
     @endpush
 
-    <!-- Page Title & Add New Button -->
     <div class="mb-6 flex flex-col sm:flex-row justify-between items-center">
-        <h1 class="text-2xl font-semibold text-slate-800 dark:text-white">Kelola Galeri</h1>
-        <button id="addGalleryBtn"
-            class="inline-flex items-center px-5 py-2.5 bg-green-100 dark:bg-green-500 text-green-600 dark:text-white text-sm font-medium rounded-lg hover:bg-green-700 dark:hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400 focus:ring-offset-2 dark:focus:ring-offset-slate-800 transition duration-150 ease-in-out focus:text-white hover:text-white">
-            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                    d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-                    clip-rule="evenodd"></path>
-            </svg>
-            Unggah ke Galeri
-        </button>
+        <h1 class="text-2xl font-semibold text-slate-800 dark:text-white">Kelola Galeri & Kategori</h1>
     </div>
 
-    <!-- Gallery Management Table -->
-    <div class="bg-white dark:bg-stone-800 text-stone-900 dark:text-white shadow-xl rounded-lg">
-        <div class="p-4">
-            <table id="galleryTable" class="table-auto">
-                <thead class="bg-red-600 dark:bg-stone-700">
-                    <tr>
-                        <th class="text-left text-xs font-medium text-white uppercase">
-                            No.</th>
-                        <th class="text-left text-xs font-medium text-white uppercase">
-                            Title</th>
-                        <th class="text-left text-xs font-medium text-white uppercase">
-                            Photo</th>
-                        <th class="text-left text-xs font-medium text-white uppercase">
-                            Category</th>
-                        <th class="text-left text-xs font-medium text-white uppercase">
-                            Created At</th>
-                        <th class="text-left text-xs font-medium text-white uppercase">
-                            Updated At</th>
-                        <th class="text-left text-xs font-medium text-white uppercase">
-                            Actions</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white dark:bg-stone-700 divide-y divide-slate-200 dark:divide-stone-600">
-                </tbody>
-            </table>
+    <div class="bg-white dark:bg-stone-800 shadow-xl rounded-lg p-6">
+        <!-- Tab Nav -->
+        <div class="mb-6 border-b border-slate-200 dark:border-stone-700">
+            <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="galleryTabs">
+                <li class="mr-2">
+                    <button type="button"
+                        class="inline-block p-4 border-b-2 rounded-t-lg focus:outline-none text-slate-500 dark:text-slate-400 cursor-pointer"
+                        data-tab-target="#galleryContent">Galeri</button>
+                </li>
+                <li class="mr-2">
+                    <button type="button"
+                        class="inline-block p-4 border-b-2 rounded-t-lg focus:outline-none text-slate-500 dark:text-slate-400 cursor-pointer"
+                        data-tab-target="#categoryContent">Kategori</button>
+                </li>
+            </ul>
         </div>
-        {{-- Pagination (Uncomment and use if $GalleryItems is a paginated collection from your controller) --}}
-        {{--
-        @if (isset($GalleryItems) && $GalleryItems instanceof \Illuminate\Pagination\LengthAwarePaginator && $GalleryItems->hasPages())
-        <div class="px-4 py-3 bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-stone-600">
-            {{ $GalleryItems->links() }}
-        </div>
-        @endif
-        --}}
-    </div>
 
+        <!-- Tab Content for Gallery -->
+        <div id="galleryContent" data-tab-content class="space-y-4">
+            <!-- Page Title & Add New Button -->
+            <div class="mb-6 flex flex-col sm:flex-row justify-between items-center">
+                <h1 class="text-2xl font-semibold text-slate-800 dark:text-white">Daftar Foto Galeri</h1>
+                <button id="addGalleryBtn"
+                    class="inline-flex items-center px-5 py-2.5 bg-green-100 dark:bg-green-500 text-green-600 dark:text-white text-sm font-medium rounded-lg hover:bg-green-700 dark:hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400 focus:ring-offset-2 dark:focus:ring-offset-slate-800 transition duration-150 ease-in-out focus:text-white hover:text-white cursor-pointer">
+                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                    Unggah ke Galeri
+                </button>
+            </div>
+
+            <!-- Gallery Management Table -->
+            <div class="bg-white dark:bg-stone-800 text-stone-900 dark:text-white shadow-xl rounded-lg p-4">
+                <table id="galleryTable" class="table-auto">
+                    <thead class="bg-red-600 dark:bg-stone-700">
+                        <tr>
+                            <th class="text-left text-xs font-medium text-white uppercase">No.</th>
+                            <th class="text-left text-xs font-medium text-white uppercase">Title</th>
+                            <th class="text-left text-xs font-medium text-white uppercase">Photo</th>
+                            <th class="text-left text-xs font-medium text-white uppercase">Category</th>
+                            <th class="text-left text-xs font-medium text-white uppercase">Created At</th>
+                            <th class="text-left text-xs font-medium text-white uppercase">Updated At</th>
+                            <th class="text-left text-xs font-medium text-white uppercase">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-stone-700 divide-y divide-slate-200 dark:divide-stone-600">
+                    </tbody>
+                </table>
+            </div>
+        </div>
     <!-- Create Gallery Modal -->
     <x-admin.gallery-modal modalId="createGalleryModal" modalTitle="Tambah Foto Baru" formId="createGalleryForm"
         submitButtonText="Simpan" :isEdit="false" />
@@ -68,38 +74,40 @@
         submitButtonText="Simpan Perubahan" :isEdit="true" />
 
     <!-- Spacer -->
-    <div class="my-12"></div>
+    {{-- <div class="my-12"></div> --}} {{-- Removed spacer as tabs handle separation --}}
 
-    <!-- Page Title & Add New Category Button -->
-    <div class="mb-6 flex flex-col sm:flex-row justify-between items-center">
-        <h1 class="text-2xl font-semibold text-slate-800 dark:text-white">Kelola Kategori Galeri</h1>
-        <button id="addCategoryBtn"
-            class="inline-flex items-center px-5 py-2.5 bg-blue-100 dark:bg-blue-500 text-blue-600 dark:text-white text-sm font-medium rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:ring-offset-2 dark:focus:ring-offset-slate-800 transition duration-150 ease-in-out focus:text-white hover:text-white">
-            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
-                </path>
-            </svg>
-            Tambah Kategori Baru
-        </button>
-    </div>
+        <!-- Tab Content for Category -->
+        <div id="categoryContent" data-tab-content class="hidden space-y-4">
+            <!-- Page Title & Add New Category Button -->
+            <div class="mb-6 flex flex-col sm:flex-row justify-between items-center">
+                <h1 class="text-2xl font-semibold text-slate-800 dark:text-white">Daftar Kategori Galeri</h1>
+                <button id="addCategoryBtn"
+                    class="inline-flex items-center px-5 py-2.5 bg-blue-100 dark:bg-blue-500 text-blue-600 dark:text-white text-sm font-medium rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:ring-offset-2 dark:focus:ring-offset-slate-800 transition duration-150 ease-in-out focus:text-white hover:text-white cursor-pointer">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
+                        </path>
+                    </svg>
+                    Tambah Kategori Baru
+                </button>
+            </div>
 
-    <!-- Category Management Table -->
-    <div class="bg-white dark:bg-stone-800 text-stone-900 dark:text-white shadow-xl rounded-lg">
-        <div class="p-4">
-            <table id="categoryTable" class="table-auto">
-                <thead class="bg-red-600 dark:bg-stone-700">
-                    <tr>
-                        <th class="text-left text-xs font-medium text-white uppercase">No.</th>
-                        <th class="text-left text-xs font-medium text-white uppercase">Nama Kategori</th>
-                        <th class="text-left text-xs font-medium text-white uppercase">Created At</th>
-                        <th class="text-left text-xs font-medium text-white uppercase">Updated At</th>
-                        <th class="text-left text-xs font-medium text-white uppercase">Actions</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white dark:bg-stone-700 divide-y divide-slate-200 dark:divide-stone-600">
-                </tbody>
-            </table>
+            <!-- Category Management Table -->
+            <div class="bg-white dark:bg-stone-800 text-stone-900 dark:text-white shadow-xl rounded-lg p-4">
+                <table id="categoryTable" class="table-auto">
+                    <thead class="bg-red-600 dark:bg-stone-700">
+                        <tr>
+                            <th class="text-left text-xs font-medium text-white uppercase">No.</th>
+                            <th class="text-left text-xs font-medium text-white uppercase">Nama Kategori</th>
+                            <th class="text-left text-xs font-medium text-white uppercase">Created At</th>
+                            <th class="text-left text-xs font-medium text-white uppercase">Updated At</th>
+                            <th class="text-left text-xs font-medium text-white uppercase">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-stone-700 divide-y divide-slate-200 dark:divide-stone-600">
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
@@ -278,6 +286,59 @@
                     ], // Default order by created_at descending
                 });
             })
+
+            // Tab functionality for Gallery Page
+            document.addEventListener('DOMContentLoaded', function() {
+                const tabButtons = document.querySelectorAll('#galleryTabs [data-tab-target]');
+                const tabContents = document.querySelectorAll('[data-tab-content]');
+                const activeTabClasses = ['border-red-500', 'text-red-600', 'dark:text-red-500'];
+                const inactiveTabClasses = ['border-transparent', 'hover:text-slate-600', 'hover:border-slate-300',
+                    'dark:hover:text-slate-300', 'dark:hover:border-slate-600'
+                ];
+
+                function activateTab(button) {
+                    const target = document.querySelector(button.dataset.tabTarget);
+
+                    tabContents.forEach(tabContent => {
+                        tabContent.classList.add('hidden');
+                    });
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove(...activeTabClasses);
+                        btn.classList.add(...inactiveTabClasses);
+                        btn.setAttribute('aria-selected', 'false');
+                    });
+
+                    if (target) {
+                        target.classList.remove('hidden');
+                    }
+                    button.classList.add(...activeTabClasses);
+                    button.classList.remove(...inactiveTabClasses);
+                    button.setAttribute('aria-selected', 'true');
+                    localStorage.setItem('activeGalleryTab', button.dataset.tabTarget);
+                }
+
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', () => activateTab(button));
+                });
+
+                const storedTab = localStorage.getItem('activeGalleryTab');
+                const defaultTabButton = tabButtons.length > 0 ? tabButtons[0] : null;
+                let tabToActivate = defaultTabButton;
+
+                if (storedTab) {
+                    const storedTabButton = document.querySelector(`[data-tab-target="${storedTab}"]`);
+                    if (storedTabButton) {
+                        tabToActivate = storedTabButton;
+                    }
+                }
+
+                if (tabToActivate) {
+                    activateTab(tabToActivate);
+                } else if (tabButtons.length > 0) {
+                    // Fallback if no tab was activated (e.g. localStorage was invalid)
+                    activateTab(tabButtons[0]);
+                }
+            });
 
             // --- Category Modal Handling ---
             const createCategoryModal = document.getElementById('createCategoryModal');
