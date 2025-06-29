@@ -18,37 +18,95 @@ class ServiceSeeder extends Seeder
         $servicesData = [
             [
                 'service' => [
-                    'title' => 'Layanan Pengaduan Masyarakat',
+                    'title' => 'Layanan',
                     'image_src' => 'services_images/pengaduan.jpg',
-                    'card_id' => 'pengaduan-masyarakat',
+                    'card_id' => 'layanan',
                 ],
                 'items' => [
-                    ['text' => 'Formulir Pengaduan Online', 'href' => '/pengaduan/online'],
-                    ['text' => 'Lacak Status Pengaduan', 'href' => '/pengaduan/lacak'],
-                    ['text' => 'Hotline WhatsApp', 'href' => 'https://wa.me/6281234567890'],
+                    ['text' => 'Ssarana & Prasarana', 'href' => '#'],
+                    ['text' => 'Daftar Informasi Publik', 'href' => '#'],
+                    ['text' => 'Peraturan', 'href' => '#'],
                 ]
             ],
             [
                 'service' => [
-                    'title' => 'Informasi Perizinan',
+                    'title' => 'Pemberdayaan',
                     'image_src' => 'services_images/perizinan.jpg',
-                    'card_id' => 'informasi-perizinan',
+                    'card_id' => 'pemberdayaan',
                 ],
                 'items' => [
-                    ['text' => 'Izin Keramaian', 'href' => '/izin/keramaian'],
-                    ['text' => 'Izin Reklame', 'href' => '/izin/reklame'],
-                    ['text' => 'Regulasi Terkait Perizinan', 'href' => '/regulasi/perizinan'],
+                    ['text' => 'Bidang Kamtibnas', 'href' => '#'],
+                    ['text' => 'Bidang Kesehatan', 'href' => '#'],
+                    ['text' => 'Bidang Pariwisata', 'href' => '#'],
                 ]
             ],
             [
                 'service' => [
-                    'title' => 'Edukasi dan Sosialisasi',
+                    'title' => 'PPID',
                     'image_src' => 'services_images/edukasi.jpg',
-                    'card_id' => 'edukasi-sosialisasi',
+                    'card_id' => 'ppid',
                 ],
                 'items' => [
-                    ['text' => 'Jadwal Sosialisasi Perda', 'href' => '/edukasi/jadwal'],
-                    ['text' => 'Materi Edukasi Publik', 'href' => '/edukasi/materi'],
+                    ['text' => 'Dasar Hukum', 'href' => '#'],
+                    ['text' => 'Pelayanan Informasi', 'href' => '#'],
+                    ['text' => 'Profil PPID', 'href' => '#'],
+                ]
+            ],
+            [
+                'service' => [
+                    'title' => 'Kontak',
+                    'image_src' => 'services_images/edukasi.jpg',
+                    'card_id' => 'kontak',
+                ],
+                'items' => [
+                    ['text' => 'No Telp: 08123456789', 'href' => '#'],
+                    ['text' => 'Surel: mail@mail.com', 'href' => '#'],
+                    ['text' => 'Facebook: facebook.com/example', 'href' => '#'],
+                    ['text' => 'X: x.com/example', 'href' => '#'],
+                    ['text' => 'Instagram: instagram.com/example', 'href' => '#'],
+                ]
+            ],
+            [
+                'service' => [
+                    'title' => 'Perda Kota Semarang',
+                    'image_src' => 'services_images/edukasi.jpg',
+                    'card_id' => 'perda_kota_semarang',
+                ],
+                'items' => [
+                    ['text' => 'Perda Bangunan Gedung', 'href' => '#'],
+                    ['text' => 'Perda Minuman Beralkohol', 'href' => '#'],
+                    ['text' => 'Perda Pengelolaan Rumah', 'href' => '#'],
+                    ['text' => 'Perda Pengendalian Lingkungan Hidup', 'href' => '#'],
+                    ['text' => 'Perda Penyelenggaraan Administrasi Kependudukan', 'href' => '#'],
+                    ['text' => 'Perda Pendidik Pegawai Negeri Sipil', 'href' => '#'],
+                    ['text' => 'Perda Rencana Tata Ruang Wilayah', 'href' => '#'],
+                    ['text' => 'Perda Reklame', 'href' => '#'],
+                    ['text' => 'Perda Pengelolaan Pohon Pada Ruang Terbuka Hijau', 'href' => '#'],
+                ]
+            ],
+            [
+                'service' => [
+                    'title' => 'SOP',
+                    'image_src' => 'services_images/edukasi.jpg',
+                    'card_id' => 'sop',
+                ],
+                'items' => [
+                    ['text' => 'Bidang PPUD', 'href' => '#'],
+                    ['text' => 'Bidang Tibum', 'href' => '#'],
+                    ['text' => 'Bidang Linmas', 'href' => '#'],
+                    ['text' => 'Bidang Sekretariat', 'href' => '#'],
+                    ['text' => 'Bidang Binmas', 'href' => '#'],
+                ]
+            ],
+            [
+                'service' => [
+                    'title' => 'Pajak Daerah',
+                    'image_src' => 'services_images/edukasi.jpg',
+                    'card_id' => 'pajak_daerah',
+                ],
+                'items' => [
+                    ['text' => 'Daftar Wajib Pajak', 'href' => '/services/pajak-daftar'],
+                    ['text' => 'Jatuh Tempo Pajak', 'href' => '/services/tempo-pajak'],
                 ]
             ],
         ];
