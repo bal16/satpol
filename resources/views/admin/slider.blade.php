@@ -31,7 +31,7 @@
             @endphp
 
             <div
-                class="bg-red-700 dark:bg-stone-500 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out">
+                class="bg-red-700 dark:bg-stone-700 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out">
                 <h3 class="text-lg font-semibold text-white dark:text-slate-100 mb-4">Slider Gambar #{{ $slotNumber }}
                 </h3>
 

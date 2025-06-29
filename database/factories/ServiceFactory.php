@@ -17,7 +17,9 @@ class ServiceFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => fake()->catchPhrase(),
+            'image_src' => 'services_images/placeholder.jpg', // Placeholder default
+            'card_id' => fake()->unique()->slug(2),
         ];
     }
 }

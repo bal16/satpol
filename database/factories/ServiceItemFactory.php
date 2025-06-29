@@ -1,8 +1,6 @@
 <?php
 
 namespace Database\Factories;
-
-use App\Models\Service; // Import the Service model
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,9 +16,8 @@ class ServiceItemFactory extends Factory
     public function definition(): array
     {
         return [
-            'service_id' => Service::factory(), // Menghubungkan ke Service
-            'text' => fake()->sentence(),
-            'href' => fake()->optional()->url(),
+            'text' => fake()->sentence(4),
+            'href' => fake()->optional(0.7)->url(), // 70% kemungkinan memiliki URL
         ];
     }
 }
