@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Requests\Auth\LoginRequest;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Http; // Tambahkan ini
+use App\Http\Requests\Auth\LoginRequest;
+use App\Models;
+use Illuminate\Http\Request; // Tambahkan ini
 // use Symfony\Component\HttpFoundation\IpUtils; // Hapus atau pastikan ini ada jika Anda benar-benar menggunakannya
 use Illuminate\Support\Facades\Auth;
-use App\Models;
+use Illuminate\Support\Facades\Http;
 
 class LoginController extends Controller
 {
@@ -47,12 +47,12 @@ class LoginController extends Controller
             return redirect()->back()->withErrors(['g-recaptcha-response' => 'Mohon lengkapi reCAPTCHA.']);
         }
 
-        $url = "https://www.google.com/recaptcha/api/siteverify";
+        $url = 'https://www.google.com/recaptcha/api/siteverify';
 
         $params = [
             'secret' => config('services.recaptcha.secret'),
             'response' => $recaptcha,
-            'remoteip' => $request->ip() // Menggunakan IP langsung dari request
+            'remoteip' => $request->ip(), // Menggunakan IP langsung dari request
         ];
 
         // Melakukan POST request ke Google reCAPTCHA
@@ -60,20 +60,22 @@ class LoginController extends Controller
         $resultJson = $recaptchaResponse->json();
 
         // Periksa apakah request berhasil dan reCAPTCHA valid
-        if (!$recaptchaResponse->successful() || !isset($resultJson['success']) || $resultJson['success'] !== true) {
+        if (! $recaptchaResponse->successful() || ! isset($resultJson['success']) || $resultJson['success'] !== true) {
             // Jika ada error codes dari Google, Anda bisa menambahkannya ke pesan error
             $errorCodes = $resultJson['error-codes'] ?? [];
             $errorMessage = 'Verifikasi reCAPTCHA gagal. Silakan coba lagi.';
-            if (!empty($errorCodes)) {
-                $errorMessage .= ' Kode error: ' . implode(', ', $errorCodes);
+            if (! empty($errorCodes)) {
+                $errorMessage .= ' Kode error: '.implode(', ', $errorCodes);
             }
+
             return redirect()->back()->withErrors(['g-recaptcha-response' => $errorMessage]);
         }
         // Jika reCAPTCHA berhasil, lanjutkan ke autentikasi
         $request->authenticate();
 
         $request->session()->regenerate(); // return boolean method
-        return to_route('admin.dashboard')->with('success', "Welcome Back " . $request->key);
+
+        return to_route('admin.dashboard')->with('success', 'Welcome Back '.$request->key);
     }
 
     /**

@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProfileItems;
-use App\Models\SOP;
-use Illuminate\Http\Request;
-// use App\Http\Requests\StoreProfileItemsRequest;
-// use App\Http\Requests\UpdateProfileItemsRequest;
+use App\Services\ProfileItemService;
+use App\Services\SopService;
 
 class ProfileController extends Controller
 {
-    public function __invoke(Request $request)
+    public function __construct(
+        private ProfileItemService $profile,
+        private SopService $sop,
+    ) {}
+
+    public function __invoke()
     {
         return view('profile', [
-            'items' => ProfileItems::all(),
-            'sops' => SOP::all(),
+            'items' => $this->profile->list(),
+            'sops' => $this->sop->list(),
         ]);
     }
 }

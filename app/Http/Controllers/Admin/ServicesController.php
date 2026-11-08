@@ -2,37 +2,38 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Service;
+use App\Data\ServiceData;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreServiceRequest;
+use App\Http\Requests\UpdateServiceRequest;
+use App\Models\Service;
+use App\Services\ServiceService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 
 class ServicesController extends Controller
 {
+    public function __construct(private ServiceService $service) {}
+
     public function index()
     {
         return view('admin.services.index');
     }
 
-    /**
-     * Returns data for DataTables.
-     */
     public function data(Request $request)
     {
-        if ($request->ajax()) { // This method is still used by index.blade.php for DataTables
-            $data = Service::latest(); // Urutkan berdasarkan data terbaru
-
-            return DataTables::of($data)
+        if ($request->ajax()) {
+            return DataTables::of($this->service->dataTableQuery())
                 ->addIndexColumn()
                 ->addColumn('items_count', function ($row) {
-                    return $row->items()->count(); // Get count of related items
+                    return $row->items()->count();
                 })
                 ->addColumn('action', function ($row) {
-                    $editBtn = '<a href="' . route('admin.services.edit', $row->id) . '" class="font-medium text-indigo-600 dark:text-indigo-500 hover:underline">Edit</a> ';
-                    $manageItemsBtn = '<button class="font-medium text-blue-600 dark:text-blue-500 hover:underline manage-items-btn ml-2 cursor-pointer" data-id="' . $row->id . '" data-title="' . htmlspecialchars($row->title, ENT_QUOTES) . '">Kelola Item</button> ';
-                    $deleteBtn = '<button class="cursor-pointer font-medium text-red-600 dark:text-red-500 hover:underline delete-service-btn ml-2" data-id="' . $row->id . '">Hapus</button>';
-                    return $editBtn . $manageItemsBtn . $deleteBtn;
+                    $editBtn = '<a href="'.route('admin.services.edit', $row->id).'" class="font-medium text-indigo-600 dark:text-indigo-500 hover:underline">Edit</a> ';
+                    $manageItemsBtn = '<button class="font-medium text-blue-600 dark:text-blue-500 hover:underline manage-items-btn ml-2 cursor-pointer" data-id="'.$row->id.'" data-title="'.htmlspecialchars($row->title, ENT_QUOTES).'">Kelola Item</button> ';
+                    $deleteBtn = '<button class="cursor-pointer font-medium text-red-600 dark:text-red-500 hover:underline delete-service-btn ml-2" data-id="'.$row->id.'">Hapus</button>';
+
+                    return $editBtn.$manageItemsBtn.$deleteBtn;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
@@ -41,7 +42,8 @@ class ServicesController extends Controller
 
     public function create()
     {
-        $service = new Service();
+        $service = new Service;
+
         return view('admin.services.create', compact('service'));
     }
 
@@ -50,62 +52,32 @@ class ServicesController extends Controller
         return view('admin.services.edit', compact('service'));
     }
 
-    public function store(Request $request)
+    public function store(StoreServiceRequest $request)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'image_src' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validasi untuk upload file
-            'card_id' => 'nullable|string|max:255',
-        ]);
-
-        $data = $request->all();
-
-        // Handle file upload
-        if ($request->hasFile('image_src')) {
-            $path = $request->file('image_src')->store('services_images', 'public');
-            $data['image_src'] = $path; // Simpan path relatif ke storage
-        }
-
-        Service::create($data);
+        $this->service->create(
+            ServiceData::fromArray($request->validated()),
+            $request->file('image_src')
+        );
 
         return redirect()->route('admin.services')->with('success', 'Kartu Informasi berhasil dibuat.');
     }
 
-    public function update(Request $request, Service $service)
+    public function update(UpdateServiceRequest $request, Service $service)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'image_src' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // 'nullable' karena tidak selalu diupdate
-            'card_id' => 'nullable|string|max:255',
-        ]);
-
-        $data = $request->all();
-
-        // Handle file upload for update
-        if ($request->hasFile('image_src')) {
-            // Hapus gambar lama jika ada
-            if ($service->image_src && Storage::disk('public')->exists($service->image_src)) {
-                Storage::disk('public')->delete($service->image_src);
-            }
-            $path = $request->file('image_src')->store('services_images', 'public');
-            $data['image_src'] = $path;
-        }
-
-        $service->update($data);
+        $this->service->update(
+            $service,
+            ServiceData::fromArray($request->validated()),
+            $request->file('image_src')
+        );
 
         return redirect()->route('admin.services')->with('success', 'Kartu Informasi berhasil diperbarui.');
     }
 
-    public function destroy(Service $service)
+    public function destroy(Request $request, Service $service)
     {
-        // Hapus gambar terkait saat service dihapus
-        if ($service->image_src && Storage::disk('public')->exists($service->image_src)) {
-            Storage::disk('public')->delete($service->image_src);
-        }
-        $service->delete(); // Items will be deleted automatically due to onDelete('cascade')
+        $this->service->delete($service);
 
-        // For AJAX requests from the index page
-        if (request()->ajax()) {
+        if ($request->expectsJson() || $request->ajax()) {
             return response()->json(['message' => 'Kartu Informasi berhasil dihapus.'], 200);
         }
 
