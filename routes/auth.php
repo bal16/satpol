@@ -3,7 +3,6 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
-
 Route::prefix('/admin')->group(function () {
     Route::get(
         '/login',
@@ -11,7 +10,7 @@ Route::prefix('/admin')->group(function () {
     )->name('login');
 
     Route::get(
-        "/register",
+        '/register',
         [RegisterController::class, 'create']
     )->name('register');
 
@@ -21,7 +20,7 @@ Route::prefix('/admin')->group(function () {
     )->name('login.store');
 
     Route::post(
-        "/register",
+        '/register',
         [RegisterController::class, 'store']
     )->name('register.store');
 

@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\Api;
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\Admin\NewsImageController;
-use App\Http\Middleware\AdminAuth;
-use App\Http\Controllers\AttachmentsController;
 use App\Http\Controllers\Admin\ServiceItemController;
+use App\Http\Controllers\Api;
+use App\Http\Controllers\AttachmentsController;
+use App\Http\Middleware\AdminAuth;
 
 Route::prefix('/admin')->middleware([AdminAuth::class])->group(function () {
     Route::get('/', [Admin\DashboardController::class, 'index'])->name('admin.dashboard');
@@ -47,8 +47,8 @@ Route::prefix('/admin')->middleware([AdminAuth::class])->group(function () {
     Route::put('/profile/{profileItem}', [Admin\ProfileController::class, 'update'])->name('admin.profile.update');
     Route::get('/profile/sop', [Admin\SOPController::class, 'index'])->name('admin.profile.sop');
     Route::post('/profile/sop', [Admin\SOPController::class, 'store'])->name('admin.profile.sop.store');
-    Route::delete('/profile/sop/{SOP}', [Admin\SOPController::class, 'destroy'])->name('admin.profile.sop.destroy');
-    Route::put('/profile/sop/{SOP}', [Admin\SOPController::class, 'update'])->name('admin.profile.sop.update');
+    Route::delete('/profile/sop/{sop}', [Admin\SOPController::class, 'destroy'])->name('admin.profile.sop.destroy');
+    Route::put('/profile/sop/{sop}', [Admin\SOPController::class, 'update'])->name('admin.profile.sop.update');
 
     // Services Page Items
     Route::get('/services', [Admin\ServicesController::class, 'index'])->name('admin.services');
@@ -58,8 +58,8 @@ Route::prefix('/admin')->middleware([AdminAuth::class])->group(function () {
     Route::put('/services/{service}', [Admin\ServicesController::class, 'update'])->name('admin.services.update');
     Route::delete('/services/{service}', [Admin\ServicesController::class, 'destroy'])->name('admin.services.destroy');
     Route::get('api/services/data', [Admin\ServicesController::class, 'data'])->name('services.data');
-    
-        // Service Items routes (dipindahkan dari api.php)
+
+    // Service Items routes (dipindahkan dari api.php)
     Route::get('services/{service}/items/data', [ServiceItemController::class, 'data'])->name('admin.services.items.data');
     Route::post('services/{service}/items', [ServiceItemController::class, 'store'])->name('admin.services.items.store');
     Route::match(['put', 'patch'], 'services/items/{item}', [ServiceItemController::class, 'update'])->name('admin.services.items.update');
