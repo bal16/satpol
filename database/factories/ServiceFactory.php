@@ -17,7 +17,9 @@ class ServiceFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => $this->faker->sentence(rand(3, 6)),
+            'image_src' => 'services_images/fake.jpg',
+            'card_id' => $this->faker->optional()->slug(),
         ];
     }
 }

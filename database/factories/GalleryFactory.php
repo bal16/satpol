@@ -18,8 +18,8 @@ class GalleryFactory extends Factory
     {
         return [
             'title' => $this->faker->sentence(rand(3, 7)),
-            'path' => $this->faker->imageUrl(640, 480, 'cats', true, 'Faker'), // Generates a placeholder image URL
-            'category' => $this->faker->randomElement(['Cats', 'Dogs', 'Birds', 'Other']), // Generates a random word for category
+            'path' => 'gallery_images/fake.jpg',
+            'category_id' => \App\Models\Category::factory(),
         ];
     }
 }
