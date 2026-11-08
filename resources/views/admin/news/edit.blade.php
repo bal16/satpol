@@ -136,7 +136,7 @@ trix-content-invalid
                     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                         @foreach ($news->images as $image)
                             <div class="relative group border rounded-md dark:border-stone-700 p-2">
-                                <img src="{{ Storage::url($image->path) }}" alt="News image"
+                                <img src="{{ Storage::disk('public')->url($image->path ?? '') }}" alt="News image"
                                     class="rounded-md object-cover w-full h-32">
                                 <form action="{{ route('admin.news.images.destroy', $image->id) }}" method="POST"
                                     class="absolute top-1 right-1">

@@ -25,7 +25,7 @@
                             src="https://placehold.co/1600x900?text=Placeholder+{{ $sliderItem->slot_number }}"
                             alt="Slider Image {{ $sliderItem->slot_number }}" />
                     @else
-                        <img class="w-full h-[60vh] object-contain" src="{{ asset('storage/' . $imagePath) }}"
+                        <img class="w-full h-[60vh] object-contain" src="{{ Storage::disk('public')->url($imagePath ?? '') }}"
                             alt="Slider Image {{ $sliderItem->slot_number }}" />
                     @endif
                 </div>

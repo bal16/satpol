@@ -56,7 +56,7 @@
                 {{-- Ini Mulai isi Berita --}}
                 @foreach ($latest as $item)
                     <div class="static bg-cover rounded text-[#FDFDFD] max-w-145.25 max-h-81.5 h-81.5"
-                        style="background-image:url({{ asset('storage/' . optional($item->images->first())->path) }})">
+                        style="background-image:url({{ Storage::disk('public')->url(optional($item->images->first())->path ?? '') }})">
                         <div
                             class="static flex flex-col group justify-end w-full h-full bg-gradient-to-b from-white-100/0 to-[#2B2A29]">
                             <a class="z-10 absolute lg:w-145.25 w-75.25 h-81.5"

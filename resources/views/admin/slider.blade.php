@@ -43,7 +43,7 @@
                             alt="Pratinjau Slider {{ $slotNumber }}" class="w-full h-full object-cover">
                     @else
                         <img id="sliderPreview{{ $slotNumber }}"
-                            src="{{ asset('storage/' . $sliderData->image_path) }}"
+                            src="{{ Storage::disk('public')->url($sliderData->image_path ?? '') }}"
                             alt="Pratinjau Slider {{ $slotNumber }}" class="w-full h-full object-cover">
                     @endif
                 </div>

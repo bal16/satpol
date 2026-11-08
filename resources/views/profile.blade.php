@@ -51,7 +51,7 @@
                         <h3 class="font-bold text-3xl lg:text-7xl text-center">{{ $items[2]->title }}</h3>
                         <div class="w-full mt-4 lg:mt-6">
                             <img class="w-full h-auto max-w-3xl mx-auto"
-                                src="{{ asset('storage/' . $items[2]->content) }}" alt="Struktur Organisasi" />
+                                src="{{ Storage::disk('public')->url($items[2]->content ?? '') }}" alt="Struktur Organisasi" />
                         </div>
                     </div>
                 </div>

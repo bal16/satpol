@@ -23,7 +23,7 @@
                             src="https://placehold.co/1600x900?text=Placeholder+{{ $loop->iteration }}"
                             alt="Slider Image {{ $loop->iteration }}" />
                     @else
-                        <img class="w-full h-[60vh] object-contain" src="{{ asset('storage/' . $sliderItem->path) }}"
+                        <img class="w-full h-[60vh] object-contain" src="{{ Storage::disk('public')->url($sliderItem->path ?? '') }}"
                             alt="Slider Image {{ $loop->iteration }}" />
                     @endif
                 </div>
