@@ -35,9 +35,10 @@
         </div>
         <section class="flex justify-center lg:h-166.25 h-126.25 items-center bg-[#FDFDFD]">
             <div class="flex lg:max-h-166.25 gap-14">
+                @if($firstNews)
                 <div class="hidden lg:flex flex-col gap-20 max-w-160">
                     <div class="static bg-cover rounded text-[#FDFDFD] max-w-145.25 max-h-81.5 h-81.5"
-                        style="background-image:url({{ asset('storage/' . $firstNews->images->first()->path) }})">
+                        style="background-image:url({{ asset('storage/' . optional($firstNews->images->first())->path) }})">
                         <div
                             class="static flex flex-col group justify-end w-full h-full bg-gradient-to-b from-white-100/0 to-[#2B2A29]">
                             <a class="z-10 absolute lg:w-145.25 w-75.25 h-81.5"
@@ -62,10 +63,11 @@
                 </div>
                 <div class="flex flex-col lg:max-w-160 gap-4">
                     @foreach ($nextNews as $item)
-                        <x-news.list :href="route('news.show', $item->slug)" :image="asset('storage/' . $item->images->first()->path)" :category="'Berita'" :date="$item->created_at->format('d-m-Y') . ' (' . $item->created_at->diffForHumans() . ')'"
+                        <x-news.list :href="route('news.show', $item->slug)" :image="asset('storage/' . optional($item->images->first())->path)" :category="'Berita'" :date="$item->created_at->format('d-m-Y') . ' (' . $item->created_at->diffForHumans() . ')'"
                             :title="$item->title" />
                     @endforeach
                 </div>
+                @endif
         </section>
     </main>
     <x-footer />
