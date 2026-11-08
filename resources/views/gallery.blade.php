@@ -40,11 +40,11 @@
                             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
                                 {{-- {/* Membuat grid responsif */} --}}
                                 @foreach ($gallery as $gal)
-                                    <a href="{{ Storage::disk('public')->url($gal->path ?? '') }}" class="gallery-lightbox-item"
+                                    <a href="{{ media_url($gal->path) }}" class="gallery-lightbox-item"
                                         {{-- Class for GLightbox selector --}}
                                         data-gallery="{{ $currentCategoryId ? 'category-' . $currentCategoryId : 'all-gallery' }}"
                                         {{-- For grouping --}} title="{{ $gal->title }}"> {{-- GLightbox uses this for captions --}}
-                                        <img src="{{ Storage::disk('public')->url($gal->path ?? '') }}"
+                                        <img src="{{ media_url($gal->path) }}"
                                             class="w-full h-37.5 object-cover hover:scale-105 transition duration-300 ease-in-out"
                                             {/* Mengubah lg:w-50 menjadi w-full */} alt="{{ $gal->title }}">
                                     </a>

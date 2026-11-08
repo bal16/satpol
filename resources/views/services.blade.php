@@ -18,7 +18,7 @@
             <div class="grid lg:grid-cols-3 grid-cols-1 mx-auto lg:gap-14 gap-8.75">
                 @foreach ($services as $service)
                     <x-info-card 
-                        imageSrc="{{ Storage::disk('public')->url($service->image_src ?? '') }}" 
+                        imageSrc="{{ media_url($service->image_src) }}" 
                         title="{{ $service->title }}"
                         :items="$service->items" {{-- Pass the collection of ServiceItems --}}
                         :cardId="$service->card_id" />
