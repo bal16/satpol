@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use Database\Factories\NewsImageFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class NewsImage extends Model
 {
-    /** @use HasFactory<\Database\Factories\NewsImageFactory> */
+    /** @use HasFactory<NewsImageFactory> */
     use HasFactory;
 
     protected $fillable = [
@@ -15,7 +16,6 @@ class NewsImage extends Model
         'path',
         // 'caption', // Optional: if you want captions for images
     ];
-
 
     public function news()
     {
