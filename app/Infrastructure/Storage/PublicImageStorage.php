@@ -3,14 +3,25 @@
 namespace App\Infrastructure\Storage;
 
 use App\Contracts\ImageStorage;
+use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
 class PublicImageStorage implements ImageStorage
 {
+    protected function diskName(): string
+    {
+        return config('filesystems.media_disk', 'public');
+    }
+
+    protected function disk(): Filesystem
+    {
+        return Storage::disk($this->diskName());
+    }
+
     public function store(UploadedFile $file, string $directory): string
     {
-        return $file->store($directory, 'public');
+        return $file->store($directory, $this->diskName());
     }
 
     public function delete(?string $path): void
@@ -19,7 +30,7 @@ class PublicImageStorage implements ImageStorage
             return;
         }
 
-        $disk = Storage::disk('public');
+        $disk = $this->disk();
 
         if ($disk->exists($path)) {
             $disk->delete($path);
@@ -37,6 +48,6 @@ class PublicImageStorage implements ImageStorage
 
     public function url(string $path): string
     {
-        return Storage::disk('public')->url($path);
+        return $this->disk()->url($path);
     }
 }
