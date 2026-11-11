@@ -72,7 +72,6 @@
             }
         });
     </script>
-    <script async src="https://www.google.com/recaptcha/api.js"></script>
 </body>
 
 </html>
