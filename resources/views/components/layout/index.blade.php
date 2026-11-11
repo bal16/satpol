@@ -46,11 +46,13 @@
 </head>
 
 <body class="grid grid-rows-[auto_1fr_auto] font-sans antialiased">
-    <!-- Demo Showcase Announcement Bar -->
-    <x-demo-notice.announcement-bar />
+    @unless (request()->routeIs('login', 'register', 'admin.*'))
+        <!-- Demo Showcase Announcement Bar -->
+        <x-demo-notice.announcement-bar />
 
-    <!-- Demo Showcase Onboarding Modal -->
-    <x-demo-notice.onboarding-modal />
+        <!-- Demo Showcase Onboarding Modal -->
+        <x-demo-notice.onboarding-modal />
+    @endunless
 
     <!-- Sidebar Component -->
     <x-sidebar />

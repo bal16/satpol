@@ -10,7 +10,7 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD:-satpol}
       POSTGRES_DB: ${DB_DATABASE:-satpol_dev}
     ports:
-      - '5432:5432'
+      - '${DB_PORT:-5432}:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -54,10 +54,10 @@ services:
         condition: service_healthy
     entrypoint: >
       /bin/sh -c "
+        set -e;
         mc alias set local http://silo:9000 ${AWS_ACCESS_KEY_ID:-minioadmin} ${AWS_SECRET_ACCESS_KEY:-minioadmin};
         mc mb --ignore-existing local/${AWS_BUCKET:-satpol-storage};
         mc anonymous set download local/${AWS_BUCKET:-satpol-storage};
-        exit 0;
       "
     networks:
       - satpol-net

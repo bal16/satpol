@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 beforeEach(function () {
     $pgHost = env('DB_HOST', '127.0.0.1');
-    $pgPort = 5432;
+    $pgPort = (int) env('DB_PORT', 5432);
     $siloEndpoint = env('AWS_ENDPOINT', 'http://127.0.0.1:9000');
     $siloHost = parse_url($siloEndpoint, PHP_URL_HOST) ?: '127.0.0.1';
     $siloPort = parse_url($siloEndpoint, PHP_URL_PORT) ?: 9000;
