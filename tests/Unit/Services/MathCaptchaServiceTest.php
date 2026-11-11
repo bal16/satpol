@@ -27,10 +27,11 @@ test('validate fails with wrong answer and clears session', function () {
     expect(session(MathCaptchaService::SESSION_KEY))->toBeNull();
 });
 
-test('validate fails when answer is null or empty', function () {
+test('validate fails when answer is null or empty or array', function () {
     $service = new MathCaptchaService;
     session()->put(MathCaptchaService::SESSION_KEY, 15);
 
     expect($service->validate(null))->toBeFalse();
     expect($service->validate(''))->toBeFalse();
+    expect($service->validate(['15']))->toBeFalse();
 });

@@ -12,6 +12,36 @@ test('login page can be rendered with math captcha', function () {
     $response->assertSee('name="website_url"', false);
 });
 
+test('login fails when password is wrong and renders error message', function () {
+    User::factory()->admin()->create([
+        'username' => 'admin_test',
+        'password' => bcrypt('correct_password'),
+    ]);
+
+    session()->put(MathCaptchaService::SESSION_KEY, 10);
+
+    $response = $this->from(route('login'))->post(route('login.store'), [
+        'key' => 'admin_test',
+        'password' => 'wrong_password',
+        'math_captcha' => '10',
+    ]);
+
+    $this->assertGuest();
+    $response->assertRedirect(route('login'));
+    $response->assertSessionHasErrors(['login']);
+
+    $followed = $this->get(route('login'));
+    $followed->assertSee(trans('auth.failed'));
+});
+
+test('login page does not display demo modal or announcement bar', function () {
+    $response = $this->get(route('login'));
+
+    $response->assertOk();
+    $response->assertDontSee('id="demo-announcement-bar"', false);
+    $response->assertDontSee('id="demo-onboarding-modal"', false);
+});
+
 test('user can authenticate using valid credentials and captcha', function () {
     $user = User::factory()->admin()->create([
         'username' => 'admin_test',
@@ -42,6 +72,25 @@ test('login fails when math captcha is incorrect', function () {
         'key' => 'admin_test',
         'password' => 'secret123',
         'math_captcha' => '99',
+    ]);
+
+    $this->assertGuest();
+    $response->assertRedirect(route('login'));
+    $response->assertSessionHasErrors(['math_captcha']);
+});
+
+test('login fails when math captcha payload is an array', function () {
+    User::factory()->admin()->create([
+        'username' => 'admin_test',
+        'password' => bcrypt('secret123'),
+    ]);
+
+    session()->put(MathCaptchaService::SESSION_KEY, 10);
+
+    $response = $this->from(route('login'))->post(route('login.store'), [
+        'key' => 'admin_test',
+        'password' => 'secret123',
+        'math_captcha' => ['10'],
     ]);
 
     $this->assertGuest();

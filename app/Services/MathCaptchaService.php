@@ -30,14 +30,20 @@ class MathCaptchaService
     /**
      * Validate user answer against the session value and flush it.
      */
-    public function validate(?string $answer): bool
+    public function validate(mixed $answer): bool
     {
         $expected = session()->pull(self::SESSION_KEY);
 
-        if ($expected === null || $answer === null || trim($answer) === '') {
+        if ($expected === null || $answer === null || is_array($answer) || is_object($answer)) {
             return false;
         }
 
-        return (int) trim($answer) === (int) $expected;
+        $answerStr = is_scalar($answer) ? trim((string) $answer) : '';
+
+        if ($answerStr === '') {
+            return false;
+        }
+
+        return (int) $answerStr === (int) $expected;
     }
 }
