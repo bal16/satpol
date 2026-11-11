@@ -26,7 +26,7 @@
                 file:cursor-pointer cursor-pointer">
         @if ($service->image_src)
             <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">Gambar saat ini:</p>
-            <img src="{{ asset('storage/' . $service->image_src) }}" alt="Gambar saat ini"
+            <img src="{{ media_url($service->image_src) }}" alt="Gambar saat ini"
                 class="mt-2 h-32 w-auto object-cover rounded-md shadow-sm">
         @else
             <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">Tidak ada gambar saat ini.</p>

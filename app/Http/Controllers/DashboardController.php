@@ -2,20 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\News;
-use App\Models\Slider;
-use Illuminate\Http\Request;
+use App\Services\DashboardService;
 
 class DashboardController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     */
-    public function __invoke(Request $request)
+    public function __construct(private DashboardService $dashboard) {}
+
+    public function __invoke()
     {
-        return view('dashboard', [
-            'sliders' => Slider::all(),
-            'news' => News::latest()->take(5)->get(),
-        ]);
+        return view('dashboard', $this->dashboard->home());
     }
 }

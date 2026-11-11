@@ -20,7 +20,7 @@
                                 <x-news.primary-list :category="'Berita'" :date="$item->created_at->format('d-m-Y') .
                                     ' (' .
                                     $item->created_at->diffForHumans() .
-                                    ')'" :title="$item->title" :image="asset('storage/' . $item->images->first()->path)"
+                                    ')'" :title="$item->title" :image="media_url(optional($item->images->first())->path)"
                                     :href="route('news.show', $item->slug)" />
                             @endforeach
                             <div class="flex justify-center p-5">
@@ -36,7 +36,7 @@
                         </div>
                         @foreach ($latest as $item)
                             <x-news.secondary-list :category="'Berita'" :date="$item->created_at->format('d-m-Y')" :title="$item->title"
-                                :image="asset('storage/' . $item->images->first()->path)" :href="route('news.show', $item->slug)" />
+                                :image="media_url(optional($item->images->first())->path)" :href="route('news.show', $item->slug)" />
                         @endforeach
                         <div class="lg:hidden flex justify-center">
 

@@ -3,45 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Models\News;
+use App\Services\NewsService;
 use Illuminate\Http\Request;
-// use App\Http\Requests\StoreNewsRequest;
-// use App\Http\Requests\UpdateNewsRequest;
 
 class NewsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct(private NewsService $news) {}
+
     public function index(Request $request)
     {
-        $news = News::query();
+        $news = $this->news->paginate($request->input('search'), 5);
+        $latest = $this->news->latest(5);
 
-        $query = $request->input('search');
-
-        if ($query) {
-            $news->where('title', 'like', "%{$query}%")
-                ->orWhere('body', 'like', "%{$query}%");
-        }
-
-        $news = $news->orderBy('created_at', 'desc')->paginate(5)->appends($request->except('page'));
-        $latest = News::latest()->take(5)->get();
         if ($request->ajax()) {
             return view('partial.news', ['news' => $news]);
         }
 
-        return view('news.index', ['news' => $news,'latest' => $latest]);
+        return view('news.index', ['news' => $news, 'latest' => $latest]);
     }
 
-
-
-    /**
-     * Display the specified resource.
-     */
     public function show(News $news)
     {
         return view('news.show', [
             'news' => $news,
-            'latest' => News::latest()->take(4)->get()
+            'latest' => $this->news->latest(4),
         ]);
     }
 }

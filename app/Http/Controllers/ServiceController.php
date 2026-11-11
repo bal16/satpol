@@ -3,24 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Service;
-// use App\Http\Requests\StoreServiceRequest;
-// use App\Http\Requests\UpdateServiceRequest;
+use App\Services\ServiceService;
 
 class ServiceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct(private ServiceService $service) {}
+
     public function index()
     {
-        return view('services', ['services' => Service::with('items')->get()]);
+        return view('services', ['services' => $this->service->listWithItems()]);
     }
 
-
-
-    /**
-     * Display the specified resource.
-     */
     public function show(Service $service)
     {
         return view('service.show', ['service' => $service]);

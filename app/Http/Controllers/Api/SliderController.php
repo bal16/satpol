@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Slider;
-// use App\Http\Requests\StoreSliderRequest;
 use App\Http\Controllers\Controller;
+// use App\Http\Requests\StoreSliderRequest;
+use App\Models\Slider;
+
 // use App\Http\Requests\UpdateSliderRequest;
 
 class SliderController extends Controller
@@ -14,10 +15,8 @@ class SliderController extends Controller
      */
     public function index()
     {
-        return response()->json( ['slider' => Slider::all(),]);
+        return response()->json(['slider' => Slider::all()]);
     }
-
-
 
     /**
      * Display the specified resource.

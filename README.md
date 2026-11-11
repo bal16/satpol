@@ -56,6 +56,15 @@ In order to ensure that the Laravel community is welcoming to all, please review
 
 If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
+## Architecture
+
+This project follows a layered architecture: thin controllers, FormRequests for validation,
+services for use cases/transactions, repository contracts for persistence (News, Gallery,
+Service) and small ports for third-party coupling (`ImageStorage`, `RichTextRenderer`).
+
+See `docs/superpowers/specs/2026-11-08-service-repository-design.md` for the full design,
+module coverage and the roadmap to the fully-uniform variant.
+
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

@@ -69,7 +69,7 @@
                             @if ($item->type == 'image' && $item->content)
                                 <div>
                                     <p class="mt-2 text-xs text-slate-500 dark:text-slate-400 mb-1">Gambar saat ini:</p>
-                                    <img src="{{ asset('storage/' . $item->content) }}" alt="Gambar saat ini"
+                                    <img src="{{ media_url($item->content) }}" alt="Gambar saat ini"
                                         class="rounded-md max-h-48 w-auto shadow">
                                 </div>
                             @endif

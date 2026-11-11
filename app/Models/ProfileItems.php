@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use Database\Factories\ProfileItemsFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Tonysm\RichTextLaravel\Models\Traits\HasRichText;
 
 class ProfileItems extends Model
 {
-    /** @use HasFactory<\Database\Factories\ProfileItemsFactory> */
+    /** @use HasFactory<ProfileItemsFactory> */
     use HasFactory, HasRichText;
 
     /**

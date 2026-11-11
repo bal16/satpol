@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ServiceController;
 
-require __DIR__ . '/auth.php';
-require __DIR__ . '/admin.php';
+use Illuminate\Support\Facades\Route;
+
+require __DIR__.'/auth.php';
+require __DIR__.'/admin.php';
 
 Route::get('/welcome', function () {
     return view('welcome');
@@ -31,9 +30,7 @@ Route::get('/services/tempo-pajak', function () {
     return view('pajak-info', ['type' => 'tempo']);
 })->name('services.pajak-tempo');
 
-
 Route::get('/gallery', GalleryController::class)->name('gallery');
-
 
 Route::prefix('/info')
     ->group(function () {

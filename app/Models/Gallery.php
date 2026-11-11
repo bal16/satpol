@@ -2,10 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Casts\Attribute; // Import Attribute
+use Illuminate\Database\Eloquent\Model; // Import Attribute
 
 class Gallery extends Model
 {
@@ -14,22 +13,8 @@ class Gallery extends Model
     protected $fillable = [
         'title',
         'path',
-        'category',
+        'category_id',
     ];
-
-
-
-    protected static function boot()
-    {
-        parent::boot();
-        static::updating(function ($model) {
-
-            if ($model->isDirty('path') && ($model->getOriginal('path') !== null)) {
-                Storage::delete($model->getOriginal('path'));
-            }
-        });
-
-    }
 
     /**
      * Get the category that owns the gallery item.

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProfileItems;
 use App\Http\Requests\StoreProfileItemsRequest;
 use App\Http\Requests\UpdateProfileItemsRequest;
+use App\Models\ProfileItems;
 
 class ProfileItemsController extends Controller
 {

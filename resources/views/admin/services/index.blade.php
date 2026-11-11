@@ -222,7 +222,7 @@
                             render: function(data, type, full, meta) {
                                 if (type === 'display' &&
                                     data) { // 'data' now contains the relative path
-                                    return `<img src="{{ asset('storage/') }}/${data}" alt="${full.title || 'Service image'}" class="h-12 w-auto object-cover rounded"/>`; // Smaller image for better fit
+                                    return `<img src="{{ media_url('') }}/${data}" alt="${full.title || 'Service image'}" class="h-12 w-auto object-cover rounded"/>`; // Smaller image for better fit
                                 }
                                 return 'No Image';
                             }

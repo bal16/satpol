@@ -6,23 +6,31 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateProfileItemsRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
-        return [
-            //
+        $rules = [
+            'title' => 'required|string|max:255',
+            'type' => 'required|string|in:text,image,html',
+            'show' => 'boolean',
         ];
+
+        $type = $this->input('type');
+
+        if ($type === 'image') {
+            $item = $this->route('profileItem');
+            $rule = ($item && $item->content) ? 'nullable' : 'required';
+            $rules['content_image'] = [$rule, 'image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:2048'];
+        } elseif ($type === 'text') {
+            $rules['content_text'] = 'required|string';
+        } elseif ($type === 'html') {
+            $rules['body'] = 'required|string';
+        }
+
+        return $rules;
     }
 }

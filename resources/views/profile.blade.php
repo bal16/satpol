@@ -14,7 +14,7 @@
         }
     </style>
     <main>
-        @if ($items->first()->show)
+        @if ($items->first() && $items->first()->show)
             <div class="flex lg:max-h-64 max-h-32 bg-[#FDFDFD] overflow-hidden justify-center">
                 <span class="flex flex-col justify-center text-center lg:h-64 h-32 lg:gap-15 gap-5 py-auto">
                     <h3 class="font-[DM_Serif_Text] lg:text-7xl text-3xl font-black">{{ $items->first()->title }}</h3>
@@ -22,7 +22,7 @@
                 </span>
             </div>
         @endif
-        @if ($items[1]->show)
+        @if (isset($items[1]) && $items[1]->show)
             <div class="bg-[#2B2A29] lg:max-h-166.25">
                 <div class="flex max-w-7xl justify-center mx-auto">
                     <div
@@ -43,7 +43,7 @@
                 </div>
             </div>
         @endif
-        @if ($items[2]->show)
+        @if (isset($items[2]) && $items[2]->show)
             <div class="bg-[#FDFDFD]">
                 <div class="flex max-w-7xl justify-center mx-auto">
                     <div
@@ -51,13 +51,13 @@
                         <h3 class="font-bold text-3xl lg:text-7xl text-center">{{ $items[2]->title }}</h3>
                         <div class="w-full mt-4 lg:mt-6">
                             <img class="w-full h-auto max-w-3xl mx-auto"
-                                src="{{ asset('storage/' . $items[2]->content) }}" alt="Struktur Organisasi" />
+                                src="{{ media_url($items[2]->content) }}" alt="Struktur Organisasi" />
                         </div>
                     </div>
                 </div>
             </div>
         @endif
-        @if ($items[3]->show)
+        @if (isset($items[3]) && $items[3]->show)
             <div class="bg-[#2B2A29] lg:max-h-166.25">
                 <div class="flex lg:max-w-7xl justify-center mx-auto">
                     <div
@@ -70,7 +70,7 @@
                 </div>
             </div>
         @endif
-        @if ($items[4]->show)
+        @if (isset($items[4]) && $items[4]->show)
             <div class="bg-[#FDFDFD]">
                 <div class="flex max-w-7xl justify-center mx-auto">
                     <div
@@ -83,7 +83,7 @@
                 </div>
             </div>
         @endif
-        @if ($items[5]->show)
+        @if (isset($items[5]) && $items[5]->show)
             <div class="bg-[#2B2A29]">
                 <div class="flex justify-center mx-auto">
                     <div
@@ -124,7 +124,7 @@
                 </div>
             </div>
         @endif
-        @if ($items[6]->show)
+        @if (isset($items[6]) && $items[6]->show)
             <div class="bg-[#FDFDFD] lg:max-h-166.25">
                 <div class="flex max-w-7xl justify-center mx-auto">
                     <div
