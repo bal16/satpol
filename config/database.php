@@ -97,8 +97,10 @@ return [
             'search_path' => 'public',
             'sslmode' => 'prefer',
             'options' => extension_loaded('pdo_pgsql') ? array_filter([
-                PDO::ATTR_EMULATE_PREPARES => env('DB_EMULATE_PREPARES', false),
-            ]) : [],
+                PDO::ATTR_EMULATE_PREPARES => env('DB_EMULATE_PREPARES') === null
+                    ? null
+                    : (bool) env('DB_EMULATE_PREPARES'),
+            ], static fn ($value): bool => $value !== null) : [],
         ],
 
         'sqlsrv' => [
