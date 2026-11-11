@@ -31,6 +31,12 @@
 </head>
 
 <body class="grid grid-rows-[auto_1fr_auto] font-sans antialiased">
+    <!-- Demo Showcase Announcement Bar -->
+    <x-demo-notice.announcement-bar />
+
+    <!-- Demo Showcase Onboarding Modal -->
+    <x-demo-notice.onboarding-modal />
+
     <!-- Sidebar Component -->
     <x-sidebar />
 
