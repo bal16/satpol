@@ -10,7 +10,6 @@ return new class extends Migration {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('body')->nullable();
             $table->string('image_src');
             $table->string('card_id')->nullable();
             $table->timestamps();

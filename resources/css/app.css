@@ -105,3 +105,17 @@
         background-color: var(--color-stone-400) !important;
     }
 }
+
+/* Handle the expandable button in collapsed state */
+#admin-app-container.sidebar-collapsed #admin-sidebar nav > div > button {
+    @apply justify-center px-3;
+}
+
+#admin-app-container.sidebar-collapsed #admin-sidebar nav > div > button svg:first-of-type {
+    @apply mr-0;
+}
+
+#admin-app-container.sidebar-collapsed #admin-sidebar nav > div > button .admin-submenu-arrow,
+#admin-app-container.sidebar-collapsed #admin-sidebar #profileSubmenu {
+    @apply hidden;
+}

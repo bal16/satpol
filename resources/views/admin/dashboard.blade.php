@@ -29,7 +29,7 @@
         {{-- Tambahkan kartu statistik lain di sini jika perlu --}}
     </div>
     <!-- Main Content Area / Welcome Message -->
-    <div class="dark:bg-stone-500 bg-red-700 p-6 md:p-8 rounded-xl shadow-2xl">
+    <div class="dark:bg-stone-700 bg-red-700 p-6 md:p-8 rounded-xl shadow-2xl">
         <h3 class="text-xl font-black dark:text-white text-slate-200 mb-4">Panduan Pengelolaan Konten</h3>
         <p class="dark:text-white text-white mb-6 leading-relaxed">
             Selamat datang di panel admin Satuan Polisi Pamong Praja. Dari sini, Anda memiliki kontrol penuh untuk

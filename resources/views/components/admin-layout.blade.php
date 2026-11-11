@@ -14,7 +14,7 @@
     @stack('styles')
 </head>
 
-<body class="bg-slate-200 dark:bg-stone-800 font-sans antialiased">
+<body class="bg-slate-200 dark:bg-stone-600 font-sans antialiased">
 
     <div id="admin-app-container" class="flex min-h-screen">
         <!-- Sidebar -->
@@ -296,6 +296,21 @@
         });
 
         function toggleAdminSubmenu(button, submenuId) {
+            const appContainer = document.getElementById('admin-app-container');
+
+            // Jika sidebar sedang diciutkan...
+            if (appContainer.classList.contains('sidebar-collapsed')) {
+                // ...temukan tombol utama dan klik untuk melebarkan sidebar.
+                const sidebarToggle = document.getElementById('sidebar-toggle');
+                if (sidebarToggle) {
+                    sidebarToggle.click();
+                }
+                // Berhenti di sini. Aksi pengguna adalah untuk melebarkan sidebar.
+                // Mereka bisa mengklik tombol profile lagi untuk membuka submenu.
+                return;
+            }
+
+            // Jika sidebar sudah lebar, buka/tutup submenu seperti biasa.
             const submenu = document.getElementById(submenuId);
             const arrow = button.querySelector('.admin-submenu-arrow');
             submenu.classList.toggle('hidden');
