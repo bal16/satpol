@@ -68,7 +68,7 @@
             "@php vendor/bin/pest"
         ],
         "test:integration": [
-            "@php vendor/bin/pest --group=integration"
+            "@php vendor/bin/pest tests/Integration --group=integration"
         ]
     },
     "extra": {
@@ -80,6 +80,9 @@
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true,
+        "platform": {
+            "php": "8.3.0"
+        },
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true

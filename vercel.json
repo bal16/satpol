@@ -3,33 +3,13 @@
   "framework": null,
   "functions": {
     "api/index.php": {
-      "runtime": "vercel-php@0.7.1"
+      "runtime": "vercel-php@0.9.0",
+      "maxDuration": 30
     }
   },
   "routes": [
     {
-      "src": "/build/(.*)",
-      "dest": "/public/build/$1"
-    },
-    {
-      "src": "/vendor/(.*)",
-      "dest": "/public/vendor/$1"
-    },
-    {
-      "src": "/image/(.*)",
-      "dest": "/public/image/$1"
-    },
-    {
-      "src": "/image.png",
-      "dest": "/public/image.png"
-    },
-    {
-      "src": "/favicon.ico",
-      "dest": "/public/favicon.ico"
-    },
-    {
-      "src": "/robots.txt",
-      "dest": "/public/robots.txt"
+      "handle": "filesystem"
     },
     {
       "src": "/(.*)",
