@@ -1,4 +1,4 @@
-<x-layout :pageName="'Services'">
+<x-layout :pageName="'Layanan Publik'" :seoDescription="'Informasi regulasi dan layanan publik Satuan Polisi Pamong Praja Kota Semarang (Showcase Portofolio).'">
     <x-header />
     <main class="flex flex-col items-center">
         <div 

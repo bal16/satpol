@@ -1,5 +1,15 @@
+@props([
+    'page' => null,
+    'pageName' => null,
+    'seoTitle' => null,
+    'seoDescription' => null,
+    'seoImage' => null,
+    'seoType' => 'website',
+])
+
 @php
-    $pageName = isset($page) ? " - $page" : '';
+    $effectivePage = $pageName ?? $page;
+    $computedTitle = $seoTitle ?? (config('app.name') . ($effectivePage ? " - $effectivePage" : ''));
 @endphp
 
 <!DOCTYPE html>
@@ -9,7 +19,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ config('app.name') }} {{ $pageName }}</title>
+    <title>{{ $computedTitle }}</title>
+
+    <x-seo-meta
+        :title="$seoTitle ?? ($effectivePage ? ($effectivePage . ' - ' . config('app.name')) : null)"
+        :description="$seoDescription"
+        :image="$seoImage"
+        :type="$seoType"
+    />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">

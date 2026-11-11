@@ -1,3 +1,11 @@
+@props([
+    'pageName' => null,
+    'seoTitle' => null,
+    'seoDescription' => null,
+    'seoImage' => null,
+    'seoType' => 'website',
+])
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -5,7 +13,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ config('app.name') }} {{ isset($pageName) ? " - $pageName" : '' }}</title>
+    <title>{{ $seoTitle ?? (config('app.name') . ($pageName ? " - $pageName" : '')) }}</title>
+
+    <x-seo-meta
+        :title="$seoTitle ?? ($pageName ? ($pageName . ' - ' . config('app.name')) : null)"
+        :description="$seoDescription"
+        :image="$seoImage"
+        :type="$seoType"
+    />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">

@@ -1,4 +1,4 @@
-<x-layout :pageName="'News'">
+<x-layout :pageName="'Berita'" :seoDescription="'Kumpulan berita dan artikel terkini Satuan Polisi Pamong Praja Kota Semarang (Showcase Portofolio).'">
     <x-header />
         <main class="static bg-cover lg:min-h-166 min-h-83"
         style="background-image:url(https://lh7-us.googleusercontent.com/A5DMTAlM3WhISDYMy0W7IsraNmSfBCJ2JLGokPftjz4i7fzxe6FXW2lAzs_s34AW58j4htCGAesYziXXxDm8gXh09IPEbY64CuW2OuliUWPMYw9SP4WlF2lamL41kKJkkCkSAe9KMBXVbHJ9xh45FX4)">

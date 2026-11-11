@@ -1,4 +1,4 @@
-<x-layout :pageName="'Profile'">
+<x-layout :pageName="'Profil'" :seoDescription="'Profil, visi, misi, dan struktur organisasi Satuan Polisi Pamong Praja Kota Semarang (Showcase Portofolio).'">
     <x-header />
     <style>
         .dropdown:focus-within .dropdown-menu {
