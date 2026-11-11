@@ -70,15 +70,27 @@
                 {{-- </a> --}}
 
             </div>
-            <!-- Google Recaptcha Widget-->
-            <div class="g-recaptcha mt-4" data-sitekey="{{ config('services.recaptcha.key') }}"></div>
-            {{-- Pastikan ada kutip di sini --}}
-            {{-- Contoh di admin.login.blade.php --}}
-            @if ($errors->has('g-recaptcha-response'))
-                <span class="text-red-500 text-sm">
-                    {{ $errors->first('g-recaptcha-response') }}
-                </span>
-            @endif
+            <!-- Honeypot anti-bot -->
+            <div style="display:none; position:absolute; left:-9999px;" aria-hidden="true">
+                <input type="text" name="website_url" tabindex="-1" autocomplete="off" value="">
+            </div>
+
+            <!-- Math Captcha -->
+            <div class="mb-4.5">
+                <label for="math_captcha" class="mb-2.5 block font-medium text-black dark:text-white">
+                    Verifikasi Keamanan: <span class="inline-flex items-center px-2 py-0.5 rounded bg-primary/10 text-primary font-bold">{{ $captchaQuestion ?? 'Hitung' }} = ?</span>
+                </label>
+                <div class="relative">
+                    <input id="math_captcha" name="math_captcha" type="number" placeholder="Masukkan hasil perhitungan" required
+                        class="w-full rounded border border-stroke bg-gray py-3 px-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary @error('math_captcha') !border-red-500 @enderror">
+                </div>
+                @error('math_captcha')
+                    <p class="mt-1.5 text-xs text-red-500">{{ $message }}</p>
+                @enderror
+                @error('website_url')
+                    <p class="mt-1.5 text-xs text-red-500">{{ $message }}</p>
+                @enderror
+            </div>
 
             <!-- Sign In Button -->
             <div class="mt-5 mb-5">

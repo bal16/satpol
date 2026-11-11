@@ -30,6 +30,21 @@ class LoginRequest extends FormRequest
         return [
             'key' => ['required', 'string'],
             'password' => ['required', 'string'],
+            'math_captcha' => ['required'],
+            'website_url' => ['prohibited'],
+        ];
+    }
+
+    /**
+     * Get custom error messages for validator errors.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'math_captcha.required' => 'Mohon jawab pertanyaan hitungan matematika.',
+            'website_url.prohibited' => 'Pengiriman form terindikasi spam bot.',
         ];
     }
 
@@ -94,6 +109,6 @@ class LoginRequest extends FormRequest
      */
     public function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->input('login')).'|'.$this->ip());
+        return Str::transliterate(Str::lower($this->input('key', '')).'|'.$this->ip());
     }
 }
