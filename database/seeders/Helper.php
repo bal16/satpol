@@ -31,7 +31,8 @@ trait Helper
         } else {
             $storagePath = $for . '_images/' . $randomString . '.' . $extension;
         }
-        Storage::disk('public')->put($storagePath, $imageContent);
+        $mediaDisk = config('filesystems.media_disk', config('filesystems.default', 'public'));
+        Storage::disk($mediaDisk)->put($storagePath, $imageContent);
 
         return $storagePath;
     }
