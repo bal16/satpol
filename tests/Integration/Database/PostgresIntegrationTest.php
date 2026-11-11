@@ -15,11 +15,23 @@ test('real postgresql connection and query execution', function () {
 
     fclose($connection);
 
+    $database = (env('DB_DATABASE') && env('DB_DATABASE') !== ':memory:')
+        ? env('DB_DATABASE')
+        : env('POSTGRES_DB', 'satpol_dev');
+
+    $username = (env('DB_USERNAME') && env('DB_USERNAME') !== 'root')
+        ? env('DB_USERNAME')
+        : env('POSTGRES_USER', 'satpol');
+
+    $password = env('DB_PASSWORD') ?: env('POSTGRES_PASSWORD', 'satpol');
+
     Config::set('database.connections.pgsql.host', $host);
     Config::set('database.connections.pgsql.port', $port);
-    Config::set('database.connections.pgsql.database', env('DB_DATABASE', 'satpol_dev'));
-    Config::set('database.connections.pgsql.username', env('DB_USERNAME', 'satpol'));
-    Config::set('database.connections.pgsql.password', env('DB_PASSWORD', 'satpol'));
+    Config::set('database.connections.pgsql.database', $database);
+    Config::set('database.connections.pgsql.username', $username);
+    Config::set('database.connections.pgsql.password', $password);
+
+    DB::purge('pgsql');
 
     try {
         $result = DB::connection('pgsql')->select('SELECT 1 as connected');

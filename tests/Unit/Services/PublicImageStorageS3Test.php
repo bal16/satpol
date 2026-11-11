@@ -10,6 +10,10 @@ beforeEach(function () {
     Storage::fake('s3');
 });
 
+afterEach(function () {
+    Config::set('filesystems.media_disk', 'public');
+});
+
 test('PublicImageStorage store uploads file to configured s3 disk', function () {
     $storage = new PublicImageStorage;
     $file = UploadedFile::fake()->create('banner.jpg', 10, 'image/jpeg');
