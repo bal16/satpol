@@ -1,0 +1,8 @@
+/vendor
+/node_modules
+.git
+.env
+.env.*
+/tests
+compose.yml
+phpunit.xml
