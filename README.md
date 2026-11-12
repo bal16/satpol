@@ -6,20 +6,6 @@
   <img src="https://shieldcn.dev/badge/License-MIT-2563eb.svg?logo=opensourceinitiative&split=true" alt="License">
 </p>
 
-<p>
-  <img src="https://shieldcn.dev/badge/Laravel-12-dc2626.svg?logo=laravel&split=true" alt="Laravel 12">
-  <img src="https://shieldcn.dev/badge/PHP-8.4-4f46e5.svg?logo=php&split=true" alt="PHP 8.4">
-  <img src="https://shieldcn.dev/badge/Tailwind%20CSS-4-0891b2.svg?logo=tailwindcss&split=true" alt="Tailwind CSS 4">
-  <img src="https://shieldcn.dev/badge/Vite-6-7c3aed.svg?logo=vite&split=true" alt="Vite">
-</p>
-
-<p>
-  <img src="https://shieldcn.dev/badge/PostgreSQL-Neon-3b82f6.svg?logo=postgresql&split=true" alt="PostgreSQL">
-  <img src="https://shieldcn.dev/badge/Storage-Neon%20Object%20Storage-0d9488.svg?logo=neon&split=true" alt="Object Storage">
-  <img src="https://shieldcn.dev/badge/Hosting-Vercel-3f3f46.svg?logo=vercel&split=true" alt="Vercel">
-  <img src="https://shieldcn.dev/badge/Tests-86%20lulus-059669.svg?logo=lu:CircleCheck&split=true" alt="Tests">
-</p>
-
 Situs profil dan pusat informasi Satpol PP Kota Semarang: berita kegiatan, profil organisasi, layanan masyarakat, galeri, sampai dokumen informasi publik. Semuanya bisa diperbarui sendiri lewat panel admin, tanpa perlu menyentuh kode.
 
 > **Catatan penting:** proyek ini dibuat untuk keperluan portofolio dan demonstrasi teknis. **Bukan situs resmi instansi pemerintah** dan tidak dipakai untuk pelayanan publik yang sebenarnya.
@@ -37,6 +23,7 @@ Situs profil dan pusat informasi Satpol PP Kota Semarang: berita kegiatan, profi
 - [Struktur Proyek](#struktur-proyek)
 - [Pengujian](#pengujian)
 - [Dokumentasi Lain](#dokumentasi-lain)
+- [Kolaborator](#kolaborator)
 - [Lisensi](#lisensi)
 
 ## Tentang
@@ -70,6 +57,20 @@ Semua konten disimpan di basis data, sedangkan foto dan gambar disimpan di penyi
 - **Login aman** — dilindungi captcha matematika sederhana, tanpa bergantung pada layanan captcha pihak ketiga.
 
 ## Teknologi
+
+<p>
+  <img src="https://shieldcn.dev/badge/Laravel-12-dc2626.svg?logo=laravel&split=true" alt="Laravel 12">
+  <img src="https://shieldcn.dev/badge/PHP-8.4-4f46e5.svg?logo=php&split=true" alt="PHP 8.4">
+  <img src="https://shieldcn.dev/badge/Tailwind%20CSS-4-0891b2.svg?logo=tailwindcss&split=true" alt="Tailwind CSS 4">
+  <img src="https://shieldcn.dev/badge/Vite-6-7c3aed.svg?logo=vite&split=true" alt="Vite">
+</p>
+
+<p>
+  <img src="https://shieldcn.dev/badge/PostgreSQL-Neon-3b82f6.svg?logo=postgresql&split=true" alt="PostgreSQL">
+  <img src="https://shieldcn.dev/badge/Storage-Neon%20Object%20Storage-0d9488.svg?logo=neon&split=true" alt="Object Storage">
+  <img src="https://shieldcn.dev/badge/Hosting-Vercel-3f3f46.svg?logo=vercel&split=true" alt="Vercel">
+  <img src="https://shieldcn.dev/badge/Tests-86%20lulus-059669.svg?logo=lu:CircleCheck&split=true" alt="Tests">
+</p>
 
 | Bagian | Yang Dipakai |
 | --- | --- |
@@ -154,6 +155,16 @@ composer run test           # menjalankan seluruh pengujian
 ## Dokumentasi Lain
 
 - [`README.laravel.md`](README.laravel.md) — dokumentasi asli dari Laravel.
+
+## Kolaborator
+
+Terima kasih kepada rekan-rekan yang ikut mengembangkan proyek ini:
+
+- [@bal16](https://github.com/bal16)
+- [@rifqieali](https://github.com/rifqieali)
+- [@TerserahEnte](https://github.com/TerserahEnte)
+- [@acegaf74](https://github.com/acegaf74)
+- [@Dionda02](https://github.com/Dionda02)
 
 ## Lisensi
 
