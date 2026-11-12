@@ -1,4 +1,10 @@
-<x-layout :pageName="Str::words($news->title, 20, '...')">
+<x-layout
+    :pageName="Str::words($news->title, 20, '...')"
+    :seoTitle="$news->title . ' - Satpol PP Kota Semarang (Demo)'"
+    :seoDescription="Str::limit(strip_tags((string) ($news->body?->toHtml() ?? $news->title)), 160)"
+    :seoImage="$news->images->isNotEmpty() ? media_url($news->images->first()->path) : null"
+    :seoType="'article'"
+>
     <x-header />
     <main class="flex flex-col items-center font-[DM_Sans] overflow-x-hidden"> {{-- Menambahkan overflow-x-hidden sebagai pengaman --}}
         {{-- Bagian Judul --}}

@@ -10,12 +10,18 @@
 
         <x-auth-heading title="Sign In" subtitle="Login to access your account" />
 
+        @if ($errors->has('login') || $errors->has('email'))
+            <div class="mb-4 rounded-lg bg-red-50 p-4 text-sm text-red-600 dark:bg-red-950/50 dark:text-red-400 border border-red-200 dark:border-red-900" role="alert">
+                <p class="font-medium">{{ $errors->first('login') ?: $errors->first('email') }}</p>
+            </div>
+        @endif
+
         <form method="POST" action="{{ route('login.store') }}">
             @csrf
 
             <!-- Key -->
-            <x-form-input id="email" name="key" type="key" label="Email or username"
-                placeholder="Enter your Email or Username" :value="old('email')" required autofocus :iconSvg="'<svg class=\'fill-current\' width=\'22\' height=\'22\' viewBox=\'0 0 22 22\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'><g opacity=\'0.5\'><path d=\'M19.2516 3.30005H2.75156C1.65156 3.30005 0.751562 4.20005 0.751562 5.30005V16.7C0.751562 17.8 1.65156 18.7 2.75156 18.7H19.2516C20.3516 18.7 21.2516 17.8 21.2516 16.7V5.30005C21.2516 4.20005 20.3516 3.30005 19.2516 3.30005ZM19.2516 4.80005C19.2828 4.80005 19.3128 4.80155 19.3432 4.80455L11.0016 10.3846L2.66003 4.80455C2.69034 4.80155 2.72034 4.80005 2.75156 4.80005H19.2516ZM19.2516 17.2H2.75156C2.47031 17.2 2.25156 16.9813 2.25156 16.7V6.9188L10.5244 12.2331C10.6716 12.3313 10.8366 12.3846 11.0016 12.3846C11.1666 12.3846 11.3316 12.3313 11.4788 12.2331L19.7516 6.9188V16.7C19.7516 16.9813 19.5328 17.2 19.2516 17.2Z\' fill=\'currentColor\'/></g></svg>'" />
+            <x-form-input id="key" name="key" type="text" label="Email or username"
+                placeholder="Enter your Email or Username" :value="old('key')" required autofocus :iconSvg="'<svg class=\'fill-current\' width=\'22\' height=\'22\' viewBox=\'0 0 22 22\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'><g opacity=\'0.5\'><path d=\'M19.2516 3.30005H2.75156C1.65156 3.30005 0.751562 4.20005 0.751562 5.30005V16.7C0.751562 17.8 1.65156 18.7 2.75156 18.7H19.2516C20.3516 18.7 21.2516 17.8 21.2516 16.7V5.30005C21.2516 4.20005 20.3516 3.30005 19.2516 3.30005ZM19.2516 4.80005C19.2828 4.80005 19.3128 4.80155 19.3432 4.80455L11.0016 10.3846L2.66003 4.80455C2.69034 4.80155 2.72034 4.80005 2.75156 4.80005H19.2516ZM19.2516 17.2H2.75156C2.47031 17.2 2.25156 16.9813 2.25156 16.7V6.9188L10.5244 12.2331C10.6716 12.3313 10.8366 12.3846 11.0016 12.3846C11.1666 12.3846 11.3316 12.3313 11.4788 12.2331L19.7516 6.9188V16.7C19.7516 16.9813 19.5328 17.2 19.2516 17.2Z\' fill=\'currentColor\'/></g></svg>'" />
 
             <!-- Password -->
             <div class="mb-4.5">
@@ -70,15 +76,27 @@
                 {{-- </a> --}}
 
             </div>
-            <!-- Google Recaptcha Widget-->
-            <div class="g-recaptcha mt-4" data-sitekey="{{ config('services.recaptcha.key') }}"></div>
-            {{-- Pastikan ada kutip di sini --}}
-            {{-- Contoh di admin.login.blade.php --}}
-            @if ($errors->has('g-recaptcha-response'))
-                <span class="text-red-500 text-sm">
-                    {{ $errors->first('g-recaptcha-response') }}
-                </span>
-            @endif
+            <!-- Honeypot anti-bot -->
+            <div style="display:none; position:absolute; left:-9999px;" aria-hidden="true">
+                <input type="text" name="website_url" tabindex="-1" autocomplete="off" value="">
+            </div>
+
+            <!-- Math Captcha -->
+            <div class="mb-4.5">
+                <label for="math_captcha" class="mb-2.5 block font-medium text-black dark:text-white">
+                    Verifikasi Keamanan: <span class="inline-flex items-center px-2 py-0.5 rounded bg-primary/10 text-primary font-bold">{{ $captchaQuestion ?? 'Hitung' }} = ?</span>
+                </label>
+                <div class="relative">
+                    <input id="math_captcha" name="math_captcha" type="number" placeholder="Masukkan hasil perhitungan" required
+                        class="w-full rounded border border-stroke bg-gray py-3 px-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary @error('math_captcha') !border-red-500 @enderror">
+                </div>
+                @error('math_captcha')
+                    <p class="mt-1.5 text-xs text-red-500">{{ $message }}</p>
+                @enderror
+                @error('website_url')
+                    <p class="mt-1.5 text-xs text-red-500">{{ $message }}</p>
+                @enderror
+            </div>
 
             <!-- Sign In Button -->
             <div class="mt-5 mb-5">

@@ -3,7 +3,7 @@
     $nextNews = $news->take(5)->skip(1);
 
 @endphp
-<x-layout :pageName="'Dashboard'">
+<x-layout :pageName="'Beranda'" :seoDescription="'Website showcase portofolio pengembang perangkat lunak - simulasi portal Satuan Polisi Pamong Praja Kota Semarang.'">
     <x-header />
     <main class="max-w-[100vw] overflow-hidden">
         <!-- New Slider Component -->

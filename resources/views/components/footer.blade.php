@@ -68,6 +68,17 @@
             </div>
         </div>
     </div>
+    <!-- Portfolio Showcase Disclaimer -->
+    <div class="bg-[#1A1918] border-t border-amber-500/20 text-amber-200/90 py-3.5 px-6 text-center text-xs">
+        <div class="container mx-auto flex flex-col sm:flex-row items-center justify-center gap-2">
+            <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-amber-400 text-neutral-950 uppercase tracking-wider">
+                Portofolio Showcase
+            </span>
+            <span>
+                Website ini dikembangkan untuk tujuan portofolio dan demonstrasi teknis, bukan situs resmi instansi pemerintah.
+            </span>
+        </div>
+    </div>
     <div class="bg-[#000] text-white py-3 text-center">
         <span class="mx-auto text-xs">&copy; {{ date('Y') }} Satuan Polisi Pamong Praja Kota Semarang. All rights
             reserved</span>

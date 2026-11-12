@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
 
-<x-layout :pageName="'Gallery'">
+<x-layout :pageName="'Galeri'" :seoDescription="'Dokumentasi galeri foto kegiatan Satuan Polisi Pamong Praja Kota Semarang (Showcase Portofolio).'">
     <x-header />
     <main class="bg-[#FDFDFD]">
         <div class="flex max-w-7xl justify-center mx-auto">

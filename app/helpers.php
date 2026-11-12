@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Storage;
+
 if (! function_exists('media_url')) {
     /**
      * Build a URL for a stored media file.
@@ -14,9 +16,11 @@ if (! function_exists('media_url')) {
         }
 
         $path = ltrim($path, '/');
+        $mediaDisk = config('filesystems.media_disk', 'public');
+        $driver = config("filesystems.disks.{$mediaDisk}.driver", 'local');
 
-        if (config('filesystems.disks.public.driver') === 's3') {
-            return \Illuminate\Support\Facades\Storage::disk('public')->url($path);
+        if ($driver === 's3' || $mediaDisk === 's3') {
+            return Storage::disk($mediaDisk)->url($path);
         }
 
         return '/storage/'.$path;

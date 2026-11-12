@@ -1,68 +1,70 @@
 <?php
 
-
 namespace Database\Seeders;
 
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
-
-
+use Illuminate\Support\Str;
 
 trait Helper
 {
-    private function process_image($imageFilename, $id = "", $for = "news")
+    private function process_image($imageFilename, $id = '', $for = 'news')
     {
-        $sourceImagePath = $this->dataPath("images/" . $for . "/" . $imageFilename);
-        if (!File::exists($sourceImagePath)) {
+        $sourceImagePath = $this->dataPath('images/'.$for.'/'.$imageFilename);
+        if (! File::exists($sourceImagePath)) {
             // Optionally, log this error or handle it if an image is missing
             // For now, we'll return null if the source image doesn't exist
             if (isset($this->command)) {
                 $this->command->error("Source image not found: {$sourceImagePath}");
             }
+
             return null;
         }
         $imageContent = file_get_contents($sourceImagePath);
         $extension = pathinfo($sourceImagePath, PATHINFO_EXTENSION);
 
         $randomString = Str::random(40);
-        if ($id !== "") {
-            $storagePath = $for . '_images/' . $id . '/' . $randomString . '.' . $extension;
+        if ($id !== '') {
+            $storagePath = $for.'_images/'.$id.'/'.$randomString.'.'.$extension;
         } else {
-            $storagePath = $for . '_images/' . $randomString . '.' . $extension;
+            $storagePath = $for.'_images/'.$randomString.'.'.$extension;
         }
-        Storage::disk('public')->put($storagePath, $imageContent);
+        $mediaDisk = config('filesystems.media_disk', config('filesystems.default', 'public'));
+        Storage::disk($mediaDisk)->put($storagePath, $imageContent);
 
         return $storagePath;
     }
 
-    private function unzip($path, $target = "news")
+    private function unzip($path, $target = 'news')
     {
-        if (!extension_loaded('zip')) {
+        if (! extension_loaded('zip')) {
             $this->command->error('The PHP Zip extension is not enabled. Please enable it to proceed.');
+
             return;
         }
 
         $zipFilePath = $this->dataPath($path);
 
-        if (!File::exists($zipFilePath)) { // Explicitly use File facade
+        if (! File::exists($zipFilePath)) { // Explicitly use File facade
             $this->command->error("Zip file not found at: {$zipFilePath}");
+
             return;
         }
 
-        if (!File::isReadable($zipFilePath)) { // Explicitly use File facade
+        if (! File::isReadable($zipFilePath)) { // Explicitly use File facade
             $this->command->error("Zip file is not readable at: {$zipFilePath}. Check permissions.");
+
             return;
         }
 
         $zip = new \ZipArchive;
         $res = $zip->open($zipFilePath);
 
-        if ($res === TRUE) {
-            $extractPath = $this->dataPath("images/" . $target);
+        if ($res === true) {
+            $extractPath = $this->dataPath('images/'.$target);
 
             // Ensure the extraction directory exists, create if not
-            if (!File::isDirectory($extractPath)) { // Explicitly use File facade
+            if (! File::isDirectory($extractPath)) { // Explicitly use File facade
                 File::makeDirectory($extractPath, 0755, true, true); // Explicitly use File facade
             }
 
@@ -72,6 +74,7 @@ trait Helper
             } else {
                 $this->command->error("Failed to create or access extraction directory: {$extractPath}");
                 $zip->close();
+
                 return;
             }
 
@@ -79,14 +82,15 @@ trait Helper
             $zip->close();
             $this->command->info("Successfully unzipped '{$path}' to '{$extractPath}'.");
         } else {
-            $this->command->error("Failed to open zip file '{$path}'. ZipArchive Error Code: " . $this->getZipErrorMessage($res));
+            $this->command->error("Failed to open zip file '{$path}'. ZipArchive Error Code: ".$this->getZipErrorMessage($res));
+
             return;
         }
     }
 
     private function dataPath($path = '')
     {
-        return rtrim(base_path("database/seeders/data"), '/') . '/' . ltrim($path, '/');
+        return rtrim(base_path('database/seeders/data'), '/').'/'.ltrim($path, '/');
     }
 
     private function makeCollectionfromJSON($path)
@@ -120,7 +124,7 @@ trait Helper
             case \ZipArchive::ER_SEEK:
                 return 'Seek error.';
             default:
-                return 'Unknown error (' . $errorCode . ')';
+                return 'Unknown error ('.$errorCode.')';
         }
     }
 }

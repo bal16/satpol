@@ -4,76 +4,44 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Models;
-use Illuminate\Http\Request; // Tambahkan ini
-// use Symfony\Component\HttpFoundation\IpUtils; // Hapus atau pastikan ini ada jika Anda benar-benar menggunakannya
+use App\Services\MathCaptchaService;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
+use Illuminate\View\View;
 
 class LoginController extends Controller
 {
+    public function __construct(
+        protected MathCaptchaService $captchaService
+    ) {}
+
     /**
      * Display the login view.
      */
-    public function create()
+    public function create(): View
     {
-        return view('admin.login');
+        $captcha = $this->captchaService->generate();
+
+        return view('admin.login', [
+            'captchaQuestion' => $captcha['question'],
+        ]);
     }
 
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request)
+    public function store(LoginRequest $request): RedirectResponse
     {
-        // $email = Models\User::where(
-        //     'username',
-        //     '=',
-        //     $request->key
-        //     )->orWhere(
-        //         'email',
-        //         '=',
-        //         $request->key
-        //         )->first('email')->email;
-
-        // // dd($user);
-        // if (!$email)
-        //     return to_route('login');
-
-        // $request['email'] = $user->email;
-
-        $recaptcha = $request->input('g-recaptcha-response');
-
-        if (is_null($recaptcha)) {
-            return redirect()->back()->withErrors(['g-recaptcha-response' => 'Mohon lengkapi reCAPTCHA.']);
+        if (! $this->captchaService->validate($request->input('math_captcha'))) {
+            return redirect()->back()
+                ->withInput($request->only('key', 'remember'))
+                ->withErrors(['math_captcha' => 'Jawaban hitungan matematika tidak tepat. Silakan coba lagi.']);
         }
 
-        $url = 'https://www.google.com/recaptcha/api/siteverify';
-
-        $params = [
-            'secret' => config('services.recaptcha.secret'),
-            'response' => $recaptcha,
-            'remoteip' => $request->ip(), // Menggunakan IP langsung dari request
-        ];
-
-        // Melakukan POST request ke Google reCAPTCHA
-        $recaptchaResponse = Http::asForm()->post($url, $params);
-        $resultJson = $recaptchaResponse->json();
-
-        // Periksa apakah request berhasil dan reCAPTCHA valid
-        if (! $recaptchaResponse->successful() || ! isset($resultJson['success']) || $resultJson['success'] !== true) {
-            // Jika ada error codes dari Google, Anda bisa menambahkannya ke pesan error
-            $errorCodes = $resultJson['error-codes'] ?? [];
-            $errorMessage = 'Verifikasi reCAPTCHA gagal. Silakan coba lagi.';
-            if (! empty($errorCodes)) {
-                $errorMessage .= ' Kode error: '.implode(', ', $errorCodes);
-            }
-
-            return redirect()->back()->withErrors(['g-recaptcha-response' => $errorMessage]);
-        }
-        // Jika reCAPTCHA berhasil, lanjutkan ke autentikasi
         $request->authenticate();
 
-        $request->session()->regenerate(); // return boolean method
+        $request->session()->regenerate();
 
         return to_route('admin.dashboard')->with('success', 'Welcome Back '.$request->key);
     }
@@ -81,7 +49,7 @@ class LoginController extends Controller
     /**
      * Destroy an authenticated session.
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
 
