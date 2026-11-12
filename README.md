@@ -142,7 +142,6 @@ Nilai rahasia seperti kata sandi basis data dan kunci storage **tidak disimpan d
 | `routes/` | Daftar alamat halaman publik dan admin |
 | `public/` | Titik masuk aplikasi dan aset hasil build |
 | `database/` | Migrasi, seeder, dan data contoh |
-| `docs/` | Catatan desain dan arsitektur |
 | `tests/` | Pengujian otomatis |
 
 ## Pengujian
@@ -155,7 +154,6 @@ composer run test           # menjalankan seluruh pengujian
 ## Dokumentasi Lain
 
 - [`README.laravel.md`](README.laravel.md) — dokumentasi asli dari Laravel.
-- [`docs/superpowers/specs/`](docs/superpowers/specs/) — catatan desain arsitektur aplikasi.
 
 ## Lisensi
 
