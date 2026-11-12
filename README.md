@@ -1,24 +1,24 @@
-<p align="center">
+# Website Profil Satpol PP Kota Semarang
+
+<p>
   <img src="https://shieldcn.dev/badge/Live%20Demo-satpol.vercel.app-16a34a.svg?logo=lu:Globe&split=true" alt="Live Demo">
   <img src="https://shieldcn.dev/badge/Status-Portofolio%20Showcase-ea580c.svg?logo=lu:Sparkles&split=true" alt="Status">
   <img src="https://shieldcn.dev/badge/License-MIT-2563eb.svg?logo=opensourceinitiative&split=true" alt="License">
 </p>
 
-<p align="center">
+<p>
   <img src="https://shieldcn.dev/badge/Laravel-12-dc2626.svg?logo=laravel&split=true" alt="Laravel 12">
   <img src="https://shieldcn.dev/badge/PHP-8.4-4f46e5.svg?logo=php&split=true" alt="PHP 8.4">
   <img src="https://shieldcn.dev/badge/Tailwind%20CSS-4-0891b2.svg?logo=tailwindcss&split=true" alt="Tailwind CSS 4">
   <img src="https://shieldcn.dev/badge/Vite-6-7c3aed.svg?logo=vite&split=true" alt="Vite">
 </p>
 
-<p align="center">
+<p>
   <img src="https://shieldcn.dev/badge/PostgreSQL-Neon-3b82f6.svg?logo=postgresql&split=true" alt="PostgreSQL">
   <img src="https://shieldcn.dev/badge/Storage-Neon%20Object%20Storage-0d9488.svg?logo=neon&split=true" alt="Object Storage">
   <img src="https://shieldcn.dev/badge/Hosting-Vercel-3f3f46.svg?logo=vercel&split=true" alt="Vercel">
   <img src="https://shieldcn.dev/badge/Tests-86%20lulus-059669.svg?logo=lu:CircleCheck&split=true" alt="Tests">
 </p>
-
-# Website Profil Satpol PP Kota Semarang
 
 Situs profil dan pusat informasi Satpol PP Kota Semarang: berita kegiatan, profil organisasi, layanan masyarakat, galeri, sampai dokumen informasi publik. Semuanya bisa diperbarui sendiri lewat panel admin, tanpa perlu menyentuh kode.
 
