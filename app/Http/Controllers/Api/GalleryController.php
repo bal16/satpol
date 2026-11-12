@@ -23,7 +23,7 @@ class GalleryController extends Controller
             return DataTables::of($this->gallery->dataTableQuery())
                 ->addIndexColumn()
                 ->editColumn('path', function ($item) {
-                    return asset('storage/'.$item->path);
+                    return media_url($item->path);
                 })
                 ->addColumn('category_name', function (Gallery $gallery) {
                     return $gallery->category ? $gallery->category->name : 'N/A';
