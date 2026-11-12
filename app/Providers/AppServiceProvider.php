@@ -12,6 +12,7 @@ use App\Infrastructure\Storage\PublicImageStorage;
 use App\Repositories\Eloquent\EloquentGalleryRepository;
 use App\Repositories\Eloquent\EloquentNewsRepository;
 use App\Repositories\Eloquent\EloquentServiceRepository;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -27,6 +28,11 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        //
+        // Behind a TLS-terminating proxy such as Vercel, the request reaching the
+        // container is plain HTTP, so generated asset and route URLs would use
+        // http:// and be blocked as mixed content by the browser.
+        if ($this->app->environment('production')) {
+            URL::forceScheme('https');
+        }
     }
 }
