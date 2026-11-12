@@ -1,70 +1,162 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img src="https://img.shields.io/badge/Live_Demo-satpol.vercel.app-2ea44f?style=flat-square&logo=vercel&logoColor=white" alt="Demo">
+  <img src="https://img.shields.io/badge/Status-Portofolio_Showcase-orange?style=flat-square" alt="Status">
+  <img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square&logo=opensourceinitiative&logoColor=white" alt="License">
 </p>
 
-## About Laravel
+<p align="center">
+  <img src="https://img.shields.io/badge/Laravel-12-FF2D20?style=flat-square&logo=laravel&logoColor=white" alt="Laravel 12">
+  <img src="https://img.shields.io/badge/PHP-8.4-777BB4?style=flat-square&logo=php&logoColor=white" alt="PHP 8.4">
+  <img src="https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white" alt="Tailwind CSS 4">
+  <img src="https://img.shields.io/badge/Vite-6-646CFF?style=flat-square&logo=vite&logoColor=white" alt="Vite">
+</p>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<p align="center">
+  <img src="https://img.shields.io/badge/PostgreSQL-Neon-4169E1?style=flat-square&logo=postgresql&logoColor=white" alt="PostgreSQL">
+  <img src="https://img.shields.io/badge/Storage-Neon_Object_Storage-00E599?style=flat-square&logo=neon&logoColor=white" alt="Object Storage">
+  <img src="https://img.shields.io/badge/Hosting-Vercel-000000?style=flat-square&logo=vercel&logoColor=white" alt="Vercel">
+  <img src="https://img.shields.io/badge/Tests-86_lulus-brightgreen?style=flat-square" alt="Tests">
+</p>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+# Website Profil Satpol PP Kota Semarang
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Situs profil dan pusat informasi Satpol PP Kota Semarang: berita kegiatan, profil organisasi, layanan masyarakat, galeri, sampai dokumen informasi publik. Semuanya bisa diperbarui sendiri lewat panel admin, tanpa perlu menyentuh kode.
 
-## Learning Laravel
+> **Catatan penting:** proyek ini dibuat untuk keperluan portofolio dan demonstrasi teknis. **Bukan situs resmi instansi pemerintah** dan tidak dipakai untuk pelayanan publik yang sebenarnya.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**Lihat langsung:** <https://satpol.vercel.app>
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Daftar Isi
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- [Tentang](#tentang)
+- [Fitur](#fitur)
+- [Teknologi](#teknologi)
+- [Menjalankan di Lokal](#menjalankan-di-lokal)
+- [Konfigurasi](#konfigurasi)
+- [Deployment](#deployment)
+- [Struktur Proyek](#struktur-proyek)
+- [Pengujian](#pengujian)
+- [Dokumentasi Lain](#dokumentasi-lain)
+- [Lisensi](#lisensi)
 
-## Laravel Sponsors
+## Tentang
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Ada dua bagian besar di dalam aplikasi ini:
 
-### Premium Partners
+1. **Halaman publik** — yang dilihat pengunjung: beranda, profil, berita, layanan, galeri, dan halaman informasi.
+2. **Panel admin** — tempat pengelola memperbarui isi website: menulis berita, mengunggah foto, mengganti gambar beranda, dan memperbarui profil.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development/)**
-- **[Active Logic](https://activelogic.com)**
+Semua konten disimpan di basis data, sedangkan foto dan gambar disimpan di penyimpanan objek (bukan di dalam aplikasi), sehingga website tetap ringan dan aman ketika dijalankan di server yang dibuat ulang setiap kali diperbarui.
 
-## Contributing
+## Fitur
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Untuk Pengunjung
 
-## Code of Conduct
+- **Beranda** — sorotan kegiatan lewat slider, berita terbaru, dan pintasan menuju layanan.
+- **Profil** — visi, sejarah, struktur organisasi, tupoksi, dan kegiatan.
+- **Berita** — daftar berita dengan halaman detail, gambar, dan kategori.
+- **Layanan** — daftar layanan masyarakat, termasuk panduan pajak daerah (pendaftaran dan tempo pajak).
+- **Galeri** — dokumentasi foto kegiatan yang dikelompokkan per kategori.
+- **Informasi publik** — halaman PPID, Perda, dan SOP per bidang.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Untuk Pengelola
 
-## Security Vulnerabilities
+- **Dashboard** — ringkasan konten dan aktivitas terbaru.
+- **Berita** — tulis, ubah, hapus, lampirkan beberapa gambar, dan atur kategori.
+- **Galeri** — unggah foto, kelola kategori, ubah, dan hapus.
+- **Slider beranda** — atur gambar untuk setiap slot tampilan.
+- **Layanan** — kelola daftar layanan beserta rincian item di dalamnya.
+- **Profil & SOP** — perbarui teks, gambar struktur organisasi, dan dokumen SOP.
+- **Login aman** — dilindungi captcha matematika sederhana, tanpa bergantung pada layanan captcha pihak ketiga.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Teknologi
 
-## Architecture
+| Bagian | Yang Dipakai |
+| --- | --- |
+| Kerangka kerja | Laravel 12 (PHP 8.4) |
+| Tampilan | Blade, Tailwind CSS 4, Vite |
+| Basis data | PostgreSQL (Neon) |
+| Penyimpanan gambar | Object storage kompatibel S3 (Neon Object Storage) |
+| Hosting | Vercel, dijalankan sebagai container |
+| Pengujian | Pest |
 
-This project follows a layered architecture: thin controllers, FormRequests for validation,
-services for use cases/transactions, repository contracts for persistence (News, Gallery,
-Service) and small ports for third-party coupling (`ImageStorage`, `RichTextRenderer`).
+## Menjalankan di Lokal
 
-See `docs/superpowers/specs/2026-11-08-service-repository-design.md` for the full design,
-module coverage and the roadmap to the fully-uniform variant.
+Yang perlu tersedia: **PHP 8.2+**, **Composer**, **Node.js 20+**, dan **basis data** (PostgreSQL, MySQL, atau SQLite).
 
-## License
+```bash
+git clone https://github.com/bal16/satpol.git
+cd satpol
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+composer install
+cp .env.example .env
+php artisan key:generate
+
+# Sesuaikan koneksi basis data di .env, lalu:
+php artisan migrate --seed
+
+npm install
+npm run build      # atau: npm run dev, saat sedang mengembangkan tampilan
+php artisan serve
+```
+
+Buka <http://localhost:8000>. Panel admin ada di `/admin`.
+
+Kalau memakai penyimpanan lokal untuk gambar (`MEDIA_DISK=public`), jalankan sekali:
+
+```bash
+php artisan storage:link
+```
+
+Akun admin awal dibuat oleh seeder. Lihat `database/seeders/DatabaseSeeder.php` untuk detailnya, dan **ganti kata sandinya sebelum dipakai di lingkungan nyata**.
+
+## Konfigurasi
+
+Semua pengaturan ada di file `.env`. Beberapa yang paling sering disentuh:
+
+| Variabel | Kegunaan |
+| --- | --- |
+| `APP_URL` | Alamat website, dipakai saat membuat tautan |
+| `DB_*` | Koneksi basis data. Untuk Neon, aktifkan `DB_SSLMODE=require` |
+| `MEDIA_DISK` | Tempat menyimpan gambar: `public` (lokal) atau `s3` (object storage) |
+| `AWS_*` | Kredensial dan alamat object storage, dipakai bila `MEDIA_DISK=s3` |
+
+Penjelasan lengkap setiap variabel ada sebagai komentar di `.env.example`.
+
+## Deployment
+
+Aplikasi ini disiapkan untuk berjalan di **Vercel** dengan tiga bagian:
+
+- **Aplikasi** — dibungkus sebagai container (FrankenPHP) lewat `Dockerfile`, dikenali Vercel melalui `vercel.json`.
+- **Basis data** — PostgreSQL di Neon, terhubung dengan koneksi ber-SSL.
+- **Gambar** — Neon Object Storage, dengan alamat publik yang bisa dibuka langsung oleh browser.
+
+Nilai rahasia seperti kata sandi basis data dan kunci storage **tidak disimpan di repository**, melainkan diatur sebagai *environment variables* pada dashboard Vercel.
+
+## Struktur Proyek
+
+| Folder | Isi |
+| --- | --- |
+| `app/` | Logika aplikasi: controller, service, model, dan repository |
+| `resources/views/` | Tampilan halaman (Blade) |
+| `routes/` | Daftar alamat halaman publik dan admin |
+| `public/` | Titik masuk aplikasi dan aset hasil build |
+| `database/` | Migrasi, seeder, dan data contoh |
+| `docs/` | Catatan desain dan arsitektur |
+| `tests/` | Pengujian otomatis |
+
+## Pengujian
+
+```bash
+composer run test           # menjalankan seluruh pengujian
+./vendor/bin/pint --test    # memeriksa gaya penulisan kode
+```
+
+## Dokumentasi Lain
+
+- [`README.laravel.md`](README.laravel.md) — dokumentasi asli dari Laravel.
+- [`docs/superpowers/specs/`](docs/superpowers/specs/) — catatan desain arsitektur aplikasi.
+
+## Lisensi
+
+Kode proyek ini dirilis di bawah lisensi [MIT](https://opensource.org/licenses/MIT). Dibangun dengan [Laravel](https://laravel.com).
