@@ -62,9 +62,6 @@ This project follows a layered architecture: thin controllers, FormRequests for 
 services for use cases/transactions, repository contracts for persistence (News, Gallery,
 Service) and small ports for third-party coupling (`ImageStorage`, `RichTextRenderer`).
 
-See `docs/superpowers/specs/2026-11-08-service-repository-design.md` for the full design,
-module coverage and the roadmap to the fully-uniform variant.
-
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
