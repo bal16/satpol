@@ -1,21 +1,21 @@
 <p align="center">
-  <img src="https://img.shields.io/badge/Live_Demo-satpol.vercel.app-2ea44f?style=flat-square&logo=vercel&logoColor=white" alt="Demo">
-  <img src="https://img.shields.io/badge/Status-Portofolio_Showcase-orange?style=flat-square" alt="Status">
-  <img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square&logo=opensourceinitiative&logoColor=white" alt="License">
+  <img src="https://shieldcn.dev/badge/Live%20Demo-satpol.vercel.app-16a34a.svg?logo=lu:Globe&split=true" alt="Live Demo">
+  <img src="https://shieldcn.dev/badge/Status-Portofolio%20Showcase-ea580c.svg?logo=lu:Sparkles&split=true" alt="Status">
+  <img src="https://shieldcn.dev/badge/License-MIT-2563eb.svg?logo=opensourceinitiative&split=true" alt="License">
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Laravel-12-FF2D20?style=flat-square&logo=laravel&logoColor=white" alt="Laravel 12">
-  <img src="https://img.shields.io/badge/PHP-8.4-777BB4?style=flat-square&logo=php&logoColor=white" alt="PHP 8.4">
-  <img src="https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white" alt="Tailwind CSS 4">
-  <img src="https://img.shields.io/badge/Vite-6-646CFF?style=flat-square&logo=vite&logoColor=white" alt="Vite">
+  <img src="https://shieldcn.dev/badge/Laravel-12-dc2626.svg?logo=laravel&split=true" alt="Laravel 12">
+  <img src="https://shieldcn.dev/badge/PHP-8.4-4f46e5.svg?logo=php&split=true" alt="PHP 8.4">
+  <img src="https://shieldcn.dev/badge/Tailwind%20CSS-4-0891b2.svg?logo=tailwindcss&split=true" alt="Tailwind CSS 4">
+  <img src="https://shieldcn.dev/badge/Vite-6-7c3aed.svg?logo=vite&split=true" alt="Vite">
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/PostgreSQL-Neon-4169E1?style=flat-square&logo=postgresql&logoColor=white" alt="PostgreSQL">
-  <img src="https://img.shields.io/badge/Storage-Neon_Object_Storage-00E599?style=flat-square&logo=neon&logoColor=white" alt="Object Storage">
-  <img src="https://img.shields.io/badge/Hosting-Vercel-000000?style=flat-square&logo=vercel&logoColor=white" alt="Vercel">
-  <img src="https://img.shields.io/badge/Tests-86_lulus-brightgreen?style=flat-square" alt="Tests">
+  <img src="https://shieldcn.dev/badge/PostgreSQL-Neon-3b82f6.svg?logo=postgresql&split=true" alt="PostgreSQL">
+  <img src="https://shieldcn.dev/badge/Storage-Neon%20Object%20Storage-0d9488.svg?logo=neon&split=true" alt="Object Storage">
+  <img src="https://shieldcn.dev/badge/Hosting-Vercel-3f3f46.svg?logo=vercel&split=true" alt="Vercel">
+  <img src="https://shieldcn.dev/badge/Tests-86%20lulus-059669.svg?logo=lu:CircleCheck&split=true" alt="Tests">
 </p>
 
 # Website Profil Satpol PP Kota Semarang
